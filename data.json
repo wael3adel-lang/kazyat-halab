@@ -1,0 +1,272 @@
+[
+  {
+    "name": "محطة الزهرة",
+    "area": "دوار الفيض",
+    "status": "open",
+    "traffic": "none",
+    "gas": "yes",
+    "diesel": "no",
+    "note": "",
+    "updated": "13 آب 2026 — 07:00"
+  },
+  {
+    "name": "محطة اكسبريس",
+    "area": "قصر الضيافة",
+    "status": "open",
+    "traffic": "light",
+    "gas": "yes",
+    "diesel": "no",
+    "note": "",
+    "updated": "13 آب 2026 — 07:00"
+  },
+  {
+    "name": "محطة أحمد شياح",
+    "area": "دوار برج القلعة",
+    "status": "open",
+    "traffic": "none",
+    "gas": "no",
+    "diesel": "yes",
+    "note": "",
+    "updated": "13 آب 2026 — 07:00"
+  },
+  {
+    "name": "محطة النصر",
+    "area": "القصر البلدي",
+    "status": "open",
+    "traffic": "none",
+    "gas": "no",
+    "diesel": "yes",
+    "note": "",
+    "updated": "13 آب 2026 — 07:00"
+  },
+  {
+    "name": "محطة سوق الهال القديم",
+    "area": "",
+    "status": "open",
+    "traffic": "none",
+    "gas": "no",
+    "diesel": "yes",
+    "note": "",
+    "updated": "13 آب 2026 — 07:00"
+  },
+  {
+    "name": "محطة شام",
+    "area": "اتستراد الحمدانية",
+    "status": "open",
+    "traffic": "none",
+    "gas": "yes",
+    "diesel": "yes",
+    "note": "",
+    "updated": "13 آب 2026 — 07:00"
+  },
+  {
+    "name": "محطة القدسي",
+    "area": "حي القاطرجي",
+    "status": "open",
+    "traffic": "none",
+    "gas": "yes",
+    "diesel": "yes",
+    "note": "",
+    "updated": "13 آب 2026 — 07:00"
+  },
+  {
+    "name": "محطة طيبة",
+    "area": "دوار الشعار",
+    "status": "open",
+    "traffic": "none",
+    "gas": "yes",
+    "diesel": "yes",
+    "note": "",
+    "updated": "13 آب 2026 — 07:00"
+  },
+  {
+    "name": "محطة الشرق",
+    "area": "الشعار",
+    "status": "open",
+    "traffic": "none",
+    "gas": "yes",
+    "diesel": "no",
+    "note": "",
+    "updated": "13 آب 2026 — 07:00"
+  },
+  {
+    "name": "محطة السيد",
+    "area": "دوار الجزماتي",
+    "status": "open",
+    "traffic": "none",
+    "gas": "yes",
+    "diesel": "no",
+    "note": "",
+    "updated": "13 آب 2026 — 07:00"
+  },
+  {
+    "name": "محطة الاتحاد",
+    "area": "دوار الصاخور",
+    "status": "open",
+    "traffic": "none",
+    "gas": "yes",
+    "diesel": "no",
+    "note": "",
+    "updated": "13 آب 2026 — 07:00"
+  },
+  {
+    "name": "محطة خالد البيك",
+    "area": "الشيخ سعيد",
+    "status": "open",
+    "traffic": "none",
+    "gas": "yes",
+    "diesel": "yes",
+    "note": "",
+    "updated": "13 آب 2026 — 07:00"
+  },
+  {
+    "name": "محطة النورس",
+    "area": "طريق المطار",
+    "status": "open",
+    "traffic": "none",
+    "gas": "yes",
+    "diesel": "no",
+    "note": "",
+    "updated": "13 آب 2026 — 07:00"
+  },
+  {
+    "name": "محطة الجلبي",
+    "area": "طريق دمشق",
+    "status": "open",
+    "traffic": "none",
+    "gas": "yes",
+    "diesel": "yes",
+    "note": "",
+    "updated": "13 آب 2026 — 07:00"
+  },
+  {
+    "name": "محطة القداح",
+    "area": "طريق دمشق",
+    "status": "open",
+    "traffic": "none",
+    "gas": "yes",
+    "diesel": "yes",
+    "note": "",
+    "updated": "13 آب 2026 — 07:00"
+  },
+  {
+    "name": "محطة زيدو",
+    "area": "طريق دمشق",
+    "status": "open",
+    "traffic": "none",
+    "gas": "yes",
+    "diesel": "yes",
+    "note": "",
+    "updated": "13 آب 2026 — 07:00"
+  },
+  {
+    "name": "محطة طيبة",
+    "area": "طريق دمشق",
+    "status": "open",
+    "traffic": "none",
+    "gas": "yes",
+    "diesel": "yes",
+    "note": "",
+    "updated": "13 آب 2026 — 07:00"
+  },
+  {
+    "name": "محطة الرحمة",
+    "area": "خان العسل",
+    "status": "open",
+    "traffic": "none",
+    "gas": "yes",
+    "diesel": "yes",
+    "note": "",
+    "updated": "13 آب 2026 — 07:00"
+  },
+  {
+    "name": "محطة البدوي",
+    "area": "طريق اعزاز",
+    "status": "open",
+    "traffic": "none",
+    "gas": "yes",
+    "diesel": "no",
+    "note": "",
+    "updated": "13 آب 2026 — 07:00"
+  },
+  {
+    "name": "محطة البوابة أوكتان 95",
+    "area": "",
+    "status": "closed",
+    "traffic": "closed",
+    "gas": "no",
+    "diesel": "no",
+    "note": "مغلقة الآن",
+    "updated": "13 آب 2026 — 07:00"
+  },
+  {
+    "name": "محطة شمس",
+    "area": "العزيزية",
+    "status": "closed",
+    "traffic": "closed",
+    "gas": "no",
+    "diesel": "no",
+    "note": "مغلقة",
+    "updated": "13 آب 2026 — 07:00"
+  },
+  {
+    "name": "محطة الكنج",
+    "area": "",
+    "status": "closed",
+    "traffic": "closed",
+    "gas": "no",
+    "diesel": "no",
+    "note": "مغلقة",
+    "updated": "13 آب 2026 — 07:00"
+  },
+  {
+    "name": "محطة الفرقان",
+    "area": "",
+    "status": "closed",
+    "traffic": "closed",
+    "gas": "no",
+    "diesel": "no",
+    "note": "مغلقة",
+    "updated": "13 آب 2026 — 07:00"
+  },
+  {
+    "name": "محطة بارون",
+    "area": "تتان",
+    "status": "closed",
+    "traffic": "closed",
+    "gas": "no",
+    "diesel": "no",
+    "note": "مغلقة",
+    "updated": "13 آب 2026 — 07:00"
+  },
+  {
+    "name": "محطة سوريا",
+    "area": "",
+    "status": "closed",
+    "traffic": "closed",
+    "gas": "no",
+    "diesel": "no",
+    "note": "مغلقة",
+    "updated": "13 آب 2026 — 07:00"
+  },
+  {
+    "name": "محطة الشياح",
+    "area": "دوار الفيض",
+    "status": "closed",
+    "traffic": "closed",
+    "gas": "no",
+    "diesel": "no",
+    "note": "مغلقة",
+    "updated": "13 آب 2026 — 07:00"
+  },
+  {
+    "name": "محطة سانوسيان",
+    "area": "دوار شيحان",
+    "status": "closed",
+    "traffic": "closed",
+    "gas": "no",
+    "diesel": "no",
+    "note": "مغلقة",
+    "updated": "13 آب 2026 — 07:00"
+  }
+]
