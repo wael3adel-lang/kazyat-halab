@@ -5,124 +5,819 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0f766e">
 <link rel="manifest" href="manifest.webmanifest">
+
 <title>كازيات حلب</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;background:#f4f7f7;color:#17202a}
-header{background:#0f766e;color:#fff;padding:24px 15px}.wrap{max-width:900px;margin:auto}
-.brand{font-size:29px;font-weight:900}.sub{margin-top:5px;opacity:.92}
-.search{margin-top:16px}.search input{width:100%;padding:14px;border:0;border-radius:13px;font-size:16px}
-.filters{display:flex;gap:7px;overflow:auto;padding:14px 0}.filters button,.btn{white-space:nowrap;border:1px solid #d7dddd;background:#fff;border-radius:999px;padding:9px 13px;cursor:pointer}
-.filters button.active,.btn.primary{background:#0f766e;color:#fff;border-color:#0f766e}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}.stat{background:#fff;border-radius:12px;padding:9px;text-align:center}.stat b{display:block;font-size:21px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px}.card{background:#fff;border:1px solid #e3e9e9;border-radius:16px;padding:15px;box-shadow:0 2px 10px #0000000b}
-.name{font-size:19px;font-weight:850}.area{font-size:13px;color:#69767c;margin-top:3px}.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:11px}
-.badge{padding:6px 9px;border-radius:9px;font-size:12px;font-weight:750}.ok{background:#dcfce7;color:#166534}.no{background:#fee2e2;color:#991b1b}.warn{background:#fef3c7;color:#92400e}.gray{background:#e5e7eb;color:#374151}
-.time{font-size:11px;color:#777;margin-top:10px}.note{font-size:13px;margin-top:9px}
-.fab{position:fixed;left:20px;bottom:20px;border:0;border-radius:999px;padding:14px 18px;background:#0f766e;color:#fff;font-weight:800;box-shadow:0 5px 20px #0003;cursor:pointer}
-dialog{border:0;border-radius:18px;width:min(560px,92vw);padding:0;box-shadow:0 20px 60px #0004}dialog::backdrop{background:#0006}
-.form{padding:20px}label{display:block;font-weight:700;margin:10px 0 5px}select,input,textarea{width:100%;padding:11px;border:1px solid #ccd5d5;border-radius:10px;font:inherit}textarea{min-height:80px}
-.actions{display:flex;gap:8px;margin-top:15px;justify-content:flex-start}.statusmsg{margin-top:10px;font-size:13px}
-@media(max-width:600px){.stats{grid-template-columns:repeat(2,1fr)}}
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;
+background:#f4f7f7;
+color:#17202a
+}
+
+header{
+background:#0f766e;
+color:#fff;
+padding:24px 15px
+}
+
+.wrap{
+max-width:900px;
+margin:auto
+}
+
+.brand{
+font-size:29px;
+font-weight:900
+}
+
+.sub{
+margin-top:5px;
+opacity:.92
+}
+
+.credit{
+margin-top:8px;
+font-size:12px;
+opacity:.75;
+font-weight:600
+}
+
+.search{
+margin-top:16px
+}
+
+.search input{
+width:100%;
+padding:14px;
+border:0;
+border-radius:13px;
+font-size:16px
+}
+
+.filters{
+display:flex;
+gap:7px;
+overflow:auto;
+padding:14px 0
+}
+
+.filters button,.btn{
+white-space:nowrap;
+border:1px solid #d7dddd;
+background:#fff;
+border-radius:999px;
+padding:9px 13px;
+cursor:pointer
+}
+
+.filters button.active,.btn.primary{
+background:#0f766e;
+color:#fff;
+border-color:#0f766e
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:8px;
+margin-bottom:10px
+}
+
+.stat{
+background:#fff;
+border-radius:12px;
+padding:9px;
+text-align:center
+}
+
+.stat b{
+display:block;
+font-size:21px
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:10px
+}
+
+.card{
+background:#fff;
+border:1px solid #e3e9e9;
+border-radius:16px;
+padding:15px;
+box-shadow:0 2px 10px #0000000b
+}
+
+.name{
+font-size:19px;
+font-weight:850
+}
+
+.area{
+font-size:13px;
+color:#69767c;
+margin-top:3px
+}
+
+.badges{
+display:flex;
+gap:6px;
+flex-wrap:wrap;
+margin-top:11px
+}
+
+.badge{
+padding:6px 9px;
+border-radius:9px;
+font-size:12px;
+font-weight:750
+}
+
+.ok{
+background:#dcfce7;
+color:#166534
+}
+
+.no{
+background:#fee2e2;
+color:#991b1b
+}
+
+.warn{
+background:#fef3c7;
+color:#92400e
+}
+
+.gray{
+background:#e5e7eb;
+color:#374151
+}
+
+.time{
+font-size:11px;
+color:#777;
+margin-top:10px
+}
+
+.note{
+font-size:13px;
+margin-top:9px
+}
+
+.fab{
+position:fixed;
+left:20px;
+bottom:20px;
+border:0;
+border-radius:999px;
+padding:14px 18px;
+background:#0f766e;
+color:#fff;
+font-weight:800;
+box-shadow:0 5px 20px #0003;
+cursor:pointer
+}
+
+dialog{
+border:0;
+border-radius:18px;
+width:min(560px,92vw);
+padding:0;
+box-shadow:0 20px 60px #0004
+}
+
+dialog::backdrop{
+background:#0006
+}
+
+.form{
+padding:20px
+}
+
+label{
+display:block;
+font-weight:700;
+margin:10px 0 5px
+}
+
+select,input,textarea{
+width:100%;
+padding:11px;
+border:1px solid #ccd5d5;
+border-radius:10px;
+font:inherit
+}
+
+textarea{
+min-height:80px
+}
+
+.actions{
+display:flex;
+gap:8px;
+margin-top:15px;
+justify-content:flex-start
+}
+
+.statusmsg{
+margin-top:10px;
+font-size:13px
+}
+
+@media(max-width:600px){
+.stats{
+grid-template-columns:repeat(2,1fr)
+}
+}
 </style>
 </head>
+
 <body>
-<header><div class="wrap">
-<div class="brand">⛽ كازيات حلب</div>
-<div class="sub">حالة المحطات وآخر تحديثات الوقود</div>
-<div class="sub" id="updatedLine">آخر تحديث: جاري التحميل…</div>
-<div class="search"><input id="search" placeholder="ابحث عن محطة أو منطقة…"></div>
-</div></header>
-<main class="wrap">
-<div class="stats" id="stats"></div>
-<div class="filters">
-<button class="active" data-f="all">الكل</button><button data-f="open">مفتوحة</button>
-<button data-f="both">بنزين + مازوت</button><button data-f="gas">بنزين</button><button data-f="diesel">مازوت</button>
-<button data-f="closed">مغلقة</button><button data-f="long">طابور طويل</button><button data-f="light">ازدحام خفيف</button>
+
+<header>
+<div class="wrap">
+
+<div class="brand">
+⛽ كازيات حلب
 </div>
-<div id="count"></div><section class="grid" id="stations"></section>
+
+<div class="sub">
+حالة المحطات وآخر تحديثات الوقود
+</div>
+
+<div class="credit">
+By Ammar Morgan
+</div>
+
+<div class="sub" id="updatedLine">
+آخر تحديث: جاري التحميل…
+</div>
+
+<div class="search">
+<input id="search" placeholder="ابحث عن محطة أو منطقة…">
+</div>
+
+</div>
+</header>
+
+<main class="wrap">
+
+<div class="stats" id="stats"></div>
+
+<div class="filters">
+
+<button class="active" data-f="all">
+الكل
+</button>
+
+<button data-f="open">
+مفتوحة
+</button>
+
+<button data-f="both">
+بنزين + مازوت
+</button>
+
+<button data-f="gas">
+بنزين
+</button>
+
+<button data-f="diesel">
+مازوت
+</button>
+
+<button data-f="closed">
+مغلقة
+</button>
+
+<button data-f="long">
+طابور طويل
+</button>
+
+<button data-f="light">
+ازدحام خفيف
+</button>
+
+</div>
+
+<div id="count"></div>
+
+<section class="grid" id="stations"></section>
+
 </main>
-<button class="fab" id="addBtn">＋ إضافة تحديث</button>
+
+<button class="fab" id="addBtn">
+＋ إضافة تحديث
+</button>
 
 <dialog id="dlg">
+
 <form class="form" id="updateForm">
-<h2>إضافة تحديث للمشرف</h2>
-<label>المحطة</label><select id="station" required></select>
-<label>الحالة</label><select id="status"><option value="open">مفتوحة</option><option value="closed">مغلقة</option></select>
-<label>الازدحام</label><select id="traffic"><option value="none">لا يوجد ازدحام</option><option value="light">ازدحام خفيف</option><option value="long">طابور طويل</option></select>
-<label>البنزين</label><select id="gas"><option value="yes">يوجد</option><option value="no">لا يوجد</option></select>
-<label>المازوت</label><select id="diesel"><option value="yes">يوجد</option><option value="no">لا يوجد</option></select>
-<label>ملاحظة</label><textarea id="note" placeholder="مثلاً: بدء توزيع المازوت"></textarea>
-<div class="actions"><button class="btn primary" type="submit">إرسال للمشرف</button><button class="btn" type="button" id="closeDlg">إلغاء</button></div>
+
+<h2>
+إضافة تحديث للمشرف
+</h2>
+
+<label>
+المحطة
+</label>
+
+<select id="station" required></select>
+
+<label>
+الحالة
+</label>
+
+<select id="status">
+<option value="open">مفتوحة</option>
+<option value="closed">مغلقة</option>
+</select>
+
+<label>
+الازدحام
+</label>
+
+<select id="traffic">
+<option value="none">لا يوجد ازدحام</option>
+<option value="light">ازدحام خفيف</option>
+<option value="long">طابور طويل</option>
+</select>
+
+<label>
+البنزين
+</label>
+
+<select id="gas">
+<option value="yes">يوجد</option>
+<option value="no">لا يوجد</option>
+</select>
+
+<label>
+المازوت
+</label>
+
+<select id="diesel">
+<option value="yes">يوجد</option>
+<option value="no">لا يوجد</option>
+</select>
+
+<label>
+ملاحظة
+</label>
+
+<textarea id="note" placeholder="مثلاً: بدء توزيع المازوت"></textarea>
+
+<div class="actions">
+
+<button class="btn primary" type="submit">
+إرسال للمشرف
+</button>
+
+<button class="btn" type="button" id="closeDlg">
+إلغاء
+</button>
+
+</div>
+
 <div class="statusmsg" id="formMsg"></div>
+
 </form>
+
 </dialog>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
-const sb=supabase.createClient("https://hjggfolotblsurfwfcvn.supabase.co","sb_publishable_UTpiWf5wrq8VfxAXxl9zfw_CtRRizyl");
+
+const sb=supabase.createClient(
+"https://hjggfolotblsurfwfcvn.supabase.co",
+"sb_publishable_UTpiWf5wrq8VfxAXxl9zfw_CtRRizyl"
+);
+
 async function logVisitor(){
-  try{
-    let vid=localStorage.getItem("kazyat_visitor_id");
-    if(!vid){ vid=crypto.randomUUID(); localStorage.setItem("kazyat_visitor_id",vid); }
-    const day=new Date().toISOString().slice(0,10);
-    const key="kazyat_visit_"+day;
-    if(localStorage.getItem(key)==="1") return;
-    const {error}=await sb.from("visitor_events").insert({visitor_id:vid,page:"home"});
-    if(!error) localStorage.setItem(key,"1");
-  }catch(e){}
+
+try{
+
+let vid=localStorage.getItem("kazyat_visitor_id");
+
+if(!vid){
+
+vid=crypto.randomUUID();
+
+localStorage.setItem(
+"kazyat_visitor_id",
+vid
+);
+
 }
 
-let all=[],filter="all";
+const day=new Date().toISOString().slice(0,10);
+
+const key="kazyat_visit_"+day;
+
+if(localStorage.getItem(key)==="1")
+return;
+
+const {error}=await sb
+.from("visitor_events")
+.insert({
+visitor_id:vid,
+page:"home"
+});
+
+if(!error)
+localStorage.setItem(key,"1");
+
+}catch(e){}
+
+}
+
+let all=[],
+filter="all";
+
 const $=id=>document.getElementById(id);
-function esc(x){return String(x??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
-function fmt(t){return new Intl.DateTimeFormat("ar-SY",{day:"numeric",month:"numeric",year:"numeric",hour:"2-digit",minute:"2-digit"}).format(new Date(t))}
-function tr(v){return v==="none"?["🟢","لا يوجد ازدحام","ok"]:v==="light"?["🟡","ازدحام خفيف","warn"]:v==="long"?["🔴","طابور طويل","no"]:["❌","مغلقة","gray"]}
+
+function esc(x){
+
+return String(x??"").replace(
+/[&<>"']/g,
+m=>({
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+}[m])
+)
+
+}
+
+function fmt(t){
+
+return new Intl.DateTimeFormat(
+"ar-SY",
+{
+day:"numeric",
+month:"numeric",
+year:"numeric",
+hour:"2-digit",
+minute:"2-digit"
+}
+).format(new Date(t))
+
+}
+
+function tr(v){
+
+return v==="none"
+?
+["🟢","لا يوجد ازدحام","ok"]
+:
+v==="light"
+?
+["🟡","ازدحام خفيف","warn"]
+:
+v==="long"
+?
+["🔴","طابور طويل","no"]
+:
+["❌","مغلقة","gray"]
+
+}
+
 function render(){
- const q=$("search").value.trim().toLowerCase();
- const a=all.filter(s=>{
-   if(q && !(s.name+" "+(s.area||"")).toLowerCase().includes(q)) return false;
-   if(filter==="open") return s.status==="open"; if(filter==="closed") return s.status==="closed";
-   if(filter==="both") return s.gas==="yes"&&s.diesel==="yes"; if(filter==="gas") return s.gas==="yes";
-   if(filter==="diesel") return s.diesel==="yes"; if(filter==="long") return s.traffic==="long";
-   if(filter==="light") return s.traffic==="light"; return true;
- });
- const open=all.filter(s=>s.status==="open").length, closed=all.length-open;
- const gas=all.filter(s=>s.gas==="yes").length, diesel=all.filter(s=>s.diesel==="yes").length;
- $("stats").innerHTML=`<div class="stat"><b>🟢 ${open}</b>مفتوحة</div><div class="stat"><b>🔴 ${closed}</b>مغلقة</div><div class="stat"><b>⛽ ${gas}</b>بنزين</div><div class="stat"><b>🛢️ ${diesel}</b>مازوت</div>`;
- $("count").textContent=a.length+" محطة";
- $("stations").innerHTML=a.map(s=>{const t=tr(s.traffic);return `<article class="card">
- <div class="name">${esc(s.name)}</div><div class="area">${esc(s.area||"")}</div>
- <div class="badges"><span class="badge ${s.status==="open"?"ok":"no"}">${s.status==="open"?"🟢 مفتوحة":"❌ مغلقة"}</span>
- <span class="badge ${t[2]}">${t[0]} ${t[1]}</span>
- <span class="badge ${s.gas==="yes"?"ok":"no"}">بنزين: ${s.gas==="yes"?"يوجد":"لا يوجد"}</span>
- <span class="badge ${s.diesel==="yes"?"ok":"no"}">مازوت: ${s.diesel==="yes"?"يوجد":"لا يوجد"}</span></div>
- ${s.note?`<div class="note">📝 ${esc(s.note)}</div>`:""}
- <div class="time">آخر تحديث: ${fmt(s.updated_at)}</div></article>`}).join("")||'<div style="padding:30px;text-align:center;color:#777">لا توجد نتائج.</div>';
+
+const q=$("search").value
+.trim()
+.toLowerCase();
+
+const a=all.filter(s=>{
+
+if(
+q &&
+!(s.name+" "+(s.area||""))
+.toLowerCase()
+.includes(q)
+)
+return false;
+
+if(filter==="open")
+return s.status==="open";
+
+if(filter==="closed")
+return s.status==="closed";
+
+if(filter==="both")
+return s.gas==="yes" &&
+s.diesel==="yes";
+
+if(filter==="gas")
+return s.gas==="yes";
+
+if(filter==="diesel")
+return s.diesel==="yes";
+
+if(filter==="long")
+return s.traffic==="long";
+
+if(filter==="light")
+return s.traffic==="light";
+
+return true;
+
+});
+
+const open=
+all.filter(
+s=>s.status==="open"
+).length;
+
+const closed=
+all.length-open;
+
+const gas=
+all.filter(
+s=>s.gas==="yes"
+).length;
+
+const diesel=
+all.filter(
+s=>s.diesel==="yes"
+).length;
+
+$("stats").innerHTML=`
+
+<div class="stat">
+<b>🟢 ${open}</b>
+مفتوحة
+</div>
+
+<div class="stat">
+<b>🔴 ${closed}</b>
+مغلقة
+</div>
+
+<div class="stat">
+<b>⛽ ${gas}</b>
+بنزين
+</div>
+
+<div class="stat">
+<b>🛢️ ${diesel}</b>
+مازوت
+</div>
+
+`;
+
+$("count").textContent=
+a.length+" محطة";
+
+$("stations").innerHTML=
+
+a.map(s=>{
+
+const t=tr(s.traffic);
+
+return `
+
+<article class="card">
+
+<div class="name">
+${esc(s.name)}
+</div>
+
+<div class="area">
+${esc(s.area||"")}
+</div>
+
+<div class="badges">
+
+<span class="badge ${s.status==="open"?"ok":"no"}">
+
+${s.status==="open"
+?"🟢 مفتوحة"
+:"❌ مغلقة"}
+
+</span>
+
+<span class="badge ${t[2]}">
+${t[0]} ${t[1]}
+</span>
+
+<span class="badge ${s.gas==="yes"?"ok":"no"}">
+
+بنزين:
+${s.gas==="yes"
+?"يوجد"
+:"لا يوجد"}
+
+</span>
+
+<span class="badge ${s.diesel==="yes"?"ok":"no"}">
+
+مازوت:
+${s.diesel==="yes"
+?"يوجد"
+:"لا يوجد"}
+
+</span>
+
+</div>
+
+${s.note
+?
+`<div class="note">
+📝 ${esc(s.note)}
+</div>`
+:
+""}
+
+<div class="time">
+
+آخر تحديث:
+${fmt(s.updated_at)}
+
+</div>
+
+</article>
+
+`
+
+}).join("")
+
+||
+
+'<div style="padding:30px;text-align:center;color:#777">لا توجد نتائج.</div>';
+
 }
+
 async function load(){
- const {data,error}=await sb.from("stations").select("*").order("updated_at",{ascending:false});
- if(error){$("stations").innerHTML="<div class='card'>تعذر تحميل البيانات: "+esc(error.message)+"</div>";return}
- all=data||[];
- if(all.length){
-   const latest=all.reduce((a,b)=>new Date(a.updated_at)>new Date(b.updated_at)?a:b);
-   $("updatedLine").textContent="آخر تحديث: "+fmt(latest.updated_at);
- } else $("updatedLine").textContent="آخر تحديث: —";
- render();
- const sel=$("station"); sel.innerHTML=all.map(s=>`<option value="${s.id}">${esc(s.name)} — ${esc(s.area||"")}</option>`).join("");
+
+const {data,error}=await sb
+.from("stations")
+.select("*")
+.order("updated_at",{ascending:false});
+
+if(error){
+
+$("stations").innerHTML=
+"<div class='card'>تعذر تحميل البيانات: "+
+esc(error.message)+
+"</div>";
+
+return;
+
 }
-document.querySelectorAll(".filters button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".filters button").forEach(x=>x.classList.remove("active"));b.classList.add("active");filter=b.dataset.f;render()});
+
+all=data||[];
+
+if(all.length){
+
+const latest=
+all.reduce(
+(a,b)=>
+new Date(a.updated_at)>
+new Date(b.updated_at)
+?a
+:b
+);
+
+$("updatedLine").textContent=
+"آخر تحديث: "+
+fmt(latest.updated_at);
+
+}
+
+else{
+
+$("updatedLine").textContent=
+"آخر تحديث: —";
+
+}
+
+render();
+
+const sel=$("station");
+
+sel.innerHTML=
+all.map(s=>
+
+`<option value="${s.id}">
+${esc(s.name)}
+—
+${esc(s.area||"")}
+</option>`
+
+).join("");
+
+}
+
+document
+.querySelectorAll(".filters button")
+.forEach(b=>
+
+b.onclick=()=>{
+
+document
+.querySelectorAll(".filters button")
+.forEach(x=>
+x.classList.remove("active")
+);
+
+b.classList.add("active");
+
+filter=b.dataset.f;
+
+render();
+
+});
+
 $("search").oninput=render;
-$("addBtn").onclick=()=>{$("formMsg").textContent="";$("dlg").showModal()};
-$("closeDlg").onclick=()=>$("dlg").close();
-$("updateForm").onsubmit=async e=>{e.preventDefault();$("formMsg").textContent="جاري الإرسال…";
- const s=all.find(x=>String(x.id)===$("station").value); if(!s)return;
- const payload={name:s.name,area:s.area,status:$("status").value,traffic:$("traffic").value,gas:$("gas").value,diesel:$("diesel").value,note:$("note").value};
- const {error}=await sb.from("pending_updates").insert(payload);
- if(error){$("formMsg").textContent="تعذر إرسال التحديث: "+error.message;return}
- $("formMsg").textContent="تم إرسال التحديث للمشرف بنجاح ✅"; setTimeout(()=>$("dlg").close(),900);
+
+$("addBtn").onclick=()=>{
+
+$("formMsg").textContent="";
+
+$("dlg").showModal();
+
 };
+
+$("closeDlg").onclick=()=>
+$("dlg").close();
+
+$("updateForm").onsubmit=
+async e=>{
+
+e.preventDefault();
+
+$("formMsg").textContent=
+"جاري الإرسال…";
+
+const s=all.find(
+x=>String(x.id)===$("station").value
+);
+
+if(!s)return;
+
+const payload={
+name:s.name,
+area:s.area,
+status:$("status").value,
+traffic:$("traffic").value,
+gas:$("gas").value,
+diesel:$("diesel").value,
+note:$("note").value
+};
+
+const {error}=await sb
+.from("pending_updates")
+.insert(payload);
+
+if(error){
+
+$("formMsg").textContent=
+"تعذر إرسال التحديث: "+
+error.message;
+
+return;
+
+}
+
+$("formMsg").textContent=
+"تم إرسال التحديث للمشرف بنجاح ✅";
+
+setTimeout(
+()=>$("dlg").close(),
+900
+);
+
+};
+
 load();
+
 logVisitor();
+
 </script>
-<script>if("serviceWorker" in navigator && location.protocol!=="file:")navigator.serviceWorker.register("./sw.js").catch(()=>{});</script>
-</body></html>
+
+<script>
+
+if(
+"serviceWorker"
+in navigator &&
+location.protocol!=="file:"
+)
+
+navigator
+.serviceWorker
+.register("./sw.js")
+.catch(()=>{});
+
+</script>
+
+</body>
+</html>
