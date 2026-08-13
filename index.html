@@ -9,7 +9,10 @@
 <title>كازيات حلب</title>
 
 <style>
-*{box-sizing:border-box}
+
+*{
+box-sizing:border-box
+}
 
 body{
 margin:0;
@@ -29,9 +32,37 @@ max-width:900px;
 margin:auto
 }
 
+/* الترويسة */
+
+.header-top{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px
+}
+
 .brand{
 font-size:29px;
 font-weight:900
+}
+
+/* زر إرسال رسالة للمشرف */
+
+.admin-message{
+display:inline-block;
+background:transparent;
+color:#fff;
+border:1px solid rgba(255,255,255,.65);
+border-radius:999px;
+padding:7px 11px;
+font-size:12px;
+font-weight:700;
+text-decoration:none;
+white-space:nowrap
+}
+
+.admin-message:hover{
+background:rgba(255,255,255,.12)
 }
 
 .sub{
@@ -169,26 +200,8 @@ font-size:13px;
 margin-top:9px
 }
 
-/* زر رسالة المشرف داخل بطاقة الكازية */
-.admin-message{
-display:block;
-width:100%;
-margin-top:12px;
-padding:9px 12px;
-border:0;
-border-radius:10px;
-background:#0f766e;
-color:#fff;
-font-weight:700;
-font-size:13px;
-text-align:center;
-text-decoration:none;
-cursor:pointer
-}
 
-.admin-message:hover{
-opacity:.92
-}
+/* الهاتف */
 
 @media(max-width:600px){
 
@@ -196,31 +209,69 @@ opacity:.92
 grid-template-columns:repeat(2,1fr)
 }
 
+.header-top{
+align-items:flex-start
 }
+
+.brand{
+font-size:27px
+}
+
+.admin-message{
+font-size:11px;
+padding:6px 9px
+}
+
+}
+
 </style>
 </head>
 
+
 <body>
+
 
 <header>
 
 <div class="wrap">
 
+
+<!-- عنوان الموقع + زر المشرف -->
+
+<div class="header-top">
+
 <div class="brand">
 ⛽ كازيات حلب
 </div>
+
+
+<a
+class="admin-message"
+href="https://wa.me/905050978000?text=مرحباً،%20لدي%20معلومات%20أو%20تحديث%20بخصوص%20كازيات%20حلب:"
+target="_blank"
+rel="noopener">
+
+📩 المشرف
+
+</a>
+
+</div>
+
 
 <div class="sub">
 حالة المحطات وآخر تحديثات الوقود
 </div>
 
+
 <div class="credit">
 By Ammar Morgan
 </div>
 
+
 <div class="sub" id="updatedLine">
 آخر تحديث: جاري التحميل…
 </div>
+
 
 <div class="search">
 
@@ -230,71 +281,124 @@ placeholder="ابحث عن محطة أو منطقة…">
 
 </div>
 
+
 </div>
 
 </header>
 
 
+
 <main class="wrap">
 
-<div class="stats" id="stats"></div>
+
+<div
+class="stats"
+id="stats">
+</div>
+
 
 
 <div class="filters">
 
-<button class="active" data-f="all">
+
+<button
+class="active"
+data-f="all">
+
 الكل
+
 </button>
 
-<button data-f="open">
+
+<button
+data-f="open">
+
 مفتوحة
+
 </button>
 
-<button data-f="both">
+
+<button
+data-f="both">
+
 بنزين + مازوت
+
 </button>
 
-<button data-f="gas">
+
+<button
+data-f="gas">
+
 بنزين
+
 </button>
 
-<button data-f="diesel">
+
+<button
+data-f="diesel">
+
 مازوت
+
 </button>
 
-<button data-f="closed">
+
+<button
+data-f="closed">
+
 مغلقة
+
 </button>
 
-<button data-f="long">
+
+<button
+data-f="long">
+
 طابور طويل
+
 </button>
 
-<button data-f="light">
+
+<button
+data-f="light">
+
 ازدحام خفيف
+
 </button>
+
 
 </div>
 
 
+
 <div id="count"></div>
+
+
 
 <section
 class="grid"
 id="stations">
+
 </section>
+
 
 </main>
 
 
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 
 <script>
 
+
 const sb=supabase.createClient(
+
 "https://hjggfolotblsurfwfcvn.supabase.co",
+
 "sb_publishable_UTpiWf5wrq8VfxAXxl9zfw_CtRRizyl"
+
 );
+
 
 
 /* تسجيل الزوار */
@@ -303,14 +407,17 @@ async function logVisitor(){
 
 try{
 
+
 let vid=
 localStorage.getItem(
 "kazyat_visitor_id"
 );
 
+
 if(!vid){
 
 vid=crypto.randomUUID();
+
 
 localStorage.setItem(
 "kazyat_visitor_id",
@@ -319,25 +426,34 @@ vid
 
 }
 
+
 const day=
 new Date()
 .toISOString()
 .slice(0,10);
 
+
 const key=
 "kazyat_visit_"+day;
 
+
 if(
 localStorage.getItem(key)==="1"
-)return;
+)
+return;
+
 
 const {error}=
 await sb
 .from("visitor_events")
 .insert({
+
 visitor_id:vid,
+
 page:"home"
+
 });
+
 
 if(!error){
 
@@ -348,9 +464,11 @@ key,
 
 }
 
+
 }catch(e){}
 
 }
+
 
 
 /* البيانات */
@@ -359,8 +477,10 @@ let all=[];
 
 let filter="all";
 
+
 const $=
 id=>document.getElementById(id);
+
 
 
 /* حماية النصوص */
@@ -370,16 +490,21 @@ function esc(x){
 return String(x??"")
 .replace(
 /[&<>"']/g,
+
 m=>({
+
 "&":"&amp;",
 "<":"&lt;",
 ">":"&gt;",
 '"':"&quot;",
 "'":"&#039;"
+
 }[m])
+
 )
 
 }
+
 
 
 /* تنسيق التاريخ */
@@ -387,19 +512,31 @@ m=>({
 function fmt(t){
 
 return new Intl.DateTimeFormat(
+
 "ar-SY",
+
 {
+
 day:"numeric",
+
 month:"numeric",
+
 year:"numeric",
+
 hour:"2-digit",
+
 minute:"2-digit"
+
 }
+
 ).format(
+
 new Date(t)
+
 )
 
 }
+
 
 
 /* حالة الازدحام */
@@ -407,25 +544,39 @@ new Date(t)
 function tr(v){
 
 return v==="none"
+
 ?
+
 ["🟢","لا يوجد ازدحام","ok"]
+
 :
+
 v==="light"
+
 ?
+
 ["🟡","ازدحام خفيف","warn"]
+
 :
+
 v==="long"
+
 ?
+
 ["🔴","طابور طويل","no"]
+
 :
+
 ["❌","مغلقة","gray"]
 
 }
 
 
+
 /* عرض المحطات */
 
 function render(){
+
 
 const q=
 $("search")
@@ -434,279 +585,411 @@ $("search")
 .toLowerCase();
 
 
+
 const a=
 all.filter(s=>{
 
+
 if(
+
 q &&
+
 !(
+
 s.name+
+
 " "+
+
 (s.area||"")
+
 )
+
 .toLowerCase()
+
 .includes(q)
+
 )
+
 return false;
 
 
+
 if(filter==="open")
+
 return s.status==="open";
 
 
+
 if(filter==="closed")
+
 return s.status==="closed";
 
 
+
 if(filter==="both")
+
 return
+
 s.gas==="yes" &&
+
 s.diesel==="yes";
 
 
+
 if(filter==="gas")
+
 return s.gas==="yes";
 
 
+
 if(filter==="diesel")
+
 return s.diesel==="yes";
 
 
+
 if(filter==="long")
+
 return s.traffic==="long";
 
 
+
 if(filter==="light")
+
 return s.traffic==="light";
+
 
 
 return true;
 
+
 });
+
 
 
 /* الإحصائيات */
 
+
 const open=
+
 all.filter(
+
 s=>s.status==="open"
+
 ).length;
+
+
 
 const closed=
+
 all.length-open;
 
+
+
 const gas=
+
 all.filter(
+
 s=>s.gas==="yes"
+
 ).length;
 
+
+
 const diesel=
+
 all.filter(
+
 s=>s.diesel==="yes"
+
 ).length;
+
 
 
 $("stats").innerHTML=`
 
 <div class="stat">
+
 <b>🟢 ${open}</b>
+
 مفتوحة
+
 </div>
 
+
 <div class="stat">
+
 <b>🔴 ${closed}</b>
+
 مغلقة
+
 </div>
 
+
 <div class="stat">
+
 <b>⛽ ${gas}</b>
+
 بنزين
+
 </div>
 
+
 <div class="stat">
+
 <b>🛢️ ${diesel}</b>
+
 مازوت
+
 </div>
 
 `;
 
 
+
 $("count").textContent=
+
 a.length+" محطة";
 
 
+
 /* المحطات */
+
 
 $("stations").innerHTML=
 
 a.map(s=>{
 
+
 const t=
+
 tr(s.traffic);
 
 
-/* تجهيز رسالة خاصة بالكازية */
-
-const message=
-encodeURIComponent(
-"مرحباً، لدي تحديث بخصوص "+
-s.name+
-" ("+
-(s.area||"")+
-"):"
-);
-
 return `
+
 
 <article class="card">
 
+
 <div class="name">
+
 ${esc(s.name)}
+
 </div>
 
+
 <div class="area">
+
 ${esc(s.area||"")}
+
 </div>
+
+
 
 <div class="badges">
 
 
-<span class="badge ${s.status==="open"?"ok":"no"}">
+
+<span
+class="badge ${s.status==="open"?"ok":"no"}">
+
 
 ${
+
 s.status==="open"
+
 ?
+
 "🟢 مفتوحة"
+
 :
+
 "❌ مغلقة"
+
 }
+
 
 </span>
 
 
-<span class="badge ${t[2]}">
+
+<span
+class="badge ${t[2]}">
 
 ${t[0]}
+
 ${t[1]}
 
 </span>
 
 
-<span class="badge ${s.gas==="yes"?"ok":"no"}">
+
+<span
+class="badge ${s.gas==="yes"?"ok":"no"}">
+
 
 بنزين:
+
 ${
+
 s.gas==="yes"
+
 ?
+
 "يوجد"
+
 :
+
 "لا يوجد"
+
 }
+
 
 </span>
 
 
-<span class="badge ${s.diesel==="yes"?"ok":"no"}">
+
+<span
+class="badge ${s.diesel==="yes"?"ok":"no"}">
+
 
 مازوت:
+
 ${
+
 s.diesel==="yes"
+
 ?
+
 "يوجد"
+
 :
+
 "لا يوجد"
+
 }
+
 
 </span>
 
 
+
 </div>
+
 
 
 ${
+
 s.note
+
 ?
+
 `
+
 <div class="note">
+
 📝 ${esc(s.note)}
+
 </div>
+
 `
+
 :
+
 ""
+
 }
+
 
 
 <div class="time">
 
+
 آخر تحديث:
+
 ${fmt(s.updated_at)}
+
 
 </div>
 
 
-<!-- زر المشرف أصبح داخل بطاقة الكازية -->
-
-<a
-class="admin-message"
-href="https://wa.me/905050978000?text=${message}"
-target="_blank"
-rel="noopener">
-
-📩 إرسال رسالة للمشرف
-
-</a>
-
 
 </article>
 
+
 `
+
 
 }).join("")
 
+
 ||
+
 
 `
 
 <div
+
 style="padding:30px;text-align:center;color:#777">
 
+
 لا توجد نتائج.
+
 
 </div>
 
 `;
 
 }
+
 
 
 /* تحميل المحطات */
 
 async function load(){
 
+
 const {data,error}=
+
 await sb
+
 .from("stations")
+
 .select("*")
+
 .order(
+
 "updated_at",
+
 {
+
 ascending:false
+
 }
+
 );
+
 
 
 if(error){
 
+
 $("stations").innerHTML=
 
 `
+
 <div class="card">
+
 
 تعذر تحميل البيانات:
 
+
 ${esc(error.message)}
 
+
 </div>
+
 `;
 
 return;
@@ -714,80 +997,131 @@ return;
 }
 
 
+
 all=data||[];
+
 
 
 if(all.length){
 
+
 const latest=
+
 all.reduce(
+
 (a,b)=>
+
 new Date(a.updated_at)>
+
 new Date(b.updated_at)
+
 ?
+
 a
+
 :
+
 b
+
 );
 
 
+
 $("updatedLine").textContent=
+
 "آخر تحديث: "+
+
 fmt(latest.updated_at);
 
+
 }
+
 
 else{
 
+
 $("updatedLine").textContent=
+
 "آخر تحديث: —";
 
+
 }
+
 
 
 render();
 
 }
+
 
 
 /* الفلاتر */
 
 document
+
 .querySelectorAll(
+
 ".filters button"
+
 )
+
 .forEach(b=>
+
 
 b.onclick=()=>{
 
+
 document
+
 .querySelectorAll(
+
 ".filters button"
+
 )
+
 .forEach(
+
 x=>
+
 x.classList.remove(
+
 "active"
+
 )
+
 );
+
+
 
 b.classList.add(
+
 "active"
+
 );
 
+
+
 filter=
+
 b.dataset.f;
+
+
 
 render();
 
+
 }
+
 );
+
 
 
 /* البحث */
 
 $("search").oninput=
+
 render;
+
 
 
 /* تشغيل */
@@ -796,23 +1130,37 @@ load();
 
 logVisitor();
 
+
 </script>
+
 
 
 <script>
 
+
 if(
+
 "serviceWorker"
+
 in navigator &&
+
 location.protocol!=="file:"
+
 )
 
+
 navigator
+
 .serviceWorker
+
 .register("./sw.js")
+
 .catch(()=>{});
+
 
 </script>
 
+
 </body>
+
 </html>
