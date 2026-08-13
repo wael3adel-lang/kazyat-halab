@@ -29,7 +29,7 @@ dialog{border:0;border-radius:18px;width:min(560px,92vw);padding:0;box-shadow:0 
 <header><div class="wrap">
 <div class="brand">⛽ كازيات حلب</div>
 <div class="sub">حالة المحطات وآخر تحديثات الوقود</div>
-<div class="sub" id="updatedLine">جاري تحميل آخر التحديثات…</div>
+<div class="sub" id="updatedLine">آخر تحديث: جاري التحميل…</div>
 <div class="search"><input id="search" placeholder="ابحث عن محطة أو منطقة…"></div>
 </div></header>
 <main class="wrap">
@@ -102,7 +102,12 @@ function render(){
 async function load(){
  const {data,error}=await sb.from("stations").select("*").order("updated_at",{ascending:false});
  if(error){$("stations").innerHTML="<div class='card'>تعذر تحميل البيانات: "+esc(error.message)+"</div>";return}
- all=data||[]; if(all.length) $("updatedLine").textContent="آخر تحديث: "+fmt(all[0].updated_at); render();
+ all=data||[];
+ if(all.length){
+   const latest=all.reduce((a,b)=>new Date(a.updated_at)>new Date(b.updated_at)?a:b);
+   $("updatedLine").textContent="آخر تحديث: "+fmt(latest.updated_at);
+ } else $("updatedLine").textContent="آخر تحديث: —";
+ render();
  const sel=$("station"); sel.innerHTML=all.map(s=>`<option value="${s.id}">${esc(s.name)} — ${esc(s.area||"")}</option>`).join("");
 }
 document.querySelectorAll(".filters button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".filters button").forEach(x=>x.classList.remove("active"));b.classList.add("active");filter=b.dataset.f;render()});
