@@ -60,6 +60,18 @@ dialog{border:0;border-radius:18px;width:min(560px,92vw);padding:0;box-shadow:0 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const sb=supabase.createClient("https://hjggfolotblsurfwfcvn.supabase.co","sb_publishable_UTpiWf5wrq8VfxAXxl9zfw_CtRRizyl");
+async function logVisitor(){
+  try{
+    let vid=localStorage.getItem("kazyat_visitor_id");
+    if(!vid){ vid=crypto.randomUUID(); localStorage.setItem("kazyat_visitor_id",vid); }
+    const day=new Date().toISOString().slice(0,10);
+    const key="kazyat_visit_"+day;
+    if(localStorage.getItem(key)==="1") return;
+    const {error}=await sb.from("visitor_events").insert({visitor_id:vid,page:"home"});
+    if(!error) localStorage.setItem(key,"1");
+  }catch(e){}
+}
+
 let all=[],filter="all";
 const $=id=>document.getElementById(id);
 function esc(x){return String(x??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
@@ -105,6 +117,7 @@ $("updateForm").onsubmit=async e=>{e.preventDefault();$("formMsg").textContent="
  $("formMsg").textContent="تم إرسال التحديث للمشرف بنجاح ✅"; setTimeout(()=>$("dlg").close(),900);
 };
 load();
+logVisitor();
 </script>
 <script>if("serviceWorker" in navigator && location.protocol!=="file:")navigator.serviceWorker.register("./sw.js").catch(()=>{});</script>
 </body></html>

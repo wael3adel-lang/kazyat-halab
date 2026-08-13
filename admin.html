@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>لوحة تحكم — كازيات حلب</title>
 <style>
 *{box-sizing:border-box}body{font-family:system-ui;margin:0;background:#f4f7f7;color:#17202a}header{background:#0f766e;color:#fff;padding:22px}main{max-width:1050px;margin:auto;padding:15px}
-.panel{background:#fff;padding:16px;border-radius:16px;margin:12px 0;box-shadow:0 2px 10px #0000000b}input,select,textarea{padding:11px;border:1px solid #ccd5d5;border-radius:10px;width:100%;margin:5px 0 10px;font:inherit}button{padding:10px 14px;border:0;border-radius:10px;cursor:pointer;margin:3px}.primary{background:#0f766e;color:#fff}.danger{background:#fee2e2;color:#991b1b}.muted{color:#68757a}.row{border-bottom:1px solid #eee;padding:13px 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:10px}.badge{background:#eef2f2;padding:5px 8px;border-radius:8px;margin:2px;display:inline-block;font-size:12px}.actions{display:flex;flex-wrap:wrap;gap:4px}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}dialog{border:0;border-radius:18px;width:min(650px,94vw);padding:0;box-shadow:0 20px 60px #0004}dialog::backdrop{background:#0006}.form{padding:20px}@media(max-width:600px){.two{grid-template-columns:1fr}}
+.panel{background:#fff;padding:16px;border-radius:16px;margin:12px 0;box-shadow:0 2px 10px #0000000b}input,select,textarea{padding:11px;border:1px solid #ccd5d5;border-radius:10px;width:100%;margin:5px 0 10px;font:inherit}button{padding:10px 14px;border:0;border-radius:10px;cursor:pointer;margin:3px}.primary{background:#0f766e;color:#fff}.danger{background:#fee2e2;color:#991b1b}.muted{color:#68757a}.row{border-bottom:1px solid #eee;padding:13px 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:10px}.badge{background:#eef2f2;padding:5px 8px;border-radius:8px;margin:2px;display:inline-block;font-size:12px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.stat{background:#f8fafb;border-radius:12px;padding:12px;text-align:center}.stat b{display:block;font-size:24px}@media(max-width:700px){.stats{grid-template-columns:repeat(2,1fr)}}.actions{display:flex;flex-wrap:wrap;gap:4px}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}dialog{border:0;border-radius:18px;width:min(650px,94vw);padding:0;box-shadow:0 20px 60px #0004}dialog::backdrop{background:#0006}.form{padding:20px}@media(max-width:600px){.two{grid-template-columns:1fr}}
 </style></head><body>
 <header><main><h2>⚙️ لوحة تحكم كازيات حلب</h2></main></header><main><div id="app">جاري التحميل…</div></main>
 <dialog id="stationDlg"><form class="form" id="stationForm"><h2 id="dlgTitle">تعديل محطة</h2><input type="hidden" id="sid">
@@ -21,13 +21,35 @@ function fmt(t){return new Intl.DateTimeFormat("ar-SY",{day:"numeric",month:"num
 function login(){app.innerHTML=`<div class="panel"><h2>دخول المشرف</h2><label>البريد الإلكتروني</label><input id="email" type="email"><label>كلمة السر</label><input id="password" type="password"><button class="primary" onclick="doLogin()">دخول</button></div>`}
 async function doLogin(){const {error}=await sb.auth.signInWithPassword({email:email.value,password:password.value});if(error)return alert(error.message);location.reload()}
 async function init(){const {data}=await sb.auth.getSession();session=data.session;if(!session)return login();const {data:me,error}=await sb.from("admin_users").select("user_id").eq("user_id",session.user.id).maybeSingle();if(error)return app.innerHTML="<div class='panel'>خطأ في صلاحيات المشرف: "+esc(error.message)+"</div>";if(!me)return app.innerHTML="<div class='panel'>هذا الحساب ليس مشرفاً.</div>";await load()}
+
+async function loadStats(){
+  try{
+    const now=new Date(), today=new Date(now); today.setHours(0,0,0,0);
+    const yesterday=new Date(today); yesterday.setDate(yesterday.getDate()-1);
+    const tomorrow=new Date(today); tomorrow.setDate(tomorrow.getDate()+1);
+    const start7=new Date(today); start7.setDate(start7.getDate()-6);
+    const {data:events,error}=await sb.from("visitor_events").select("visitor_id,visited_at").gte("visited_at",start7.toISOString());
+    if(error) throw error;
+    const uniq=a=>new Set(a.map(x=>x.visitor_id)).size, t=events||[];
+    $("vToday").textContent=uniq(t.filter(x=>new Date(x.visited_at)>=today && new Date(x.visited_at)<tomorrow));
+    $("vYesterday").textContent=uniq(t.filter(x=>new Date(x.visited_at)>=yesterday && new Date(x.visited_at)<today));
+    $("vWeek").textContent=uniq(t);
+    const {count,error:e2}=await sb.from("visitor_events").select("id",{count:"exact",head:true});
+    if(e2) throw e2;
+    $("vTotal").textContent=count??0;
+  }catch(e){
+    ["vToday","vYesterday","vWeek","vTotal"].forEach(id=>{if($(id)) $(id).textContent="—";});
+  }
+}
 async function load(){const {data:p,error:pe}=await sb.from("pending_updates").select("*").order("submitted_at",{ascending:false});const {data:s,error:se}=await sb.from("stations").select("*").order("name");if(pe||se)return app.innerHTML="<div class='panel'>خطأ: "+esc((pe||se).message)+"</div>";stations=s||[];app.innerHTML=`<div class="panel"><b>المشرف:</b> ${esc(session.user.email)} <button onclick="sb.auth.signOut().then(()=>location.reload())">خروج</button></div>
+<div class="panel"><h3>📊 إحصائيات الزوار</h3><div class="stats">
+<div class="stat"><b id="vToday">—</b>زوار اليوم</div>
+<div class="stat"><b id="vYesterday">—</b>أمس</div>
+<div class="stat"><b id="vWeek">—</b>آخر 7 أيام</div>
+<div class="stat"><b id="vTotal">—</b>إجمالي الزيارات</div>
+</div><small class="muted">يُحسب الزائر مرة واحدة يومياً من نفس المتصفح، ولا نخزن عنوان IP.</small></div>
 <div class="panel"><h3>التحديثات المعلقة (${p.length})</h3>${p.length?p.map(x=>`<div class="row"><b>${esc(x.name)}</b> — ${esc(x.area||"")}<br><span class="badge">${x.status}</span><span class="badge">${x.traffic}</span><span class="badge">بنزين ${x.gas}</span><span class="badge">مازوت ${x.diesel}</span><br><small class="muted">${esc(x.note||"")}</small><div class="actions"><button class="primary" onclick="approve('${x.id}')">اعتماد ✅</button><button class="danger" onclick="reject('${x.id}')">رفض ❌</button></div></div>`).join(""):"لا توجد تحديثات معلقة."}</div>
-<div class="panel"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><h3>المحطات (${stations.length})</h3><button class="primary" onclick="openAdd()">＋ إضافة محطة</button></div><div class="grid">${stations.map(s=>`<div class="row"><b>${esc(s.name)}</b><br><small class="muted">${esc(s.area||"")}</small><div>
-<span class="badge">${s.status==="open"?"🟢 مفتوحة":"❌ مغلقة"}</span>
-<span class="badge">⛽ بنزين: ${s.gas==="yes"?"يوجد":"لا يوجد"}</span>
-<span class="badge">🛢️ مازوت: ${s.diesel==="yes"?"يوجد":"لا يوجد"}</span>
-</div><small>الازدحام: ${s.traffic==="long"?"🔴 طابور طويل":s.traffic==="light"?"🟡 ازدحام خفيف":"🟢 لا يوجد ازدحام"}</small><br><small>آخر تحديث: ${fmt(s.updated_at)}</small><div class="actions"><button onclick="openEdit('${s.id}')">✏️ تعديل</button><button class="danger" onclick="removeStation('${s.id}')">🗑️ حذف</button></div></div>`).join("")}</div></div>`}
+<div class="panel"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><h3>المحطات (${stations.length})</h3><button class="primary" onclick="openAdd()">＋ إضافة محطة</button></div><div class="grid">${stations.map(s=>`<div class="row"><b>${esc(s.name)}</b><br><small class="muted">${esc(s.area||"")}</small><div><span class="badge">${s.status==="open"?"🟢 مفتوحة":"❌ مغلقة"}</span><span class="badge">بنزين: ${s.gas==="yes"?"يوجد":"لا يوجد"}</span><span class="badge">مازوت: ${s.diesel==="yes"?"يوجد":"لا يوجد"}</span></div><small>آخر تحديث: ${fmt(s.updated_at)}</small><div class="actions"><button onclick="openEdit('${s.id}')">✏️ تعديل</button><button class="danger" onclick="removeStation('${s.id}')">🗑️ حذف</button></div></div>`).join("")}</div></div>`}
 async function approve(id){const {data:p}=await sb.from("pending_updates").select("*").eq("id",id).single();if(!p)return;const {data:old}=await sb.from("stations").select("id").eq("name",p.name).eq("area",p.area).maybeSingle();let r;if(old)r=await sb.from("stations").update({status:p.status,traffic:p.traffic,gas:p.gas,diesel:p.diesel,note:p.note,updated_at:new Date().toISOString()}).eq("id",old.id);else r=await sb.from("stations").insert({name:p.name,area:p.area,status:p.status,traffic:p.traffic,gas:p.gas,diesel:p.diesel,note:p.note,updated_at:new Date().toISOString()});if(r.error)return alert(r.error.message);await sb.from("pending_updates").delete().eq("id",id);load()}
 async function reject(id){const {error}=await sb.from("pending_updates").delete().eq("id",id);if(error)return alert(error.message);load()}
 function openAdd(){$("dlgTitle").textContent="إضافة محطة";$("sid").value="";$("stationForm").reset();stationDlg.showModal()}
