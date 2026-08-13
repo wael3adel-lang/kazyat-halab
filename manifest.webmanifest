@@ -1,7 +1,7 @@
 {
   "name": "كازيات حلب",
   "short_name": "كازيات حلب",
-  "description": "حالة محطات الوقود في حلب وآخر تحديثاتها",
+  "description": "حالة محطات الوقود في حلب",
   "lang": "ar",
   "dir": "rtl",
   "start_url": "./index.html",
