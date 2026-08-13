@@ -169,24 +169,24 @@ font-size:13px;
 margin-top:9px
 }
 
-/* زر إرسال رسالة */
-.fab{
-position:fixed;
-left:20px;
-bottom:20px;
+/* زر رسالة المشرف داخل بطاقة الكازية */
+.admin-message{
+display:block;
+width:100%;
+margin-top:12px;
+padding:9px 12px;
 border:0;
-border-radius:999px;
-padding:14px 20px;
+border-radius:10px;
 background:#0f766e;
 color:#fff;
-font-weight:800;
-box-shadow:0 5px 20px #0003;
-cursor:pointer;
+font-weight:700;
+font-size:13px;
+text-align:center;
 text-decoration:none;
-display:inline-block
+cursor:pointer
 }
 
-.fab:hover{
+.admin-message:hover{
 opacity:.92
 }
 
@@ -194,13 +194,6 @@ opacity:.92
 
 .stats{
 grid-template-columns:repeat(2,1fr)
-}
-
-.fab{
-left:15px;
-right:15px;
-bottom:15px;
-text-align:center
 }
 
 }
@@ -292,19 +285,6 @@ id="stations">
 </section>
 
 </main>
-
-
-<!-- زر التواصل مع المشرف -->
-
-<a
-class="fab"
-href="https://wa.me/905050978000?text=مرحباً،%20لدي%20معلومات%20أو%20تحديث%20بخصوص%20إحدى%20محطات%20الوقود%20في%20حلب:"
-target="_blank"
-rel="noopener">
-
-📩 إرسال رسالة للمشرف
-
-</a>
 
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -564,6 +544,18 @@ a.map(s=>{
 const t=
 tr(s.traffic);
 
+
+/* تجهيز رسالة خاصة بالكازية */
+
+const message=
+encodeURIComponent(
+"مرحباً، لدي تحديث بخصوص "+
+s.name+
+" ("+
+(s.area||"")+
+"):"
+);
+
 return `
 
 <article class="card">
@@ -652,6 +644,19 @@ ${fmt(s.updated_at)}
 </div>
 
 
+<!-- زر المشرف أصبح داخل بطاقة الكازية -->
+
+<a
+class="admin-message"
+href="https://wa.me/905050978000?text=${message}"
+target="_blank"
+rel="noopener">
+
+📩 إرسال رسالة للمشرف
+
+</a>
+
+
 </article>
 
 `
@@ -661,10 +666,14 @@ ${fmt(s.updated_at)}
 ||
 
 `
+
 <div
 style="padding:30px;text-align:center;color:#777">
+
 لا توجد نتائج.
+
 </div>
+
 `;
 
 }
@@ -689,6 +698,7 @@ ascending:false
 if(error){
 
 $("stations").innerHTML=
+
 `
 <div class="card">
 
