@@ -250,21 +250,17 @@ padding:6px 9px
 
 </head>
 
-
 <body>
-
 
 <header>
 
 <div class="wrap">
-
 
 <div class="header-top">
 
 <div class="brand">
 ⛽ كازيات حلب
 </div>
-
 
 <a
 class="admin-message"
@@ -278,16 +274,13 @@ rel="noopener">
 
 </div>
 
-
 <div class="sub">
 حالة المحطات وآخر تحديثات الوقود
 </div>
 
-
 <div class="credit">
 By Ammar Morgan
 </div>
-
 
 <div
 class="sub"
@@ -296,7 +289,6 @@ id="updatedLine">
 آخر تحديث: جاري التحميل…
 
 </div>
-
 
 <div class="search">
 
@@ -308,14 +300,11 @@ autocomplete="off">
 
 </div>
 
-
 </div>
 
 </header>
 
-
 <main class="wrap">
-
 
 <!-- إحصائيات المحطات للمستخدمين -->
 
@@ -324,9 +313,7 @@ class="stats"
 id="stats">
 </div>
 
-
 <div class="filters">
-
 
 <button
 class="active"
@@ -336,62 +323,49 @@ data-f="all">
 
 </button>
 
-
 <button data-f="open">
 تعمل
 </button>
-
 
 <button data-f="both">
 بنزين + مازوت
 </button>
 
-
 <button data-f="gas">
 بنزين
 </button>
-
 
 <button data-f="diesel">
 مازوت
 </button>
 
-
 <button data-f="closed">
 مغلقة
 </button>
-
 
 <button data-f="long">
 طابور طويل
 </button>
 
-
 <button data-f="light">
 ازدحام خفيف
 </button>
 
-
 </div>
-
 
 <div
 id="count"
 style="margin-bottom:10px;font-size:13px;color:#68757a">
 </div>
 
-
 <section
 class="grid"
 id="stations">
 </section>
 
-
 </main>
 
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 
 <script>
 
@@ -403,14 +377,15 @@ const sb=supabase.createClient(
 
 );
 
-
 let all=[];
 let filter="all";
 
+const $=id=>document.getElementById(id);
 
-const $=id=>
-document.getElementById(id);
 
+/* =========================
+   حماية النصوص
+========================= */
 
 function esc(x){
 
@@ -428,48 +403,52 @@ return String(x??"")
 }
 
 
+/* =========================
+   التاريخ
+========================= */
+
 function fmt(t){
 
 if(!t)return "—";
 
-
 return new Intl.DateTimeFormat(
-
 "ar-SY",
-
 {
-
 day:"numeric",
 month:"numeric",
 year:"numeric",
 hour:"2-digit",
 minute:"2-digit"
-
 }
-
 ).format(new Date(t));
 
 }
 
 
+/* =========================
+   سبب الإغلاق
+========================= */
+
 function closureReasonText(v){
 
-if(v==="maintenance")
+const value=String(v??"").trim().toLowerCase();
+
+if(value==="maintenance")
 return "🔧 صيانة";
 
-if(v==="technical")
+if(value==="technical")
 return "⚡ عطل فني";
 
-if(v==="delivery")
+if(value==="delivery")
 return "🚚 بانتظار وصول الطلبية";
 
-if(v==="fuel")
+if(value==="fuel")
 return "⛽ نفاد الوقود";
 
-if(v==="administrative")
+if(value==="administrative")
 return "🏢 إغلاق إداري";
 
-if(v==="temporary")
+if(value==="temporary")
 return "🕐 إغلاق مؤقت";
 
 return "";
@@ -477,31 +456,34 @@ return "";
 }
 
 
+/* =========================
+   الازدحام
+========================= */
+
 function tr(v){
 
-if(v==="none")
+const value=String(v??"").trim().toLowerCase();
+
+if(value==="none")
 return [
 "🟢",
 "لا يوجد ازدحام",
 "ok"
 ];
 
-
-if(v==="light")
+if(value==="light")
 return [
 "🟡",
 "ازدحام خفيف",
 "warn"
 ];
 
-
-if(v==="long")
+if(value==="long")
 return [
 "🔴",
 "طابور طويل",
 "no"
 ];
-
 
 return [
 "❌",
@@ -512,11 +494,14 @@ return [
 }
 
 
+/* =========================
+   لوكيشن
+========================= */
+
 function locationButton(s){
 
 if(!s.location_url)
 return "";
-
 
 return `
 
@@ -531,6 +516,66 @@ rel="noopener">
 </a>
 
 `;
+
+}
+
+
+/* =========================
+   الفلاتر
+========================= */
+
+function stationMatchesFilter(s){
+
+const status=String(s.status??"").trim().toLowerCase();
+const gas=String(s.gas??"").trim().toLowerCase();
+const diesel=String(s.diesel??"").trim().toLowerCase();
+const traffic=String(s.traffic??"").trim().toLowerCase();
+
+if(filter==="open"){
+return status==="open";
+}
+
+if(filter==="closed"){
+return status==="closed";
+}
+
+if(filter==="both"){
+return (
+status==="open" &&
+gas==="yes" &&
+diesel==="yes"
+);
+}
+
+if(filter==="gas"){
+return (
+status==="open" &&
+gas==="yes"
+);
+}
+
+if(filter==="diesel"){
+return (
+status==="open" &&
+diesel==="yes"
+);
+}
+
+if(filter==="long"){
+return (
+status==="open" &&
+traffic==="long"
+);
+}
+
+if(filter==="light"){
+return (
+status==="open" &&
+traffic==="light"
+);
+}
+
+return true;
 
 }
 
@@ -551,83 +596,26 @@ $("search")
 const a=
 all.filter(s=>{
 
+const name=String(s.name??"").toLowerCase();
+const area=String(s.area??"").toLowerCase();
 
 if(
-
 q &&
-
-!(
-
-(s.name+" "+(s.area||""))
-.toLowerCase()
-.includes(q)
-
-)
-
-)
+!((name+" "+area).includes(q))
+){
 
 return false;
 
+}
 
-if(filter==="open")
-return s.status==="open";
-
-
-if(filter==="closed")
-return s.status==="closed";
-
-
-if(filter==="both")
-
-return
-
-s.status==="open" &&
-
-s.gas==="yes" &&
-
-s.diesel==="yes";
-
-
-if(filter==="gas")
-
-return
-
-s.status==="open" &&
-
-s.gas==="yes";
-
-
-if(filter==="diesel")
-
-return
-
-s.status==="open" &&
-
-s.diesel==="yes";
-
-
-if(filter==="long")
-
-return
-
-s.status==="open" &&
-
-s.traffic==="long";
-
-
-if(filter==="light")
-
-return
-
-s.status==="open" &&
-
-s.traffic==="light";
-
-
-return true;
+return stationMatchesFilter(s);
 
 });
 
+
+/* =========================
+   إحصائيات المحطات
+========================= */
 
 const total=
 all.length;
@@ -635,13 +623,13 @@ all.length;
 
 const open=
 all.filter(
-s=>s.status==="open"
+s=>String(s.status??"").trim().toLowerCase()==="open"
 ).length;
 
 
 const closed=
 all.filter(
-s=>s.status==="closed"
+s=>String(s.status??"").trim().toLowerCase()==="closed"
 ).length;
 
 
@@ -649,13 +637,15 @@ const gas=
 all.filter(
 
 s=>
-s.status==="open" &&
-s.gas==="yes"
+String(s.status??"").trim().toLowerCase()==="open" &&
+String(s.gas??"").trim().toLowerCase()==="yes"
 
 ).length;
 
 
-/* إحصائيات المستخدمين */
+/* =========================
+   عرض الإحصائيات
+========================= */
 
 $("stats").innerHTML=
 
@@ -707,29 +697,43 @@ ${gas}
 `;
 
 
+/* =========================
+   عدد النتائج
+========================= */
+
 $("count").textContent=
+
+a.length===0
+?
+"0 محطة"
+:
 a.length+" محطة";
 
 
-$("stations").innerHTML=
+/* =========================
+   عرض المحطات
+========================= */
 
+$("stations").innerHTML=
 
 a.map(s=>{
 
 const t=
 tr(s.traffic);
 
+const status=
+String(s.status??"").trim().toLowerCase();
+
 
 /* =========================
    محطة مغلقة
 ========================= */
 
-if(s.status==="closed"){
+if(status==="closed"){
 
 return `
 
 <article class="card">
-
 
 <div class="name">
 
@@ -737,13 +741,11 @@ ${esc(s.name)}
 
 </div>
 
-
 <div class="area">
 
 ${esc(s.area||"")}
 
 </div>
-
 
 <div class="badges">
 
@@ -761,7 +763,6 @@ ${esc(s.area||"")}
 
 ${
 s.closure_reason
-
 ?
 
 `
@@ -789,7 +790,6 @@ s.closure_reason
 
 ${
 s.closure_hours
-
 ?
 
 `
@@ -820,7 +820,6 @@ s.closure_hours
 
 ${
 s.note
-
 ?
 
 `
@@ -867,13 +866,11 @@ return `
 
 <article class="card">
 
-
 <div class="name">
 
 ${esc(s.name)}
 
 </div>
-
 
 <div class="area">
 
@@ -901,7 +898,7 @@ ${t[1]}
 
 
 <span class="badge ${
-s.gas==="yes"
+String(s.gas??"").trim().toLowerCase()==="yes"
 ?
 "ok"
 :
@@ -910,17 +907,19 @@ s.gas==="yes"
 
 بنزين:
 
-${s.gas==="yes"
+${
+String(s.gas??"").trim().toLowerCase()==="yes"
 ?
 "يوجد"
 :
-"لا يوجد"}
+"لا يوجد"
+}
 
 </span>
 
 
 <span class="badge ${
-s.diesel==="yes"
+String(s.diesel??"").trim().toLowerCase()==="yes"
 ?
 "ok"
 :
@@ -929,11 +928,13 @@ s.diesel==="yes"
 
 مازوت:
 
-${s.diesel==="yes"
+${
+String(s.diesel??"").trim().toLowerCase()==="yes"
 ?
 "يوجد"
 :
-"لا يوجد"}
+"لا يوجد"
+}
 
 </span>
 
@@ -943,7 +944,6 @@ ${s.diesel==="yes"
 
 ${
 s.note
-
 ?
 
 `
@@ -1059,7 +1059,6 @@ new Date(a.updated_at) >
 new Date(b.updated_at)
 
 ?
-
 a
 :
 b
@@ -1098,11 +1097,9 @@ document
 )
 .forEach(button=>{
 
-
 button.addEventListener(
 "click",
 ()=>{
-
 
 document
 .querySelectorAll(
@@ -1115,18 +1112,12 @@ b.classList.remove(
 )
 );
 
-
-button.classList.add(
-"active"
-);
-
+button.classList.add("active");
 
 filter=
 button.dataset.f;
 
-
 render();
-
 
 }
 
@@ -1183,7 +1174,6 @@ navigator.serviceWorker
 }
 
 </script>
-
 
 </body>
 </html>
