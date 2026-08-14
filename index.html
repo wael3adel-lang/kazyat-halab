@@ -1,14 +1,20 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0f766e">
+
 <link rel="manifest" href="manifest.webmanifest">
+
 <title>كازيات حلب</title>
 
 <style>
-*{box-sizing:border-box}
+
+*{
+box-sizing:border-box
+}
 
 body{
 margin:0;
@@ -115,7 +121,7 @@ margin-bottom:10px
 .stat{
 background:#fff;
 border-radius:12px;
-padding:9px;
+padding:10px;
 text-align:center
 }
 
@@ -219,6 +225,11 @@ font-size:13px;
 font-weight:800
 }
 
+.visitor-stat{
+background:#ecfdf5;
+color:#065f46
+}
+
 @media(max-width:600px){
 
 .stats{
@@ -239,21 +250,26 @@ padding:6px 9px
 }
 
 }
+
 </style>
 
 </head>
 
+
 <body>
+
 
 <header>
 
 <div class="wrap">
+
 
 <div class="header-top">
 
 <div class="brand">
 ⛽ كازيات حلب
 </div>
+
 
 <a
 class="admin-message"
@@ -267,13 +283,16 @@ rel="noopener">
 
 </div>
 
+
 <div class="sub">
 حالة المحطات وآخر تحديثات الوقود
 </div>
 
+
 <div class="credit">
 By Ammar Morgan
 </div>
+
 
 <div
 class="sub"
@@ -282,6 +301,7 @@ id="updatedLine">
 آخر تحديث: جاري التحميل…
 
 </div>
+
 
 <div class="search">
 
@@ -293,12 +313,14 @@ autocomplete="off">
 
 </div>
 
+
 </div>
 
 </header>
 
 
 <main class="wrap">
+
 
 <div
 class="stats"
@@ -308,6 +330,7 @@ id="stats">
 
 <div class="filters">
 
+
 <button
 class="active"
 data-f="all">
@@ -316,33 +339,41 @@ data-f="all">
 
 </button>
 
+
 <button data-f="open">
 تعمل
 </button>
+
 
 <button data-f="both">
 بنزين + مازوت
 </button>
 
+
 <button data-f="gas">
 بنزين
 </button>
+
 
 <button data-f="diesel">
 مازوت
 </button>
 
+
 <button data-f="closed">
 مغلقة
 </button>
+
 
 <button data-f="long">
 طابور طويل
 </button>
 
+
 <button data-f="light">
 ازدحام خفيف
 </button>
+
 
 </div>
 
@@ -358,21 +389,28 @@ class="grid"
 id="stations">
 </section>
 
+
 </main>
 
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+
 <script>
 
+
 const sb=supabase.createClient(
+
 "https://hjggfolotblsurfwfcvn.supabase.co",
+
 "sb_publishable_UTpiWf5wrq8VfxAXxl9zfw_CtRRizyl"
+
 );
 
 
 let all=[];
 let filter="all";
+
 
 const $=id=>
 document.getElementById(id);
@@ -382,11 +420,13 @@ function esc(x){
 
 return String(x??"")
 .replace(/[&<>"']/g,m=>({
+
 "&":"&amp;",
 "<":"&lt;",
 ">":"&gt;",
 '"':"&quot;",
 "'":"&#039;"
+
 }[m]));
 
 }
@@ -396,15 +436,21 @@ function fmt(t){
 
 if(!t)return "—";
 
+
 return new Intl.DateTimeFormat(
+
 "ar-SY",
+
 {
+
 day:"numeric",
 month:"numeric",
 year:"numeric",
 hour:"2-digit",
 minute:"2-digit"
+
 }
+
 ).format(new Date(t));
 
 }
@@ -444,6 +490,7 @@ return [
 "ok"
 ];
 
+
 if(v==="light")
 return [
 "🟡",
@@ -451,12 +498,14 @@ return [
 "warn"
 ];
 
+
 if(v==="long")
 return [
 "🔴",
 "طابور طويل",
 "no"
 ];
+
 
 return [
 "❌",
@@ -469,11 +518,11 @@ return [
 
 function locationButton(s){
 
-return s.location_url
+if(!s.location_url)
+return "";
 
-?
 
-`
+return `
 
 <a
 class="location-link"
@@ -485,538 +534,14 @@ rel="noopener">
 
 </a>
 
-`
-
-:
-
-"";
-
-}
-
-
-function render(){
-
-const q=
-$("search")
-.value
-.trim()
-.toLowerCase();
-
-
-const a=
-all.filter(s=>{
-
-if(
-q &&
-!(
-(s.name+" "+(s.area||""))
-.toLowerCase()
-.includes(q)
-)
-)
-return false;
-
-
-if(filter==="open")
-return s.status==="open";
-
-
-if(filter==="closed")
-return s.status==="closed";
-
-
-if(filter==="both")
-return
-s.status==="open" &&
-s.gas==="yes" &&
-s.diesel==="yes";
-
-
-if(filter==="gas")
-return
-s.status==="open" &&
-s.gas==="yes";
-
-
-if(filter==="diesel")
-return
-s.status==="open" &&
-s.diesel==="yes";
-
-
-if(filter==="long")
-return
-s.status==="open" &&
-s.traffic==="long";
-
-
-if(filter==="light")
-return
-s.status==="open" &&
-s.traffic==="light";
-
-
-return true;
-
-});
-
-
-const open=
-all.filter(
-s=>s.status==="open"
-).length;
-
-
-const closed=
-all.filter(
-s=>s.status==="closed"
-).length;
-
-
-const gas=
-all.filter(
-s=>s.status==="open" &&
-s.gas==="yes"
-).length;
-
-
-const diesel=
-all.filter(
-s=>s.status==="open" &&
-s.diesel==="yes"
-).length;
-
-
-$("stats").innerHTML=
-
-`
-
-<div class="stat">
-
-<b>
-🟢 ${open}
-</b>
-
-تعمل
-
-</div>
-
-
-<div class="stat">
-
-<b>
-🔴 ${closed}
-</b>
-
-مغلقة
-
-</div>
-
-
-<div class="stat">
-
-<b>
-⛽ ${gas}
-</b>
-
-بنزين
-
-</div>
-
-
-<div class="stat">
-
-<b>
-🛢️ ${diesel}
-</b>
-
-مازوت
-
-</div>
-
-`;
-
-
-$("count").textContent=
-a.length+
-(
-a.length===1
-?
-" محطة"
-:
-" محطات"
-);
-
-
-$("stations").innerHTML=
-
-a.map(s=>{
-
-const t=tr(s.traffic);
-
-
-if(s.status==="closed"){
-
-return `
-
-<article class="card">
-
-<div class="name">
-${esc(s.name)}
-</div>
-
-
-<div class="area">
-${esc(s.area||"")}
-</div>
-
-
-<div class="badges">
-
-<span class="badge no">
-
-❌ مغلقة
-
-</span>
-
-</div>
-
-
-<div class="closure-info">
-
-${
-s.closure_reason
-
-?
-
-`
-<div>
-🔧 السبب:
-${esc(
-closureReasonText(
-s.closure_reason
-)
-)}
-</div>
-`
-
-:
-
-""
-
-}
-
-
-${
-s.closure_hours
-
-?
-
-`
-<div>
-⏱️ مدة الإغلاق المتوقعة:
-${esc(s.closure_hours)}
-ساعة
-</div>
-`
-
-:
-
-""
-
-}
-
-</div>
-
-
-${
-s.note
-
-?
-
-`
-<div class="note">
-
-📝 ${esc(s.note)}
-
-</div>
-`
-
-:
-
-""
-
-}
-
-
-${locationButton(s)}
-
-
-<div class="time">
-
-آخر تحديث:
-${fmt(s.updated_at)}
-
-</div>
-
-
-</article>
-
 `;
 
 }
 
 
-return `
-
-<article class="card">
-
-<div class="name">
-${esc(s.name)}
-</div>
-
-
-<div class="area">
-${esc(s.area||"")}
-</div>
-
-
-<div class="badges">
-
-
-<span class="badge ok">
-
-🟢 تعمل
-
-</span>
-
-
-<span class="badge ${t[2]}">
-
-${t[0]}
-${t[1]}
-
-</span>
-
-
-<span class="badge ${
-s.gas==="yes"
-?
-"ok"
-:
-"no"
-}">
-
-بنزين:
-${s.gas==="yes"
-?
-"يوجد"
-:
-"لا يوجد"}
-
-</span>
-
-
-<span class="badge ${
-s.diesel==="yes"
-?
-"ok"
-:
-"no"
-}">
-
-مازوت:
-${s.diesel==="yes"
-?
-"يوجد"
-:
-"لا يوجد"}
-
-</span>
-
-
-</div>
-
-
-${
-s.note
-
-?
-
-`
-<div class="note">
-
-📝 ${esc(s.note)}
-
-</div>
-`
-
-:
-
-""
-
-}
-
-
-${locationButton(s)}
-
-
-<div class="time">
-
-آخر تحديث:
-${fmt(s.updated_at)}
-
-</div>
-
-
-</article>
-
-`;
-
-})
-.join("")
-
-||
-
-`
-
-<div
-class="card"
-style="text-align:center;color:#777">
-
-لا توجد نتائج.
-
-</div>
-
-`;
-
-}
-
-
-async function load(){
-
-const {data,error}=
-
-await sb
-.from("stations")
-.select("*")
-.order(
-"updated_at",
-{
-ascending:false
-}
-);
-
-
-if(error){
-
-$("stations").innerHTML=
-
-`
-
-<div class="card">
-
-تعذر تحميل البيانات:
-
-<br><br>
-
-${esc(error.message)}
-
-</div>
-
-`;
-
-return;
-
-}
-
-
-all=data||[];
-
-
-if(all.length){
-
-const latest=
-all.reduce(
-(a,b)=>
-new Date(a.updated_at)>
-new Date(b.updated_at)
-?
-a
-:
-b
-);
-
-
-$("updatedLine")
-.textContent=
-"آخر تحديث: "+
-fmt(latest.updated_at);
-
-}else{
-
-$("updatedLine")
-.textContent=
-"آخر تحديث: —";
-
-}
-
-
-render();
-
-}
-
-
-document
-.querySelectorAll(
-".filters button"
-)
-.forEach(button=>
-
-button.addEventListener(
-"click",
-()=>{
-
-document
-.querySelectorAll(
-".filters button"
-)
-.forEach(
-b=>
-b.classList.remove(
-"active"
-)
-);
-
-
-button.classList.add(
-"active"
-);
-
-
-filter=
-button.dataset.f;
-
-
-render();
-
-}
-)
-);
-
-
-$("search")
-.addEventListener(
-"input",
-render
-);
-
-
-setInterval(
-load,
-60000
-);
-
+/* =========================
+   تسجيل الزائر
+========================= */
 
 async function logVisitor(){
 
@@ -1063,8 +588,11 @@ const {error}=
 await sb
 .from("visitor_events")
 .insert({
+
 visitor_id:vid,
+
 page:"home"
+
 });
 
 
@@ -1077,14 +605,719 @@ key,
 
 }
 
-}catch(e){}
+}catch(e){
+
+console.error(
+"Visitor error:",
+e
+);
+
+}
 
 }
 
 
+/* =========================
+   عدد الزوار
+========================= */
+
+async function getVisitorCount(){
+
+try{
+
+const {data,error}=
+
+await sb
+.from("visitor_events")
+.select("visitor_id");
+
+
+if(error){
+
+console.error(
+"Visitor count error:",
+error
+);
+
+return 0;
+
+}
+
+
+if(!data)
+return 0;
+
+
+return new Set(
+
+data
+.map(x=>x.visitor_id)
+.filter(Boolean)
+
+).size;
+
+
+}catch(e){
+
+return 0;
+
+}
+
+}
+
+
+/* =========================
+   عرض البيانات
+========================= */
+
+async function render(){
+
+const q=
+$("search")
+.value
+.trim()
+.toLowerCase();
+
+
+const a=
+all.filter(s=>{
+
+
+if(
+
+q &&
+
+!(
+
+(s.name+" "+(s.area||""))
+.toLowerCase()
+.includes(q)
+
+)
+
+)
+
+return false;
+
+
+if(filter==="open")
+return s.status==="open";
+
+
+if(filter==="closed")
+return s.status==="closed";
+
+
+if(filter==="both")
+
+return
+
+s.status==="open" &&
+
+s.gas==="yes" &&
+
+s.diesel==="yes";
+
+
+if(filter==="gas")
+
+return
+
+s.status==="open" &&
+
+s.gas==="yes";
+
+
+if(filter==="diesel")
+
+return
+
+s.status==="open" &&
+
+s.diesel==="yes";
+
+
+if(filter==="long")
+
+return
+
+s.status==="open" &&
+
+s.traffic==="long";
+
+
+if(filter==="light")
+
+return
+
+s.status==="open" &&
+
+s.traffic==="light";
+
+
+return true;
+
+});
+
+
+const open=
+
+all.filter(
+s=>s.status==="open"
+).length;
+
+
+const closed=
+
+all.filter(
+s=>s.status==="closed"
+).length;
+
+
+const gas=
+
+all.filter(
+
+s=>
+s.status==="open" &&
+s.gas==="yes"
+
+).length;
+
+
+const diesel=
+
+all.filter(
+
+s=>
+s.status==="open" &&
+s.diesel==="yes"
+
+).length;
+
+
+const visitors=
+await getVisitorCount();
+
+
+$("stats").innerHTML=
+
+`
+
+<div class="stat visitor-stat">
+
+<b>
+👥 ${visitors}
+</b>
+
+زوار الموقع
+
+</div>
+
+
+<div class="stat">
+
+<b>
+🟢 ${open}
+</b>
+
+تعمل
+
+</div>
+
+
+<div class="stat">
+
+<b>
+🔴 ${closed}
+</b>
+
+مغلقة
+
+</div>
+
+
+<div class="stat">
+
+<b>
+⛽ ${gas}
+</b>
+
+بنزين
+
+</div>
+
+`;
+
+
+$("count").textContent=
+
+a.length+
+
+(
+a.length===1
+?
+" محطة"
+:
+" محطة"
+);
+
+
+$("stations").innerHTML=
+
+
+a.map(s=>{
+
+const t=
+tr(s.traffic);
+
+
+/* =========================
+   محطة مغلقة
+========================= */
+
+if(s.status==="closed"){
+
+return `
+
+<article class="card">
+
+
+<div class="name">
+
+${esc(s.name)}
+
+</div>
+
+
+<div class="area">
+
+${esc(s.area||"")}
+
+</div>
+
+
+<div class="badges">
+
+<span class="badge no">
+
+❌ مغلقة
+
+</span>
+
+</div>
+
+
+<div class="closure-info">
+
+
+${
+s.closure_reason
+
+?
+
+`
+
+<div>
+
+🔧 السبب:
+
+${esc(
+closureReasonText(
+s.closure_reason
+)
+)}
+
+</div>
+
+`
+
+:
+
+""
+
+}
+
+
+${
+s.closure_hours
+
+?
+
+`
+
+<div>
+
+⏱️ مدة الإغلاق المتوقعة:
+
+${esc(
+s.closure_hours
+)}
+
+ساعة
+
+</div>
+
+`
+
+:
+
+""
+
+}
+
+
+</div>
+
+
+${
+s.note
+
+?
+
+`
+
+<div class="note">
+
+📝 ${esc(s.note)}
+
+</div>
+
+`
+
+:
+
+""
+
+}
+
+
+${locationButton(s)}
+
+
+<div class="time">
+
+آخر تحديث:
+
+${fmt(s.updated_at)}
+
+</div>
+
+
+</article>
+
+`;
+
+}
+
+
+/* =========================
+   محطة تعمل
+========================= */
+
+return `
+
+<article class="card">
+
+
+<div class="name">
+
+${esc(s.name)}
+
+</div>
+
+
+<div class="area">
+
+${esc(s.area||"")}
+
+</div>
+
+
+<div class="badges">
+
+
+<span class="badge ok">
+
+🟢 تعمل
+
+</span>
+
+
+<span class="badge ${t[2]}">
+
+${t[0]}
+${t[1]}
+
+</span>
+
+
+<span class="badge ${
+s.gas==="yes"
+?
+"ok"
+:
+"no"
+}">
+
+بنزين:
+
+${s.gas==="yes"
+?
+"يوجد"
+:
+"لا يوجد"}
+
+</span>
+
+
+<span class="badge ${
+s.diesel==="yes"
+?
+"ok"
+:
+"no"
+}">
+
+مازوت:
+
+${s.diesel==="yes"
+?
+"يوجد"
+:
+"لا يوجد"}
+
+</span>
+
+
+</div>
+
+
+${
+s.note
+
+?
+
+`
+
+<div class="note">
+
+📝 ${esc(s.note)}
+
+</div>
+
+`
+
+:
+
+""
+
+}
+
+
+${locationButton(s)}
+
+
+<div class="time">
+
+آخر تحديث:
+
+${fmt(s.updated_at)}
+
+</div>
+
+
+</article>
+
+`;
+
+})
+
+
+.join("")
+
+
+||
+
+`
+
+<div
+class="card"
+style="text-align:center;color:#777">
+
+لا توجد نتائج.
+
+</div>
+
+`;
+
+}
+
+
+/* =========================
+   تحميل المحطات
+========================= */
+
+async function load(){
+
+const {data,error}=
+
+await sb
+.from("stations")
+.select("*")
+.order(
+"updated_at",
+{
+ascending:false
+}
+);
+
+
+if(error){
+
+$("stations").innerHTML=
+
+`
+
+<div class="card">
+
+تعذر تحميل البيانات:
+
+<br><br>
+
+${esc(error.message)}
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+all=data||[];
+
+
+if(all.length){
+
+const latest=
+
+all.reduce(
+
+(a,b)=>
+
+new Date(a.updated_at) >
+
+new Date(b.updated_at)
+
+?
+
+a
+:
+b
+
+);
+
+
+$("updatedLine")
+.textContent=
+
+"آخر تحديث: "+
+fmt(latest.updated_at);
+
+}
+
+else{
+
+$("updatedLine")
+.textContent=
+"آخر تحديث: —";
+
+}
+
+
+await render();
+
+}
+
+
+/* =========================
+   الفلاتر
+========================= */
+
+document
+.querySelectorAll(
+".filters button"
+)
+.forEach(button=>{
+
+
+button.addEventListener(
+"click",
+()=>{
+
+
+document
+.querySelectorAll(
+".filters button"
+)
+.forEach(
+b=>
+b.classList.remove(
+"active"
+)
+);
+
+
+button.classList.add(
+"active"
+);
+
+
+filter=
+button.dataset.f;
+
+
+render();
+
+
+}
+
+);
+
+});
+
+
+/* =========================
+   البحث
+========================= */
+
+$("search")
+.addEventListener(
+"input",
+render
+);
+
+
+/* =========================
+   تحديث تلقائي
+========================= */
+
+setInterval(
+load,
+60000
+);
+
+
+/* =========================
+   تشغيل
+========================= */
+
 load();
 
 logVisitor();
+
 
 </script>
 
@@ -1092,9 +1325,12 @@ logVisitor();
 <script>
 
 if(
+
 "serviceWorker"
 in navigator &&
+
 location.protocol!=="file:"
+
 ){
 
 navigator.serviceWorker
@@ -1104,6 +1340,7 @@ navigator.serviceWorker
 }
 
 </script>
+
 
 </body>
 </html>
