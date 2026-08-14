@@ -225,11 +225,6 @@ font-size:13px;
 font-weight:800
 }
 
-.visitor-stat{
-background:#ecfdf5;
-color:#065f46
-}
-
 @media(max-width:600px){
 
 .stats{
@@ -273,7 +268,7 @@ padding:6px 9px
 
 <a
 class="admin-message"
-href="https://wa.me/905050978000?text=مرحباً،%20لدي%20معلومات%20أو%20تحديث%20بخصوص%20كازيات%20حلب:"
+href="https://wa.me/905050978000?text=مرحباً،%20لدي%20معلومات%20أو%20تحديث%20بخصوص%20كازيات%20حلب"
 target="_blank"
 rel="noopener">
 
@@ -321,6 +316,8 @@ autocomplete="off">
 
 <main class="wrap">
 
+
+<!-- إحصائيات المحطات للمستخدمين -->
 
 <div
 class="stats"
@@ -397,7 +394,6 @@ id="stations">
 
 
 <script>
-
 
 const sb=supabase.createClient(
 
@@ -540,133 +536,6 @@ rel="noopener">
 
 
 /* =========================
-   تسجيل الزائر
-========================= */
-
-async function logVisitor(){
-
-try{
-
-let vid=
-localStorage.getItem(
-"kazyat_visitor_id"
-);
-
-
-if(!vid){
-
-vid=
-crypto.randomUUID();
-
-localStorage.setItem(
-"kazyat_visitor_id",
-vid
-);
-
-}
-
-
-const day=
-new Date()
-.toISOString()
-.slice(0,10);
-
-
-const key=
-"kazyat_visit_"+
-day;
-
-
-if(
-localStorage.getItem(key)==="1"
-)
-return;
-
-
-const {error}=
-
-await sb
-.from("visitor_events")
-.insert({
-
-visitor_id:vid,
-
-page:"home"
-
-});
-
-
-if(!error){
-
-localStorage.setItem(
-key,
-"1"
-);
-
-}
-
-}catch(e){
-
-console.error(
-"Visitor error:",
-e
-);
-
-}
-
-}
-
-
-/* =========================
-   عدد الزوار
-========================= */
-
-async function getVisitorCount(){
-
-try{
-
-const {data,error}=
-
-await sb
-.from("visitor_events")
-.select("visitor_id");
-
-
-if(error){
-
-console.error(
-"Visitor count error:",
-error
-);
-
-return 0;
-
-}
-
-
-if(!data)
-return 0;
-
-
-return new Set(
-
-data
-.map(x=>x.visitor_id)
-.filter(Boolean)
-
-).size;
-
-
-}catch(e){
-
-return 0;
-
-}
-
-}
-
-
-/* =========================
    عرض البيانات
 ========================= */
 
@@ -760,22 +629,23 @@ return true;
 });
 
 
-const open=
+const total=
+all.length;
 
+
+const open=
 all.filter(
 s=>s.status==="open"
 ).length;
 
 
 const closed=
-
 all.filter(
 s=>s.status==="closed"
 ).length;
 
 
 const gas=
-
 all.filter(
 
 s=>
@@ -785,32 +655,19 @@ s.gas==="yes"
 ).length;
 
 
-const diesel=
-
-all.filter(
-
-s=>
-s.status==="open" &&
-s.diesel==="yes"
-
-).length;
-
-
-const visitors=
-await getVisitorCount();
-
+/* إحصائيات المستخدمين */
 
 $("stats").innerHTML=
 
 `
 
-<div class="stat visitor-stat">
+<div class="stat">
 
 <b>
-👥 ${visitors}
+${total}
 </b>
 
-زوار الموقع
+إجمالي المحطات
 
 </div>
 
@@ -818,7 +675,7 @@ $("stats").innerHTML=
 <div class="stat">
 
 <b>
-🟢 ${open}
+${open}
 </b>
 
 تعمل
@@ -829,7 +686,7 @@ $("stats").innerHTML=
 <div class="stat">
 
 <b>
-🔴 ${closed}
+${closed}
 </b>
 
 مغلقة
@@ -840,7 +697,7 @@ $("stats").innerHTML=
 <div class="stat">
 
 <b>
-⛽ ${gas}
+${gas}
 </b>
 
 بنزين
@@ -851,16 +708,7 @@ $("stats").innerHTML=
 
 
 $("count").textContent=
-
-a.length+
-
-(
-a.length===1
-?
-" محطة"
-:
-" محطة"
-);
+a.length+" محطة";
 
 
 $("stations").innerHTML=
@@ -1208,7 +1056,6 @@ all.reduce(
 (a,b)=>
 
 new Date(a.updated_at) >
-
 new Date(b.updated_at)
 
 ?
@@ -1230,8 +1077,7 @@ fmt(latest.updated_at);
 
 else{
 
-$("updatedLine")
-.textContent=
+$("updatedLine").textContent=
 "آخر تحديث: —";
 
 }
@@ -1315,9 +1161,6 @@ load,
 ========================= */
 
 load();
-
-logVisitor();
-
 
 </script>
 
