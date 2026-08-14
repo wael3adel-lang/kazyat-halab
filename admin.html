@@ -1,344 +1,114 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-
 <head>
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-
 <title>لوحة تحكم — كازيات حلب</title>
 
 <style>
-
-*{
-box-sizing:border-box
-}
-
-body{
-font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;
-margin:0;
-background:#f4f7f7;
-color:#17202a
-}
-
-header{
-background:#0f766e;
-color:#fff;
-padding:22px
-}
-
-main{
-max-width:1050px;
-margin:auto;
-padding:15px
-}
-
-.panel{
-background:#fff;
-padding:16px;
-border-radius:16px;
-margin:12px 0;
-box-shadow:0 2px 10px #0000000b
-}
-
-input,select,textarea{
-padding:11px;
-border:1px solid #ccd5d5;
-border-radius:10px;
-width:100%;
-margin:5px 0 10px;
-font:inherit
-}
-
-button{
-padding:10px 14px;
-border:0;
-border-radius:10px;
-cursor:pointer;
-margin:3px;
-font:inherit
-}
-
-.primary{
-background:#0f766e;
-color:#fff
-}
-
-.danger{
-background:#fee2e2;
-color:#991b1b
-}
-
-.muted{
-color:#68757a
-}
-
-.row{
-border-bottom:1px solid #eee;
-padding:13px 0
-}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-gap:10px
-}
-
-.badge{
-background:#eef2f2;
-padding:5px 8px;
-border-radius:8px;
-margin:2px;
-display:inline-block;
-font-size:12px
-}
-
-.ok{
-background:#dcfce7;
-color:#166534
-}
-
-.no{
-background:#fee2e2;
-color:#991b1b
-}
-
-.warn{
-background:#fef3c7;
-color:#92400e
-}
-
-.gray{
-background:#e5e7eb;
-color:#374151
-}
-
-.stats{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:8px
-}
-
-.stat{
-background:#f8fafb;
-border-radius:12px;
-padding:12px;
-text-align:center
-}
-
-.stat b{
-display:block;
-font-size:24px
-}
-
-.visitor-stat{
-background:#ecfdf5;
-color:#065f46
-}
-
-.actions{
-display:flex;
-flex-wrap:wrap;
-gap:4px
-}
-
-.two{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px
-}
-
-.owner-box{
-background:#ecfdf5;
-border:1px solid #a7f3d0;
-color:#065f46;
-border-radius:12px;
-padding:12px;
-margin-bottom:12px
-}
-
-.admin-box{
-background:#eff6ff;
-border:1px solid #bfdbfe;
-color:#1e40af;
-border-radius:12px;
-padding:12px;
-margin-bottom:12px
-}
-
-.station-title{
-font-size:20px;
-font-weight:800
-}
-
-.hidden{
-display:none
-}
-
-.closure-box{
-background:#fff7ed;
-border:1px solid #fed7aa;
-color:#9a3412;
-border-radius:12px;
-padding:10px;
-margin-top:10px
-}
-
-dialog{
-border:0;
-border-radius:18px;
-width:min(650px,94vw);
-padding:0;
-box-shadow:0 20px 60px #0004
-}
-
-dialog::backdrop{
-background:#0006
-}
-
-.form{
-padding:20px
-}
+*{box-sizing:border-box}
+body{font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;margin:0;background:#f4f7f7;color:#17202a}
+header{background:#0f766e;color:#fff;padding:22px}
+main{max-width:1050px;margin:auto;padding:15px}
+.panel{background:#fff;padding:16px;border-radius:16px;margin:12px 0;box-shadow:0 2px 10px #0000000b}
+input,select,textarea{padding:11px;border:1px solid #ccd5d5;border-radius:10px;width:100%;margin:5px 0 10px;font:inherit}
+button{padding:10px 14px;border:0;border-radius:10px;cursor:pointer;margin:3px;font:inherit}
+.primary{background:#0f766e;color:#fff}
+.danger{background:#fee2e2;color:#991b1b}
+.muted{color:#68757a}
+.row{border-bottom:1px solid #eee;padding:13px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:10px}
+.badge{background:#eef2f2;padding:5px 8px;border-radius:8px;margin:2px;display:inline-block;font-size:12px}
+.ok{background:#dcfce7;color:#166534}
+.no{background:#fee2e2;color:#991b1b}
+.warn{background:#fef3c7;color:#92400e}
+.gray{background:#e5e7eb;color:#374151}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.stat{background:#f8fafb;border-radius:12px;padding:12px;text-align:center}
+.stat b{display:block;font-size:24px}
+.visitor-stat{background:#ecfdf5;color:#065f46}
+.actions{display:flex;flex-wrap:wrap;gap:4px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.owner-box{background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46;border-radius:12px;padding:12px;margin-bottom:12px}
+.admin-box{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af;border-radius:12px;padding:12px;margin-bottom:12px}
+.station-title{font-size:20px;font-weight:800}
+.hidden{display:none}
+.closure-box{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:12px;padding:10px;margin-top:10px}
+dialog{border:0;border-radius:18px;width:min(650px,94vw);padding:0;box-shadow:0 20px 60px #0004}
+dialog::backdrop{background:#0006}
+.form{padding:20px}
 
 @media(max-width:700px){
-
-.stats{
-grid-template-columns:repeat(2,1fr)
-}
-
+.stats{grid-template-columns:repeat(2,1fr)}
 }
 
 @media(max-width:600px){
-
-.two{
-grid-template-columns:1fr
+.two{grid-template-columns:1fr}
 }
-
-}
-
 </style>
-
 </head>
 
 <body>
 
 <header>
-
 <main>
-
-<h2>
-⚙️ لوحة تحكم كازيات حلب
-</h2>
-
+<h2>⚙️ لوحة تحكم كازيات حلب</h2>
 </main>
-
 </header>
 
-
 <main>
-
-<div id="app">
-جاري التحميل…
-</div>
-
+<div id="app">جاري التحميل…</div>
 </main>
 
 
-<!-- =========================
-     نافذة المحطة
-========================= -->
+<!-- نافذة إضافة / تعديل محطة -->
 
 <dialog id="stationDlg">
 
 <form class="form" id="stationForm">
 
-<h2 id="dlgTitle">
-تعديل محطة
-</h2>
+<h2 id="dlgTitle">تعديل محطة</h2>
 
-<input
-type="hidden"
-id="sid">
+<input type="hidden" id="sid">
 
+<label>اسم المحطة</label>
+<input id="name" required>
 
-<label>
-اسم المحطة
-</label>
+<label>المنطقة</label>
+<input id="area">
 
-<input
-id="name"
-required>
-
-
-<label>
-المنطقة
-</label>
-
-<input
-id="area">
-
-
-<label>
-📍 رابط موقع المحطة على Google Maps
-</label>
-
+<label>📍 رابط موقع المحطة على Google Maps</label>
 <input
 id="location_url"
 type="url"
 placeholder="https://maps.google.com/...">
 
-
 <div class="two">
 
 <div>
 
-<label>
-الحالة
-</label>
+<label>الحالة</label>
 
-<select
-id="status"
-onchange="toggleAdminOpening()">
+<select id="status" onchange="toggleAdminOpening()">
 
-<option value="open">
-تعمل
-</option>
-
-<option value="closed">
-مغلقة
-</option>
+<option value="open">تعمل</option>
+<option value="closed">مغلقة</option>
 
 </select>
 
 </div>
 
 
-<div
-id="adminOpeningBox"
-class="hidden">
+<div id="adminOpeningBox" class="hidden">
 
-<label>
-الافتتاح
-</label>
+<label>الافتتاح</label>
 
-<select
-id="opening_time">
+<select id="opening_time">
 
-<option value="">
-اختر موعد الافتتاح
-</option>
-
-<option value="8">
-الثامنة صباحاً
-</option>
-
-<option value="9">
-التاسعة صباحاً
-</option>
-
-<option value="order">
-مع وصول الطلبية
-</option>
+<option value="">اختر موعد الافتتاح</option>
+<option value="8">الثامنة صباحاً</option>
+<option value="9">التاسعة صباحاً</option>
+<option value="order">مع وصول الطلبية</option>
 
 </select>
 
@@ -349,92 +119,39 @@ id="opening_time">
 
 <!-- سبب ومدة الإغلاق -->
 
-<div
-id="closureAdminBox"
-class="hidden closure-box">
+<div id="closureAdminBox" class="hidden closure-box">
 
-<b>
-سبب الإغلاق ومدة الإغلاق المتوقعة
-</b>
+<b>سبب الإغلاق ومدة الإغلاق المتوقعة</b>
 
-<label>
-سبب الإغلاق
-</label>
+<label>سبب الإغلاق</label>
 
 <select id="closure_reason">
 
-<option value="">
-اختر السبب
-</option>
+<option value="">اختر السبب</option>
 
-<option value="maintenance">
-🔧 صيانة
-</option>
-
-<option value="technical">
-⚡ عطل فني
-</option>
-
-<option value="delivery">
-🚚 بانتظار وصول الطلبية
-</option>
-
-<option value="fuel">
-⛽ نفاد الوقود
-</option>
-
-<option value="administrative">
-🏢 إغلاق إداري
-</option>
-
-<option value="temporary">
-🕐 إغلاق مؤقت
-</option>
+<option value="maintenance">🔧 صيانة</option>
+<option value="technical">⚡ عطل فني</option>
+<option value="delivery">🚚 بانتظار وصول الطلبية</option>
+<option value="fuel">⛽ نفاد الوقود</option>
+<option value="administrative">🏢 إغلاق إداري</option>
+<option value="temporary">🕐 إغلاق مؤقت</option>
 
 </select>
 
 
-<label>
-مدة الإغلاق المتوقعة
-</label>
+<label>مدة الإغلاق المتوقعة</label>
 
 <select id="closure_hours">
 
-<option value="">
-اختر المدة
-</option>
-
-<option value="1">
-1 ساعة
-</option>
-
-<option value="2">
-2 ساعة
-</option>
-
-<option value="3">
-3 ساعات
-</option>
-
-<option value="4">
-4 ساعات
-</option>
-
-<option value="6">
-6 ساعات
-</option>
-
-<option value="8">
-8 ساعات
-</option>
-
-<option value="12">
-12 ساعة
-</option>
-
-<option value="24">
-24 ساعة
-</option>
+<option value="">اختر المدة</option>
+<option value="1">1 ساعة</option>
+<option value="2">2 ساعة</option>
+<option value="3">3 ساعات</option>
+<option value="4">4 ساعات</option>
+<option value="6">6 ساعات</option>
+<option value="8">8 ساعات</option>
+<option value="12">12 ساعة</option>
+<option value="24">24 ساعة</option>
 
 </select>
 
@@ -447,23 +164,13 @@ class="hidden closure-box">
 
 <div>
 
-<label>
-الازدحام
-</label>
+<label>الازدحام</label>
 
 <select id="traffic">
 
-<option value="none">
-لا يوجد ازدحام
-</option>
-
-<option value="light">
-ازدحام خفيف
-</option>
-
-<option value="long">
-طابور طويل
-</option>
+<option value="none">لا يوجد ازدحام</option>
+<option value="light">ازدحام خفيف</option>
+<option value="long">طابور طويل</option>
 
 </select>
 
@@ -472,19 +179,12 @@ class="hidden closure-box">
 
 <div>
 
-<label>
-البنزين
-</label>
+<label>البنزين</label>
 
 <select id="gas">
 
-<option value="yes">
-يوجد
-</option>
-
-<option value="no">
-لا يوجد
-</option>
+<option value="yes">يوجد</option>
+<option value="no">لا يوجد</option>
 
 </select>
 
@@ -495,19 +195,12 @@ class="hidden closure-box">
 
 <div>
 
-<label>
-المازوت
-</label>
+<label>المازوت</label>
 
 <select id="diesel">
 
-<option value="yes">
-يوجد
-</option>
-
-<option value="no">
-لا يوجد
-</option>
+<option value="yes">يوجد</option>
+<option value="no">لا يوجد</option>
 
 </select>
 
@@ -516,31 +209,19 @@ class="hidden closure-box">
 </div>
 
 
-<label>
-ملاحظة / إعلان
-</label>
+<label>ملاحظة / إعلان</label>
 
-<textarea
-id="note"
-rows="4"></textarea>
+<textarea id="note" rows="4"></textarea>
 
 
 <div>
 
-<button
-class="primary"
-type="submit">
-
+<button class="primary" type="submit">
 حفظ التغيير
-
 </button>
 
-<button
-type="button"
-onclick="stationDlg.close()">
-
+<button type="button" onclick="stationDlg.close()">
 إلغاء
-
 </button>
 
 </div>
@@ -554,61 +235,36 @@ onclick="stationDlg.close()">
 
 <script>
 
-
-/* =========================
-   Supabase
-========================= */
-
 const sb=supabase.createClient(
-
 "https://hjggfolotblsurfwfcvn.supabase.co",
-
 "sb_publishable_UTpiWf5wrq8VfxAXxl9zfw_CtRRizyl"
-
 );
 
-
 let session=null;
-
 let stations=[];
-
 let currentRole=null;
-
 let currentStationId=null;
 
+const $=id=>document.getElementById(id);
 
-const $=id=>
-document.getElementById(id);
-
-
-/* =========================
-   حماية النص
-========================= */
 
 function esc(x){
 
 return String(x??"")
 .replace(/[&<>"']/g,m=>({
-
 "&":"&amp;",
 "<":"&lt;",
 ">":"&gt;",
 '"':"&quot;",
 "'":"&#039;"
-
 }[m]));
 
 }
 
 
-/* =========================
-   التاريخ
-========================= */
-
 function fmt(t){
 
-if(!t)
-return "—";
+if(!t)return "—";
 
 return new Intl.DateTimeFormat(
 "ar-SY",
@@ -624,49 +280,25 @@ minute:"2-digit"
 }
 
 
-/* =========================
-   نص سبب الإغلاق
-========================= */
+function openingText(v){
 
-function closureReasonText(v){
-
-if(v==="maintenance")
-return "🔧 صيانة";
-
-if(v==="technical")
-return "⚡ عطل فني";
-
-if(v==="delivery")
-return "🚚 بانتظار وصول الطلبية";
-
-if(v==="fuel")
-return "⛽ نفاد الوقود";
-
-if(v==="administrative")
-return "🏢 إغلاق إداري";
-
-if(v==="temporary")
-return "🕐 إغلاق مؤقت";
+if(v==="8")return "الثامنة صباحاً";
+if(v==="9")return "التاسعة صباحاً";
+if(v==="order")return "مع وصول الطلبية";
 
 return "";
 
 }
 
 
-/* =========================
-   نص الافتتاح
-========================= */
+function closureReasonText(v){
 
-function openingText(v){
-
-if(v==="8")
-return "الثامنة صباحاً";
-
-if(v==="9")
-return "التاسعة صباحاً";
-
-if(v==="order")
-return "مع وصول الطلبية";
+if(v==="maintenance")return "🔧 صيانة";
+if(v==="technical")return "⚡ عطل فني";
+if(v==="delivery")return "🚚 بانتظار وصول الطلبية";
+if(v==="fuel")return "⛽ نفاد الوقود";
+if(v==="administrative")return "🏢 إغلاق إداري";
+if(v==="temporary")return "🕐 إغلاق مؤقت";
 
 return "";
 
@@ -683,32 +315,16 @@ $("app").innerHTML=`
 
 <div class="panel">
 
-<h2>
-تسجيل الدخول
-</h2>
+<h2>تسجيل الدخول</h2>
 
-<label>
-البريد الإلكتروني
-</label>
+<label>البريد الإلكتروني</label>
+<input id="email" type="email">
 
-<input
-id="email"
-type="email">
+<label>كلمة المرور</label>
+<input id="password" type="password">
 
-<label>
-كلمة المرور
-</label>
-
-<input
-id="password"
-type="password">
-
-<button
-class="primary"
-onclick="doLogin()">
-
+<button class="primary" onclick="doLogin()">
 دخول
-
 </button>
 
 </div>
@@ -720,9 +336,7 @@ onclick="doLogin()">
 
 async function doLogin(){
 
-const {error}=
-
-await sb.auth.signInWithPassword({
+const {error}=await sb.auth.signInWithPassword({
 
 email:$("email").value.trim(),
 
@@ -730,11 +344,9 @@ password:$("password").value
 
 });
 
-
 if(error){
 
 alert(error.message);
-
 return;
 
 }
@@ -750,36 +362,25 @@ location.reload();
 
 async function init(){
 
-const {data}=
-
-await sb.auth.getSession();
+const {data}=await sb.auth.getSession();
 
 session=data.session;
-
 
 if(!session){
 
 login();
-
 return;
 
 }
 
 
-const {data:me,error}=
-
-await sb
+const {data:me,error}=await sb
 
 .from("admin_users")
 
-.select(
-"user_id,role,station_id"
-)
+.select("user_id,role,station_id")
 
-.eq(
-"user_id",
-session.user.id
-)
+.eq("user_id",session.user.id)
 
 .maybeSingle();
 
@@ -823,34 +424,26 @@ return;
 
 
 currentRole=me.role||"admin";
-
 currentStationId=me.station_id;
 
 
-if(currentRole==="station_owner"){
-
+if(currentRole==="station_owner")
 loadOwner();
-
-}else{
-
+else
 loadAdmin();
 
 }
 
-}
 
-
-/* =========================================================
-   إحصائيات الزوار للمشرف فقط
-========================================================= */
+/* =================================================
+   إحصائيات الزوار
+================================================= */
 
 async function getVisitorStats(){
 
 try{
 
-const {data,error}=
-
-await sb
+const {data,error}=await sb
 
 .from("visitor_events")
 
@@ -865,12 +458,10 @@ error
 );
 
 return {
-
 unique:0,
 today:0,
 week:0,
 ips:0
-
 };
 
 }
@@ -879,12 +470,10 @@ ips:0
 if(!data || !data.length){
 
 return {
-
 unique:0,
 today:0,
 week:0,
 ips:0
-
 };
 
 }
@@ -895,9 +484,7 @@ const now=new Date();
 
 const todayStart=new Date();
 
-todayStart.setHours(
-0,0,0,0
-);
+todayStart.setHours(0,0,0,0);
 
 
 const weekStart=new Date();
@@ -906,9 +493,7 @@ weekStart.setDate(
 now.getDate()-6
 );
 
-weekStart.setHours(
-0,0,0,0
-);
+weekStart.setHours(0,0,0,0);
 
 
 const uniqueVisitors=
@@ -916,9 +501,7 @@ const uniqueVisitors=
 new Set(
 
 data
-
 .map(x=>x.visitor_id)
-
 .filter(Boolean)
 
 ).size;
@@ -928,15 +511,13 @@ const todayEvents=
 
 data.filter(x=>{
 
-const d=
-new Date(
+const d=new Date(
 x.created_at ||
 x.inserted_at ||
 x.timestamp
 );
 
-return !isNaN(d) &&
-d>=todayStart;
+return !isNaN(d) && d>=todayStart;
 
 });
 
@@ -945,41 +526,30 @@ const weekEvents=
 
 data.filter(x=>{
 
-const d=
-new Date(
+const d=new Date(
 x.created_at ||
 x.inserted_at ||
 x.timestamp
 );
 
-return !isNaN(d) &&
-d>=weekStart;
+return !isNaN(d) && d>=weekStart;
 
 });
 
 
-/*
-إذا كان جدول visitor_events
-يحتوي على ip أو ip_address
-نحسبها تلقائياً.
-*/
-
 const ipValues=
 
 data
-
 .map(x=>
 x.ip_address ||
 x.ip ||
 x.ipAddress ||
 null
 )
-
 .filter(Boolean);
 
 
 const uniqueIps=
-
 new Set(ipValues).size;
 
 
@@ -1001,12 +571,10 @@ ips:uniqueIps
 console.error(e);
 
 return {
-
 unique:0,
 today:0,
 week:0,
 ips:0
-
 };
 
 }
@@ -1014,602 +582,9 @@ ips:0
 }
 
 
-/* =========================================================
-   صاحب الكازية
-========================================================= */
-
-async function loadOwner(){
-
-if(!currentStationId){
-
-$("app").innerHTML=`
-
-<div class="panel">
-
-لا توجد كازية مرتبطة بهذا الحساب.
-
-</div>
-
-`;
-
-return;
-
-}
-
-
-const {data:s,error}=
-
-await sb
-
-.from("stations")
-
-.select("*")
-
-.eq(
-"id",
-currentStationId
-)
-
-.maybeSingle();
-
-
-if(error){
-
-$("app").innerHTML=`
-
-<div class="panel">
-
-${esc(error.message)}
-
-</div>
-
-`;
-
-return;
-
-}
-
-
-if(!s){
-
-$("app").innerHTML=`
-
-<div class="panel">
-
-لم يتم العثور على الكازية.
-
-</div>
-
-`;
-
-return;
-
-}
-
-
-stations=[s];
-
-
-$("app").innerHTML=`
-
-<div class="panel">
-
-<div class="owner-box">
-
-<b>
-⛽ حساب صاحب الكازية
-</b>
-
-<br>
-
-${esc(session.user.email)}
-
-<br>
-
-يمكنك تحديث بيانات كازيتك فقط.
-
-</div>
-
-<button onclick="logout()">
-خروج
-</button>
-
-</div>
-
-
-<div class="panel">
-
-<h2>
-⛽ ${esc(s.name)}
-</h2>
-
-<div class="muted">
-${esc(s.area||"")}
-</div>
-
-<div class="badge">
-آخر تحديث:
-${fmt(s.updated_at)}
-</div>
-
-<br><br>
-
-
-<label>
-الحالة
-</label>
-
-<select
-id="ownerStatus"
-onchange="toggleOwnerFields()">
-
-<option
-value="open"
-${s.status==="open"?"selected":""}>
-
-🟢 تعمل
-
-</option>
-
-<option
-value="closed"
-${s.status==="closed"?"selected":""}>
-
-❌ مغلقة
-
-</option>
-
-</select>
-
-
-<div id="ownerOpenFields">
-
-<div class="two">
-
-<div>
-
-<label>
-البنزين
-</label>
-
-<select id="ownerGas">
-
-<option
-value="yes"
-${s.gas==="yes"?"selected":""}>
-
-🟢 يوجد
-
-</option>
-
-<option
-value="no"
-${s.gas==="no"?"selected":""}>
-
-🔴 لا يوجد
-
-</option>
-
-</select>
-
-</div>
-
-
-<div>
-
-<label>
-المازوت
-</label>
-
-<select id="ownerDiesel">
-
-<option
-value="yes"
-${s.diesel==="yes"?"selected":""}>
-
-🟢 يوجد
-
-</option>
-
-<option
-value="no"
-${s.diesel==="no"?"selected":""}>
-
-🔴 لا يوجد
-
-</option>
-
-</select>
-
-</div>
-
-</div>
-
-
-<label>
-الازدحام
-</label>
-
-<select id="ownerTraffic">
-
-<option
-value="none"
-${s.traffic==="none"?"selected":""}>
-
-🟢 لا يوجد ازدحام
-
-</option>
-
-<option
-value="light"
-${s.traffic==="light"?"selected":""}>
-
-🟡 ازدحام خفيف
-
-</option>
-
-<option
-value="long"
-${s.traffic==="long"?"selected":""}>
-
-🔴 طابور طويل
-
-</option>
-
-</select>
-
-</div>
-
-
-<div
-id="ownerClosedFields"
-class="closure-box">
-
-<label>
-سبب الإغلاق
-</label>
-
-<select id="ownerClosureReason">
-
-<option value="">
-اختر السبب
-</option>
-
-<option
-value="maintenance"
-${s.closure_reason==="maintenance"?"selected":""}>
-
-🔧 صيانة
-
-</option>
-
-<option
-value="technical"
-${s.closure_reason==="technical"?"selected":""}>
-
-⚡ عطل فني
-
-</option>
-
-<option
-value="delivery"
-${s.closure_reason==="delivery"?"selected":""}>
-
-🚚 بانتظار وصول الطلبية
-
-</option>
-
-<option
-value="fuel"
-${s.closure_reason==="fuel"?"selected":""}>
-
-⛽ نفاد الوقود
-
-</option>
-
-<option
-value="administrative"
-${s.closure_reason==="administrative"?"selected":""}>
-
-🏢 إغلاق إداري
-
-</option>
-
-<option
-value="temporary"
-${s.closure_reason==="temporary"?"selected":""}>
-
-🕐 إغلاق مؤقت
-
-</option>
-
-</select>
-
-
-<label>
-مدة الإغلاق المتوقعة
-</label>
-
-<select id="ownerClosureHours">
-
-<option value="">
-اختر المدة
-</option>
-
-<option value="1" ${String(s.closure_hours)==="1"?"selected":""}>
-1 ساعة
-</option>
-
-<option value="2" ${String(s.closure_hours)==="2"?"selected":""}>
-2 ساعة
-</option>
-
-<option value="3" ${String(s.closure_hours)==="3"?"selected":""}>
-3 ساعات
-</option>
-
-<option value="4" ${String(s.closure_hours)==="4"?"selected":""}>
-4 ساعات
-</option>
-
-<option value="6" ${String(s.closure_hours)==="6"?"selected":""}>
-6 ساعات
-</option>
-
-<option value="8" ${String(s.closure_hours)==="8"?"selected":""}>
-8 ساعات
-</option>
-
-<option value="12" ${String(s.closure_hours)==="12"?"selected":""}>
-12 ساعة
-</option>
-
-<option value="24" ${String(s.closure_hours)==="24"?"selected":""}>
-24 ساعة
-</option>
-
-</select>
-
-</div>
-
-
-<br>
-
-<button
-class="primary"
-style="width:100%;font-size:17px;padding:13px"
-onclick="saveOwner()">
-
-💾 حفظ تحديث الكازية
-
-</button>
-
-
-<div
-id="ownerMessage"
-style="margin-top:12px;text-align:center">
-
-</div>
-
-</div>
-
-`;
-
-toggleOwnerFields();
-
-}
-
-
-/* =========================
-   حقول صاحب الكازية
-========================= */
-
-function toggleOwnerFields(){
-
-const closed=
-$("ownerStatus").value==="closed";
-
-
-$("ownerOpenFields").style.display=
-closed?"none":"block";
-
-
-$("ownerClosedFields").style.display=
-closed?"block":"none";
-
-
-if($("ownerGas"))
-$("ownerGas").disabled=closed;
-
-if($("ownerDiesel"))
-$("ownerDiesel").disabled=closed;
-
-if($("ownerTraffic"))
-$("ownerTraffic").disabled=closed;
-
-}
-
-
-/* =========================
-   حفظ صاحب الكازية
-========================= */
-
-async function saveOwner(){
-
-if(currentRole!=="station_owner"){
-
-alert("ليس لديك صلاحية.");
-
-return;
-
-}
-
-
-const closed=
-$("ownerStatus").value==="closed";
-
-
-let closureReason="";
-
-let closureHours="";
-
-let opening="";
-
-
-if(closed){
-
-closureReason=
-$("ownerClosureReason").value;
-
-closureHours=
-$("ownerClosureHours").value;
-
-
-if(!closureReason){
-
-alert("اختر سبب الإغلاق.");
-
-return;
-
-}
-
-
-if(!closureHours){
-
-alert("اختر مدة الإغلاق المتوقعة.");
-
-return;
-
-}
-
-}else{
-
-closureReason="";
-
-closureHours="";
-
-}
-
-
-const payload={
-
-status:$("ownerStatus").value,
-
-opening_time:"",
-
-closure_reason:closureReason,
-
-closure_hours:closureHours,
-
-updated_at:new Date().toISOString()
-
-};
-
-
-if(!closed){
-
-payload.gas=
-$("ownerGas").value;
-
-payload.diesel=
-$("ownerDiesel").value;
-
-payload.traffic=
-$("ownerTraffic").value;
-
-}else{
-
-payload.traffic="closed";
-
-}
-
-
-const {error}=
-
-await sb
-
-.from("stations")
-
-.update(payload)
-
-.eq(
-"id",
-currentStationId
-);
-
-
-if(error){
-
-$("ownerMessage").innerHTML=`
-
-<span style="color:#b91c1c">
-
-❌ لم يتم الحفظ:
-
-<br>
-
-${esc(error.message)}
-
-</span>
-
-`;
-
-return;
-
-}
-
-
-const updatedStation={
-
-...stations[0],
-
-...payload
-
-};
-
-
-stations=[updatedStation];
-
-
-const telegramOk=
-await notifyTelegram(
-updatedStation
-);
-
-
-$("ownerMessage").innerHTML=`
-
-<span
-style="color:#166534;font-weight:700">
-
-✅ تم تحديث الكازية بنجاح
-
-<br>
-
-${
-telegramOk
-?
-"📲 تم إرسال إشعار Telegram"
-:
-"⚠️ تم الحفظ لكن تعذر إرسال إشعار Telegram"
-}
-
-</span>
-
-`;
-
-
-setTimeout(
-loadOwner,
-1500
-);
-
-}
-
-
-/* =========================================================
+/* =================================================
    إشعار Telegram
-========================================================= */
+================================================= */
 
 async function notifyTelegram(station){
 
@@ -1639,7 +614,11 @@ station.closure_reason
 }
 
 
-if(station.closure_hours){
+if(
+station.closure_hours !== null &&
+station.closure_hours !== undefined &&
+station.closure_hours !== ""
+){
 
 changes.push(
 "⏱️ <b>مدة الإغلاق المتوقعة:</b> "+
@@ -1717,26 +696,16 @@ esc(station.note)
 }
 
 
-const {data,error}=
-
-await sb.functions.invoke(
+const {data,error}=await sb.functions.invoke(
 
 "notify-telegram",
 
 {
-
 body:{
-
-station_name:
-station.name,
-
-area:
-station.area||"",
-
+station_name:station.name,
+area:station.area||"",
 changes
-
 }
-
 }
 
 );
@@ -1773,20 +742,504 @@ return false;
 }
 
 
-/* =========================================================
+/* =================================================
+   صاحب الكازية
+================================================= */
+
+async function loadOwner(){
+
+if(!currentStationId){
+
+$("app").innerHTML=`
+
+<div class="panel">
+لا توجد كازية مرتبطة بهذا الحساب.
+</div>
+
+`;
+
+return;
+
+}
+
+
+const {data:s,error}=await sb
+
+.from("stations")
+
+.select("*")
+
+.eq("id",currentStationId)
+
+.maybeSingle();
+
+
+if(error){
+
+$("app").innerHTML=`
+
+<div class="panel">
+${esc(error.message)}
+</div>
+
+`;
+
+return;
+
+}
+
+
+if(!s){
+
+$("app").innerHTML=`
+
+<div class="panel">
+لم يتم العثور على الكازية.
+</div>
+
+`;
+
+return;
+
+}
+
+
+stations=[s];
+
+
+$("app").innerHTML=`
+
+<div class="panel">
+
+<div class="owner-box">
+
+<b>⛽ حساب صاحب الكازية</b>
+
+<br>
+
+${esc(session.user.email)}
+
+<br>
+
+يمكنك تحديث بيانات كازيتك فقط.
+
+</div>
+
+<button onclick="logout()">
+خروج
+</button>
+
+</div>
+
+
+<div class="panel">
+
+<h2>
+⛽ ${esc(s.name)}
+</h2>
+
+<div class="muted">
+${esc(s.area||"")}
+</div>
+
+<div class="badge">
+آخر تحديث:
+${fmt(s.updated_at)}
+</div>
+
+<br><br>
+
+<label>الحالة</label>
+
+<select id="ownerStatus" onchange="toggleOwnerFields()">
+
+<option value="open" ${s.status==="open"?"selected":""}>
+🟢 تعمل
+</option>
+
+<option value="closed" ${s.status==="closed"?"selected":""}>
+❌ مغلقة
+</option>
+
+</select>
+
+
+<div id="ownerOpenFields">
+
+<div class="two">
+
+<div>
+
+<label>البنزين</label>
+
+<select id="ownerGas">
+
+<option value="yes" ${s.gas==="yes"?"selected":""}>
+🟢 يوجد
+</option>
+
+<option value="no" ${s.gas==="no"?"selected":""}>
+🔴 لا يوجد
+</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>المازوت</label>
+
+<select id="ownerDiesel">
+
+<option value="yes" ${s.diesel==="yes"?"selected":""}>
+🟢 يوجد
+</option>
+
+<option value="no" ${s.diesel==="no"?"selected":""}>
+🔴 لا يوجد
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<label>الازدحام</label>
+
+<select id="ownerTraffic">
+
+<option value="none" ${s.traffic==="none"?"selected":""}>
+🟢 لا يوجد ازدحام
+</option>
+
+<option value="light" ${s.traffic==="light"?"selected":""}>
+🟡 ازدحام خفيف
+</option>
+
+<option value="long" ${s.traffic==="long"?"selected":""}>
+🔴 طابور طويل
+</option>
+
+</select>
+
+</div>
+
+
+<div id="ownerClosedFields" class="closure-box">
+
+<label>سبب الإغلاق</label>
+
+<select id="ownerClosureReason">
+
+<option value="">
+اختر السبب
+</option>
+
+<option value="maintenance" ${s.closure_reason==="maintenance"?"selected":""}>
+🔧 صيانة
+</option>
+
+<option value="technical" ${s.closure_reason==="technical"?"selected":""}>
+⚡ عطل فني
+</option>
+
+<option value="delivery" ${s.closure_reason==="delivery"?"selected":""}>
+🚚 بانتظار وصول الطلبية
+</option>
+
+<option value="fuel" ${s.closure_reason==="fuel"?"selected":""}>
+⛽ نفاد الوقود
+</option>
+
+<option value="administrative" ${s.closure_reason==="administrative"?"selected":""}>
+🏢 إغلاق إداري
+</option>
+
+<option value="temporary" ${s.closure_reason==="temporary"?"selected":""}>
+🕐 إغلاق مؤقت
+</option>
+
+</select>
+
+
+<label>مدة الإغلاق المتوقعة</label>
+
+<select id="ownerClosureHours">
+
+<option value="">
+اختر المدة
+</option>
+
+<option value="1" ${String(s.closure_hours)==="1"?"selected":""}>
+1 ساعة
+</option>
+
+<option value="2" ${String(s.closure_hours)==="2"?"selected":""}>
+2 ساعة
+</option>
+
+<option value="3" ${String(s.closure_hours)==="3"?"selected":""}>
+3 ساعات
+</option>
+
+<option value="4" ${String(s.closure_hours)==="4"?"selected":""}>
+4 ساعات
+</option>
+
+<option value="6" ${String(s.closure_hours)==="6"?"selected":""}>
+6 ساعات
+</option>
+
+<option value="8" ${String(s.closure_hours)==="8"?"selected":""}>
+8 ساعات
+</option>
+
+<option value="12" ${String(s.closure_hours)==="12"?"selected":""}>
+12 ساعة
+</option>
+
+<option value="24" ${String(s.closure_hours)==="24"?"selected":""}>
+24 ساعة
+</option>
+
+</select>
+
+</div>
+
+
+<br>
+
+<button
+class="primary"
+style="width:100%;font-size:17px;padding:13px"
+onclick="saveOwner()">
+
+💾 حفظ تحديث الكازية
+
+</button>
+
+
+<div
+id="ownerMessage"
+style="margin-top:12px;text-align:center">
+
+</div>
+
+</div>
+
+`;
+
+toggleOwnerFields();
+
+}
+
+
+function toggleOwnerFields(){
+
+const closed=
+$("ownerStatus").value==="closed";
+
+
+$("ownerOpenFields").style.display=
+closed?"none":"block";
+
+
+$("ownerClosedFields").style.display=
+closed?"block":"none";
+
+
+if($("ownerGas"))
+$("ownerGas").disabled=closed;
+
+if($("ownerDiesel"))
+$("ownerDiesel").disabled=closed;
+
+if($("ownerTraffic"))
+$("ownerTraffic").disabled=closed;
+
+}
+
+
+/* =================================================
+   حفظ صاحب الكازية
+================================================= */
+
+async function saveOwner(){
+
+if(currentRole!=="station_owner"){
+
+alert("ليس لديك صلاحية.");
+return;
+
+}
+
+
+const closed=
+$("ownerStatus").value==="closed";
+
+
+let closureReason=null;
+let closureHours=null;
+
+
+if(closed){
+
+closureReason=
+$("ownerClosureReason").value || null;
+
+
+closureHours=
+$("ownerClosureHours").value
+?
+parseInt(
+$("ownerClosureHours").value,
+10
+)
+:
+null;
+
+
+if(!closureReason){
+
+alert("اختر سبب الإغلاق.");
+return;
+
+}
+
+
+if(closureHours===null){
+
+alert("اختر مدة الإغلاق المتوقعة.");
+return;
+
+}
+
+}
+
+
+const payload={
+
+status:
+$("ownerStatus").value,
+
+opening_time:null,
+
+closure_reason:
+closureReason,
+
+closure_hours:
+closureHours,
+
+updated_at:
+new Date().toISOString()
+
+};
+
+
+if(!closed){
+
+payload.gas=
+$("ownerGas").value;
+
+payload.diesel=
+$("ownerDiesel").value;
+
+payload.traffic=
+$("ownerTraffic").value;
+
+}else{
+
+payload.traffic="closed";
+
+}
+
+
+const {error}=await sb
+
+.from("stations")
+
+.update(payload)
+
+.eq("id",currentStationId);
+
+
+if(error){
+
+$("ownerMessage").innerHTML=`
+
+<span style="color:#b91c1c">
+
+❌ لم يتم الحفظ:
+
+<br>
+
+${esc(error.message)}
+
+</span>
+
+`;
+
+return;
+
+}
+
+
+const updatedStation={
+...stations[0],
+...payload
+};
+
+
+stations=[updatedStation];
+
+
+const telegramOk=
+await notifyTelegram(
+updatedStation
+);
+
+
+$("ownerMessage").innerHTML=`
+
+<span
+style="color:#166534;font-weight:700">
+
+✅ تم تحديث الكازية بنجاح
+
+<br>
+
+${
+telegramOk
+?
+"📲 تم إرسال إشعار Telegram"
+:
+"⚠️ تم الحفظ لكن تعذر إرسال إشعار Telegram"
+}
+
+</span>
+
+`;
+
+
+setTimeout(
+loadOwner,
+1500
+);
+
+}
+
+
+/* =================================================
    لوحة المشرف
-========================================================= */
+================================================= */
 
 async function loadAdmin(){
 
-const {
-
-data:p,
-error:pe
-
-}=
-
-await sb
+const {data:p,error:pe}=await sb
 
 .from("pending_updates")
 
@@ -1794,20 +1247,11 @@ await sb
 
 .order(
 "submitted_at",
-{
-ascending:false
-}
+{ascending:false}
 );
 
 
-const {
-
-data:s,
-error:se
-
-}=
-
-await sb
+const {data:s,error:se}=await sb
 
 .from("stations")
 
@@ -1815,9 +1259,7 @@ await sb
 
 .order(
 "name",
-{
-ascending:true
-}
+{ascending:true}
 );
 
 
@@ -1843,10 +1285,6 @@ return;
 stations=s||[];
 
 
-/* =========================
-   جلب إحصائيات الزوار
-========================= */
-
 const visitorStats=
 await getVisitorStats();
 
@@ -1857,9 +1295,7 @@ $("app").innerHTML=`
 
 <div class="admin-box">
 
-<b>
-👑 حساب المشرف
-</b>
+<b>👑 حساب المشرف</b>
 
 <br>
 
@@ -1879,9 +1315,7 @@ ${esc(session.user.email)}
 </div>
 
 
-<!-- =========================
-     إحصائيات الموقع
-========================= -->
+<!-- إحصائيات الزوار -->
 
 <div class="panel">
 
@@ -1890,7 +1324,6 @@ ${esc(session.user.email)}
 </h3>
 
 <div class="stats">
-
 
 <div class="stat visitor-stat">
 
@@ -1935,15 +1368,12 @@ ${esc(session.user.email)}
 
 </div>
 
-
 </div>
 
 </div>
 
 
-<!-- =========================
-     إحصائيات المحطات
-========================= -->
+<!-- إحصائيات المحطات -->
 
 <div class="panel">
 
@@ -1952,7 +1382,6 @@ ${esc(session.user.email)}
 </h3>
 
 <div class="stats">
-
 
 <div class="stat">
 
@@ -2005,25 +1434,18 @@ s.gas==="yes"
 
 </div>
 
-
 </div>
 
 </div>
 
 
-<!-- =========================
-     التحديثات المعلقة
-========================= -->
+<!-- التحديثات المعلقة -->
 
 <div class="panel">
 
 <h3>
-
-التحديثات المعلقة
-(${p.length})
-
+التحديثات المعلقة (${p.length})
 </h3>
-
 
 ${
 p.length
@@ -2068,7 +1490,6 @@ onclick="approve('${x.id}')">
 
 </button>
 
-
 <button
 class="danger"
 onclick="reject('${x.id}')">
@@ -2092,22 +1513,15 @@ onclick="reject('${x.id}')">
 </div>
 
 
-<!-- =========================
-     المحطات
-========================= -->
+<!-- جميع المحطات -->
 
 <div class="panel">
 
-<div
-style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
 
 <h3>
-
-جميع المحطات
-(${stations.length})
-
+جميع المحطات (${stations.length})
 </h3>
-
 
 <button
 class="primary"
@@ -2122,32 +1536,22 @@ onclick="openAdd()">
 
 <div class="grid">
 
-
 ${stations.map(s=>`
 
 <div class="row">
 
-
 <div class="station-title">
-
 ${esc(s.name)}
-
 </div>
-
 
 <div class="muted">
-
 ${esc(s.area||"")}
-
 </div>
-
 
 <br>
 
-
 <span
-class="badge
-${s.status==="open"?"ok":"no"}">
+class="badge ${s.status==="open"?"ok":"no"}">
 
 ${
 s.status==="open"
@@ -2182,7 +1586,7 @@ s.closure_reason
 
 ⏱️
 ${esc(
-s.closure_hours||""
+s.closure_hours ?? ""
 )}
 ساعة
 
@@ -2195,25 +1599,18 @@ s.closure_hours||""
 `
 
 <span
-class="badge
-${s.gas==="yes"?"ok":"no"}">
+class="badge ${s.gas==="yes"?"ok":"no"}">
 
 بنزين:
-${s.gas==="yes"
-?"يوجد"
-:"لا يوجد"}
+${s.gas==="yes"?"يوجد":"لا يوجد"}
 
 </span>
 
-
 <span
-class="badge
-${s.diesel==="yes"?"ok":"no"}">
+class="badge ${s.diesel==="yes"?"ok":"no"}">
 
 مازوت:
-${s.diesel==="yes"
-?"يوجد"
-:"لا يوجد"}
+${s.diesel==="yes"?"يوجد":"لا يوجد"}
 
 </span>
 
@@ -2224,12 +1621,9 @@ ${s.diesel==="yes"
 
 <br>
 
-
 <small>
-
 آخر تحديث:
 ${fmt(s.updated_at)}
-
 </small>
 
 
@@ -2287,14 +1681,9 @@ style="margin-top:8px;white-space:normal">
 
 <div class="actions">
 
-
-<button
-onclick="openEdit('${s.id}')">
-
+<button onclick="openEdit('${s.id}')">
 ✏️ تعديل
-
 </button>
-
 
 <button
 class="danger"
@@ -2304,14 +1693,11 @@ onclick="removeStation('${s.id}')">
 
 </button>
 
-
 </div>
-
 
 </div>
 
 `).join("")}
-
 
 </div>
 
@@ -2322,9 +1708,9 @@ onclick="removeStation('${s.id}')">
 }
 
 
-/* =========================================================
-   تعديل محطة
-========================================================= */
+/* =================================================
+   تعديل
+================================================= */
 
 function openEdit(id){
 
@@ -2391,20 +1777,23 @@ s.closure_reason||"";
 
 
 $("closure_hours").value=
-s.closure_hours||"";
+s.closure_hours==null
+?
+""
+:
+String(s.closure_hours);
 
 
 toggleAdminOpening();
-
 
 stationDlg.showModal();
 
 }
 
 
-/* =========================================================
-   إضافة محطة
-========================================================= */
+/* =================================================
+   إضافة
+================================================= */
 
 function openAdd(){
 
@@ -2436,15 +1825,14 @@ $("closure_hours").value="";
 
 toggleAdminOpening();
 
-
 stationDlg.showModal();
 
 }
 
 
-/* =========================================================
-   حقول الإغلاق للمشرف
-========================================================= */
+/* =================================================
+   حالة نافذة المشرف
+================================================= */
 
 function toggleAdminOpening(){
 
@@ -2477,10 +1865,8 @@ closed
 $("traffic").disabled=
 closed;
 
-
 $("gas").disabled=
 closed;
-
 
 $("diesel").disabled=
 closed;
@@ -2495,24 +1881,19 @@ $("traffic").value=
 
 if(
 $("traffic").value==="closed"
-){
-
-$("traffic").value=
-"none";
+)
+$("traffic").value="none";
 
 }
 
 }
 
-}
 
-
-/* =========================================================
+/* =================================================
    حفظ محطة المشرف
-========================================================= */
+================================================= */
 
-$("stationForm").onsubmit=
-async e=>{
+$("stationForm").onsubmit=async e=>{
 
 e.preventDefault();
 
@@ -2525,17 +1906,32 @@ const closed=
 $("status").value==="closed";
 
 
-let opening="";
+let opening=null;
 
-let closureReason="";
+let closureReason=null;
 
-let closureHours="";
+let closureHours=null;
 
 
 if(closed){
 
 opening=
-$("opening_time").value;
+$("opening_time").value || null;
+
+
+closureReason=
+$("closure_reason").value || null;
+
+
+closureHours=
+$("closure_hours").value
+?
+parseInt(
+$("closure_hours").value,
+10
+)
+:
+null;
 
 
 if(!opening){
@@ -2549,14 +1945,6 @@ return;
 }
 
 
-closureReason=
-$("closure_reason").value;
-
-
-closureHours=
-$("closure_hours").value;
-
-
 if(!closureReason){
 
 alert(
@@ -2568,7 +1956,7 @@ return;
 }
 
 
-if(!closureHours){
+if(closureHours===null){
 
 alert(
 "اختر مدة الإغلاق المتوقعة."
@@ -2580,6 +1968,8 @@ return;
 
 }
 
+
+/* رابط الموقع */
 
 const locationUrl=
 $("location_url")
@@ -2601,6 +1991,12 @@ return;
 }
 
 
+/*
+مهم:
+لا نرسل "" للحقول الرقمية.
+مدة الإغلاق ترسل رقماً أو null.
+*/
+
 const payload={
 
 name:
@@ -2610,7 +2006,7 @@ area:
 $("area").value.trim(),
 
 location_url:
-locationUrl,
+locationUrl || null,
 
 status:
 $("status").value,
@@ -2619,21 +2015,13 @@ opening_time:
 opening,
 
 closure_reason:
-closed
-?
-closureReason
-:
-"",
+closureReason,
 
 closure_hours:
-closed
-?
-closureHours
-:
-"",
+closureHours,
 
 note:
-$("note").value,
+$("note").value.trim(),
 
 updated_at:
 new Date().toISOString()
@@ -2659,6 +2047,8 @@ payload.traffic=
 
 }
 
+
+/* حفظ */
 
 let result;
 
@@ -2704,9 +2094,9 @@ loadAdmin();
 };
 
 
-/* =========================================================
+/* =================================================
    حذف
-========================================================= */
+================================================= */
 
 async function removeStation(id){
 
@@ -2743,18 +2133,16 @@ loadAdmin();
 }
 
 
-/* =========================================================
+/* =================================================
    اعتماد تحديث
-========================================================= */
+================================================= */
 
 async function approve(id){
 
 const {
 data:p,
 error
-}=
-
-await sb
+}=await sb
 
 .from("pending_updates")
 
@@ -2779,9 +2167,7 @@ return;
 
 const {
 data:old
-}=
-
-await sb
+}=await sb
 
 .from("stations")
 
@@ -2882,9 +2268,9 @@ loadAdmin();
 }
 
 
-/* =========================================================
+/* =================================================
    رفض
-========================================================= */
+================================================= */
 
 async function reject(id){
 
@@ -2913,9 +2299,9 @@ loadAdmin();
 }
 
 
-/* =========================================================
+/* =================================================
    خروج
-========================================================= */
+================================================= */
 
 async function logout(){
 
@@ -2926,14 +2312,13 @@ location.reload();
 }
 
 
-/* =========================================================
+/* =================================================
    تشغيل
-========================================================= */
+================================================= */
 
 init();
 
 </script>
 
 </body>
-
 </html>
