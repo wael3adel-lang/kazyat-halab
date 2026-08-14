@@ -1,334 +1,961 @@
-```html
 <!doctype html>
-<html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>لوحة تحكم — كازيات حلب</title>
-<style>
-*{box-sizing:border-box}body{font-family:system-ui;margin:0;background:#f4f7f7;color:#17202a}header{background:#0f766e;color:#fff;padding:22px}main{max-width:1050px;margin:auto;padding:15px}
-.panel{background:#fff;padding:16px;border-radius:16px;margin:12px 0;box-shadow:0 2px 10px #0000000b}input,select,textarea{padding:11px;border:1px solid #ccd5d5;border-radius:10px;width:100%;margin:5px 0 10px;font:inherit}button{padding:10px 14px;border:0;border-radius:10px;cursor:pointer;margin:3px}.primary{background:#0f766e;color:#fff}.danger{background:#fee2e2;color:#991b1b}.muted{color:#68757a}.row{border-bottom:1px solid #eee;padding:13px 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:10px}.badge{background:#eef2f2;padding:5px 8px;border-radius:8px;margin:2px;display:inline-block;font-size:12px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.stat{background:#f8fafb;border-radius:12px;padding:12px;text-align:center}.stat b{display:block;font-size:24px}@media(max-width:700px){.stats{grid-template-columns:repeat(2,1fr)}}.actions{display:flex;flex-wrap:wrap;gap:4px}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}dialog{border:0;border-radius:18px;width:min(650px,94vw);padding:0;box-shadow:0 20px 60px #0004}dialog::backdrop{background:#0006}.form{padding:20px}@media(max-width:600px){.two{grid-template-columns:1fr}}
-</style></head><body>
+<html lang="ar" dir="rtl">
 
-<header><main><h2>⚙️ لوحة تحكم كازيات حلب</h2></main></header>
-<main><div id="app">جاري التحميل…</div></main>
+<head>
+
+<meta charset="utf-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
+
+<title>لوحة تحكم — كازيات حلب</title>
+
+<style>
+
+*{
+box-sizing:border-box
+}
+
+body{
+font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;
+margin:0;
+background:#f4f7f7;
+color:#17202a
+}
+
+header{
+background:#0f766e;
+color:#fff;
+padding:22px
+}
+
+main{
+max-width:1050px;
+margin:auto;
+padding:15px
+}
+
+.panel{
+background:#fff;
+padding:16px;
+border-radius:16px;
+margin:12px 0;
+box-shadow:0 2px 10px #0000000b
+}
+
+input,
+select,
+textarea{
+padding:11px;
+border:1px solid #ccd5d5;
+border-radius:10px;
+width:100%;
+margin:5px 0 10px;
+font:inherit
+}
+
+button{
+padding:10px 14px;
+border:0;
+border-radius:10px;
+cursor:pointer;
+margin:3px;
+font:inherit
+}
+
+.primary{
+background:#0f766e;
+color:#fff
+}
+
+.danger{
+background:#fee2e2;
+color:#991b1b
+}
+
+.muted{
+color:#68757a
+}
+
+.row{
+border-bottom:1px solid #eee;
+padding:13px 0
+}
+
+.grid{
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(320px,1fr));
+gap:10px
+}
+
+.badge{
+background:#eef2f2;
+padding:5px 8px;
+border-radius:8px;
+margin:2px;
+display:inline-block;
+font-size:12px
+}
+
+.ok{
+background:#dcfce7;
+color:#166534
+}
+
+.no{
+background:#fee2e2;
+color:#991b1b
+}
+
+.warn{
+background:#fef3c7;
+color:#92400e
+}
+
+.stats{
+display:grid;
+grid-template-columns:
+repeat(4,1fr);
+gap:8px
+}
+
+.stat{
+background:#f8fafb;
+border-radius:12px;
+padding:12px;
+text-align:center
+}
+
+.stat b{
+display:block;
+font-size:24px
+}
+
+.actions{
+display:flex;
+flex-wrap:wrap;
+gap:4px
+}
+
+.two{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px
+}
+
+.owner-box{
+background:#ecfdf5;
+border:1px solid #a7f3d0;
+color:#065f46;
+border-radius:12px;
+padding:12px;
+margin-bottom:12px
+}
+
+.admin-box{
+background:#eff6ff;
+border:1px solid #bfdbfe;
+color:#1e40af;
+border-radius:12px;
+padding:12px;
+margin-bottom:12px
+}
+
+.station-title{
+font-size:20px;
+font-weight:800
+}
+
+dialog{
+border:0;
+border-radius:18px;
+width:min(650px,94vw);
+padding:0;
+box-shadow:0 20px 60px #0004
+}
+
+dialog::backdrop{
+background:#0006
+}
+
+.form{
+padding:20px
+}
+
+.hidden{
+display:none
+}
+
+@media(max-width:700px){
+
+.stats{
+grid-template-columns:repeat(2,1fr)
+}
+
+}
+
+@media(max-width:600px){
+
+.two{
+grid-template-columns:1fr
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<main>
+
+<h2>
+⚙️ لوحة تحكم كازيات حلب
+</h2>
+
+</main>
+
+</header>
+
+
+<main>
+
+<div id="app">
+جاري التحميل…
+</div>
+
+</main>
+
+
+
+<!-- =========================
+     نافذة تعديل المحطة
+========================= -->
 
 <dialog id="stationDlg">
-<form class="form" id="stationForm">
-<h2 id="dlgTitle">تعديل محطة</h2>
-<input type="hidden" id="sid">
 
-<label>اسم المحطة</label><input id="name" required>
-<label>المنطقة</label><input id="area">
+<form
+class="form"
+id="stationForm">
+
+<h2 id="dlgTitle">
+تعديل محطة
+</h2>
+
+
+<input
+type="hidden"
+id="sid">
+
+
+<label>
+اسم المحطة
+</label>
+
+<input
+id="name"
+required>
+
+
+<label>
+المنطقة
+</label>
+
+<input
+id="area">
+
 
 <div class="two">
+
+
 <div>
-<label>الحالة</label>
+
+<label>
+الحالة
+</label>
+
 <select id="status">
-<option value="open">مفتوحة</option>
-<option value="closed">مغلقة</option>
+
+<option value="open">
+مفتوحة
+</option>
+
+<option value="closed">
+مغلقة
+</option>
+
 </select>
+
 </div>
 
+
 <div>
-<label>الازدحام</label>
+
+<label>
+الازدحام
+</label>
+
 <select id="traffic">
-<option value="none">لا يوجد ازدحام</option>
-<option value="light">ازدحام خفيف</option>
-<option value="long">طابور طويل</option>
-<option value="closed">مغلقة</option>
+
+<option value="none">
+لا يوجد ازدحام
+</option>
+
+<option value="light">
+ازدحام خفيف
+</option>
+
+<option value="long">
+طابور طويل
+</option>
+
+<option value="closed">
+مغلقة
+</option>
+
 </select>
+
 </div>
+
 </div>
+
 
 <div class="two">
+
+
 <div>
-<label>البنزين</label>
+
+<label>
+البنزين
+</label>
+
 <select id="gas">
-<option value="yes">يوجد</option>
-<option value="no">لا يوجد</option>
+
+<option value="yes">
+يوجد
+</option>
+
+<option value="no">
+لا يوجد
+</option>
+
 </select>
+
 </div>
 
+
 <div>
-<label>المازوت</label>
+
+<label>
+المازوت
+</label>
+
 <select id="diesel">
-<option value="yes">يوجد</option>
-<option value="no">لا يوجد</option>
+
+<option value="yes">
+يوجد
+</option>
+
+<option value="no">
+لا يوجد
+</option>
+
 </select>
-</div>
+
 </div>
 
-<label>ملاحظة</label>
-<textarea id="note"></textarea>
+</div>
+
+
+<!-- الملاحظات تظهر للمشرف فقط -->
+
+<div id="adminNoteField">
+
+<label>
+ملاحظة / إعلان
+</label>
+
+<textarea
+id="note"
+rows="4">
+</textarea>
+
+</div>
+
 
 <div>
-<button class="primary" type="submit">حفظ التغيير</button>
-<button type="button" onclick="stationDlg.close()">إلغاء</button>
+
+<button
+class="primary"
+type="submit">
+
+حفظ التغيير
+
+</button>
+
+
+<button
+type="button"
+onclick="stationDlg.close()">
+
+إلغاء
+
+</button>
+
 </div>
+
+
 </form>
+
 </dialog>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<script
+src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+</script>
+
 
 <script>
+
+
+/* =========================
+   Supabase
+========================= */
+
 const sb=supabase.createClient(
+
 "https://hjggfolotblsurfwfcvn.supabase.co",
+
 "sb_publishable_UTpiWf5wrq8VfxAXxl9zfw_CtRRizyl"
+
 );
 
-let session=null,stations=[];
 
-const $=id=>document.getElementById(id);
+
+let session=null;
+
+let currentUser=null;
+
+let stations=[];
+
+let currentRole=null;
+
+let currentStationId=null;
+
+
+
+const $=
+id=>document.getElementById(id);
+
+
+
+/* =========================
+   حماية النصوص
+========================= */
 
 function esc(x){
-return String(x??"").replace(/[&<>"']/g,m=>({
+
+return String(x??"")
+.replace(
+/[&<>"']/g,
+m=>({
+
 "&":"&amp;",
 "<":"&lt;",
 ">":"&gt;",
 '"':"&quot;",
 "'":"&#039;"
-}[m]))
+
+}[m])
+)
+
 }
 
+
+
+/* =========================
+   التاريخ
+========================= */
+
 function fmt(t){
-return new Intl.DateTimeFormat("ar-SY",{
+
+if(!t)
+return "—";
+
+return new Intl.DateTimeFormat(
+"ar-SY",
+{
 day:"numeric",
 month:"numeric",
 year:"numeric",
 hour:"2-digit",
 minute:"2-digit"
-}).format(new Date(t))
 }
+).format(
+new Date(t)
+)
+
+}
+
+
+
+/* =========================
+   تسجيل الدخول
+========================= */
 
 function login(){
-app.innerHTML=`
+
+$("app").innerHTML=`
+
 <div class="panel">
-<h2>دخول المشرف</h2>
-<label>البريد الإلكتروني</label>
-<input id="email" type="email">
-<label>كلمة السر</label>
-<input id="password" type="password">
-<button class="primary" onclick="doLogin()">دخول</button>
-</div>`
+
+<h2>
+تسجيل الدخول
+</h2>
+
+<label>
+البريد الإلكتروني
+</label>
+
+<input
+id="email"
+type="email"
+autocomplete="username">
+
+
+<label>
+كلمة المرور
+</label>
+
+<input
+id="password"
+type="password"
+autocomplete="current-password">
+
+
+<button
+class="primary"
+onclick="doLogin()">
+
+دخول
+
+</button>
+
+</div>
+
+`;
+
 }
+
+
 
 async function doLogin(){
-const {error}=await sb.auth.signInWithPassword({
-email:email.value,
-password:password.value
+
+const email=
+$("email").value.trim();
+
+const password=
+$("password").value;
+
+
+const {error}=
+
+await sb.auth.signInWithPassword({
+
+email:email,
+
+password:password
+
 });
-if(error)return alert(error.message);
-location.reload()
+
+
+if(error){
+
+alert(error.message);
+
+return;
+
 }
+
+
+location.reload();
+
+}
+
+
+
+/* =========================
+   التحقق من الحساب
+========================= */
 
 async function init(){
-const {data}=await sb.auth.getSession();
+
+const {data}=
+
+await sb.auth.getSession();
+
+
 session=data.session;
 
-if(!session)return login();
 
-const {data:me,error}=await sb
+if(!session){
+
+login();
+
+return;
+
+}
+
+
+
+/*
+   نقرأ الدور والكازية المرتبطة
+*/
+
+const {data:me,error}=
+
+await sb
+
 .from("admin_users")
-.select("user_id")
-.eq("user_id",session.user.id)
+
+.select(
+"user_id,role,station_id"
+)
+
+.eq(
+"user_id",
+session.user.id
+)
+
 .maybeSingle();
 
-if(error)
-return app.innerHTML="<div class='panel'>خطأ في صلاحيات المشرف: "+esc(error.message)+"</div>";
 
-if(!me)
-return app.innerHTML="<div class='panel'>هذا الحساب ليس مشرفاً.</div>";
 
-await load()
+if(error){
+
+$("app").innerHTML=`
+
+<div class="panel">
+
+خطأ في قراءة صلاحيات الحساب:
+
+<br><br>
+
+${esc(error.message)}
+
+</div>
+
+`;
+
+return;
+
 }
+
+
+
+if(!me){
+
+$("app").innerHTML=`
+
+<div class="panel">
+
+هذا الحساب ليس مشرفاً.
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+
+currentUser=me;
+
+currentRole=
+me.role || "admin";
+
+currentStationId=
+me.station_id;
+
+
+
+/*
+   إذا كان صاحب كازية
+*/
+
+if(currentRole==="station_owner"){
+
+await loadOwner();
+
+return;
+
+}
+
+
+
+/*
+   أي دور آخر = مشرف كامل
+*/
+
+await loadAdmin();
+
+}
+
 
 
 /* =========================
-   إحصائيات الزوار
+   تحميل لوحة المشرف
+   يرى جميع الـ33 كازية
 ========================= */
 
-async function loadStats(){
+async function loadAdmin(){
 
-try{
+const {data:p,error:pe}=
 
-const now=new Date();
+await sb
 
-const today=new Date(now);
-today.setHours(0,0,0,0);
-
-const yesterday=new Date(today);
-yesterday.setDate(yesterday.getDate()-1);
-
-const tomorrow=new Date(today);
-tomorrow.setDate(tomorrow.getDate()+1);
-
-const start7=new Date(today);
-start7.setDate(start7.getDate()-6);
-
-
-/* آخر 7 أيام */
-const {data:events,error}=await sb
-.from("visitor_events")
-.select("visitor_id,visited_at")
-.gte("visited_at",start7.toISOString());
-
-if(error)throw error;
-
-const uniq=a=>new Set(
-a.map(x=>x.visitor_id)
-).size;
-
-const t=events||[];
-
-
-/* زوار اليوم */
-$("vToday").textContent=uniq(
-t.filter(x=>{
-const d=new Date(x.visited_at);
-return d>=today && d<tomorrow;
-})
-);
-
-
-/* زوار أمس */
-$("vYesterday").textContent=uniq(
-t.filter(x=>{
-const d=new Date(x.visited_at);
-return d>=yesterday && d<today;
-})
-);
-
-
-/* زوار آخر 7 أيام */
-$("vWeek").textContent=uniq(t);
-
-
-/* إجمالي الزيارات */
-const {count,error:e2}=await sb
-.from("visitor_events")
-.select("id",{count:"exact",head:true});
-
-if(e2)throw e2;
-
-$("vTotal").textContent=count??0;
-
-}catch(e){
-
-console.error("Visitor statistics error:",e);
-
-["vToday","vYesterday","vWeek","vTotal"]
-.forEach(id=>{
-if($(id))$(id).textContent="—";
-});
-
-}
-
-}
-
-
-/* =========================
-   تحميل لوحة التحكم
-========================= */
-
-async function load(){
-
-const {data:p,error:pe}=await sb
 .from("pending_updates")
-.select("*")
-.order("submitted_at",{ascending:false});
 
-const {data:s,error:se}=await sb
+.select("*")
+
+.order(
+"submitted_at",
+{
+ascending:false
+}
+);
+
+
+
+const {data:s,error:se}=
+
+await sb
+
 .from("stations")
-.select("*")
-.order("name");
 
-if(pe||se)
-return app.innerHTML="<div class='panel'>خطأ: "+esc((pe||se).message)+"</div>";
+.select("*")
+
+.order(
+"name",
+{
+ascending:true
+}
+);
+
+
+
+if(pe || se){
+
+$("app").innerHTML=`
+
+<div class="panel">
+
+خطأ:
+
+${esc(
+(pe||se).message
+)}
+
+</div>
+
+`;
+
+return;
+
+}
+
+
 
 stations=s||[];
 
-app.innerHTML=`
+
+
+$("app").innerHTML=`
 
 <div class="panel">
-<b>المشرف:</b>
+
+<div class="admin-box">
+
+<b>
+👑 حساب المشرف
+</b>
+
+<br>
+
 ${esc(session.user.email)}
 
-<button onclick="sb.auth.signOut().then(()=>location.reload())">
-خروج
-</button>
+<br>
+
+صلاحية كاملة — جميع المحطات
+
 </div>
 
 
+<button
+onclick="logout()">
+
+خروج
+
+</button>
+
+</div>
+
+
+
+<!-- =====================
+     إحصائيات
+===================== -->
+
 <div class="panel">
 
-<h3>📊 إحصائيات الزوار</h3>
+<h3>
+📊 إحصائيات المحطات
+</h3>
 
 <div class="stats">
 
-<div class="stat">
-<b id="vToday">جاري...</b>
-زوار اليوم
-</div>
 
 <div class="stat">
-<b id="vYesterday">جاري...</b>
-أمس
+
+<b>
+${stations.length}
+</b>
+
+إجمالي المحطات
+
 </div>
+
 
 <div class="stat">
-<b id="vWeek">جاري...</b>
-آخر 7 أيام
+
+<b>
+${stations.filter(
+s=>s.status==="open"
+).length}
+</b>
+
+مفتوحة
+
 </div>
+
 
 <div class="stat">
-<b id="vTotal">جاري...</b>
-إجمالي الزيارات
+
+<b>
+${stations.filter(
+s=>s.status==="closed"
+).length}
+</b>
+
+مغلقة
+
+</div>
+
+
+<div class="stat">
+
+<b>
+${stations.filter(
+s=>s.gas==="yes"
+).length}
+</b>
+
+بنزين
+
+</div>
+
+
 </div>
 
 </div>
 
-<small class="muted">
-يُحسب الزائر مرة واحدة يومياً من نفس المتصفح، ولا نخزن عنوان IP.
-</small>
 
-</div>
 
+<!-- =====================
+     التحديثات المعلقة
+===================== -->
 
 <div class="panel">
 
-<h3>التحديثات المعلقة (${p.length})</h3>
+<h3>
+
+التحديثات المعلقة
+(${p.length})
+
+</h3>
+
 
 ${
 p.length
+
 ?
+
 p.map(x=>`
 
 <div class="row">
 
-<b>${esc(x.name)}</b>
-—
-${esc(x.area||"")}
+<b>
+${esc(x.name)}
+</b>
 
 <br>
 
-<span class="badge">${x.status}</span>
-<span class="badge">${x.traffic}</span>
-<span class="badge">بنزين ${x.gas}</span>
-<span class="badge">مازوت ${x.diesel}</span>
+<span class="badge">
+${esc(x.area||"")}
+</span>
+
+<span class="badge">
+${esc(x.status)}
+</span>
+
+<span class="badge">
+بنزين ${esc(x.gas)}
+</span>
+
+<span class="badge">
+مازوت ${esc(x.diesel)}
+</span>
+
+<span class="badge">
+${esc(x.traffic)}
+</span>
 
 <br>
 
 <small class="muted">
+
 ${esc(x.note||"")}
+
 </small>
+
+<br>
 
 <div class="actions">
 
-<button class="primary"
+<button
+class="primary"
 onclick="approve('${x.id}')">
+
 اعتماد ✅
+
 </button>
 
-<button class="danger"
+
+<button
+class="danger"
 onclick="reject('${x.id}')">
+
 رفض ❌
+
 </button>
 
 </div>
@@ -338,21 +965,43 @@ onclick="reject('${x.id}')">
 `).join("")
 
 :
-"لا توجد تحديثات معلقة."
+
+"<p>لا توجد تحديثات معلقة.</p>"
+
 }
 
 </div>
 
 
+
+<!-- =====================
+     جميع المحطات
+===================== -->
+
 <div class="panel">
 
-<div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+<div style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:8px;
+flex-wrap:wrap
+">
 
-<h3>المحطات (${stations.length})</h3>
+<h3>
 
-<button class="primary"
+جميع المحطات
+(${stations.length})
+
+</h3>
+
+
+<button
+class="primary"
 onclick="openAdd()">
+
 ＋ إضافة محطة
+
 </button>
 
 </div>
@@ -360,228 +1009,818 @@ onclick="openAdd()">
 
 <div class="grid">
 
+
 ${stations.map(s=>`
 
 <div class="row">
 
-<b>${esc(s.name)}</b>
+
+<div class="station-title">
+
+${esc(s.name)}
+
+</div>
+
+
+<div class="muted">
+
+${esc(s.area||"")}
+
+</div>
+
 
 <br>
 
-<small class="muted">
-${esc(s.area||"")}
+
+<span class="
+badge
+${s.status==="open"
+?"ok"
+:"no"}
+">
+
+${
+s.status==="open"
+?
+"🟢 مفتوحة"
+:
+"❌ مغلقة"
+}
+
+</span>
+
+
+<span class="
+badge
+${s.gas==="yes"
+?"ok"
+:"no"}
+">
+
+بنزين:
+
+${
+s.gas==="yes"
+?
+"يوجد"
+:
+"لا يوجد"
+}
+
+</span>
+
+
+<span class="
+badge
+${s.diesel==="yes"
+?"ok"
+:"no"}
+">
+
+مازوت:
+
+${
+s.diesel==="yes"
+?
+"يوجد"
+:
+"لا يوجد"
+}
+
+</span>
+
+
+<br><br>
+
+
+<small>
+
+آخر تحديث:
+
+${fmt(s.updated_at)}
+
 </small>
 
-<div>
 
-<span class="badge">
-${s.status==="open"?"🟢 مفتوحة":"❌ مغلقة"}
-</span>
+<br>
 
-<span class="badge">
-بنزين:
-${s.gas==="yes"?"يوجد":"لا يوجد"}
-</span>
 
-<span class="badge">
-مازوت:
-${s.diesel==="yes"?"يوجد":"لا يوجد"}
-</span>
+${
+s.note
+
+?
+
+`
+
+<div class="badge"
+style="
+margin-top:8px;
+white-space:normal;
+line-height:1.6
+">
+
+📝 ${esc(s.note)}
 
 </div>
 
-<small>
-آخر تحديث: ${fmt(s.updated_at)}
-</small>
+`
+
+:
+
+""
+
+}
+
 
 <div class="actions">
 
-<button onclick="openEdit('${s.id}')">
+
+<button
+onclick="openEdit('${s.id}')">
+
 ✏️ تعديل
+
 </button>
 
-<button class="danger"
+
+<button
+class="danger"
 onclick="removeStation('${s.id}')">
+
 🗑️ حذف
+
 </button>
+
 
 </div>
+
 
 </div>
 
 `).join("")}
 
+
 </div>
+
 </div>
+
+`;
+
+}
+
+
+
+/* =========================
+   لوحة صاحب الكازية
+========================= */
+
+async function loadOwner(){
+
+/*
+   صاحب الكازية يرى station_id
+   الخاص به فقط
+*/
+
+if(!currentStationId){
+
+$("app").innerHTML=`
+
+<div class="panel">
+
+لا توجد كازية مرتبطة بهذا الحساب.
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+
+const {data:s,error}=
+
+await sb
+
+.from("stations")
+
+.select("*")
+
+.eq(
+"id",
+currentStationId
+)
+
+.maybeSingle();
+
+
+
+if(error){
+
+$("app").innerHTML=`
+
+<div class="panel">
+
+خطأ:
+
+${esc(error.message)}
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+
+if(!s){
+
+$("app").innerHTML=`
+
+<div class="panel">
+
+لم يتم العثور على الكازية المرتبطة بالحساب.
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+
+stations=[s];
+
+
+
+$("app").innerHTML=`
+
+<div class="panel">
+
+<div class="owner-box">
+
+<b>
+⛽ حساب صاحب الكازية
+</b>
+
+<br>
+
+${esc(session.user.email)}
+
+<br><br>
+
+يمكنك تحديث بيانات كازيتك فقط.
+
+</div>
+
+
+<button
+onclick="logout()">
+
+خروج
+
+</button>
+
+</div>
+
+
+
+<div class="panel">
+
+<h2>
+
+⛽ ${esc(s.name)}
+
+</h2>
+
+
+<div class="muted">
+
+${esc(s.area||"")}
+
+</div>
+
+
+<br>
+
+
+<div class="badge">
+
+آخر تحديث:
+
+${fmt(s.updated_at)}
+
+</div>
+
+
+<br><br>
+
+
+<div class="two">
+
+
+<div>
+
+<label>
+الحالة
+</label>
+
+<select id="ownerStatus">
+
+<option
+value="open"
+${s.status==="open"?"selected":""}
+>
+
+🟢 مفتوحة
+
+</option>
+
+<option
+value="closed"
+${s.status==="closed"?"selected":""}
+>
+
+❌ مغلقة
+
+</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>
+الازدحام
+</label>
+
+<select id="ownerTraffic">
+
+<option
+value="none"
+${s.traffic==="none"?"selected":""}
+>
+
+🟢 لا يوجد ازدحام
+
+</option>
+
+<option
+value="light"
+${s.traffic==="light"?"selected":""}
+>
+
+🟡 ازدحام خفيف
+
+</option>
+
+<option
+value="long"
+${s.traffic==="long"?"selected":""}
+>
+
+🔴 طابور طويل
+
+</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>
+البنزين
+</label>
+
+<select id="ownerGas">
+
+<option
+value="yes"
+${s.gas==="yes"?"selected":""}
+>
+
+🟢 يوجد
+
+</option>
+
+<option
+value="no"
+${s.gas==="no"?"selected":""}
+>
+
+🔴 لا يوجد
+
+</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>
+المازوت
+</label>
+
+<select id="ownerDiesel">
+
+<option
+value="yes"
+${s.diesel==="yes"?"selected":""}
+>
+
+🟢 يوجد
+
+</option>
+
+<option
+value="no"
+${s.diesel==="no"?"selected":""}
+>
+
+🔴 لا يوجد
+
+</option>
+
+</select>
+
+</div>
+
+
+</div>
+
+
+<br>
+
+
+<button
+class="primary"
+style="
+width:100%;
+font-size:17px;
+padding:13px
+"
+onclick="saveOwner()">
+
+💾 حفظ تحديث الكازية
+
+</button>
+
+
+<div
+id="ownerMessage"
+style="
+margin-top:12px;
+text-align:center
+">
+
+</div>
+
+
+</div>
+
+`;
+
+}
+
+
+
+/* =========================
+   حفظ تحديث صاحب الكازية
+========================= */
+
+async function saveOwner(){
+
+if(currentRole!=="station_owner"){
+
+alert("ليس لديك صلاحية.");
+
+return;
+
+}
+
+
+
+const status=
+$("ownerStatus").value;
+
+const traffic=
+$("ownerTraffic").value;
+
+const gas=
+$("ownerGas").value;
+
+const diesel=
+$("ownerDiesel").value;
+
+
+
+const {error}=
+
+await sb
+
+.from("stations")
+
+.update({
+
+status:status,
+
+traffic:traffic,
+
+gas:gas,
+
+diesel:diesel,
+
+updated_at:
+new Date().toISOString()
+
+})
+
+.eq(
+"id",
+currentStationId
+);
+
+
+
+if(error){
+
+$("ownerMessage").innerHTML=`
+
+<span style="color:#b91c1c">
+
+❌ لم يتم الحفظ:
+
+${esc(error.message)}
+
+</span>
+
+`;
+
+return;
+
+}
+
+
+
+$("ownerMessage").innerHTML=`
+
+<span style="color:#166534;font-weight:700">
+
+✅ تم تحديث بيانات الكازية بنجاح
+
+</span>
+
 `;
 
 
-/* ⭐ هذا هو الإصلاح الأساسي */
-await loadStats();
+
+setTimeout(
+loadOwner,
+1000
+);
 
 }
+
 
 
 /* =========================
-   اعتماد تحديث
-========================= */
-
-async function approve(id){
-
-const {data:p}=await sb
-.from("pending_updates")
-.select("*")
-.eq("id",id)
-.single();
-
-if(!p)return;
-
-const {data:old}=await sb
-.from("stations")
-.select("id")
-.eq("name",p.name)
-.eq("area",p.area)
-.maybeSingle();
-
-let r;
-
-if(old){
-
-r=await sb
-.from("stations")
-.update({
-status:p.status,
-traffic:p.traffic,
-gas:p.gas,
-diesel:p.diesel,
-note:p.note,
-updated_at:new Date().toISOString()
-})
-.eq("id",old.id);
-
-}else{
-
-r=await sb
-.from("stations")
-.insert({
-name:p.name,
-area:p.area,
-status:p.status,
-traffic:p.traffic,
-gas:p.gas,
-diesel:p.diesel,
-note:p.note,
-updated_at:new Date().toISOString()
-});
-
-}
-
-if(r.error)return alert(r.error.message);
-
-await sb
-.from("pending_updates")
-.delete()
-.eq("id",id);
-
-load();
-
-}
-
-
-/* =========================
-   رفض تحديث
-========================= */
-
-async function reject(id){
-
-const {error}=await sb
-.from("pending_updates")
-.delete()
-.eq("id",id);
-
-if(error)return alert(error.message);
-
-load();
-
-}
-
-
-/* =========================
-   إضافة محطة
+   إضافة محطة — للمشرف فقط
 ========================= */
 
 function openAdd(){
 
-$("dlgTitle").textContent="إضافة محطة";
+if(currentRole!=="admin"){
+
+return;
+
+}
+
+
+
+$("dlgTitle").textContent=
+"إضافة محطة";
+
 $("sid").value="";
+
 $("stationForm").reset();
+
+$("adminNoteField").style.display=
+"block";
+
+$("name").disabled=false;
+
+$("area").disabled=false;
+
+$("status").disabled=false;
+
+$("traffic").disabled=false;
+
+$("gas").disabled=false;
+
+$("diesel").disabled=false;
+
+$("note").disabled=false;
+
+
 
 stationDlg.showModal();
 
 }
 
 
+
 /* =========================
-   تعديل محطة
+   تعديل محطة — للمشرف فقط
 ========================= */
 
 function openEdit(id){
 
-const s=stations.find(
+if(currentRole!=="admin"){
+
+return;
+
+}
+
+
+
+const s=
+
+stations.find(
 x=>String(x.id)===String(id)
 );
 
-if(!s)return;
 
-$("dlgTitle").textContent="تعديل محطة";
+
+if(!s)
+return;
+
+
+
+$("dlgTitle").textContent=
+"تعديل محطة";
+
 $("sid").value=s.id;
+
 $("name").value=s.name;
+
 $("area").value=s.area||"";
+
 $("status").value=s.status;
+
 $("traffic").value=s.traffic;
+
 $("gas").value=s.gas;
+
 $("diesel").value=s.diesel;
+
 $("note").value=s.note||"";
+
+
+
+$("adminNoteField").style.display=
+"block";
+
+
+
+$("name").disabled=false;
+
+$("area").disabled=false;
+
+$("status").disabled=false;
+
+$("traffic").disabled=false;
+
+$("gas").disabled=false;
+
+$("diesel").disabled=false;
+
+$("note").disabled=false;
+
+
 
 stationDlg.showModal();
 
 }
 
 
+
 /* =========================
-   حفظ محطة
+   حفظ تعديل المشرف
 ========================= */
 
-$("stationForm").onsubmit=async e=>{
+$("stationForm").onsubmit=
+async e=>{
 
 e.preventDefault();
 
-const id=$("sid").value;
+
+
+if(currentRole!=="admin"){
+
+alert("ليس لديك صلاحية.");
+
+return;
+
+}
+
+
+
+const id=
+$("sid").value;
+
+
 
 const payload={
-name:$("name").value.trim(),
-area:$("area").value.trim(),
-status:$("status").value,
-traffic:$("traffic").value,
-gas:$("gas").value,
-diesel:$("diesel").value,
-note:$("note").value,
-updated_at:new Date().toISOString()
+
+name:
+$("name").value.trim(),
+
+area:
+$("area").value.trim(),
+
+status:
+$("status").value,
+
+traffic:
+$("traffic").value,
+
+gas:
+$("gas").value,
+
+diesel:
+$("diesel").value,
+
+note:
+$("note").value,
+
+updated_at:
+new Date().toISOString()
+
 };
 
-let r=id
-?
-await sb.from("stations").update(payload).eq("id",id)
-:
-await sb.from("stations").insert(payload);
 
-if(r.error)return alert(r.error.message);
+
+let result;
+
+
+
+if(id){
+
+result=
+
+await sb
+
+.from("stations")
+
+.update(payload)
+
+.eq("id",id);
+
+}
+
+else{
+
+result=
+
+await sb
+
+.from("stations")
+
+.insert(payload);
+
+}
+
+
+
+if(result.error){
+
+alert(
+result.error.message
+);
+
+return;
+
+}
+
+
 
 stationDlg.close();
 
-load();
+await loadAdmin();
 
 };
+
 
 
 /* =========================
@@ -590,24 +1829,311 @@ load();
 
 async function removeStation(id){
 
-if(!confirm("هل تريد حذف هذه المحطة؟"))return;
+if(currentRole!=="admin"){
 
-const {error}=await sb
-.from("stations")
-.delete()
-.eq("id",id);
-
-if(error)return alert(error.message);
-
-load();
+return;
 
 }
 
 
-/* تشغيل لوحة التحكم */
+
+if(
+!confirm(
+"هل أنت متأكد من حذف هذه المحطة؟"
+)
+){
+
+return;
+
+}
+
+
+
+const {error}=
+
+await sb
+
+.from("stations")
+
+.delete()
+
+.eq("id",id);
+
+
+
+if(error){
+
+alert(
+error.message
+);
+
+return;
+
+}
+
+
+
+loadAdmin();
+
+}
+
+
+
+/* =========================
+   اعتماد تحديث
+========================= */
+
+async function approve(id){
+
+if(currentRole!=="admin"){
+
+return;
+
+}
+
+
+
+const {data:p,error}=
+
+await sb
+
+.from("pending_updates")
+
+.select("*")
+
+.eq("id",id)
+
+.single();
+
+
+
+if(error || !p){
+
+alert(
+error?.message ||
+"لم يتم العثور على التحديث."
+);
+
+return;
+
+}
+
+
+
+/*
+   البحث عن المحطة
+*/
+
+const {data:old}=
+
+await sb
+
+.from("stations")
+
+.select("id")
+
+.eq("name",p.name)
+
+.eq("area",p.area)
+
+.maybeSingle();
+
+
+
+let result;
+
+
+
+if(old){
+
+result=
+
+await sb
+
+.from("stations")
+
+.update({
+
+status:p.status,
+
+traffic:p.traffic,
+
+gas:p.gas,
+
+diesel:p.diesel,
+
+/*
+   الملاحظات تبقى كما هي
+   إلا إذا كان التحديث قادمًا من
+   نظامك القديم وفيه ملاحظة.
+*/
+
+updated_at:
+new Date().toISOString()
+
+})
+
+.eq("id",old.id);
+
+}
+
+else{
+
+result=
+
+await sb
+
+.from("stations")
+
+.insert({
+
+name:p.name,
+
+area:p.area,
+
+status:p.status,
+
+traffic:p.traffic,
+
+gas:p.gas,
+
+diesel:p.diesel,
+
+updated_at:
+new Date().toISOString()
+
+});
+
+}
+
+
+
+if(result.error){
+
+alert(
+result.error.message
+);
+
+return;
+
+}
+
+
+
+/*
+   حذف التحديث المعلق
+*/
+
+const {error:deleteError}=
+
+await sb
+
+.from("pending_updates")
+
+.delete()
+
+.eq("id",id);
+
+
+
+if(deleteError){
+
+alert(
+deleteError.message
+);
+
+return;
+
+}
+
+
+
+loadAdmin();
+
+}
+
+
+
+/* =========================
+   رفض تحديث
+========================= */
+
+async function reject(id){
+
+if(currentRole!=="admin"){
+
+return;
+
+}
+
+
+
+if(
+!confirm(
+"رفض هذا التحديث؟"
+)
+){
+
+return;
+
+}
+
+
+
+const {error}=
+
+await sb
+
+.from("pending_updates")
+
+.delete()
+
+.eq("id",id);
+
+
+
+if(error){
+
+alert(
+error.message
+);
+
+return;
+
+}
+
+
+
+loadAdmin();
+
+}
+
+
+
+/* =========================
+   تسجيل الخروج
+========================= */
+
+async function logout(){
+
+await sb.auth.signOut();
+
+location.reload();
+
+}
+
+
+
+/* =========================
+   بدء النظام
+========================= */
+
 init();
 
+
 </script>
+
+
 </body>
+
 </html>
-```
