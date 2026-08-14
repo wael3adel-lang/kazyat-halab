@@ -1,12 +1,18 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
+
 <head>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+
 <title>لوحة تحكم — كازيات حلب</title>
 
 <style>
-*{box-sizing:border-box}
+
+*{
+box-sizing:border-box
+}
 
 body{
 font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;
@@ -169,6 +175,15 @@ font-weight:800
 display:none
 }
 
+.closure-box{
+background:#fff7ed;
+border:1px solid #fed7aa;
+color:#9a3412;
+border-radius:12px;
+padding:10px;
+margin-top:10px
+}
+
 dialog{
 border:0;
 border-radius:18px;
@@ -186,48 +201,87 @@ padding:20px
 }
 
 @media(max-width:700px){
+
 .stats{
 grid-template-columns:repeat(2,1fr)
 }
+
 }
 
 @media(max-width:600px){
+
 .two{
 grid-template-columns:1fr
 }
+
 }
+
 </style>
+
 </head>
 
 <body>
 
 <header>
+
 <main>
-<h2>⚙️ لوحة تحكم كازيات حلب</h2>
+
+<h2>
+⚙️ لوحة تحكم كازيات حلب
+</h2>
+
 </main>
+
 </header>
 
+
 <main>
-<div id="app">جاري التحميل…</div>
+
+<div id="app">
+جاري التحميل…
+</div>
+
 </main>
 
+
+<!-- =========================
+     نافذة المحطة
+========================= -->
 
 <dialog id="stationDlg">
 
 <form class="form" id="stationForm">
 
-<h2 id="dlgTitle">تعديل محطة</h2>
+<h2 id="dlgTitle">
+تعديل محطة
+</h2>
 
-<input type="hidden" id="sid">
-
-<label>اسم المحطة</label>
-<input id="name" required>
-
-<label>المنطقة</label>
-<input id="area">
+<input
+type="hidden"
+id="sid">
 
 
-<label>📍 رابط موقع المحطة على Google Maps</label>
+<label>
+اسم المحطة
+</label>
+
+<input
+id="name"
+required>
+
+
+<label>
+المنطقة
+</label>
+
+<input
+id="area">
+
+
+<label>
+📍 رابط موقع المحطة على Google Maps
+</label>
+
 <input
 id="location_url"
 type="url"
@@ -238,9 +292,13 @@ placeholder="https://maps.google.com/...">
 
 <div>
 
-<label>الحالة</label>
+<label>
+الحالة
+</label>
 
-<select id="status" onchange="toggleAdminOpening()">
+<select
+id="status"
+onchange="toggleAdminOpening()">
 
 <option value="open">
 تعمل
@@ -255,11 +313,16 @@ placeholder="https://maps.google.com/...">
 </div>
 
 
-<div id="adminOpeningBox" class="hidden">
+<div
+id="adminOpeningBox"
+class="hidden">
 
-<label>الافتتاح</label>
+<label>
+الافتتاح
+</label>
 
-<select id="opening_time">
+<select
+id="opening_time">
 
 <option value="">
 اختر موعد الافتتاح
@@ -284,14 +347,24 @@ placeholder="https://maps.google.com/...">
 </div>
 
 
-<div id="adminClosureBox" class="hidden">
+<!-- سبب ومدة الإغلاق -->
 
-<label>سبب الإغلاق</label>
+<div
+id="closureAdminBox"
+class="hidden closure-box">
+
+<b>
+سبب الإغلاق ومدة الإغلاق المتوقعة
+</b>
+
+<label>
+سبب الإغلاق
+</label>
 
 <select id="closure_reason">
 
 <option value="">
-اختر سبب الإغلاق
+اختر السبب
 </option>
 
 <option value="maintenance">
@@ -321,75 +394,49 @@ placeholder="https://maps.google.com/...">
 </select>
 
 
-<label>مدة الإغلاق المتوقعة</label>
+<label>
+مدة الإغلاق المتوقعة
+</label>
 
-<div style="display:flex;gap:8px;align-items:center">
-
-<select id="closure_hours" style="margin-bottom:10px">
+<select id="closure_hours">
 
 <option value="">
 اختر المدة
 </option>
 
 <option value="1">
-1
+1 ساعة
 </option>
 
 <option value="2">
-2
+2 ساعة
 </option>
 
 <option value="3">
-3
+3 ساعات
 </option>
 
 <option value="4">
-4
-</option>
-
-<option value="5">
-5
+4 ساعات
 </option>
 
 <option value="6">
-6
-</option>
-
-<option value="7">
-7
+6 ساعات
 </option>
 
 <option value="8">
-8
-</option>
-
-<option value="9">
-9
-</option>
-
-<option value="10">
-10
+8 ساعات
 </option>
 
 <option value="12">
-12
+12 ساعة
 </option>
 
 <option value="24">
-24
-</option>
-
-<option value="48">
-48
+24 ساعة
 </option>
 
 </select>
-
-<b style="white-space:nowrap">
-ساعة
-</b>
-
-</div>
 
 </div>
 
@@ -400,7 +447,9 @@ placeholder="https://maps.google.com/...">
 
 <div>
 
-<label>الازدحام</label>
+<label>
+الازدحام
+</label>
 
 <select id="traffic">
 
@@ -423,7 +472,9 @@ placeholder="https://maps.google.com/...">
 
 <div>
 
-<label>البنزين</label>
+<label>
+البنزين
+</label>
 
 <select id="gas">
 
@@ -444,7 +495,9 @@ placeholder="https://maps.google.com/...">
 
 <div>
 
-<label>المازوت</label>
+<label>
+المازوت
+</label>
 
 <select id="diesel">
 
@@ -463,19 +516,31 @@ placeholder="https://maps.google.com/...">
 </div>
 
 
-<label>ملاحظة / إعلان</label>
+<label>
+ملاحظة / إعلان
+</label>
 
-<textarea id="note" rows="4"></textarea>
+<textarea
+id="note"
+rows="4"></textarea>
 
 
 <div>
 
-<button class="primary" type="submit">
+<button
+class="primary"
+type="submit">
+
 حفظ التغيير
+
 </button>
 
-<button type="button" onclick="stationDlg.close()">
+<button
+type="button"
+onclick="stationDlg.close()">
+
 إلغاء
+
 </button>
 
 </div>
@@ -489,58 +554,79 @@ placeholder="https://maps.google.com/...">
 
 <script>
 
+
+/* =========================
+   Supabase
+========================= */
+
 const sb=supabase.createClient(
+
 "https://hjggfolotblsurfwfcvn.supabase.co",
+
 "sb_publishable_UTpiWf5wrq8VfxAXxl9zfw_CtRRizyl"
+
 );
 
+
 let session=null;
+
 let stations=[];
+
 let currentRole=null;
+
 let currentStationId=null;
 
-const $=id=>document.getElementById(id);
 
+const $=id=>
+document.getElementById(id);
+
+
+/* =========================
+   حماية النص
+========================= */
 
 function esc(x){
 
 return String(x??"")
 .replace(/[&<>"']/g,m=>({
+
 "&":"&amp;",
 "<":"&lt;",
 ">":"&gt;",
 '"':"&quot;",
 "'":"&#039;"
+
 }[m]));
 
 }
 
 
+/* =========================
+   التاريخ
+========================= */
+
 function fmt(t){
 
-if(!t)return "—";
+if(!t)
+return "—";
 
-return new Intl.DateTimeFormat("ar-SY",{
+return new Intl.DateTimeFormat(
+"ar-SY",
+{
 day:"numeric",
 month:"numeric",
 year:"numeric",
 hour:"2-digit",
 minute:"2-digit"
-}).format(new Date(t));
+}
+).format(new Date(t));
 
 }
 
 
-function openingText(v){
-
-if(v==="8")return "الثامنة صباحاً";
-if(v==="9")return "التاسعة صباحاً";
-if(v==="order")return "مع وصول الطلبية";
-
-return "";
-
-}
-
+/* =========================
+   نص سبب الإغلاق
+========================= */
 
 function closureReasonText(v){
 
@@ -568,47 +654,21 @@ return "";
 
 
 /* =========================
-   عدد زوار الموقع
+   نص الافتتاح
 ========================= */
 
-async function getVisitorCount(){
+function openingText(v){
 
-try{
+if(v==="8")
+return "الثامنة صباحاً";
 
-const {data,error}=await sb
-.from("visitor_events")
-.select("visitor_id");
+if(v==="9")
+return "التاسعة صباحاً";
 
-if(error){
+if(v==="order")
+return "مع وصول الطلبية";
 
-console.error("Visitor count error:",error);
-
-return 0;
-
-}
-
-if(!data)
-return 0;
-
-
-/*
-نحسب الزوار الفريدين
-وليس عدد الزيارات اليومية
-*/
-
-return new Set(
-data
-.map(x=>x.visitor_id)
-.filter(Boolean)
-).size;
-
-}catch(e){
-
-console.error(e);
-
-return 0;
-
-}
+return "";
 
 }
 
@@ -623,18 +683,32 @@ $("app").innerHTML=`
 
 <div class="panel">
 
-<h2>تسجيل الدخول</h2>
+<h2>
+تسجيل الدخول
+</h2>
 
-<label>البريد الإلكتروني</label>
+<label>
+البريد الإلكتروني
+</label>
 
-<input id="email" type="email">
+<input
+id="email"
+type="email">
 
-<label>كلمة المرور</label>
+<label>
+كلمة المرور
+</label>
 
-<input id="password" type="password">
+<input
+id="password"
+type="password">
 
-<button class="primary" onclick="doLogin()">
+<button
+class="primary"
+onclick="doLogin()">
+
 دخول
+
 </button>
 
 </div>
@@ -646,13 +720,16 @@ $("app").innerHTML=`
 
 async function doLogin(){
 
-const {error}=await sb.auth.signInWithPassword({
+const {error}=
+
+await sb.auth.signInWithPassword({
 
 email:$("email").value.trim(),
 
 password:$("password").value
 
 });
+
 
 if(error){
 
@@ -673,9 +750,12 @@ location.reload();
 
 async function init(){
 
-const {data}=await sb.auth.getSession();
+const {data}=
+
+await sb.auth.getSession();
 
 session=data.session;
+
 
 if(!session){
 
@@ -686,13 +766,20 @@ return;
 }
 
 
-const {data:me,error}=await sb
+const {data:me,error}=
+
+await sb
 
 .from("admin_users")
 
-.select("user_id,role,station_id")
+.select(
+"user_id,role,station_id"
+)
 
-.eq("user_id",session.user.id)
+.eq(
+"user_id",
+session.user.id
+)
 
 .maybeSingle();
 
@@ -753,9 +840,183 @@ loadAdmin();
 }
 
 
-/* =========================
+/* =========================================================
+   إحصائيات الزوار للمشرف فقط
+========================================================= */
+
+async function getVisitorStats(){
+
+try{
+
+const {data,error}=
+
+await sb
+
+.from("visitor_events")
+
+.select("*");
+
+
+if(error){
+
+console.error(
+"Visitor stats error:",
+error
+);
+
+return {
+
+unique:0,
+today:0,
+week:0,
+ips:0
+
+};
+
+}
+
+
+if(!data || !data.length){
+
+return {
+
+unique:0,
+today:0,
+week:0,
+ips:0
+
+};
+
+}
+
+
+const now=new Date();
+
+
+const todayStart=new Date();
+
+todayStart.setHours(
+0,0,0,0
+);
+
+
+const weekStart=new Date();
+
+weekStart.setDate(
+now.getDate()-6
+);
+
+weekStart.setHours(
+0,0,0,0
+);
+
+
+const uniqueVisitors=
+
+new Set(
+
+data
+
+.map(x=>x.visitor_id)
+
+.filter(Boolean)
+
+).size;
+
+
+const todayEvents=
+
+data.filter(x=>{
+
+const d=
+new Date(
+x.created_at ||
+x.inserted_at ||
+x.timestamp
+);
+
+return !isNaN(d) &&
+d>=todayStart;
+
+});
+
+
+const weekEvents=
+
+data.filter(x=>{
+
+const d=
+new Date(
+x.created_at ||
+x.inserted_at ||
+x.timestamp
+);
+
+return !isNaN(d) &&
+d>=weekStart;
+
+});
+
+
+/*
+إذا كان جدول visitor_events
+يحتوي على ip أو ip_address
+نحسبها تلقائياً.
+*/
+
+const ipValues=
+
+data
+
+.map(x=>
+x.ip_address ||
+x.ip ||
+x.ipAddress ||
+null
+)
+
+.filter(Boolean);
+
+
+const uniqueIps=
+
+new Set(ipValues).size;
+
+
+return {
+
+unique:uniqueVisitors,
+
+today:todayEvents.length,
+
+week:weekEvents.length,
+
+ips:uniqueIps
+
+};
+
+
+}catch(e){
+
+console.error(e);
+
+return {
+
+unique:0,
+today:0,
+week:0,
+ips:0
+
+};
+
+}
+
+}
+
+
+/* =========================================================
    صاحب الكازية
-========================= */
+========================================================= */
 
 async function loadOwner(){
 
@@ -776,13 +1037,18 @@ return;
 }
 
 
-const {data:s,error}=await sb
+const {data:s,error}=
+
+await sb
 
 .from("stations")
 
 .select("*")
 
-.eq("id",currentStationId)
+.eq(
+"id",
+currentStationId
+)
 
 .maybeSingle();
 
@@ -830,7 +1096,9 @@ $("app").innerHTML=`
 
 <div class="owner-box">
 
-<b>⛽ حساب صاحب الكازية</b>
+<b>
+⛽ حساب صاحب الكازية
+</b>
 
 <br>
 
@@ -860,22 +1128,35 @@ ${esc(s.area||"")}
 </div>
 
 <div class="badge">
-آخر تحديث: ${fmt(s.updated_at)}
+آخر تحديث:
+${fmt(s.updated_at)}
 </div>
 
 <br><br>
 
 
-<label>الحالة</label>
+<label>
+الحالة
+</label>
 
-<select id="ownerStatus" onchange="toggleOwnerFields()">
+<select
+id="ownerStatus"
+onchange="toggleOwnerFields()">
 
-<option value="open" ${s.status==="open"?"selected":""}>
+<option
+value="open"
+${s.status==="open"?"selected":""}>
+
 🟢 تعمل
+
 </option>
 
-<option value="closed" ${s.status==="closed"?"selected":""}>
+<option
+value="closed"
+${s.status==="closed"?"selected":""}>
+
 ❌ مغلقة
+
 </option>
 
 </select>
@@ -887,16 +1168,26 @@ ${esc(s.area||"")}
 
 <div>
 
-<label>البنزين</label>
+<label>
+البنزين
+</label>
 
 <select id="ownerGas">
 
-<option value="yes" ${s.gas==="yes"?"selected":""}>
+<option
+value="yes"
+${s.gas==="yes"?"selected":""}>
+
 🟢 يوجد
+
 </option>
 
-<option value="no" ${s.gas==="no"?"selected":""}>
+<option
+value="no"
+${s.gas==="no"?"selected":""}>
+
 🔴 لا يوجد
+
 </option>
 
 </select>
@@ -906,16 +1197,26 @@ ${esc(s.area||"")}
 
 <div>
 
-<label>المازوت</label>
+<label>
+المازوت
+</label>
 
 <select id="ownerDiesel">
 
-<option value="yes" ${s.diesel==="yes"?"selected":""}>
+<option
+value="yes"
+${s.diesel==="yes"?"selected":""}>
+
 🟢 يوجد
+
 </option>
 
-<option value="no" ${s.diesel==="no"?"selected":""}>
+<option
+value="no"
+${s.diesel==="no"?"selected":""}>
+
 🔴 لا يوجد
+
 </option>
 
 </select>
@@ -925,20 +1226,34 @@ ${esc(s.area||"")}
 </div>
 
 
-<label>الازدحام</label>
+<label>
+الازدحام
+</label>
 
 <select id="ownerTraffic">
 
-<option value="none" ${s.traffic==="none"?"selected":""}>
+<option
+value="none"
+${s.traffic==="none"?"selected":""}>
+
 🟢 لا يوجد ازدحام
+
 </option>
 
-<option value="light" ${s.traffic==="light"?"selected":""}>
+<option
+value="light"
+${s.traffic==="light"?"selected":""}>
+
 🟡 ازدحام خفيف
+
 </option>
 
-<option value="long" ${s.traffic==="long"?"selected":""}>
+<option
+value="long"
+${s.traffic==="long"?"selected":""}>
+
 🔴 طابور طويل
+
 </option>
 
 </select>
@@ -946,7 +1261,9 @@ ${esc(s.area||"")}
 </div>
 
 
-<div id="ownerClosedFields">
+<div
+id="ownerClosedFields"
+class="closure-box">
 
 <label>
 سبب الإغلاق
@@ -955,31 +1272,55 @@ ${esc(s.area||"")}
 <select id="ownerClosureReason">
 
 <option value="">
-اختر سبب الإغلاق
+اختر السبب
 </option>
 
-<option value="maintenance" ${s.closure_reason==="maintenance"?"selected":""}>
+<option
+value="maintenance"
+${s.closure_reason==="maintenance"?"selected":""}>
+
 🔧 صيانة
+
 </option>
 
-<option value="technical" ${s.closure_reason==="technical"?"selected":""}>
+<option
+value="technical"
+${s.closure_reason==="technical"?"selected":""}>
+
 ⚡ عطل فني
+
 </option>
 
-<option value="delivery" ${s.closure_reason==="delivery"?"selected":""}>
+<option
+value="delivery"
+${s.closure_reason==="delivery"?"selected":""}>
+
 🚚 بانتظار وصول الطلبية
+
 </option>
 
-<option value="fuel" ${s.closure_reason==="fuel"?"selected":""}>
+<option
+value="fuel"
+${s.closure_reason==="fuel"?"selected":""}>
+
 ⛽ نفاد الوقود
+
 </option>
 
-<option value="administrative" ${s.closure_reason==="administrative"?"selected":""}>
+<option
+value="administrative"
+${s.closure_reason==="administrative"?"selected":""}>
+
 🏢 إغلاق إداري
+
 </option>
 
-<option value="temporary" ${s.closure_reason==="temporary"?"selected":""}>
+<option
+value="temporary"
+${s.closure_reason==="temporary"?"selected":""}>
+
 🕐 إغلاق مؤقت
+
 </option>
 
 </select>
@@ -989,64 +1330,45 @@ ${esc(s.area||"")}
 مدة الإغلاق المتوقعة
 </label>
 
-<div style="display:flex;gap:8px;align-items:center">
-
 <select id="ownerClosureHours">
 
 <option value="">
 اختر المدة
 </option>
 
-<option value="1" ${s.closure_hours==="1"?"selected":""}>1</option>
-<option value="2" ${s.closure_hours==="2"?"selected":""}>2</option>
-<option value="3" ${s.closure_hours==="3"?"selected":""}>3</option>
-<option value="4" ${s.closure_hours==="4"?"selected":""}>4</option>
-<option value="5" ${s.closure_hours==="5"?"selected":""}>5</option>
-<option value="6" ${s.closure_hours==="6"?"selected":""}>6</option>
-<option value="7" ${s.closure_hours==="7"?"selected":""}>7</option>
-<option value="8" ${s.closure_hours==="8"?"selected":""}>8</option>
-<option value="9" ${s.closure_hours==="9"?"selected":""}>9</option>
-<option value="10" ${s.closure_hours==="10"?"selected":""}>10</option>
-<option value="12" ${s.closure_hours==="12"?"selected":""}>12</option>
-<option value="24" ${s.closure_hours==="24"?"selected":""}>24</option>
-<option value="48" ${s.closure_hours==="48"?"selected":""}>48</option>
-
-</select>
-
-<b style="white-space:nowrap">
-ساعة
-</b>
-
-</div>
-
-
-<label>
-الافتتاح
-</label>
-
-<select id="ownerOpening">
-
-<option value="">
-اختر موعد الافتتاح
+<option value="1" ${String(s.closure_hours)==="1"?"selected":""}>
+1 ساعة
 </option>
 
-<option value="8" ${s.opening_time==="8"?"selected":""}>
-الثامنة صباحاً
+<option value="2" ${String(s.closure_hours)==="2"?"selected":""}>
+2 ساعة
 </option>
 
-<option value="9" ${s.opening_time==="9"?"selected":""}>
-التاسعة صباحاً
+<option value="3" ${String(s.closure_hours)==="3"?"selected":""}>
+3 ساعات
 </option>
 
-<option value="order" ${s.opening_time==="order"?"selected":""}>
-مع وصول الطلبية
+<option value="4" ${String(s.closure_hours)==="4"?"selected":""}>
+4 ساعات
+</option>
+
+<option value="6" ${String(s.closure_hours)==="6"?"selected":""}>
+6 ساعات
+</option>
+
+<option value="8" ${String(s.closure_hours)==="8"?"selected":""}>
+8 ساعات
+</option>
+
+<option value="12" ${String(s.closure_hours)==="12"?"selected":""}>
+12 ساعة
+</option>
+
+<option value="24" ${String(s.closure_hours)==="24"?"selected":""}>
+24 ساعة
 </option>
 
 </select>
-
-<div class="muted">
-عند اختيار «مغلقة» يتم تعطيل خيارات الوقود والازدحام.
-</div>
 
 </div>
 
@@ -1127,20 +1449,20 @@ const closed=
 $("ownerStatus").value==="closed";
 
 
-let opening="";
-
 let closureReason="";
 
 let closureHours="";
 
+let opening="";
+
 
 if(closed){
 
-opening=$("ownerOpening").value;
+closureReason=
+$("ownerClosureReason").value;
 
-closureReason=$("ownerClosureReason").value;
-
-closureHours=$("ownerClosureHours").value;
+closureHours=
+$("ownerClosureHours").value;
 
 
 if(!closureReason){
@@ -1160,45 +1482,40 @@ return;
 
 }
 
+}else{
 
-if(!opening){
+closureReason="";
 
-alert("اختر موعد الافتتاح.");
-
-return;
-
-}
+closureHours="";
 
 }
 
 
 const payload={
 
-status:
-$("ownerStatus").value,
+status:$("ownerStatus").value,
 
-opening_time:
-opening,
+opening_time:"",
 
-closure_reason:
-closureReason,
+closure_reason:closureReason,
 
-closure_hours:
-closureHours,
+closure_hours:closureHours,
 
-updated_at:
-new Date().toISOString()
+updated_at:new Date().toISOString()
 
 };
 
 
 if(!closed){
 
-payload.gas=$("ownerGas").value;
+payload.gas=
+$("ownerGas").value;
 
-payload.diesel=$("ownerDiesel").value;
+payload.diesel=
+$("ownerDiesel").value;
 
-payload.traffic=$("ownerTraffic").value;
+payload.traffic=
+$("ownerTraffic").value;
 
 }else{
 
@@ -1207,13 +1524,18 @@ payload.traffic="closed";
 }
 
 
-const {error}=await sb
+const {error}=
+
+await sb
 
 .from("stations")
 
 .update(payload)
 
-.eq("id",currentStationId);
+.eq(
+"id",
+currentStationId
+);
 
 
 if(error){
@@ -1237,43 +1559,266 @@ return;
 }
 
 
+const updatedStation={
+
+...stations[0],
+
+...payload
+
+};
+
+
+stations=[updatedStation];
+
+
+const telegramOk=
+await notifyTelegram(
+updatedStation
+);
+
+
 $("ownerMessage").innerHTML=`
 
-<span style="color:#166534;font-weight:700">
+<span
+style="color:#166534;font-weight:700">
 
 ✅ تم تحديث الكازية بنجاح
+
+<br>
+
+${
+telegramOk
+?
+"📲 تم إرسال إشعار Telegram"
+:
+"⚠️ تم الحفظ لكن تعذر إرسال إشعار Telegram"
+}
 
 </span>
 
 `;
 
-setTimeout(loadOwner,1000);
+
+setTimeout(
+loadOwner,
+1500
+);
 
 }
 
 
-/* =========================
+/* =========================================================
+   إشعار Telegram
+========================================================= */
+
+async function notifyTelegram(station){
+
+try{
+
+const changes=[];
+
+
+if(station.status==="closed"){
+
+changes.push(
+"❌ <b>الحالة:</b> مغلقة"
+);
+
+
+if(station.closure_reason){
+
+changes.push(
+"🔧 <b>السبب:</b> "+
+esc(
+closureReasonText(
+station.closure_reason
+)
+)
+);
+
+}
+
+
+if(station.closure_hours){
+
+changes.push(
+"⏱️ <b>مدة الإغلاق المتوقعة:</b> "+
+esc(station.closure_hours)+
+" ساعة"
+);
+
+}
+
+}else{
+
+changes.push(
+"🟢 <b>الحالة:</b> تعمل"
+);
+
+
+changes.push(
+"⛽ <b>البنزين:</b> "+
+(
+station.gas==="yes"
+?
+"يوجد"
+:
+"لا يوجد"
+)
+);
+
+
+changes.push(
+"🛢️ <b>المازوت:</b> "+
+(
+station.diesel==="yes"
+?
+"يوجد"
+:
+"لا يوجد"
+)
+);
+
+
+if(station.traffic==="none"){
+
+changes.push(
+"🟢 <b>الازدحام:</b> لا يوجد ازدحام"
+);
+
+}
+
+else if(station.traffic==="light"){
+
+changes.push(
+"🟡 <b>الازدحام:</b> ازدحام خفيف"
+);
+
+}
+
+else if(station.traffic==="long"){
+
+changes.push(
+"🔴 <b>الازدحام:</b> طابور طويل"
+);
+
+}
+
+}
+
+
+if(station.note){
+
+changes.push(
+"📝 <b>ملاحظة:</b> "+
+esc(station.note)
+);
+
+}
+
+
+const {data,error}=
+
+await sb.functions.invoke(
+
+"notify-telegram",
+
+{
+
+body:{
+
+station_name:
+station.name,
+
+area:
+station.area||"",
+
+changes
+
+}
+
+}
+
+);
+
+
+if(error){
+
+console.error(
+"Telegram error:",
+error
+);
+
+return false;
+
+}
+
+
+console.log(
+"Telegram sent:",
+data
+);
+
+return true;
+
+
+}catch(err){
+
+console.error(err);
+
+return false;
+
+}
+
+}
+
+
+/* =========================================================
    لوحة المشرف
-========================= */
+========================================================= */
 
 async function loadAdmin(){
 
-const {data:p,error:pe}=await sb
+const {
+
+data:p,
+error:pe
+
+}=
+
+await sb
 
 .from("pending_updates")
 
 .select("*")
 
-.order("submitted_at",{ascending:false});
+.order(
+"submitted_at",
+{
+ascending:false
+}
+);
 
 
-const {data:s,error:se}=await sb
+const {
+
+data:s,
+error:se
+
+}=
+
+await sb
 
 .from("stations")
 
 .select("*")
 
-.order("name",{ascending:true});
+.order(
+"name",
+{
+ascending:true
+}
+);
 
 
 if(pe||se){
@@ -1282,7 +1827,9 @@ $("app").innerHTML=`
 
 <div class="panel">
 
-${esc((pe||se).message)}
+${esc(
+(pe||se).message
+)}
 
 </div>
 
@@ -1296,11 +1843,12 @@ return;
 stations=s||[];
 
 
-/*
-جلب عدد الزوار الفريدين
-*/
+/* =========================
+   جلب إحصائيات الزوار
+========================= */
 
-const visitors=await getVisitorCount();
+const visitorStats=
+await getVisitorStats();
 
 
 $("app").innerHTML=`
@@ -1309,7 +1857,9 @@ $("app").innerHTML=`
 
 <div class="admin-box">
 
-<b>👑 حساب المشرف</b>
+<b>
+👑 حساب المشرف
+</b>
 
 <br>
 
@@ -1317,7 +1867,8 @@ ${esc(session.user.email)}
 
 <br>
 
-صلاحية كاملة — جميع المحطات (${stations.length})
+صلاحية كاملة — جميع المحطات
+(${stations.length})
 
 </div>
 
@@ -1328,9 +1879,15 @@ ${esc(session.user.email)}
 </div>
 
 
+<!-- =========================
+     إحصائيات الموقع
+========================= -->
+
 <div class="panel">
 
-<h3>📊 إحصائيات لوحة التحكم</h3>
+<h3>
+📊 إحصائيات الموقع
+</h3>
 
 <div class="stats">
 
@@ -1338,10 +1895,10 @@ ${esc(session.user.email)}
 <div class="stat visitor-stat">
 
 <b>
-👥 ${visitors}
+👥 ${visitorStats.unique}
 </b>
 
-زوار الموقع
+زوار فريدون
 
 </div>
 
@@ -1349,7 +1906,71 @@ ${esc(session.user.email)}
 <div class="stat">
 
 <b>
-${stations.filter(s=>s.status==="open").length}
+📅 ${visitorStats.today}
+</b>
+
+زيارات اليوم
+
+</div>
+
+
+<div class="stat">
+
+<b>
+📆 ${visitorStats.week}
+</b>
+
+زيارات آخر 7 أيام
+
+</div>
+
+
+<div class="stat">
+
+<b>
+🌐 ${visitorStats.ips}
+</b>
+
+عناوين IP
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     إحصائيات المحطات
+========================= -->
+
+<div class="panel">
+
+<h3>
+📊 إحصائيات المحطات
+</h3>
+
+<div class="stats">
+
+
+<div class="stat">
+
+<b>
+${stations.length}
+</b>
+
+إجمالي المحطات
+
+</div>
+
+
+<div class="stat">
+
+<b>
+${stations.filter(
+s=>s.status==="open"
+).length}
 </b>
 
 تعمل
@@ -1360,7 +1981,9 @@ ${stations.filter(s=>s.status==="open").length}
 <div class="stat">
 
 <b>
-${stations.filter(s=>s.status==="closed").length}
+${stations.filter(
+s=>s.status==="closed"
+).length}
 </b>
 
 مغلقة
@@ -1371,7 +1994,11 @@ ${stations.filter(s=>s.status==="closed").length}
 <div class="stat">
 
 <b>
-${stations.filter(s=>s.gas==="yes").length}
+${stations.filter(
+s=>
+s.status==="open" &&
+s.gas==="yes"
+).length}
 </b>
 
 بنزين
@@ -1384,11 +2011,19 @@ ${stations.filter(s=>s.gas==="yes").length}
 </div>
 
 
+<!-- =========================
+     التحديثات المعلقة
+========================= -->
+
 <div class="panel">
 
 <h3>
-التحديثات المعلقة (${p.length})
+
+التحديثات المعلقة
+(${p.length})
+
 </h3>
+
 
 ${
 p.length
@@ -1399,7 +2034,9 @@ p.map(x=>`
 
 <div class="row">
 
-<b>${esc(x.name)}</b>
+<b>
+${esc(x.name)}
+</b>
 
 <br>
 
@@ -1431,6 +2068,7 @@ onclick="approve('${x.id}')">
 
 </button>
 
+
 <button
 class="danger"
 onclick="reject('${x.id}')">
@@ -1454,14 +2092,22 @@ onclick="reject('${x.id}')">
 </div>
 
 
+<!-- =========================
+     المحطات
+========================= -->
+
 <div class="panel">
 
 <div
 style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
 
 <h3>
-جميع المحطات (${stations.length})
+
+جميع المحطات
+(${stations.length})
+
 </h3>
+
 
 <button
 class="primary"
@@ -1476,25 +2122,40 @@ onclick="openAdd()">
 
 <div class="grid">
 
+
 ${stations.map(s=>`
 
 <div class="row">
 
+
 <div class="station-title">
+
 ${esc(s.name)}
+
 </div>
 
+
 <div class="muted">
+
 ${esc(s.area||"")}
+
 </div>
 
 
 <br>
 
 
-<span class="badge ${s.status==="open"?"ok":"no"}">
+<span
+class="badge
+${s.status==="open"?"ok":"no"}">
 
-${s.status==="open"?"🟢 تعمل":"❌ مغلقة"}
+${
+s.status==="open"
+?
+"🟢 تعمل"
+:
+"❌ مغلقة"
+}
 
 </span>
 
@@ -1508,21 +2169,22 @@ s.status==="closed"
 
 <span class="badge warn">
 
-الافتتاح:
-${esc(openingText(s.opening_time))}
-
-</span>
-
-${
+🔧
+${esc(
+closureReasonText(
 s.closure_reason
-?
+)
+)}
 
-`
+</span>
 
 <span class="badge warn">
 
-السبب:
-${esc(closureReasonText(s.closure_reason))}
+⏱️
+${esc(
+s.closure_hours||""
+)}
+ساعة
 
 </span>
 
@@ -1530,46 +2192,28 @@ ${esc(closureReasonText(s.closure_reason))}
 
 :
 
-""
-}
-
-${
-s.closure_hours
-?
-
 `
 
-<span class="badge warn">
-
-مدة الإغلاق:
-${esc(s.closure_hours)} ساعة
-
-</span>
-
-`
-
-:
-
-""
-}
-
-`
-
-:
-
-`
-
-<span class="badge ${s.gas==="yes"?"ok":"no"}">
+<span
+class="badge
+${s.gas==="yes"?"ok":"no"}">
 
 بنزين:
-${s.gas==="yes"?"يوجد":"لا يوجد"}
+${s.gas==="yes"
+?"يوجد"
+:"لا يوجد"}
 
 </span>
 
-<span class="badge ${s.diesel==="yes"?"ok":"no"}">
+
+<span
+class="badge
+${s.diesel==="yes"?"ok":"no"}">
 
 مازوت:
-${s.diesel==="yes"?"يوجد":"لا يوجد"}
+${s.diesel==="yes"
+?"يوجد"
+:"لا يوجد"}
 
 </span>
 
@@ -1580,9 +2224,12 @@ ${s.diesel==="yes"?"يوجد":"لا يوجد"}
 
 <br>
 
+
 <small>
+
 آخر تحديث:
 ${fmt(s.updated_at)}
+
 </small>
 
 
@@ -1640,9 +2287,14 @@ style="margin-top:8px;white-space:normal">
 
 <div class="actions">
 
-<button onclick="openEdit('${s.id}')">
+
+<button
+onclick="openEdit('${s.id}')">
+
 ✏️ تعديل
+
 </button>
+
 
 <button
 class="danger"
@@ -1652,12 +2304,14 @@ onclick="removeStation('${s.id}')">
 
 </button>
 
+
 </div>
 
 
 </div>
 
 `).join("")}
+
 
 </div>
 
@@ -1668,85 +2322,129 @@ onclick="removeStation('${s.id}')">
 }
 
 
-/* =========================
+/* =========================================================
    تعديل محطة
-========================= */
+========================================================= */
 
 function openEdit(id){
 
-const s=stations.find(
+const s=
+stations.find(
 x=>String(x.id)===String(id)
 );
 
-if(!s)return;
+
+if(!s)
+return;
 
 
-$("dlgTitle").textContent="تعديل محطة";
+$("dlgTitle").textContent=
+"تعديل محطة";
 
-$("sid").value=s.id;
 
-$("name").value=s.name;
+$("sid").value=
+s.id;
 
-$("area").value=s.area||"";
 
-$("location_url").value=s.location_url||"";
+$("name").value=
+s.name;
 
-$("status").value=s.status;
+
+$("area").value=
+s.area||"";
+
+
+$("location_url").value=
+s.location_url||"";
+
+
+$("status").value=
+s.status;
+
 
 $("traffic").value=
-s.traffic==="closed"?"none":s.traffic;
+s.traffic==="closed"
+?
+"none"
+:
+s.traffic;
 
-$("gas").value=s.gas;
 
-$("diesel").value=s.diesel;
+$("gas").value=
+s.gas;
 
-$("note").value=s.note||"";
 
-$("opening_time").value=s.opening_time||"";
+$("diesel").value=
+s.diesel;
 
-$("closure_reason").value=s.closure_reason||"";
 
-$("closure_hours").value=s.closure_hours||"";
+$("note").value=
+s.note||"";
+
+
+$("opening_time").value=
+s.opening_time||"";
+
+
+$("closure_reason").value=
+s.closure_reason||"";
+
+
+$("closure_hours").value=
+s.closure_hours||"";
+
 
 toggleAdminOpening();
+
 
 stationDlg.showModal();
 
 }
 
 
-/* =========================
+/* =========================================================
    إضافة محطة
-========================= */
+========================================================= */
 
 function openAdd(){
 
-$("dlgTitle").textContent="إضافة محطة";
+$("dlgTitle").textContent=
+"إضافة محطة";
+
 
 $("stationForm").reset();
 
+
 $("sid").value="";
 
-$("status").value="open";
+
+$("status").value=
+"open";
+
 
 $("opening_time").value="";
 
+
 $("location_url").value="";
+
 
 $("closure_reason").value="";
 
+
 $("closure_hours").value="";
 
+
 toggleAdminOpening();
+
 
 stationDlg.showModal();
 
 }
 
 
-/* =========================
-   حالة نافذة المشرف
-========================= */
+/* =========================================================
+   حقول الإغلاق للمشرف
+========================================================= */
 
 function toggleAdminOpening(){
 
@@ -1754,53 +2452,74 @@ const closed=
 $("status").value==="closed";
 
 
-$("adminOpeningBox").classList.toggle(
+$("adminOpeningBox")
+.classList.toggle(
 "hidden",
 !closed
 );
 
 
-$("adminClosureBox").classList.toggle(
+$("closureAdminBox")
+.classList.toggle(
 "hidden",
 !closed
 );
 
 
 $("adminFuelBox").style.opacity=
-closed?".5":"1";
+closed
+?
+".5"
+:
+"1";
 
 
-$("traffic").disabled=closed;
+$("traffic").disabled=
+closed;
 
-$("gas").disabled=closed;
 
-$("diesel").disabled=closed;
+$("gas").disabled=
+closed;
+
+
+$("diesel").disabled=
+closed;
 
 
 if(closed){
 
-$("traffic").value="closed";
+$("traffic").value=
+"closed";
 
 }else{
 
-if($("traffic").value==="closed")
-$("traffic").value="none";
+if(
+$("traffic").value==="closed"
+){
+
+$("traffic").value=
+"none";
 
 }
 
 }
 
+}
 
-/* =========================
+
+/* =========================================================
    حفظ محطة المشرف
-========================= */
+========================================================= */
 
-$("stationForm").onsubmit=async e=>{
+$("stationForm").onsubmit=
+async e=>{
 
 e.preventDefault();
 
 
-const id=$("sid").value;
+const id=
+$("sid").value;
+
 
 const closed=
 $("status").value==="closed";
@@ -1815,25 +2534,34 @@ let closureHours="";
 
 if(closed){
 
-opening=$("opening_time").value;
-
-closureReason=$("closure_reason").value;
-
-closureHours=$("closure_hours").value;
+opening=
+$("opening_time").value;
 
 
 if(!opening){
 
-alert("اختر موعد الافتتاح.");
+alert(
+"اختر موعد الافتتاح."
+);
 
 return;
 
 }
 
 
+closureReason=
+$("closure_reason").value;
+
+
+closureHours=
+$("closure_hours").value;
+
+
 if(!closureReason){
 
-alert("اختر سبب الإغلاق.");
+alert(
+"اختر سبب الإغلاق."
+);
 
 return;
 
@@ -1842,7 +2570,9 @@ return;
 
 if(!closureHours){
 
-alert("اختر مدة الإغلاق المتوقعة.");
+alert(
+"اختر مدة الإغلاق المتوقعة."
+);
 
 return;
 
@@ -1852,7 +2582,9 @@ return;
 
 
 const locationUrl=
-$("location_url").value.trim();
+$("location_url")
+.value
+.trim();
 
 
 if(
@@ -1887,10 +2619,18 @@ opening_time:
 opening,
 
 closure_reason:
-closureReason,
+closed
+?
+closureReason
+:
+"",
 
 closure_hours:
-closureHours,
+closed
+?
+closureHours
+:
+"",
 
 note:
 $("note").value,
@@ -1914,7 +2654,8 @@ $("diesel").value;
 
 }else{
 
-payload.traffic="closed";
+payload.traffic=
+"closed";
 
 }
 
@@ -1924,7 +2665,8 @@ let result;
 
 if(id){
 
-result=await sb
+result=
+await sb
 
 .from("stations")
 
@@ -1934,7 +2676,8 @@ result=await sb
 
 }else{
 
-result=await sb
+result=
+await sb
 
 .from("stations")
 
@@ -1945,7 +2688,9 @@ result=await sb
 
 if(result.error){
 
-alert(result.error.message);
+alert(
+result.error.message
+);
 
 return;
 
@@ -1959,19 +2704,23 @@ loadAdmin();
 };
 
 
-/* =========================
+/* =========================================================
    حذف
-========================= */
+========================================================= */
 
 async function removeStation(id){
 
-if(!confirm(
+if(
+!confirm(
 "هل أنت متأكد من حذف هذه المحطة؟"
-))
+)
+)
 return;
 
 
-const {error}=await sb
+const {error}=
+
+await sb
 
 .from("stations")
 
@@ -1994,13 +2743,18 @@ loadAdmin();
 }
 
 
-/* =========================
+/* =========================================================
    اعتماد تحديث
-========================= */
+========================================================= */
 
 async function approve(id){
 
-const {data:p,error}=await sb
+const {
+data:p,
+error
+}=
+
+await sb
 
 .from("pending_updates")
 
@@ -2023,7 +2777,11 @@ return;
 }
 
 
-const {data:old}=await sb
+const {
+data:old
+}=
+
+await sb
 
 .from("stations")
 
@@ -2041,7 +2799,9 @@ let result;
 
 if(old){
 
-result=await sb
+result=
+
+await sb
 
 .from("stations")
 
@@ -2069,7 +2829,9 @@ new Date().toISOString()
 
 }else{
 
-result=await sb
+result=
+
+await sb
 
 .from("stations")
 
@@ -2097,7 +2859,9 @@ new Date().toISOString()
 
 if(result.error){
 
-alert(result.error.message);
+alert(
+result.error.message
+);
 
 return;
 
@@ -2118,13 +2882,15 @@ loadAdmin();
 }
 
 
-/* =========================
+/* =========================================================
    رفض
-========================= */
+========================================================= */
 
 async function reject(id){
 
-const {error}=await sb
+const {error}=
+
+await sb
 
 .from("pending_updates")
 
@@ -2147,9 +2913,9 @@ loadAdmin();
 }
 
 
-/* =========================
+/* =========================================================
    خروج
-========================= */
+========================================================= */
 
 async function logout(){
 
@@ -2160,9 +2926,14 @@ location.reload();
 }
 
 
+/* =========================================================
+   تشغيل
+========================================================= */
+
 init();
 
 </script>
 
 </body>
+
 </html>
