@@ -53,7 +53,6 @@ dialog::backdrop{background:#0006}
 <div id="app">جاري التحميل…</div>
 </main>
 
-
 <dialog id="stationDlg">
 
 <form class="form" id="stationForm">
@@ -68,7 +67,6 @@ dialog::backdrop{background:#0006}
 <label>المنطقة</label>
 <input id="area">
 
-
 <div class="two">
 
 <div>
@@ -79,7 +77,6 @@ dialog::backdrop{background:#0006}
 <option value="closed">مغلقة</option>
 </select>
 </div>
-
 
 <div id="adminOpeningBox" class="hidden">
 
@@ -109,7 +106,6 @@ dialog::backdrop{background:#0006}
 
 </div>
 
-
 <div id="adminFuelBox">
 
 <div class="two">
@@ -136,7 +132,6 @@ dialog::backdrop{background:#0006}
 
 </div>
 
-
 <div>
 
 <label>البنزين</label>
@@ -156,7 +151,6 @@ dialog::backdrop{background:#0006}
 </div>
 
 </div>
-
 
 <div>
 
@@ -178,11 +172,9 @@ dialog::backdrop{background:#0006}
 
 </div>
 
-
 <label>ملاحظة / إعلان</label>
 
 <textarea id="note" rows="4"></textarea>
-
 
 <div>
 
@@ -218,6 +210,10 @@ let currentStationId=null;
 const $=id=>document.getElementById(id);
 
 
+/* =========================
+   حماية النصوص
+========================= */
+
 function esc(x){
 
 return String(x??"")
@@ -231,6 +227,10 @@ return String(x??"")
 
 }
 
+
+/* =========================
+   التاريخ
+========================= */
 
 function fmt(t){
 
@@ -247,6 +247,10 @@ minute:"2-digit"
 }
 
 
+/* =========================
+   موعد الافتتاح
+========================= */
+
 function openingText(v){
 
 if(v==="8")return "الثامنة صباحاً";
@@ -254,6 +258,163 @@ if(v==="9")return "التاسعة صباحاً";
 if(v==="order")return "مع وصول الطلبية";
 
 return "";
+
+}
+
+
+/* =========================
+   إرسال إشعار Telegram
+========================= */
+
+async function notifyTelegram(station){
+
+try{
+
+const changes=[];
+
+
+/* الحالة */
+
+if(station.status==="closed"){
+
+changes.push(
+"❌ <b>الحالة:</b> مغلقة"
+);
+
+if(station.opening_time){
+
+changes.push(
+"🕘 <b>الافتتاح:</b> "+
+esc(openingText(station.opening_time))
+);
+
+}
+
+}else{
+
+changes.push(
+"🟢 <b>الحالة:</b> مفتوحة"
+);
+
+
+/* البنزين */
+
+if(station.gas==="yes"){
+
+changes.push(
+"⛽ <b>البنزين:</b> يوجد"
+);
+
+}else{
+
+changes.push(
+"⛽ <b>البنزين:</b> لا يوجد"
+);
+
+}
+
+
+/* المازوت */
+
+if(station.diesel==="yes"){
+
+changes.push(
+"🛢️ <b>المازوت:</b> يوجد"
+);
+
+}else{
+
+changes.push(
+"🛢️ <b>المازوت:</b> لا يوجد"
+);
+
+}
+
+
+/* الازدحام */
+
+if(station.traffic==="none"){
+
+changes.push(
+"🟢 <b>الازدحام:</b> لا يوجد ازدحام"
+);
+
+}
+
+else if(station.traffic==="light"){
+
+changes.push(
+"🟡 <b>الازدحام:</b> ازدحام خفيف"
+);
+
+}
+
+else if(station.traffic==="long"){
+
+changes.push(
+"🔴 <b>الازدحام:</b> طابور طويل"
+);
+
+}
+
+}
+
+
+/* الملاحظة */
+
+if(station.note){
+
+changes.push(
+"📝 <b>ملاحظة:</b> "+
+esc(station.note)
+);
+
+}
+
+
+/* إرسال الطلب */
+
+const {data,error}=await sb.functions.invoke(
+"notify-telegram",
+{
+body:{
+station_name:station.name,
+area:station.area||"",
+changes:changes
+}
+}
+);
+
+
+if(error){
+
+console.error(
+"Telegram notification error:",
+error
+);
+
+return false;
+
+}
+
+
+console.log(
+"Telegram notification sent:",
+data
+);
+
+return true;
+
+}catch(err){
+
+console.error(
+"Telegram notification exception:",
+err
+);
+
+return false;
+
+}
 
 }
 
@@ -346,9 +507,13 @@ if(error){
 $("app").innerHTML=`
 
 <div class="panel">
+
 خطأ في الصلاحيات:
+
 <br><br>
+
 ${esc(error.message)}
+
 </div>
 `;
 
@@ -362,7 +527,9 @@ if(!me){
 $("app").innerHTML=`
 
 <div class="panel">
+
 هذا الحساب ليس مشرفاً.
+
 </div>
 `;
 
@@ -372,6 +539,7 @@ return;
 
 
 currentRole=me.role||"admin";
+
 currentStationId=me.station_id;
 
 
@@ -397,8 +565,11 @@ async function loadOwner(){
 if(!currentStationId){
 
 $("app").innerHTML=`
+
 <div class="panel">
+
 لا توجد كازية مرتبطة بهذا الحساب.
+
 </div>
 `;
 
@@ -421,8 +592,11 @@ const {data:s,error}=await sb
 if(error){
 
 $("app").innerHTML=`
+
 <div class="panel">
+
 ${esc(error.message)}
+
 </div>
 `;
 
@@ -434,8 +608,11 @@ return;
 if(!s){
 
 $("app").innerHTML=`
+
 <div class="panel">
+
 لم يتم العثور على الكازية.
+
 </div>
 `;
 
@@ -486,9 +663,7 @@ ${esc(s.area||"")}
 آخر تحديث: ${fmt(s.updated_at)}
 </div>
 
-
 <br><br>
-
 
 <label>الحالة</label>
 
@@ -597,7 +772,9 @@ ${esc(s.area||"")}
 </select>
 
 <div class="muted">
+
 عند اختيار «مغلقة» يتم تعطيل خيارات الوقود والازدحام.
+
 </div>
 
 </div>
@@ -615,8 +792,10 @@ onclick="saveOwner()">
 </button>
 
 
-<div id="ownerMessage"
+<div
+id="ownerMessage"
 style="margin-top:12px;text-align:center">
+
 </div>
 
 </div>
@@ -757,16 +936,63 @@ return;
 }
 
 
+/* =========================
+   تجهيز بيانات المحطة للإشعار
+========================= */
+
+const updatedStation={
+
+...stations[0],
+
+...payload,
+
+name:stations[0].name,
+
+area:stations[0].area,
+
+note:stations[0].note||""
+
+};
+
+
+/* تحديث النسخة المحلية */
+
+stations=[updatedStation];
+
+
+/* =========================
+   إرسال Telegram
+========================= */
+
+const telegramOk=
+await notifyTelegram(updatedStation);
+
+
+/* =========================
+   رسالة النجاح
+========================= */
+
 $("ownerMessage").innerHTML=`
 
 <span style="color:#166534;font-weight:700">
 
 ✅ تم تحديث الكازية بنجاح
 
+<br>
+
+${
+telegramOk
+?
+"📲 تم إرسال إشعار Telegram"
+:
+"⚠️ تم الحفظ لكن تعذر إرسال إشعار Telegram"
+}
+
 </span>
 `;
 
-setTimeout(loadOwner,1000);
+
+setTimeout(loadOwner,1500);
 
 }
 
@@ -800,7 +1026,9 @@ if(pe||se){
 $("app").innerHTML=`
 
 <div class="panel">
+
 ${esc((pe||se).message)}
+
 </div>
 `;
 
@@ -844,23 +1072,41 @@ ${esc(session.user.email)}
 <div class="stats">
 
 <div class="stat">
+
 <b>${stations.length}</b>
+
 إجمالي المحطات
+
 </div>
 
 <div class="stat">
-<b>${stations.filter(s=>s.status==="open").length}</b>
+
+<b>
+${stations.filter(s=>s.status==="open").length}
+</b>
+
 مفتوحة
+
 </div>
 
 <div class="stat">
-<b>${stations.filter(s=>s.status==="closed").length}</b>
+
+<b>
+${stations.filter(s=>s.status==="closed").length}
+</b>
+
 مغلقة
+
 </div>
 
 <div class="stat">
-<b>${stations.filter(s=>s.gas==="yes").length}</b>
+
+<b>
+${stations.filter(s=>s.gas==="yes").length}
+</b>
+
 بنزين
+
 </div>
 
 </div>
@@ -971,13 +1217,13 @@ ${esc(s.name)}
 ${esc(s.area||"")}
 </div>
 
-
 <br>
-
 
 <span class="badge ${s.status==="open"?"ok":"no"}">
 
-${s.status==="open"?"🟢 مفتوحة":"❌ مغلقة"}
+${s.status==="open"
+?"🟢 مفتوحة"
+:"❌ مغلقة"}
 
 </span>
 
@@ -1024,8 +1270,10 @@ ${s.diesel==="yes"?"يوجد":"لا يوجد"}
 <br>
 
 <small>
+
 آخر تحديث:
 ${fmt(s.updated_at)}
+
 </small>
 
 
@@ -1036,7 +1284,9 @@ s.note
 
 `
 
-<div class="badge" style="margin-top:8px;white-space:normal">
+<div
+class="badge"
+style="margin-top:8px;white-space:normal">
 
 📝 ${esc(s.note)}
 
@@ -1066,7 +1316,6 @@ onclick="removeStation('${s.id}')">
 </button>
 
 </div>
-
 
 </div>
 
@@ -1104,7 +1353,9 @@ $("area").value=s.area||"";
 $("status").value=s.status;
 
 $("traffic").value=
-s.traffic==="closed"?"none":s.traffic;
+s.traffic==="closed"
+?"none"
+:s.traffic;
 
 $("gas").value=s.gas;
 
@@ -1342,7 +1593,10 @@ const {data:p,error}=await sb
 
 if(error||!p){
 
-alert(error?.message||"لم يتم العثور على التحديث.");
+alert(
+error?.message||
+"لم يتم العثور على التحديث."
+);
 
 return;
 
@@ -1375,7 +1629,10 @@ result=await sb
 
 status:p.status,
 
-traffic:p.status==="closed"?"closed":p.traffic,
+traffic:
+p.status==="closed"
+?"closed"
+:p.traffic,
 
 gas:p.gas,
 
