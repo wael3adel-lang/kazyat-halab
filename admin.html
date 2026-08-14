@@ -7,72 +7,194 @@
 
 <style>
 *{box-sizing:border-box}
-body{font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;margin:0;background:#f4f7f7;color:#17202a}
-header{background:#0f766e;color:#fff;padding:22px}
-main{max-width:1050px;margin:auto;padding:15px}
-.panel{background:#fff;padding:16px;border-radius:16px;margin:12px 0;box-shadow:0 2px 10px #0000000b}
-input,select,textarea{padding:11px;border:1px solid #ccd5d5;border-radius:10px;width:100%;margin:5px 0 10px;font:inherit}
-button{padding:10px 14px;border:0;border-radius:10px;cursor:pointer;margin:3px;font:inherit}
-.primary{background:#0f766e;color:#fff}
-.danger{background:#fee2e2;color:#991b1b}
-.muted{color:#68757a}
-.row{border-bottom:1px solid #eee;padding:13px 0}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:10px}
-.badge{background:#eef2f2;padding:5px 8px;border-radius:8px;margin:2px;display:inline-block;font-size:12px}
-.ok{background:#dcfce7;color:#166534}
-.no{background:#fee2e2;color:#991b1b}
-.warn{background:#fef3c7;color:#92400e}
-.gray{background:#e5e7eb;color:#374151}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.stat{background:#f8fafb;border-radius:12px;padding:12px;text-align:center}
-.stat b{display:block;font-size:24px}
-.actions{display:flex;flex-wrap:wrap;gap:4px}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.owner-box{background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46;border-radius:12px;padding:12px;margin-bottom:12px}
-.admin-box{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af;border-radius:12px;padding:12px;margin-bottom:12px}
-.station-title{font-size:20px;font-weight:800}
-.hidden{display:none}
 
-.closure-box{
-background:#fff7ed;
-border:1px solid #fed7aa;
+body{
+font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;
+margin:0;
+background:#f4f7f7;
+color:#17202a
+}
+
+header{
+background:#0f766e;
+color:#fff;
+padding:22px
+}
+
+main{
+max-width:1050px;
+margin:auto;
+padding:15px
+}
+
+.panel{
+background:#fff;
+padding:16px;
+border-radius:16px;
+margin:12px 0;
+box-shadow:0 2px 10px #0000000b
+}
+
+input,select,textarea{
+padding:11px;
+border:1px solid #ccd5d5;
+border-radius:10px;
+width:100%;
+margin:5px 0 10px;
+font:inherit
+}
+
+button{
+padding:10px 14px;
+border:0;
+border-radius:10px;
+cursor:pointer;
+margin:3px;
+font:inherit
+}
+
+.primary{
+background:#0f766e;
+color:#fff
+}
+
+.danger{
+background:#fee2e2;
+color:#991b1b
+}
+
+.muted{
+color:#68757a
+}
+
+.row{
+border-bottom:1px solid #eee;
+padding:13px 0
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:10px
+}
+
+.badge{
+background:#eef2f2;
+padding:5px 8px;
+border-radius:8px;
+margin:2px;
+display:inline-block;
+font-size:12px
+}
+
+.ok{
+background:#dcfce7;
+color:#166534
+}
+
+.no{
+background:#fee2e2;
+color:#991b1b
+}
+
+.warn{
+background:#fef3c7;
+color:#92400e
+}
+
+.gray{
+background:#e5e7eb;
+color:#374151
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:8px
+}
+
+.stat{
+background:#f8fafb;
 border-radius:12px;
 padding:12px;
-margin-top:10px;
+text-align:center
 }
 
-.closure-title{
-font-weight:800;
-color:#9a3412;
-margin-bottom:8px;
+.stat b{
+display:block;
+font-size:24px
 }
 
-.hours-row{
+.visitor-stat{
+background:#ecfdf5;
+color:#065f46
+}
+
+.actions{
 display:flex;
-align-items:center;
-gap:8px;
+flex-wrap:wrap;
+gap:4px
 }
 
-.hours-row input{
-margin:0;
-max-width:120px;
+.two{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px
 }
 
-.hours-label{
-font-weight:800;
-white-space:nowrap;
+.owner-box{
+background:#ecfdf5;
+border:1px solid #a7f3d0;
+color:#065f46;
+border-radius:12px;
+padding:12px;
+margin-bottom:12px
 }
 
-dialog{border:0;border-radius:18px;width:min(650px,94vw);padding:0;box-shadow:0 20px 60px #0004}
-dialog::backdrop{background:#0006}
-.form{padding:20px}
+.admin-box{
+background:#eff6ff;
+border:1px solid #bfdbfe;
+color:#1e40af;
+border-radius:12px;
+padding:12px;
+margin-bottom:12px
+}
+
+.station-title{
+font-size:20px;
+font-weight:800
+}
+
+.hidden{
+display:none
+}
+
+dialog{
+border:0;
+border-radius:18px;
+width:min(650px,94vw);
+padding:0;
+box-shadow:0 20px 60px #0004
+}
+
+dialog::backdrop{
+background:#0006
+}
+
+.form{
+padding:20px
+}
 
 @media(max-width:700px){
-.stats{grid-template-columns:repeat(2,1fr)}
+.stats{
+grid-template-columns:repeat(2,1fr)
+}
 }
 
 @media(max-width:600px){
-.two{grid-template-columns:1fr}
+.two{
+grid-template-columns:1fr
+}
 }
 </style>
 </head>
@@ -106,7 +228,10 @@ dialog::backdrop{background:#0006}
 
 
 <label>📍 رابط موقع المحطة على Google Maps</label>
-<input id="location_url" type="url" placeholder="https://maps.google.com/...">
+<input
+id="location_url"
+type="url"
+placeholder="https://maps.google.com/...">
 
 
 <div class="two">
@@ -117,9 +242,13 @@ dialog::backdrop{background:#0006}
 
 <select id="status" onchange="toggleAdminOpening()">
 
-<option value="open">تعمل</option>
+<option value="open">
+تعمل
+</option>
 
-<option value="closed">مغلقة</option>
+<option value="closed">
+مغلقة
+</option>
 
 </select>
 
@@ -155,17 +284,9 @@ dialog::backdrop{background:#0006}
 </div>
 
 
-<!-- سبب ومدة الإغلاق للمشرف -->
+<div id="adminClosureBox" class="hidden">
 
-<div id="adminClosureBox" class="closure-box hidden">
-
-<div class="closure-title">
-❌ معلومات الإغلاق
-</div>
-
-<label>
-سبب الإغلاق
-</label>
+<label>سبب الإغلاق</label>
 
 <select id="closure_reason">
 
@@ -200,24 +321,73 @@ dialog::backdrop{background:#0006}
 </select>
 
 
-<label>
-مدة الإغلاق المتوقعة
-</label>
+<label>مدة الإغلاق المتوقعة</label>
 
-<div class="hours-row">
+<div style="display:flex;gap:8px;align-items:center">
 
-<input
-id="closure_hours"
-type="number"
-min="1"
-max="48"
-step="1"
-placeholder="4"
->
+<select id="closure_hours" style="margin-bottom:10px">
 
-<span class="hours-label">
+<option value="">
+اختر المدة
+</option>
+
+<option value="1">
+1
+</option>
+
+<option value="2">
+2
+</option>
+
+<option value="3">
+3
+</option>
+
+<option value="4">
+4
+</option>
+
+<option value="5">
+5
+</option>
+
+<option value="6">
+6
+</option>
+
+<option value="7">
+7
+</option>
+
+<option value="8">
+8
+</option>
+
+<option value="9">
+9
+</option>
+
+<option value="10">
+10
+</option>
+
+<option value="12">
+12
+</option>
+
+<option value="24">
+24
+</option>
+
+<option value="48">
+48
+</option>
+
+</select>
+
+<b style="white-space:nowrap">
 ساعة
-</span>
+</b>
 
 </div>
 
@@ -341,7 +511,7 @@ return String(x??"")
 ">":"&gt;",
 '"':"&quot;",
 "'":"&#039;"
-}[m]))
+}[m]));
 
 }
 
@@ -356,7 +526,7 @@ month:"numeric",
 year:"numeric",
 hour:"2-digit",
 minute:"2-digit"
-}).format(new Date(t))
+}).format(new Date(t));
 
 }
 
@@ -374,12 +544,23 @@ return "";
 
 function closureReasonText(v){
 
-if(v==="maintenance")return "🔧 صيانة";
-if(v==="technical")return "⚡ عطل فني";
-if(v==="delivery")return "🚚 بانتظار وصول الطلبية";
-if(v==="fuel")return "⛽ نفاد الوقود";
-if(v==="administrative")return "🏢 إغلاق إداري";
-if(v==="temporary")return "🕐 إغلاق مؤقت";
+if(v==="maintenance")
+return "🔧 صيانة";
+
+if(v==="technical")
+return "⚡ عطل فني";
+
+if(v==="delivery")
+return "🚚 بانتظار وصول الطلبية";
+
+if(v==="fuel")
+return "⛽ نفاد الوقود";
+
+if(v==="administrative")
+return "🏢 إغلاق إداري";
+
+if(v==="temporary")
+return "🕐 إغلاق مؤقت";
 
 return "";
 
@@ -387,128 +568,45 @@ return "";
 
 
 /* =========================
-   إشعار Telegram
+   عدد زوار الموقع
 ========================= */
 
-async function notifyTelegram(station){
+async function getVisitorCount(){
 
 try{
 
-const changes=[];
-
-
-if(station.status==="closed"){
-
-changes.push(
-"❌ <b>الحالة:</b> مغلقة"
-);
-
-
-if(station.closure_reason){
-
-changes.push(
-"🔧 <b>سبب الإغلاق:</b> "+
-esc(closureReasonText(station.closure_reason))
-);
-
-}
-
-
-if(station.closure_hours){
-
-changes.push(
-"⏱️ <b>مدة الإغلاق المتوقعة:</b> "+
-esc(station.closure_hours)+
-" ساعة"
-);
-
-}
-
-
-}else{
-
-changes.push(
-"🟢 <b>الحالة:</b> تعمل"
-);
-
-changes.push(
-"⛽ <b>البنزين:</b> "+
-(station.gas==="yes"?"يوجد":"لا يوجد")
-);
-
-changes.push(
-"🛢️ <b>المازوت:</b> "+
-(station.diesel==="yes"?"يوجد":"لا يوجد")
-);
-
-
-if(station.traffic==="none")
-changes.push(
-"🟢 <b>الازدحام:</b> لا يوجد ازدحام"
-);
-
-else if(station.traffic==="light")
-changes.push(
-"🟡 <b>الازدحام:</b> ازدحام خفيف"
-);
-
-else if(station.traffic==="long")
-changes.push(
-"🔴 <b>الازدحام:</b> طابور طويل"
-);
-
-}
-
-
-if(station.note){
-
-changes.push(
-"📝 <b>ملاحظة:</b> "+
-esc(station.note)
-);
-
-}
-
-
-const {data,error}=await sb.functions.invoke(
-"notify-telegram",
-{
-body:{
-station_name:station.name,
-area:station.area||"",
-changes
-}
-}
-);
-
+const {data,error}=await sb
+.from("visitor_events")
+.select("visitor_id");
 
 if(error){
 
-console.error(
-"Telegram notification error:",
-error
-);
+console.error("Visitor count error:",error);
 
-return false;
+return 0;
 
 }
 
+if(!data)
+return 0;
 
-console.log(
-"Telegram notification sent:",
+
+/*
+نحسب الزوار الفريدين
+وليس عدد الزيارات اليومية
+*/
+
+return new Set(
 data
-);
+.map(x=>x.visitor_id)
+.filter(Boolean)
+).size;
 
-return true;
+}catch(e){
 
-}catch(err){
+console.error(e);
 
-console.error(
-"Telegram notification exception:",
-err
-);
-
-return false;
+return 0;
 
 }
 
@@ -848,14 +946,7 @@ ${esc(s.area||"")}
 </div>
 
 
-<!-- معلومات الإغلاق لصاحب الكازية -->
-
-<div id="ownerClosedFields" class="closure-box">
-
-<div class="closure-title">
-❌ معلومات الإغلاق
-</div>
-
+<div id="ownerClosedFields">
 
 <label>
 سبب الإغلاق
@@ -867,33 +958,27 @@ ${esc(s.area||"")}
 اختر سبب الإغلاق
 </option>
 
-<option value="maintenance"
-${s.closure_reason==="maintenance"?"selected":""}>
+<option value="maintenance" ${s.closure_reason==="maintenance"?"selected":""}>
 🔧 صيانة
 </option>
 
-<option value="technical"
-${s.closure_reason==="technical"?"selected":""}>
+<option value="technical" ${s.closure_reason==="technical"?"selected":""}>
 ⚡ عطل فني
 </option>
 
-<option value="delivery"
-${s.closure_reason==="delivery"?"selected":""}>
+<option value="delivery" ${s.closure_reason==="delivery"?"selected":""}>
 🚚 بانتظار وصول الطلبية
 </option>
 
-<option value="fuel"
-${s.closure_reason==="fuel"?"selected":""}>
+<option value="fuel" ${s.closure_reason==="fuel"?"selected":""}>
 ⛽ نفاد الوقود
 </option>
 
-<option value="administrative"
-${s.closure_reason==="administrative"?"selected":""}>
+<option value="administrative" ${s.closure_reason==="administrative"?"selected":""}>
 🏢 إغلاق إداري
 </option>
 
-<option value="temporary"
-${s.closure_reason==="temporary"?"selected":""}>
+<option value="temporary" ${s.closure_reason==="temporary"?"selected":""}>
 🕐 إغلاق مؤقت
 </option>
 
@@ -904,30 +989,69 @@ ${s.closure_reason==="temporary"?"selected":""}>
 مدة الإغلاق المتوقعة
 </label>
 
-<div class="hours-row">
+<div style="display:flex;gap:8px;align-items:center">
 
-<input
-id="ownerClosureHours"
-type="number"
-min="1"
-max="48"
-step="1"
-value="${s.closure_hours||""}"
-placeholder="4"
->
+<select id="ownerClosureHours">
 
-<span class="hours-label">
+<option value="">
+اختر المدة
+</option>
+
+<option value="1" ${s.closure_hours==="1"?"selected":""}>1</option>
+<option value="2" ${s.closure_hours==="2"?"selected":""}>2</option>
+<option value="3" ${s.closure_hours==="3"?"selected":""}>3</option>
+<option value="4" ${s.closure_hours==="4"?"selected":""}>4</option>
+<option value="5" ${s.closure_hours==="5"?"selected":""}>5</option>
+<option value="6" ${s.closure_hours==="6"?"selected":""}>6</option>
+<option value="7" ${s.closure_hours==="7"?"selected":""}>7</option>
+<option value="8" ${s.closure_hours==="8"?"selected":""}>8</option>
+<option value="9" ${s.closure_hours==="9"?"selected":""}>9</option>
+<option value="10" ${s.closure_hours==="10"?"selected":""}>10</option>
+<option value="12" ${s.closure_hours==="12"?"selected":""}>12</option>
+<option value="24" ${s.closure_hours==="24"?"selected":""}>24</option>
+<option value="48" ${s.closure_hours==="48"?"selected":""}>48</option>
+
+</select>
+
+<b style="white-space:nowrap">
 ساعة
-</span>
+</b>
 
 </div>
 
+
+<label>
+الافتتاح
+</label>
+
+<select id="ownerOpening">
+
+<option value="">
+اختر موعد الافتتاح
+</option>
+
+<option value="8" ${s.opening_time==="8"?"selected":""}>
+الثامنة صباحاً
+</option>
+
+<option value="9" ${s.opening_time==="9"?"selected":""}>
+التاسعة صباحاً
+</option>
+
+<option value="order" ${s.opening_time==="order"?"selected":""}>
+مع وصول الطلبية
+</option>
+
+</select>
+
+<div class="muted">
+عند اختيار «مغلقة» يتم تعطيل خيارات الوقود والازدحام.
+</div>
 
 </div>
 
 
 <br>
-
 
 <button
 class="primary"
@@ -948,7 +1072,6 @@ style="margin-top:12px;text-align:center">
 </div>
 
 `;
-
 
 toggleOwnerFields();
 
@@ -976,10 +1099,8 @@ closed?"block":"none";
 if($("ownerGas"))
 $("ownerGas").disabled=closed;
 
-
 if($("ownerDiesel"))
 $("ownerDiesel").disabled=closed;
-
 
 if($("ownerTraffic"))
 $("ownerTraffic").disabled=closed;
@@ -1006,22 +1127,20 @@ const closed=
 $("ownerStatus").value==="closed";
 
 
-let closureReason=null;
+let opening="";
 
-let closureHours=null;
+let closureReason="";
+
+let closureHours="";
 
 
 if(closed){
 
-closureReason=
-$("ownerClosureReason").value;
+opening=$("ownerOpening").value;
 
+closureReason=$("ownerClosureReason").value;
 
-closureHours=
-parseInt(
-$("ownerClosureHours").value,
-10
-);
+closureHours=$("ownerClosureHours").value;
 
 
 if(!closureReason){
@@ -1033,15 +1152,18 @@ return;
 }
 
 
-if(
-!Number.isInteger(closureHours) ||
-closureHours<1 ||
-closureHours>48
-){
+if(!closureHours){
 
-alert(
-"أدخل مدة إغلاق متوقعة من 1 إلى 48 ساعة."
-);
+alert("اختر مدة الإغلاق المتوقعة.");
+
+return;
+
+}
+
+
+if(!opening){
+
+alert("اختر موعد الافتتاح.");
 
 return;
 
@@ -1054,6 +1176,9 @@ const payload={
 
 status:
 $("ownerStatus").value,
+
+opening_time:
+opening,
 
 closure_reason:
 closureReason,
@@ -1069,22 +1194,15 @@ new Date().toISOString()
 
 if(!closed){
 
-payload.gas=
-$("ownerGas").value;
+payload.gas=$("ownerGas").value;
 
-payload.diesel=
-$("ownerDiesel").value;
+payload.diesel=$("ownerDiesel").value;
 
-payload.traffic=
-$("ownerTraffic").value;
-
-payload.opening_time="";
+payload.traffic=$("ownerTraffic").value;
 
 }else{
 
 payload.traffic="closed";
-
-payload.opening_time="";
 
 }
 
@@ -1119,45 +1237,17 @@ return;
 }
 
 
-const updatedStation={
-...stations[0],
-...payload,
-name:stations[0].name,
-area:stations[0].area,
-note:stations[0].note||""
-};
-
-
-stations=[updatedStation];
-
-
-const telegramOk=
-await notifyTelegram(updatedStation);
-
-
 $("ownerMessage").innerHTML=`
 
 <span style="color:#166534;font-weight:700">
 
 ✅ تم تحديث الكازية بنجاح
 
-<br>
-
-${
-telegramOk
-?"📲 تم إرسال إشعار Telegram"
-:"⚠️ تم الحفظ لكن تعذر إرسال إشعار Telegram"
-}
-
 </span>
 
 `;
 
-
-setTimeout(
-loadOwner,
-1500
-);
+setTimeout(loadOwner,1000);
 
 }
 
@@ -1174,10 +1264,7 @@ const {data:p,error:pe}=await sb
 
 .select("*")
 
-.order(
-"submitted_at",
-{ascending:false}
-);
+.order("submitted_at",{ascending:false});
 
 
 const {data:s,error:se}=await sb
@@ -1186,10 +1273,7 @@ const {data:s,error:se}=await sb
 
 .select("*")
 
-.order(
-"name",
-{ascending:true}
-);
+.order("name",{ascending:true});
 
 
 if(pe||se){
@@ -1210,6 +1294,13 @@ return;
 
 
 stations=s||[];
+
+
+/*
+جلب عدد الزوار الفريدين
+*/
+
+const visitors=await getVisitorCount();
 
 
 $("app").innerHTML=`
@@ -1239,29 +1330,54 @@ ${esc(session.user.email)}
 
 <div class="panel">
 
-<h3>📊 إحصائيات المحطات</h3>
+<h3>📊 إحصائيات لوحة التحكم</h3>
 
 <div class="stats">
 
-<div class="stat">
-<b>${stations.length}</b>
-إجمالي المحطات
+
+<div class="stat visitor-stat">
+
+<b>
+👥 ${visitors}
+</b>
+
+زوار الموقع
+
 </div>
 
+
 <div class="stat">
-<b>${stations.filter(s=>s.status==="open").length}</b>
+
+<b>
+${stations.filter(s=>s.status==="open").length}
+</b>
+
 تعمل
+
 </div>
 
+
 <div class="stat">
-<b>${stations.filter(s=>s.status==="closed").length}</b>
+
+<b>
+${stations.filter(s=>s.status==="closed").length}
+</b>
+
 مغلقة
+
 </div>
 
+
 <div class="stat">
-<b>${stations.filter(s=>s.gas==="yes").length}</b>
+
+<b>
+${stations.filter(s=>s.gas==="yes").length}
+</b>
+
 بنزين
+
 </div>
+
 
 </div>
 
@@ -1340,7 +1456,8 @@ onclick="reject('${x.id}')">
 
 <div class="panel">
 
-<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
+<div
+style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
 
 <h3>
 جميع المحطات (${stations.length})
@@ -1371,6 +1488,7 @@ ${esc(s.name)}
 ${esc(s.area||"")}
 </div>
 
+
 <br>
 
 
@@ -1390,21 +1508,21 @@ s.status==="closed"
 
 <span class="badge warn">
 
-السبب:
-${esc(closureReasonText(s.closure_reason))}
+الافتتاح:
+${esc(openingText(s.opening_time))}
 
 </span>
 
 ${
-s.closure_hours
-
+s.closure_reason
 ?
 
 `
 
 <span class="badge warn">
 
-⏱️ ${esc(s.closure_hours)} ساعة متوقعة
+السبب:
+${esc(closureReasonText(s.closure_reason))}
 
 </span>
 
@@ -1413,7 +1531,26 @@ s.closure_hours
 :
 
 ""
+}
 
+${
+s.closure_hours
+?
+
+`
+
+<span class="badge warn">
+
+مدة الإغلاق:
+${esc(s.closure_hours)} ساعة
+
+</span>
+
+`
+
+:
+
+""
 }
 
 `
@@ -1532,7 +1669,7 @@ onclick="removeStation('${s.id}')">
 
 
 /* =========================
-   المشرف: فتح تعديل
+   تعديل محطة
 ========================= */
 
 function openEdit(id){
@@ -1552,15 +1689,12 @@ $("name").value=s.name;
 
 $("area").value=s.area||"";
 
-$("location_url").value=
-s.location_url||"";
+$("location_url").value=s.location_url||"";
 
 $("status").value=s.status;
 
 $("traffic").value=
-s.traffic==="closed"
-?"none"
-:s.traffic;
+s.traffic==="closed"?"none":s.traffic;
 
 $("gas").value=s.gas;
 
@@ -1568,14 +1702,11 @@ $("diesel").value=s.diesel;
 
 $("note").value=s.note||"";
 
-$("opening_time").value=
-s.opening_time||"";
+$("opening_time").value=s.opening_time||"";
 
-$("closure_reason").value=
-s.closure_reason||"";
+$("closure_reason").value=s.closure_reason||"";
 
-$("closure_hours").value=
-s.closure_hours||"";
+$("closure_hours").value=s.closure_hours||"";
 
 toggleAdminOpening();
 
@@ -1677,15 +1808,18 @@ $("status").value==="closed";
 
 let opening="";
 
-let closureReason=null;
+let closureReason="";
 
-let closureHours=null;
+let closureHours="";
 
 
 if(closed){
 
-opening=
-$("opening_time").value;
+opening=$("opening_time").value;
+
+closureReason=$("closure_reason").value;
+
+closureHours=$("closure_hours").value;
 
 
 if(!opening){
@@ -1697,17 +1831,6 @@ return;
 }
 
 
-closureReason=
-$("closure_reason").value;
-
-
-closureHours=
-parseInt(
-$("closure_hours").value,
-10
-);
-
-
 if(!closureReason){
 
 alert("اختر سبب الإغلاق.");
@@ -1717,15 +1840,9 @@ return;
 }
 
 
-if(
-!Number.isInteger(closureHours) ||
-closureHours<1 ||
-closureHours>48
-){
+if(!closureHours){
 
-alert(
-"أدخل مدة إغلاق متوقعة من 1 إلى 48 ساعة."
-);
+alert("اختر مدة الإغلاق المتوقعة.");
 
 return;
 
@@ -1934,8 +2051,10 @@ status:p.status,
 
 traffic:
 p.status==="closed"
-?"closed"
-:p.traffic,
+?
+"closed"
+:
+p.traffic,
 
 gas:p.gas,
 
