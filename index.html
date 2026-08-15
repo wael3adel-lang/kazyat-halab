@@ -13,345 +13,569 @@
 
 <style>
 
+/* =========================
+   الأساس
+========================= */
+
 *{
-box-sizing:border-box
+    box-sizing:border-box;
 }
 
 body{
-margin:0;
-font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;
-background:#f4f7f7;
-color:#17202a
-}
-
-header{
-background:#0f766e;
-color:#fff;
-padding:24px 15px
+    margin:0;
+    font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;
+    background:#f4f7f7;
+    color:#17202a;
 }
 
 .wrap{
-max-width:900px;
-margin:auto
+    max-width:900px;
+    margin:auto;
+}
+
+/* =========================
+   الهيدر
+========================= */
+
+header{
+    background:#0f766e;
+    color:#fff;
+    padding:20px 14px 18px;
 }
 
 .header-top{
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:10px
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
 }
 
 .brand{
-font-size:29px;
-font-weight:900
+    font-size:28px;
+    font-weight:900;
 }
 
 .admin-message{
-display:inline-block;
-background:transparent;
-color:#fff;
-border:1px solid rgba(255,255,255,.65);
-border-radius:999px;
-padding:7px 11px;
-font-size:12px;
-font-weight:700;
-text-decoration:none;
-white-space:nowrap
+    display:inline-block;
+    background:transparent;
+    color:#fff;
+    border:1px solid rgba(255,255,255,.65);
+    border-radius:999px;
+    padding:6px 10px;
+    font-size:11px;
+    font-weight:700;
+    text-decoration:none;
+    white-space:nowrap;
 }
 
 .admin-message:hover{
-background:rgba(255,255,255,.12)
+    background:rgba(255,255,255,.12);
 }
 
 .sub{
-margin-top:5px;
-opacity:.92
+    margin-top:4px;
+    opacity:.92;
+    font-size:14px;
+    font-weight:600;
 }
 
 .credit{
-margin-top:8px;
-font-size:12px;
-opacity:.75;
-font-weight:600
+    margin-top:6px;
+    font-size:11px;
+    opacity:.75;
+    font-weight:600;
 }
 
+.updated-line{
+    margin-top:6px;
+    font-size:12px;
+    opacity:.95;
+}
+
+/* =========================
+   البحث
+========================= */
+
 .search{
-margin-top:16px
+    margin-top:14px;
 }
 
 .search input{
-width:100%;
-padding:14px;
-border:0;
-border-radius:13px;
-font-size:16px;
-outline:none
+    width:100%;
+    padding:13px 15px;
+    border:0;
+    border-radius:13px;
+    font-size:15px;
+    outline:none;
 }
 
+/* =========================
+   المنطقة
+========================= */
+
 .filters{
-display:flex;
-gap:7px;
-overflow:auto;
-padding:14px 0
+    display:flex;
+    gap:7px;
+    overflow-x:auto;
+    padding:12px 0;
+    scrollbar-width:none;
+}
+
+.filters::-webkit-scrollbar{
+    display:none;
 }
 
 .filters button{
-white-space:nowrap;
-border:1px solid #d7dddd;
-background:#fff;
-border-radius:999px;
-padding:9px 13px;
-cursor:pointer;
-font:inherit
+    white-space:nowrap;
+    border:1px solid #d7dddd;
+    background:#fff;
+    border-radius:999px;
+    padding:8px 13px;
+    cursor:pointer;
+    font:inherit;
+    font-size:14px;
+    color:#17202a;
 }
 
 .filters button.active{
-background:#0f766e;
-color:#fff;
-border-color:#0f766e
+    background:#0f766e;
+    color:#fff;
+    border-color:#0f766e;
 }
 
+/* =========================
+   الإحصائيات
+========================= */
+
 .stats{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:8px;
-margin-bottom:10px
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:7px;
+    margin:10px 0 5px;
 }
 
 .stat{
-background:#fff;
-border-radius:12px;
-padding:10px;
-text-align:center
+    background:#fff;
+    border-radius:12px;
+    padding:8px 5px;
+    text-align:center;
+    border:1px solid #e5eaea;
 }
 
 .stat b{
-display:block;
-font-size:21px
+    display:block;
+    font-size:19px;
+    line-height:1.2;
 }
 
+.stat span{
+    display:block;
+    margin-top:2px;
+    font-size:11px;
+    color:#5f6b70;
+}
+
+/* =========================
+   العدد
+========================= */
+
+.count-row{
+    margin:2px 2px 9px;
+    font-size:12px;
+    color:#68757a;
+}
+
+/* =========================
+   البطاقات
+========================= */
+
 .grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:10px
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:10px;
 }
 
 .card{
-background:#fff;
-border:1px solid #e3e9e9;
-border-radius:16px;
-padding:15px;
-box-shadow:0 2px 10px #0000000b
+    background:#fff;
+    border:1px solid #e2e8e8;
+    border-radius:16px;
+    padding:13px;
+    box-shadow:0 2px 8px rgba(0,0,0,.045);
+}
+
+/* =========================
+   رأس البطاقة
+========================= */
+
+.card-head{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:10px;
 }
 
 .name{
-font-size:19px;
-font-weight:850
+    font-size:19px;
+    font-weight:900;
+    line-height:1.35;
 }
 
 .area{
-font-size:13px;
-color:#69767c;
-margin-top:3px
+    font-size:12px;
+    color:#69767c;
+    margin-top:2px;
 }
 
-.badges{
-display:flex;
-gap:6px;
-flex-wrap:wrap;
-margin-top:11px
+.status-dot{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    display:inline-block;
+    margin-left:4px;
+    vertical-align:middle;
 }
 
-.badge{
-padding:6px 9px;
-border-radius:9px;
-font-size:12px;
-font-weight:750
+.status-dot.green{
+    background:#22c55e;
+}
+
+.status-dot.red{
+    background:#ef4444;
+}
+
+/* =========================
+   المعلومات المهمة
+========================= */
+
+.main-info{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin-top:11px;
+}
+
+.info-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
+    padding:7px 9px;
+    border-radius:9px;
+    font-size:12px;
+    font-weight:800;
+    line-height:1.1;
 }
 
 .ok{
-background:#dcfce7;
-color:#166534
+    background:#dcfce7;
+    color:#166534;
 }
 
 .no{
-background:#fee2e2;
-color:#991b1b
+    background:#fee2e2;
+    color:#991b1b;
 }
 
 .warn{
-background:#fef3c7;
-color:#92400e
+    background:#fef3c7;
+    color:#92400e;
 }
 
 .gray{
-background:#e5e7eb;
-color:#374151
+    background:#e5e7eb;
+    color:#374151;
 }
 
-.time{
-font-size:11px;
-color:#777;
-margin-top:10px
+/* =========================
+   الازدحام - بارز
+========================= */
+
+.traffic-badge{
+    font-weight:900;
 }
 
-.note{
-font-size:13px;
-margin-top:9px;
-line-height:1.6
+/* =========================
+   الموقع
+========================= */
+
+.actions{
+    display:flex;
+    gap:7px;
+    flex-wrap:wrap;
+    margin-top:10px;
 }
 
-.closure-info{
-margin-top:10px;
-background:#fff7ed;
-color:#9a3412;
-border-radius:10px;
-padding:9px 10px;
-font-size:13px;
-font-weight:750;
-line-height:1.8
+.location-link,
+.complaint-link{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    border-radius:9px;
+    padding:7px 10px;
+    font-size:12px;
+    font-weight:800;
 }
 
 .location-link{
-display:inline-block;
-margin-top:10px;
-background:#ecfdf5;
-color:#047857;
-text-decoration:none;
-border:1px solid #a7f3d0;
-border-radius:10px;
-padding:8px 11px;
-font-size:13px;
-font-weight:800
+    background:#ecfdf5;
+    color:#047857;
+    border:1px solid #a7f3d0;
 }
 
-/* =========================
-   التقييم
-========================= */
-
-.rating-box{
-margin-top:13px;
-padding-top:11px;
-border-top:1px solid #eef2f2;
-text-align:right
+.location-link:hover{
+    background:#d1fae5;
 }
-
-.rating-average{
-font-size:13px;
-font-weight:800;
-color:#555
-}
-
-.stars{
-margin-top:8px;
-display:flex;
-gap:4px;
-direction:ltr;
-justify-content:flex-start;
-align-items:flex-start
-}
-
-.star-item{
-text-align:center;
-min-width:42px
-}
-
-.star{
-border:0;
-background:transparent;
-font-size:27px;
-padding:1px 3px;
-cursor:pointer;
-line-height:1;
-transition:.15s
-}
-
-.star:hover{
-transform:scale(1.12)
-}
-
-.star.selected{
-transform:scale(1.12)
-}
-
-.star-number{
-font-size:12px;
-font-weight:800;
-color:#555;
-margin-top:1px
-}
-
-.rating-selected{
-font-size:13px;
-font-weight:700;
-color:#0f766e;
-margin-top:8px;
-min-height:20px
-}
-
-.confirm-rating{
-margin-top:9px;
-border:0;
-background:#0f766e;
-color:#fff;
-border-radius:10px;
-padding:9px 16px;
-font:inherit;
-font-weight:800;
-cursor:pointer
-}
-
-.confirm-rating:hover{
-opacity:.9
-}
-
-.rating-message{
-font-size:12px;
-color:#0f766e;
-margin-top:6px;
-min-height:18px
-}
-
-/* =========================
-   زر الشكوى
-========================= */
 
 .complaint-link{
-display:inline-block;
-margin-top:9px;
-background:#fff1f2;
-color:#be123c;
-text-decoration:none;
-border:1px solid #fecdd3;
-border-radius:10px;
-padding:8px 11px;
-font-size:13px;
-font-weight:800
+    background:#fff1f2;
+    color:#be123c;
+    border:1px solid #fecdd3;
 }
 
 .complaint-link:hover{
-background:#ffe4e6
+    background:#ffe4e6;
 }
+
+/* =========================
+   الملاحظة
+========================= */
+
+.note{
+    font-size:12px;
+    margin-top:9px;
+    line-height:1.6;
+    color:#4b5563;
+    background:#f8fafc;
+    padding:7px 9px;
+    border-radius:8px;
+}
+
+/* =========================
+   الإغلاق
+========================= */
+
+.closure-info{
+    margin-top:9px;
+    background:#fff7ed;
+    color:#9a3412;
+    border-radius:9px;
+    padding:8px 9px;
+    font-size:12px;
+    font-weight:750;
+    line-height:1.7;
+}
+
+/* =========================
+   التقييم - مختصر
+========================= */
+
+.rating-box{
+    margin-top:10px;
+    padding-top:9px;
+    border-top:1px solid #eef2f2;
+}
+
+.rating-summary{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+}
+
+.rating-average{
+    font-size:12px;
+    font-weight:800;
+    color:#555;
+}
+
+.rating-toggle{
+    border:0;
+    background:#f8fafc;
+    color:#0f766e;
+    border-radius:8px;
+    padding:6px 8px;
+    font-size:11px;
+    font-weight:800;
+    cursor:pointer;
+}
+
+.rating-content{
+    margin-top:8px;
+}
+
+.rating-help{
+    font-size:11px;
+    color:#0f766e;
+    font-weight:700;
+    margin-top:4px;
+}
+
+/* النجوم صغيرة */
+
+.stars{
+    margin-top:6px;
+    display:flex;
+    gap:2px;
+    direction:ltr;
+    justify-content:flex-start;
+    align-items:flex-start;
+}
+
+.star-item{
+    text-align:center;
+    min-width:31px;
+}
+
+.star{
+    border:0;
+    background:transparent;
+    font-size:21px;
+    padding:1px;
+    cursor:pointer;
+    line-height:1;
+    transition:.15s;
+}
+
+.star:hover{
+    transform:scale(1.08);
+}
+
+.star.selected{
+    transform:scale(1.08);
+}
+
+.star-number{
+    font-size:10px;
+    font-weight:800;
+    color:#555;
+    margin-top:1px;
+}
+
+.rating-selected{
+    font-size:11px;
+    font-weight:700;
+    color:#0f766e;
+    margin-top:5px;
+    min-height:17px;
+}
+
+.confirm-rating{
+    margin-top:6px;
+    border:0;
+    background:#0f766e;
+    color:#fff;
+    border-radius:8px;
+    padding:7px 11px;
+    font:inherit;
+    font-size:11px;
+    font-weight:800;
+    cursor:pointer;
+}
+
+.rating-message{
+    font-size:11px;
+    color:#0f766e;
+    margin-top:5px;
+    min-height:15px;
+}
+
+/* =========================
+   الوقت
+========================= */
+
+.time{
+    font-size:10px;
+    color:#777;
+    margin-top:8px;
+    text-align:left;
+}
+
+/* =========================
+   الهاتف
+========================= */
 
 @media(max-width:600px){
 
-.stats{
-grid-template-columns:repeat(2,1fr)
+    header{
+        padding:17px 12px 15px;
+    }
+
+    .brand{
+        font-size:25px;
+    }
+
+    .admin-message{
+        font-size:10px;
+        padding:5px 8px;
+    }
+
+    .sub{
+        font-size:13px;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+        gap:8px;
+    }
+
+    .card{
+        padding:12px;
+        border-radius:14px;
+    }
+
+    .name{
+        font-size:18px;
+    }
+
+    .main-info{
+        gap:5px;
+    }
+
+    .info-badge{
+        padding:7px 8px;
+        font-size:11px;
+    }
+
+    .stats{
+        gap:5px;
+    }
+
+    .stat{
+        padding:7px 3px;
+    }
+
+    .stat b{
+        font-size:18px;
+    }
+
+    .stat span{
+        font-size:10px;
+    }
+
 }
 
-.header-top{
-align-items:flex-start
-}
+/* =========================
+   شاشات صغيرة جداً
+========================= */
 
-.brand{
-font-size:27px
-}
+@media(max-width:380px){
 
-.admin-message{
-font-size:11px;
-padding:6px 9px
-}
+    .brand{
+        font-size:22px;
+    }
+
+    .admin-message{
+        font-size:9px;
+    }
+
+    .info-badge{
+        font-size:10px;
+        padding:6px 7px;
+    }
+
+    .name{
+        font-size:17px;
+    }
 
 }
 
@@ -367,13 +591,11 @@ padding:6px 9px
 
 <div class="wrap">
 
-
 <div class="header-top">
 
 <div class="brand">
 ⛽ كازيات حلب
 </div>
-
 
 <a
 class="admin-message"
@@ -399,7 +621,7 @@ By Ammar Morgan
 
 
 <div
-class="sub"
+class="updated-line"
 id="updatedLine">
 
 آخر تحديث: جاري التحميل…
@@ -427,7 +649,7 @@ autocomplete="off">
 
 
 <!-- =========================
-     إحصائيات
+     الإحصائيات
 ========================= -->
 
 <div
@@ -523,8 +745,8 @@ data-f="all">
 
 
 <div
-id="count"
-style="margin-bottom:10px;font-size:13px;color:#68757a">
+class="count-row"
+id="count">
 </div>
 
 
@@ -541,7 +763,6 @@ id="stations">
 
 
 <script>
-
 
 /* =========================
    Supabase
@@ -720,7 +941,7 @@ href="${esc(s.location_url)}"
 target="_blank"
 rel="noopener">
 
-📍 فتح الموقع
+📍 الموقع
 
 </a>
 
@@ -742,8 +963,7 @@ String(s.name??"محطة");
 const text=
 `شكوى بخصوص ${stationName}
 
-أرغب بتقديم شكوى:
-`;
+أرغب بتقديم شكوى:`;
 
 
 const url=
@@ -759,7 +979,7 @@ href="${url}"
 target="_blank"
 rel="noopener">
 
-📩 شكوى على المحطة
+📩 شكوى
 
 </a>
 
@@ -794,30 +1014,39 @@ return `
 
 <div class="rating-box">
 
+<div class="rating-summary">
 
 <div class="rating-average">
 
-⭐ تقييم المحطة:
-${average} / 5
-
-${
-count
-?
-` — ${count} تقييم`
-:
-""
-}
+⭐ ${average} / 5
+${count ? ` • ${count} تقييم` : " • لا يوجد تقييم"}
 
 </div>
 
 
-<div class="stars">
+<button
+class="rating-toggle"
+type="button"
+onclick="toggleRating(${Number(s.id)})">
 
+⭐ تقييم المحطة
+
+</button>
+
+</div>
+
+
+<div
+class="rating-content"
+id="rating-content-${Number(s.id)}"
+style="display:none">
+
+
+<div class="stars">
 
 ${[1,2,3,4,5].map(n=>`
 
 <div class="star-item">
-
 
 <button
 class="star"
@@ -831,16 +1060,12 @@ title="تقييم ${n} من 5">
 
 
 <div class="star-number">
-
 ${n}
-
 </div>
-
 
 </div>
 
 `).join("")}
-
 
 </div>
 
@@ -860,7 +1085,7 @@ id="confirm-rating-${Number(s.id)}"
 onclick="confirmRating(${Number(s.id)})"
 style="display:none">
 
-✅ تأكيد التقييم
+✅ تأكيد
 
 </button>
 
@@ -873,7 +1098,37 @@ id="rating-message-${Number(s.id)}">
 
 </div>
 
+</div>
+
 `;
+
+}
+
+
+/* =========================
+   فتح التقييم
+========================= */
+
+function toggleRating(stationId){
+
+const box=
+document.getElementById(
+"rating-content-"+stationId
+);
+
+if(!box)
+return;
+
+
+if(box.style.display==="none"){
+
+box.style.display="block";
+
+}else{
+
+box.style.display="none";
+
+}
 
 }
 
@@ -896,8 +1151,8 @@ document.getElementById(
 if(selected){
 
 selected.textContent=
-"اخترت: ⭐ "+rating+
-" من 5 — يمكنك تغيير الاختيار قبل التأكيد";
+"اخترت ⭐ "+rating+
+" من 5";
 
 }
 
@@ -1050,7 +1305,7 @@ storageKey,
 if(message){
 
 message.textContent=
-"✅ شكرًا، تم تسجيل تقييمك.";
+"✅ تم تسجيل تقييمك.";
 
 }
 
@@ -1071,7 +1326,6 @@ await render();
 ========================= */
 
 function stationMatchesFilter(s){
-
 
 const status=
 String(s.status??"")
@@ -1174,9 +1428,7 @@ diesel==="yes"
 }
 
 
-/* =========================
-   لا يوجد ازدحام
-========================= */
+/* لا يوجد ازدحام */
 
 if(filter==="none"){
 
@@ -1188,10 +1440,6 @@ traffic==="none"
 }
 
 
-/* =========================
-   طابور طويل
-========================= */
-
 if(filter==="long"){
 
 return (
@@ -1201,10 +1449,6 @@ traffic==="long"
 
 }
 
-
-/* =========================
-   ازدحام خفيف
-========================= */
 
 if(filter==="light"){
 
@@ -1292,7 +1536,6 @@ ratings[id].count;
 
 async function render(){
 
-
 const q=
 $("search")
 .value
@@ -1303,13 +1546,14 @@ $("search")
 const a=
 all.filter(s=>{
 
-
 const name=
-String(s.name??"").toLowerCase();
+String(s.name??"")
+.toLowerCase();
 
 
 const area=
-String(s.area??"").toLowerCase();
+String(s.area??"")
+.toLowerCase();
 
 
 if(
@@ -1374,7 +1618,7 @@ $("stats").innerHTML=
 
 <b>${total}</b>
 
-إجمالي المحطات
+<span>إجمالي المحطات</span>
 
 </div>
 
@@ -1383,7 +1627,7 @@ $("stats").innerHTML=
 
 <b>${open}</b>
 
-تعمل
+<span>تعمل</span>
 
 </div>
 
@@ -1392,7 +1636,7 @@ $("stats").innerHTML=
 
 <b>${closed}</b>
 
-مغلقة
+<span>مغلقة</span>
 
 </div>
 
@@ -1401,7 +1645,7 @@ $("stats").innerHTML=
 
 <b>${gas}</b>
 
-بنزين
+<span>بنزين</span>
 
 </div>
 
@@ -1427,9 +1671,7 @@ a.length+" محطة";
 
 $("stations").innerHTML=
 
-
 a.map(s=>{
-
 
 const t=
 tr(s.traffic);
@@ -1451,13 +1693,17 @@ return `
 
 <article class="card">
 
+<div class="card-head">
+
+<div>
 
 <div class="name">
+
+<span class="status-dot red"></span>
 
 ${esc(s.name)}
 
 </div>
-
 
 <div class="area">
 
@@ -1465,30 +1711,22 @@ ${esc(s.area||"")}
 
 </div>
 
+</div>
 
-<div class="badges">
+</div>
 
-<span class="badge no">
+
+<div class="main-info">
+
+<span class="info-badge gray">
 
 ❌ مغلقة
 
 </span>
 
-</div>
+${s.closure_reason ? `
 
-
-<div class="closure-info">
-
-
-${
-s.closure_reason
-?
-
-`
-
-<div>
-
-🔧 السبب:
+<span class="info-badge no">
 
 ${esc(
 closureReasonText(
@@ -1496,48 +1734,26 @@ s.closure_reason
 )
 )}
 
+</span>
+
+` : ""}
+
 </div>
 
-`
 
-:
+${s.closure_hours ? `
 
-""
-}
-
-
-${
-s.closure_hours
-?
-
-`
-
-<div>
+<div class="closure-info">
 
 ⏱️ مدة الإغلاق المتوقعة:
-
-${esc(s.closure_hours)}
-
-ساعة
+${esc(s.closure_hours)} ساعة
 
 </div>
 
-`
-
-:
-
-""
-}
+` : ""}
 
 
-</div>
-
-
-${
-s.note
-?
-
-`
+${s.note ? `
 
 <div class="note">
 
@@ -1545,27 +1761,24 @@ s.note
 
 </div>
 
-`
+` : ""}
 
-:
 
-""
-}
-
+<div class="actions">
 
 ${locationButton(s)}
+
+${complaintButton(s)}
+
+</div>
 
 
 ${ratingBox(s)}
 
 
-${complaintButton(s)}
-
-
 <div class="time">
 
 آخر تحديث:
-
 ${fmt(s.updated_at)}
 
 </div>
@@ -1586,13 +1799,17 @@ return `
 
 <article class="card">
 
+<div class="card-head">
+
+<div>
 
 <div class="name">
+
+<span class="status-dot green"></span>
 
 ${esc(s.name)}
 
 </div>
-
 
 <div class="area">
 
@@ -1600,27 +1817,31 @@ ${esc(s.area||"")}
 
 </div>
 
+</div>
 
-<div class="badges">
+</div>
 
 
-<span class="badge ok">
+<!-- المعلومات الأهم -->
+
+<div class="main-info">
+
+
+<span class="info-badge ok">
 
 🟢 تعمل
 
 </span>
 
 
-<span class="badge ${t[2]}">
+<span class="info-badge ${t[2]} traffic-badge">
 
-${t[0]}
-${t[1]}
+${t[0]} ${t[1]}
 
 </span>
 
 
-<span
-class="badge ${
+<span class="info-badge ${
 String(s.gas??"")
 .trim()
 .toLowerCase()==="yes"
@@ -1630,8 +1851,7 @@ String(s.gas??"")
 "no"
 }">
 
-بنزين:
-
+⛽ بنزين:
 ${
 String(s.gas??"")
 .trim()
@@ -1645,8 +1865,7 @@ String(s.gas??"")
 </span>
 
 
-<span
-class="badge ${
+<span class="info-badge ${
 String(s.diesel??"")
 .trim()
 .toLowerCase()==="yes"
@@ -1657,7 +1876,6 @@ String(s.diesel??"")
 }">
 
 مازوت:
-
 ${
 String(s.diesel??"")
 .trim()
@@ -1674,11 +1892,7 @@ String(s.diesel??"")
 </div>
 
 
-${
-s.note
-?
-
-`
+${s.note ? `
 
 <div class="note">
 
@@ -1686,27 +1900,24 @@ s.note
 
 </div>
 
-`
+` : ""}
 
-:
 
-""
-}
-
+<div class="actions">
 
 ${locationButton(s)}
+
+${complaintButton(s)}
+
+</div>
 
 
 ${ratingBox(s)}
 
 
-${complaintButton(s)}
-
-
 <div class="time">
 
 آخر تحديث:
-
 ${fmt(s.updated_at)}
 
 </div>
@@ -1720,7 +1931,6 @@ ${fmt(s.updated_at)}
 
 
 .join("")
-
 
 ||
 
@@ -1831,11 +2041,9 @@ document
 )
 .forEach(button=>{
 
-
 button.addEventListener(
 "click",
 ()=>{
-
 
 document
 .querySelectorAll(
@@ -1894,11 +2102,9 @@ document
 )
 .forEach(button=>{
 
-
 button.addEventListener(
 "click",
 ()=>{
-
 
 document
 .querySelectorAll(
@@ -1952,7 +2158,6 @@ load,
 ========================= */
 
 load();
-
 
 </script>
 
