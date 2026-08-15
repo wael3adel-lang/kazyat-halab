@@ -7,569 +7,508 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0f766e">
 
-<link rel="manifest" href="manifest.webmanifest">
-
 <title>كازيات حلب</title>
 
 <style>
 
-/* =========================
-   الأساس
-========================= */
-
 *{
-    box-sizing:border-box;
+box-sizing:border-box;
 }
 
 body{
-    margin:0;
-    font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;
-    background:#f4f7f7;
-    color:#17202a;
+margin:0;
+font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;
+background:#f4f7f7;
+color:#17202a;
 }
 
 .wrap{
-    max-width:900px;
-    margin:auto;
+max-width:900px;
+margin:auto;
 }
 
-/* =========================
-   الهيدر
-========================= */
-
 header{
-    background:#0f766e;
-    color:#fff;
-    padding:20px 14px 18px;
+background:#0f766e;
+color:#fff;
+padding:20px 14px 18px;
 }
 
 .header-top{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
 }
 
 .brand{
-    font-size:28px;
-    font-weight:900;
+font-size:28px;
+font-weight:900;
 }
 
 .admin-message{
-    display:inline-block;
-    background:transparent;
-    color:#fff;
-    border:1px solid rgba(255,255,255,.65);
-    border-radius:999px;
-    padding:6px 10px;
-    font-size:11px;
-    font-weight:700;
-    text-decoration:none;
-    white-space:nowrap;
+display:inline-block;
+background:transparent;
+color:#fff;
+border:1px solid rgba(255,255,255,.65);
+border-radius:999px;
+padding:6px 10px;
+font-size:11px;
+font-weight:700;
+text-decoration:none;
+white-space:nowrap;
 }
 
 .admin-message:hover{
-    background:rgba(255,255,255,.12);
+background:rgba(255,255,255,.12);
 }
 
 .sub{
-    margin-top:4px;
-    opacity:.92;
-    font-size:14px;
-    font-weight:600;
+margin-top:4px;
+opacity:.92;
+font-size:14px;
+font-weight:600;
 }
 
 .credit{
-    margin-top:6px;
-    font-size:11px;
-    opacity:.75;
-    font-weight:600;
+margin-top:6px;
+font-size:11px;
+opacity:.75;
+font-weight:600;
 }
 
 .updated-line{
-    margin-top:6px;
-    font-size:12px;
-    opacity:.95;
+margin-top:6px;
+font-size:12px;
+opacity:.95;
 }
 
-/* =========================
-   البحث
-========================= */
-
 .search{
-    margin-top:14px;
+margin-top:14px;
 }
 
 .search input{
-    width:100%;
-    padding:13px 15px;
-    border:0;
-    border-radius:13px;
-    font-size:15px;
-    outline:none;
+width:100%;
+padding:13px 15px;
+border:0;
+border-radius:13px;
+font-size:15px;
+outline:none;
 }
 
-/* =========================
-   الفلاتر
-========================= */
-
 .filters{
-    display:flex;
-    gap:7px;
-    overflow-x:auto;
-    padding:12px 0;
-    scrollbar-width:none;
+display:flex;
+gap:7px;
+overflow-x:auto;
+padding:12px 0;
+scrollbar-width:none;
 }
 
 .filters::-webkit-scrollbar{
-    display:none;
+display:none;
 }
 
 .filters button{
-    white-space:nowrap;
-    border:1px solid #d7dddd;
-    background:#fff;
-    border-radius:999px;
-    padding:8px 13px;
-    cursor:pointer;
-    font:inherit;
-    font-size:14px;
-    color:#17202a;
+white-space:nowrap;
+border:1px solid #d7dddd;
+background:#fff;
+border-radius:999px;
+padding:8px 13px;
+cursor:pointer;
+font:inherit;
+font-size:14px;
+color:#17202a;
 }
 
 .filters button.active{
-    background:#0f766e;
-    color:#fff;
-    border-color:#0f766e;
+background:#0f766e;
+color:#fff;
+border-color:#0f766e;
 }
 
-/* =========================
-   الإحصائيات
-========================= */
-
 .stats{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:7px;
-    margin:10px 0 5px;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:7px;
+margin:10px 0 5px;
 }
 
 .stat{
-    background:#fff;
-    border-radius:12px;
-    padding:8px 5px;
-    text-align:center;
-    border:1px solid #e5eaea;
+background:#fff;
+border-radius:12px;
+padding:8px 5px;
+text-align:center;
+border:1px solid #e5eaea;
 }
 
 .stat b{
-    display:block;
-    font-size:19px;
-    line-height:1.2;
+display:block;
+font-size:19px;
+line-height:1.2;
 }
 
 .stat span{
-    display:block;
-    margin-top:2px;
-    font-size:11px;
-    color:#5f6b70;
+display:block;
+margin-top:2px;
+font-size:11px;
+color:#5f6b70;
 }
-
-/* =========================
-   العدد
-========================= */
 
 .count-row{
-    margin:2px 2px 9px;
-    font-size:12px;
-    color:#68757a;
+margin:2px 2px 9px;
+font-size:12px;
+color:#68757a;
 }
 
-/* =========================
-   البطاقات
-========================= */
-
 .grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:10px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:10px;
 }
 
 .card{
-    background:#fff;
-    border:1px solid #e2e8e8;
-    border-radius:16px;
-    padding:13px;
-    box-shadow:0 2px 8px rgba(0,0,0,.045);
+background:#fff;
+border:1px solid #e2e8e8;
+border-radius:16px;
+padding:13px;
+box-shadow:0 2px 8px rgba(0,0,0,.045);
 }
 
-/* =========================
-   رأس البطاقة
-========================= */
-
 .card-head{
-    display:flex;
-    align-items:flex-start;
-    justify-content:space-between;
-    gap:10px;
+display:flex;
+align-items:flex-start;
+justify-content:space-between;
+gap:10px;
 }
 
 .name{
-    font-size:19px;
-    font-weight:900;
-    line-height:1.35;
+font-size:19px;
+font-weight:900;
+line-height:1.35;
 }
 
 .area{
-    font-size:12px;
-    color:#69767c;
-    margin-top:2px;
+font-size:12px;
+color:#69767c;
+margin-top:2px;
 }
 
 .status-dot{
-    width:10px;
-    height:10px;
-    border-radius:50%;
-    display:inline-block;
-    margin-left:4px;
-    vertical-align:middle;
+width:10px;
+height:10px;
+border-radius:50%;
+display:inline-block;
+margin-left:4px;
+vertical-align:middle;
 }
 
 .status-dot.green{
-    background:#22c55e;
+background:#22c55e;
 }
 
 .status-dot.red{
-    background:#ef4444;
+background:#ef4444;
 }
 
-/* =========================
-   المعلومات المهمة
-========================= */
-
 .main-info{
-    display:flex;
-    flex-wrap:wrap;
-    gap:6px;
-    margin-top:11px;
+display:flex;
+flex-wrap:wrap;
+gap:6px;
+margin-top:11px;
 }
 
 .info-badge{
-    display:inline-flex;
-    align-items:center;
-    gap:4px;
-    padding:7px 9px;
-    border-radius:9px;
-    font-size:12px;
-    font-weight:800;
-    line-height:1.1;
+display:inline-flex;
+align-items:center;
+gap:4px;
+padding:7px 9px;
+border-radius:9px;
+font-size:12px;
+font-weight:800;
+line-height:1.1;
 }
 
 .ok{
-    background:#dcfce7;
-    color:#166534;
+background:#dcfce7;
+color:#166534;
 }
 
 .no{
-    background:#fee2e2;
-    color:#991b1b;
+background:#fee2e2;
+color:#991b1b;
 }
 
 .warn{
-    background:#fef3c7;
-    color:#92400e;
+background:#fef3c7;
+color:#92400e;
 }
 
 .gray{
-    background:#e5e7eb;
-    color:#374151;
+background:#e5e7eb;
+color:#374151;
 }
 
 .traffic-badge{
-    font-weight:900;
+font-weight:900;
 }
 
-/* =========================
-   الموقع
-========================= */
-
 .actions{
-    display:flex;
-    gap:7px;
-    flex-wrap:wrap;
-    margin-top:10px;
+display:flex;
+gap:7px;
+flex-wrap:wrap;
+margin-top:10px;
 }
 
 .location-link,
 .complaint-link{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    text-decoration:none;
-    border-radius:9px;
-    padding:7px 10px;
-    font-size:12px;
-    font-weight:800;
+display:inline-flex;
+align-items:center;
+justify-content:center;
+text-decoration:none;
+border-radius:9px;
+padding:7px 10px;
+font-size:12px;
+font-weight:800;
 }
 
 .location-link{
-    background:#ecfdf5;
-    color:#047857;
-    border:1px solid #a7f3d0;
-}
-
-.location-link:hover{
-    background:#d1fae5;
+background:#ecfdf5;
+color:#047857;
+border:1px solid #a7f3d0;
 }
 
 .complaint-link{
-    background:#fff1f2;
-    color:#be123c;
-    border:1px solid #fecdd3;
+background:#fff1f2;
+color:#be123c;
+border:1px solid #fecdd3;
 }
-
-.complaint-link:hover{
-    background:#ffe4e6;
-}
-
-/* =========================
-   الملاحظة
-========================= */
 
 .note{
-    font-size:12px;
-    margin-top:9px;
-    line-height:1.6;
-    color:#4b5563;
-    background:#f8fafc;
-    padding:7px 9px;
-    border-radius:8px;
+font-size:12px;
+margin-top:9px;
+line-height:1.6;
+color:#4b5563;
+background:#f8fafc;
+padding:7px 9px;
+border-radius:8px;
 }
-
-/* =========================
-   الإغلاق
-========================= */
 
 .closure-info{
-    margin-top:9px;
-    background:#fff7ed;
-    color:#9a3412;
-    border-radius:9px;
-    padding:8px 9px;
-    font-size:12px;
-    font-weight:750;
-    line-height:1.7;
+margin-top:9px;
+background:#fff7ed;
+color:#9a3412;
+border-radius:9px;
+padding:8px 9px;
+font-size:12px;
+font-weight:750;
+line-height:1.7;
 }
 
-/* =========================
-   التقييم
-========================= */
-
 .rating-box{
-    margin-top:10px;
-    padding-top:9px;
-    border-top:1px solid #eef2f2;
+margin-top:10px;
+padding-top:9px;
+border-top:1px solid #eef2f2;
 }
 
 .rating-summary{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:8px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:8px;
 }
 
 .rating-average{
-    font-size:12px;
-    font-weight:800;
-    color:#555;
+font-size:12px;
+font-weight:800;
+color:#555;
 }
 
 .rating-toggle{
-    border:0;
-    background:#f8fafc;
-    color:#0f766e;
-    border-radius:8px;
-    padding:6px 8px;
-    font-size:11px;
-    font-weight:800;
-    cursor:pointer;
+border:0;
+background:#f8fafc;
+color:#0f766e;
+border-radius:8px;
+padding:6px 8px;
+font-size:11px;
+font-weight:800;
+cursor:pointer;
 }
 
 .rating-content{
-    margin-top:8px;
-}
-
-.rating-help{
-    font-size:11px;
-    color:#0f766e;
-    font-weight:700;
-    margin-top:4px;
+margin-top:8px;
 }
 
 .stars{
-    margin-top:6px;
-    display:flex;
-    gap:2px;
-    direction:ltr;
-    justify-content:flex-start;
-    align-items:flex-start;
+margin-top:6px;
+display:flex;
+gap:2px;
+direction:ltr;
+justify-content:flex-start;
+align-items:flex-start;
 }
 
 .star-item{
-    text-align:center;
-    min-width:31px;
+text-align:center;
+min-width:31px;
 }
 
 .star{
-    border:0;
-    background:transparent;
-    font-size:21px;
-    padding:1px;
-    cursor:pointer;
-    line-height:1;
-    transition:.15s;
-}
-
-.star:hover{
-    transform:scale(1.08);
-}
-
-.star.selected{
-    transform:scale(1.08);
+border:0;
+background:transparent;
+font-size:21px;
+padding:1px;
+cursor:pointer;
+line-height:1;
 }
 
 .star-number{
-    font-size:10px;
-    font-weight:800;
-    color:#555;
-    margin-top:1px;
+font-size:10px;
+font-weight:800;
+color:#555;
+margin-top:1px;
 }
 
 .rating-selected{
-    font-size:11px;
-    font-weight:700;
-    color:#0f766e;
-    margin-top:5px;
-    min-height:17px;
+font-size:11px;
+font-weight:700;
+color:#0f766e;
+margin-top:5px;
+min-height:17px;
 }
 
 .confirm-rating{
-    margin-top:6px;
-    border:0;
-    background:#0f766e;
-    color:#fff;
-    border-radius:8px;
-    padding:7px 11px;
-    font:inherit;
-    font-size:11px;
-    font-weight:800;
-    cursor:pointer;
+margin-top:6px;
+border:0;
+background:#0f766e;
+color:#fff;
+border-radius:8px;
+padding:7px 11px;
+font:inherit;
+font-size:11px;
+font-weight:800;
+cursor:pointer;
 }
 
 .rating-message{
-    font-size:11px;
-    color:#0f766e;
-    margin-top:5px;
-    min-height:15px;
+font-size:11px;
+color:#0f766e;
+margin-top:5px;
+min-height:15px;
 }
-
-/* =========================
-   الوقت
-========================= */
 
 .time{
-    font-size:10px;
-    color:#777;
-    margin-top:8px;
-    text-align:left;
+font-size:10px;
+color:#777;
+margin-top:8px;
+text-align:left;
 }
 
-/* =========================
-   الهاتف
-========================= */
+.loading{
+background:#fff;
+border-radius:14px;
+padding:25px;
+text-align:center;
+color:#68757a;
+}
+
+.error-box{
+background:#fff1f2;
+border:1px solid #fecdd3;
+color:#991b1b;
+border-radius:14px;
+padding:18px;
+margin-top:10px;
+line-height:1.7;
+}
+
+.retry{
+margin-top:10px;
+border:0;
+background:#0f766e;
+color:#fff;
+border-radius:9px;
+padding:9px 15px;
+cursor:pointer;
+font:inherit;
+}
 
 @media(max-width:600px){
 
-    header{
-        padding:17px 12px 15px;
-    }
+header{
+padding:17px 12px 15px;
+}
 
-    .brand{
-        font-size:25px;
-    }
+.brand{
+font-size:25px;
+}
 
-    .admin-message{
-        font-size:10px;
-        padding:5px 8px;
-    }
+.admin-message{
+font-size:10px;
+padding:5px 8px;
+}
 
-    .sub{
-        font-size:13px;
-    }
+.sub{
+font-size:13px;
+}
 
-    .grid{
-        grid-template-columns:1fr;
-        gap:8px;
-    }
+.grid{
+grid-template-columns:1fr;
+gap:8px;
+}
 
-    .card{
-        padding:12px;
-        border-radius:14px;
-    }
+.card{
+padding:12px;
+border-radius:14px;
+}
 
-    .name{
-        font-size:18px;
-    }
+.name{
+font-size:18px;
+}
 
-    .main-info{
-        gap:5px;
-    }
+.main-info{
+gap:5px;
+}
 
-    .info-badge{
-        padding:7px 8px;
-        font-size:11px;
-    }
+.info-badge{
+padding:7px 8px;
+font-size:11px;
+}
 
-    .stats{
-        gap:5px;
-    }
+.stats{
+gap:5px;
+}
 
-    .stat{
-        padding:7px 3px;
-    }
+.stat{
+padding:7px 3px;
+}
 
-    .stat b{
-        font-size:18px;
-    }
+.stat b{
+font-size:18px;
+}
 
-    .stat span{
-        font-size:10px;
-    }
+.stat span{
+font-size:10px;
+}
 
 }
 
-/* =========================
-   شاشات صغيرة جداً
-========================= */
-
 @media(max-width:380px){
 
-    .brand{
-        font-size:22px;
-    }
+.brand{
+font-size:22px;
+}
 
-    .admin-message{
-        font-size:9px;
-    }
+.admin-message{
+font-size:9px;
+}
 
-    .info-badge{
-        font-size:10px;
-        padding:6px 7px;
-    }
+.info-badge{
+font-size:10px;
+padding:6px 7px;
+}
 
-    .name{
-        font-size:17px;
-    }
+.name{
+font-size:17px;
+}
 
 }
 
@@ -585,4 +524,195 @@ header{
 
 <div class="header-top">
 
-<div class="brand
+<div class="brand">
+⛽ كازيات حلب
+</div>
+
+<a
+class="admin-message"
+href="https://wa.me/905050978000?text=مرحباً،%20لدي%20معلومات%20أو%20تحديث%20بخصوص%20كازيات%20حلب"
+target="_blank"
+rel="noopener">
+
+📩 المشرف
+
+</a>
+
+</div>
+
+<div class="sub">
+حالة المحطات وآخر تحديثات الوقود
+</div>
+
+<div class="credit">
+By Ammar Morgan
+</div>
+
+<div
+class="updated-line"
+id="updatedLine">
+
+آخر تحديث: جاري التحميل…
+
+</div>
+
+<div class="search">
+
+<input
+id="search"
+type="search"
+placeholder="ابحث عن محطة أو منطقة…"
+autocomplete="off">
+
+</div>
+
+</div>
+
+</header>
+
+<main class="wrap">
+
+<div
+class="stats"
+id="stats">
+</div>
+
+<div class="filters">
+
+<button
+class="active"
+data-region="city">
+
+🏙️ حلب المدينة
+
+</button>
+
+<button
+data-region="countryside">
+
+🏡 ريف حلب
+
+</button>
+
+</div>
+
+<div class="filters">
+
+<button
+class="active"
+data-f="all">
+
+الكل
+
+</button>
+
+<button data-f="open">
+تعمل
+</button>
+
+<button data-f="both">
+بنزين + مازوت
+</button>
+
+<button data-f="gas">
+بنزين
+</button>
+
+<button data-f="diesel">
+مازوت
+</button>
+
+<button data-f="closed">
+مغلقة
+</button>
+
+<button data-f="none">
+لا يوجد ازدحام
+</button>
+
+<button data-f="long">
+طابور طويل
+</button>
+
+<button data-f="light">
+ازدحام خفيف
+</button>
+
+</div>
+
+<div
+class="count-row"
+id="count">
+جاري تحميل المحطات…
+</div>
+
+<section
+class="grid"
+id="stations">
+
+<div class="loading">
+⏳ جاري تحميل المحطات…
+</div>
+
+</section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL =
+"https://hjggfolotblsurfwfcvn.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_UTpiWf5wrq8VfxAXxl9zfw_CtRRizyl";
+
+const sb =
+supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+let all = [];
+
+let filter = "all";
+
+let regionFilter = "city";
+
+const ratings = {};
+
+const selectedRatings = {};
+
+const $ = id =>
+document.getElementById(id);
+
+
+/* =========================
+حماية النصوص
+========================= */
+
+function esc(x){
+
+return String(x ?? "")
+.replace(/[&<>"']/g,m=>({
+
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+
+}[m]));
+
+}
+
+
+/* =========================
+التاريخ
+========================= */
+
+function fmt(t){
+
+if(!t)
+return
