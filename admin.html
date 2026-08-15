@@ -1,12 +1,17 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
+
 <head>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>لوحة تحكم — كازيات حلب</title>
 
 <style>
-*{box-sizing:border-box}
+
+*{
+box-sizing:border-box
+}
 
 body{
 font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;
@@ -178,6 +183,10 @@ padding:10px;
 margin-top:10px
 }
 
+/* =========================
+   تصنيف المنطقة
+========================= */
+
 .region-city{
 background:#dbeafe;
 color:#1d4ed8
@@ -186,6 +195,30 @@ color:#1d4ed8
 .region-country{
 background:#dcfce7;
 color:#166534
+}
+
+.region-required{
+background:#fff7ed;
+border:1px solid #fed7aa;
+color:#9a3412;
+border-radius:10px;
+padding:9px 11px;
+font-size:13px;
+font-weight:700;
+margin-bottom:10px
+}
+
+.region-select-box{
+background:#f8fafc;
+border:1px solid #e2e8f0;
+border-radius:12px;
+padding:12px;
+margin-bottom:10px
+}
+
+.region-select-box label{
+font-weight:800;
+display:block
 }
 
 dialog{
@@ -205,60 +238,123 @@ padding:20px
 }
 
 @media(max-width:700px){
+
 .stats{
 grid-template-columns:repeat(2,1fr)
 }
+
 }
 
 @media(max-width:600px){
+
 .two{
 grid-template-columns:1fr
 }
+
 }
+
 </style>
+
 </head>
 
 <body>
 
 <header>
+
 <main>
+
 <h2>⚙️ لوحة تحكم كازيات حلب</h2>
+
 </main>
+
 </header>
 
+
 <main>
-<div id="app">جاري التحميل…</div>
+
+<div id="app">
+جاري التحميل…
+</div>
+
 </main>
 
 
-<!-- نافذة إضافة / تعديل محطة -->
+<!-- =================================================
+     نافذة إضافة / تعديل محطة
+================================================= -->
 
 <dialog id="stationDlg">
 
 <form class="form" id="stationForm">
 
-<h2 id="dlgTitle">تعديل محطة</h2>
+<h2 id="dlgTitle">
+تعديل محطة
+</h2>
 
-<input type="hidden" id="sid">
 
-<label>اسم المحطة</label>
-<input id="name" required>
+<input
+type="hidden"
+id="sid">
 
-<label>المنطقة</label>
-<input id="area">
 
-<!-- التصنيف الجديد -->
+<label>
+اسم المحطة
+</label>
 
-<label>تصنيف المحطة</label>
+<input
+id="name"
+required>
 
-<select id="region_type">
-<option value="">اختر التصنيف</option>
-<option value="city">🏙️ مدينة حلب</option>
-<option value="countryside">🌿 ريف حلب</option>
+
+<label>
+المنطقة / الموقع
+</label>
+
+<input
+id="area">
+
+
+<!-- =================================================
+     تصنيف المحطة
+================================================= -->
+
+<div class="region-select-box">
+
+<label>
+🏷️ تصنيف المحطة
+</label>
+
+<select
+id="region_type"
+required>
+
+<option value="">
+⚠️ اختر تصنيف المحطة
+</option>
+
+<option value="city">
+🏙️ مدينة حلب
+</option>
+
+<option value="countryside">
+🌿 ريف حلب
+</option>
+
 </select>
 
+<div
+class="region-required">
 
-<label>📍 رابط موقع المحطة على Google Maps</label>
+يجب اختيار مدينة حلب أو ريف حلب قبل حفظ المحطة.
+
+</div>
+
+</div>
+
+
+<label>
+📍 رابط موقع المحطة على Google Maps
+</label>
 
 <input
 id="location_url"
@@ -270,76 +366,162 @@ placeholder="https://maps.google.com/...">
 
 <div>
 
-<label>الحالة</label>
+<label>
+الحالة
+</label>
 
-<select id="status" onchange="toggleAdminOpening()">
+<select
+id="status"
+onchange="toggleAdminOpening()">
 
-<option value="open">تعمل</option>
-<option value="closed">مغلقة</option>
+<option value="open">
+تعمل
+</option>
+
+<option value="closed">
+مغلقة
+</option>
+
+</select>
+
+</div>
+
+
+<div
+id="adminOpeningBox"
+class="hidden">
+
+<label>
+الافتتاح
+</label>
+
+<select
+id="opening_time">
+
+<option value="">
+اختر موعد الافتتاح
+</option>
+
+<option value="8">
+الثامنة صباحاً
+</option>
+
+<option value="9">
+التاسعة صباحاً
+</option>
+
+<option value="order">
+مع وصول الطلبية
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<!-- =================================================
+     سبب ومدة الإغلاق
+================================================= -->
+
+<div
+id="closureAdminBox"
+class="hidden closure-box">
+
+<b>
+سبب الإغلاق ومدة الإغلاق المتوقعة
+</b>
+
+<label>
+سبب الإغلاق
+</label>
+
+<select
+id="closure_reason">
+
+<option value="">
+اختر السبب
+</option>
+
+<option value="maintenance">
+🔧 صيانة
+</option>
+
+<option value="technical">
+⚡ عطل فني
+</option>
+
+<option value="delivery">
+🚚 بانتظار وصول الطلبية
+</option>
+
+<option value="fuel">
+⛽ نفاد الوقود
+</option>
+
+<option value="administrative">
+🏢 إغلاق إداري
+</option>
+
+<option value="temporary">
+🕐 إغلاق مؤقت
+</option>
+
+</select>
+
+
+<label>
+مدة الإغلاق المتوقعة
+</label>
+
+<select
+id="closure_hours">
+
+<option value="">
+اختر المدة
+</option>
+
+<option value="1">
+1 ساعة
+</option>
+
+<option value="2">
+2 ساعة
+</option>
+
+<option value="3">
+3 ساعات
+</option>
+
+<option value="4">
+4 ساعات
+</option>
+
+<option value="6">
+6 ساعات
+</option>
+
+<option value="8">
+8 ساعات
+</option>
+
+<option value="12">
+12 ساعة
+</option>
+
+<option value="24">
+24 ساعة
+</option>
 
 </select>
 
 </div>
 
 
-<div id="adminOpeningBox" class="hidden">
-
-<label>الافتتاح</label>
-
-<select id="opening_time">
-
-<option value="">اختر موعد الافتتاح</option>
-<option value="8">الثامنة صباحاً</option>
-<option value="9">التاسعة صباحاً</option>
-<option value="order">مع وصول الطلبية</option>
-
-</select>
-
-</div>
-
-</div>
-
-
-<!-- سبب ومدة الإغلاق -->
-
-<div id="closureAdminBox" class="hidden closure-box">
-
-<b>سبب الإغلاق ومدة الإغلاق المتوقعة</b>
-
-<label>سبب الإغلاق</label>
-
-<select id="closure_reason">
-
-<option value="">اختر السبب</option>
-
-<option value="maintenance">🔧 صيانة</option>
-<option value="technical">⚡ عطل فني</option>
-<option value="delivery">🚚 بانتظار وصول الطلبية</option>
-<option value="fuel">⛽ نفاد الوقود</option>
-<option value="administrative">🏢 إغلاق إداري</option>
-<option value="temporary">🕐 إغلاق مؤقت</option>
-
-</select>
-
-
-<label>مدة الإغلاق المتوقعة</label>
-
-<select id="closure_hours">
-
-<option value="">اختر المدة</option>
-<option value="1">1 ساعة</option>
-<option value="2">2 ساعة</option>
-<option value="3">3 ساعات</option>
-<option value="4">4 ساعات</option>
-<option value="6">6 ساعات</option>
-<option value="8">8 ساعات</option>
-<option value="12">12 ساعة</option>
-<option value="24">24 ساعة</option>
-
-</select>
-
-</div>
-
+<!-- =================================================
+     الوقود والازدحام
+================================================= -->
 
 <div id="adminFuelBox">
 
@@ -347,13 +529,24 @@ placeholder="https://maps.google.com/...">
 
 <div>
 
-<label>الازدحام</label>
+<label>
+الازدحام
+</label>
 
-<select id="traffic">
+<select
+id="traffic">
 
-<option value="none">لا يوجد ازدحام</option>
-<option value="light">ازدحام خفيف</option>
-<option value="long">طابور طويل</option>
+<option value="none">
+لا يوجد ازدحام
+</option>
+
+<option value="light">
+ازدحام خفيف
+</option>
+
+<option value="long">
+طابور طويل
+</option>
 
 </select>
 
@@ -362,12 +555,20 @@ placeholder="https://maps.google.com/...">
 
 <div>
 
-<label>البنزين</label>
+<label>
+البنزين
+</label>
 
-<select id="gas">
+<select
+id="gas">
 
-<option value="yes">يوجد</option>
-<option value="no">لا يوجد</option>
+<option value="yes">
+يوجد
+</option>
+
+<option value="no">
+لا يوجد
+</option>
 
 </select>
 
@@ -378,12 +579,20 @@ placeholder="https://maps.google.com/...">
 
 <div>
 
-<label>المازوت</label>
+<label>
+المازوت
+</label>
 
-<select id="diesel">
+<select
+id="diesel">
 
-<option value="yes">يوجد</option>
-<option value="no">لا يوجد</option>
+<option value="yes">
+يوجد
+</option>
+
+<option value="no">
+لا يوجد
+</option>
 
 </select>
 
@@ -392,19 +601,33 @@ placeholder="https://maps.google.com/...">
 </div>
 
 
-<label>ملاحظة / إعلان</label>
+<label>
+ملاحظة / إعلان
+</label>
 
-<textarea id="note" rows="4"></textarea>
+<textarea
+id="note"
+rows="4">
+</textarea>
 
 
 <div>
 
-<button class="primary" type="submit">
+<button
+class="primary"
+type="submit">
+
 حفظ التغيير
+
 </button>
 
-<button type="button" onclick="stationDlg.close()">
+
+<button
+type="button"
+onclick="stationDlg.close()">
+
 إلغاء
+
 </button>
 
 </div>
@@ -418,39 +641,67 @@ placeholder="https://maps.google.com/...">
 
 <script>
 
+/* =================================================
+   Supabase
+================================================= */
+
 const sb=supabase.createClient(
+
 "https://hjggfolotblsurfwfcvn.supabase.co",
+
 "sb_publishable_UTpiWf5wrq8VfxAXxl9zfw_CtRRizyl"
+
 );
 
+
+/* =================================================
+   المتغيرات
+================================================= */
+
 let session=null;
+
 let stations=[];
+
 let currentRole=null;
+
 let currentStationId=null;
 
 const $=id=>document.getElementById(id);
 
 
+/* =================================================
+   حماية النصوص
+================================================= */
+
 function esc(x){
 
 return String(x??"")
 .replace(/[&<>"']/g,m=>({
+
 "&":"&amp;",
 "<":"&lt;",
 ">":"&gt;",
 '"':"&quot;",
 "'":"&#039;"
+
 }[m]));
 
 }
 
 
+/* =================================================
+   التاريخ
+================================================= */
+
 function fmt(t){
 
-if(!t)return "—";
+if(!t)
+return "—";
 
 return new Intl.DateTimeFormat(
+
 "ar-SY",
+
 {
 day:"numeric",
 month:"numeric",
@@ -458,50 +709,81 @@ year:"numeric",
 hour:"2-digit",
 minute:"2-digit"
 }
+
 ).format(new Date(t));
 
 }
 
 
+/* =================================================
+   موعد الافتتاح
+================================================= */
+
 function openingText(v){
 
-if(v==="8")return "الثامنة صباحاً";
-if(v==="9")return "التاسعة صباحاً";
-if(v==="order")return "مع وصول الطلبية";
+if(v==="8")
+return "الثامنة صباحاً";
+
+if(v==="9")
+return "التاسعة صباحاً";
+
+if(v==="order")
+return "مع وصول الطلبية";
 
 return "";
 
 }
 
+
+/* =================================================
+   سبب الإغلاق
+================================================= */
 
 function closureReasonText(v){
 
-if(v==="maintenance")return "🔧 صيانة";
-if(v==="technical")return "⚡ عطل فني";
-if(v==="delivery")return "🚚 بانتظار وصول الطلبية";
-if(v==="fuel")return "⛽ نفاد الوقود";
-if(v==="administrative")return "🏢 إغلاق إداري";
-if(v==="temporary")return "🕐 إغلاق مؤقت";
+if(v==="maintenance")
+return "🔧 صيانة";
+
+if(v==="technical")
+return "⚡ عطل فني";
+
+if(v==="delivery")
+return "🚚 بانتظار وصول الطلبية";
+
+if(v==="fuel")
+return "⛽ نفاد الوقود";
+
+if(v==="administrative")
+return "🏢 إغلاق إداري";
+
+if(v==="temporary")
+return "🕐 إغلاق مؤقت";
 
 return "";
 
 }
 
+
+/* =================================================
+   تصنيف المنطقة
+================================================= */
 
 function regionText(v){
 
-if(v==="city")return "🏙️ مدينة حلب";
+if(v==="city")
+return "🏙️ مدينة حلب";
 
-if(v==="countryside")return "🌿 ريف حلب";
+if(v==="countryside")
+return "🌿 ريف حلب";
 
-return "";
+return "⚠️ غير محدد";
 
 }
 
 
-/* =========================
+/* =================================================
    تسجيل الدخول
-========================= */
+================================================= */
 
 function login(){
 
@@ -509,16 +791,34 @@ $("app").innerHTML=`
 
 <div class="panel">
 
-<h2>تسجيل الدخول</h2>
+<h2>
+تسجيل الدخول
+</h2>
 
-<label>البريد الإلكتروني</label>
-<input id="email" type="email">
+<label>
+البريد الإلكتروني
+</label>
 
-<label>كلمة المرور</label>
-<input id="password" type="password">
+<input
+id="email"
+type="email">
 
-<button class="primary" onclick="doLogin()">
+
+<label>
+كلمة المرور
+</label>
+
+<input
+id="password"
+type="password">
+
+
+<button
+class="primary"
+onclick="doLogin()">
+
 دخول
+
 </button>
 
 </div>
@@ -538,9 +838,11 @@ password:$("password").value
 
 });
 
+
 if(error){
 
 alert(error.message);
+
 return;
 
 }
@@ -550,9 +852,9 @@ location.reload();
 }
 
 
-/* =========================
+/* =================================================
    البداية
-========================= */
+================================================= */
 
 async function init(){
 
@@ -560,15 +862,20 @@ const {data}=await sb.auth.getSession();
 
 session=data.session;
 
+
 if(!session){
 
 login();
+
 return;
 
 }
 
 
-const {data:me,error}=await sb
+const {
+data:me,
+error
+}=await sb
 
 .from("admin_users")
 
@@ -618,11 +925,13 @@ return;
 
 
 currentRole=me.role||"admin";
+
 currentStationId=me.station_id;
 
 
 if(currentRole==="station_owner")
 loadOwner();
+
 else
 loadAdmin();
 
@@ -637,7 +946,10 @@ async function getVisitorStats(){
 
 try{
 
-const {data,error}=await sb
+const {
+data,
+error
+}=await sb
 
 .from("visitor_events")
 
@@ -678,7 +990,9 @@ const now=new Date();
 
 const todayStart=new Date();
 
-todayStart.setHours(0,0,0,0);
+todayStart.setHours(
+0,0,0,0
+);
 
 
 const weekStart=new Date();
@@ -687,7 +1001,9 @@ weekStart.setDate(
 now.getDate()-6
 );
 
-weekStart.setHours(0,0,0,0);
+weekStart.setHours(
+0,0,0,0
+);
 
 
 const uniqueVisitors=
@@ -706,9 +1022,11 @@ const todayEvents=
 data.filter(x=>{
 
 const d=new Date(
+
 x.created_at ||
 x.inserted_at ||
 x.timestamp
+
 );
 
 return !isNaN(d) && d>=todayStart;
@@ -721,9 +1039,11 @@ const weekEvents=
 data.filter(x=>{
 
 const d=new Date(
+
 x.created_at ||
 x.inserted_at ||
 x.timestamp
+
 );
 
 return !isNaN(d) && d>=weekStart;
@@ -734,12 +1054,14 @@ return !isNaN(d) && d>=weekStart;
 const ipValues=
 
 data
+
 .map(x=>
 x.ip_address ||
 x.ip ||
 x.ipAddress ||
 null
 )
+
 .filter(Boolean);
 
 
@@ -797,12 +1119,14 @@ changes.push(
 if(station.closure_reason){
 
 changes.push(
+
 "🔧 <b>السبب:</b> "+
 esc(
 closureReasonText(
 station.closure_reason
 )
 )
+
 );
 
 }
@@ -815,9 +1139,11 @@ station.closure_hours !== ""
 ){
 
 changes.push(
+
 "⏱️ <b>مدة الإغلاق المتوقعة:</b> "+
 esc(station.closure_hours)+
 " ساعة"
+
 );
 
 }
@@ -830,6 +1156,7 @@ changes.push(
 
 
 changes.push(
+
 "⛽ <b>البنزين:</b> "+
 (
 station.gas==="yes"
@@ -838,10 +1165,12 @@ station.gas==="yes"
 :
 "لا يوجد"
 )
+
 );
 
 
 changes.push(
+
 "🛢️ <b>المازوت:</b> "+
 (
 station.diesel==="yes"
@@ -850,6 +1179,7 @@ station.diesel==="yes"
 :
 "لا يوجد"
 )
+
 );
 
 
@@ -883,14 +1213,19 @@ changes.push(
 if(station.note){
 
 changes.push(
+
 "📝 <b>ملاحظة:</b> "+
 esc(station.note)
+
 );
 
 }
 
 
-const {data,error}=await sb.functions.invoke(
+const {
+data,
+error
+}=await sb.functions.invoke(
 
 "notify-telegram",
 
@@ -947,7 +1282,9 @@ if(!currentStationId){
 $("app").innerHTML=`
 
 <div class="panel">
+
 لا توجد كازية مرتبطة بهذا الحساب.
+
 </div>
 
 `;
@@ -957,7 +1294,10 @@ return;
 }
 
 
-const {data:s,error}=await sb
+const {
+data:s,
+error
+}=await sb
 
 .from("stations")
 
@@ -973,7 +1313,9 @@ if(error){
 $("app").innerHTML=`
 
 <div class="panel">
+
 ${esc(error.message)}
+
 </div>
 
 `;
@@ -988,7 +1330,9 @@ if(!s){
 $("app").innerHTML=`
 
 <div class="panel">
+
 لم يتم العثور على الكازية.
+
 </div>
 
 `;
@@ -1007,7 +1351,9 @@ $("app").innerHTML=`
 
 <div class="owner-box">
 
-<b>⛽ حساب صاحب الكازية</b>
+<b>
+⛽ حساب صاحب الكازية
+</b>
 
 <br>
 
@@ -1018,6 +1364,7 @@ ${esc(session.user.email)}
 يمكنك تحديث بيانات كازيتك فقط.
 
 </div>
+
 
 <button onclick="logout()">
 خروج
@@ -1032,39 +1379,77 @@ ${esc(session.user.email)}
 ⛽ ${esc(s.name)}
 </h2>
 
+
 <div class="muted">
 ${esc(s.area||"")}
 </div>
+
 
 ${
 s.region_type
 ?
 `
-<span class="badge ${s.region_type==="city"?"region-city":"region-country"}">
+
+<span class="badge ${
+s.region_type==="city"
+?
+"region-city"
+:
+"region-country"
+}">
+
 ${esc(regionText(s.region_type))}
+
 </span>
+
 `
 :
-""
+`
+
+<div class="region-required">
+
+⚠️ هذه المحطة لا تملك تصنيفاً.
+يرجى إبلاغ المشرف لتحديد مدينة حلب أو ريف حلب.
+
+</div>
+
+`
 }
 
+
 <div class="badge">
+
 آخر تحديث:
 ${fmt(s.updated_at)}
+
 </div>
+
 
 <br><br>
 
-<label>الحالة</label>
 
-<select id="ownerStatus" onchange="toggleOwnerFields()">
+<label>
+الحالة
+</label>
 
-<option value="open" ${s.status==="open"?"selected":""}>
+<select
+id="ownerStatus"
+onchange="toggleOwnerFields()">
+
+<option
+value="open"
+${s.status==="open"?"selected":""}>
+
 🟢 تعمل
+
 </option>
 
-<option value="closed" ${s.status==="closed"?"selected":""}>
+<option
+value="closed"
+${s.status==="closed"?"selected":""}>
+
 ❌ مغلقة
+
 </option>
 
 </select>
@@ -1076,16 +1461,26 @@ ${fmt(s.updated_at)}
 
 <div>
 
-<label>البنزين</label>
+<label>
+البنزين
+</label>
 
 <select id="ownerGas">
 
-<option value="yes" ${s.gas==="yes"?"selected":""}>
+<option
+value="yes"
+${s.gas==="yes"?"selected":""}>
+
 🟢 يوجد
+
 </option>
 
-<option value="no" ${s.gas==="no"?"selected":""}>
+<option
+value="no"
+${s.gas==="no"?"selected":""}>
+
 🔴 لا يوجد
+
 </option>
 
 </select>
@@ -1095,16 +1490,26 @@ ${fmt(s.updated_at)}
 
 <div>
 
-<label>المازوت</label>
+<label>
+المازوت
+</label>
 
 <select id="ownerDiesel">
 
-<option value="yes" ${s.diesel==="yes"?"selected":""}>
+<option
+value="yes"
+${s.diesel==="yes"?"selected":""}>
+
 🟢 يوجد
+
 </option>
 
-<option value="no" ${s.diesel==="no"?"selected":""}>
+<option
+value="no"
+${s.diesel==="no"?"selected":""}>
+
 🔴 لا يوجد
+
 </option>
 
 </select>
@@ -1114,20 +1519,34 @@ ${fmt(s.updated_at)}
 </div>
 
 
-<label>الازدحام</label>
+<label>
+الازدحام
+</label>
 
 <select id="ownerTraffic">
 
-<option value="none" ${s.traffic==="none"?"selected":""}>
+<option
+value="none"
+${s.traffic==="none"?"selected":""}>
+
 🟢 لا يوجد ازدحام
+
 </option>
 
-<option value="light" ${s.traffic==="light"?"selected":""}>
+<option
+value="light"
+${s.traffic==="light"?"selected":""}>
+
 🟡 ازدحام خفيف
+
 </option>
 
-<option value="long" ${s.traffic==="long"?"selected":""}>
+<option
+value="long"
+${s.traffic==="long"?"selected":""}>
+
 🔴 طابور طويل
+
 </option>
 
 </select>
@@ -1135,9 +1554,13 @@ ${fmt(s.updated_at)}
 </div>
 
 
-<div id="ownerClosedFields" class="closure-box">
+<div
+id="ownerClosedFields"
+class="closure-box">
 
-<label>سبب الإغلاق</label>
+<label>
+سبب الإغلاق
+</label>
 
 <select id="ownerClosureReason">
 
@@ -1145,34 +1568,60 @@ ${fmt(s.updated_at)}
 اختر السبب
 </option>
 
-<option value="maintenance" ${s.closure_reason==="maintenance"?"selected":""}>
+<option
+value="maintenance"
+${s.closure_reason==="maintenance"?"selected":""}>
+
 🔧 صيانة
+
 </option>
 
-<option value="technical" ${s.closure_reason==="technical"?"selected":""}>
+<option
+value="technical"
+${s.closure_reason==="technical"?"selected":""}>
+
 ⚡ عطل فني
+
 </option>
 
-<option value="delivery" ${s.closure_reason==="delivery"?"selected":""}>
+<option
+value="delivery"
+${s.closure_reason==="delivery"?"selected":""}>
+
 🚚 بانتظار وصول الطلبية
+
 </option>
 
-<option value="fuel" ${s.closure_reason==="fuel"?"selected":""}>
+<option
+value="fuel"
+${s.closure_reason==="fuel"?"selected":""}>
+
 ⛽ نفاد الوقود
+
 </option>
 
-<option value="administrative" ${s.closure_reason==="administrative"?"selected":""}>
+<option
+value="administrative"
+${s.closure_reason==="administrative"?"selected":""}>
+
 🏢 إغلاق إداري
+
 </option>
 
-<option value="temporary" ${s.closure_reason==="temporary"?"selected":""}>
+<option
+value="temporary"
+${s.closure_reason==="temporary"?"selected":""}>
+
 🕐 إغلاق مؤقت
+
 </option>
 
 </select>
 
 
-<label>مدة الإغلاق المتوقعة</label>
+<label>
+مدة الإغلاق المتوقعة
+</label>
 
 <select id="ownerClosureHours">
 
@@ -1180,36 +1629,68 @@ ${fmt(s.updated_at)}
 اختر المدة
 </option>
 
-<option value="1" ${String(s.closure_hours)==="1"?"selected":""}>
+<option
+value="1"
+${String(s.closure_hours)==="1"?"selected":""}>
+
 1 ساعة
+
 </option>
 
-<option value="2" ${String(s.closure_hours)==="2"?"selected":""}>
+<option
+value="2"
+${String(s.closure_hours)==="2"?"selected":""}>
+
 2 ساعة
+
 </option>
 
-<option value="3" ${String(s.closure_hours)==="3"?"selected":""}>
+<option
+value="3"
+${String(s.closure_hours)==="3"?"selected":""}>
+
 3 ساعات
+
 </option>
 
-<option value="4" ${String(s.closure_hours)==="4"?"selected":""}>
+<option
+value="4"
+${String(s.closure_hours)==="4"?"selected":""}>
+
 4 ساعات
+
 </option>
 
-<option value="6" ${String(s.closure_hours)==="6"?"selected":""}>
+<option
+value="6"
+${String(s.closure_hours)==="6"?"selected":""}>
+
 6 ساعات
+
 </option>
 
-<option value="8" ${String(s.closure_hours)==="8"?"selected":""}>
+<option
+value="8"
+${String(s.closure_hours)==="8"?"selected":""}>
+
 8 ساعات
+
 </option>
 
-<option value="12" ${String(s.closure_hours)==="12"?"selected":""}>
+<option
+value="12"
+${String(s.closure_hours)==="12"?"selected":""}>
+
 12 ساعة
+
 </option>
 
-<option value="24" ${String(s.closure_hours)==="24"?"selected":""}>
+<option
+value="24"
+${String(s.closure_hours)==="24"?"selected":""}>
+
 24 ساعة
+
 </option>
 
 </select>
@@ -1218,6 +1699,7 @@ ${fmt(s.updated_at)}
 
 
 <br>
+
 
 <button
 class="primary"
@@ -1239,6 +1721,7 @@ style="margin-top:12px;text-align:center">
 
 `;
 
+
 toggleOwnerFields();
 
 }
@@ -1251,18 +1734,28 @@ $("ownerStatus").value==="closed";
 
 
 $("ownerOpenFields").style.display=
-closed?"none":"block";
+closed
+?
+"none"
+:
+"block";
 
 
 $("ownerClosedFields").style.display=
-closed?"block":"none";
+closed
+?
+"block"
+:
+"none";
 
 
 if($("ownerGas"))
 $("ownerGas").disabled=closed;
 
+
 if($("ownerDiesel"))
 $("ownerDiesel").disabled=closed;
+
 
 if($("ownerTraffic"))
 $("ownerTraffic").disabled=closed;
@@ -1279,6 +1772,7 @@ async function saveOwner(){
 if(currentRole!=="station_owner"){
 
 alert("ليس لديك صلاحية.");
+
 return;
 
 }
@@ -1289,6 +1783,7 @@ $("ownerStatus").value==="closed";
 
 
 let closureReason=null;
+
 let closureHours=null;
 
 
@@ -1311,7 +1806,10 @@ null;
 
 if(!closureReason){
 
-alert("اختر سبب الإغلاق.");
+alert(
+"اختر سبب الإغلاق."
+);
+
 return;
 
 }
@@ -1319,7 +1817,10 @@ return;
 
 if(closureHours===null){
 
-alert("اختر مدة الإغلاق المتوقعة.");
+alert(
+"اختر مدة الإغلاق المتوقعة."
+);
+
 return;
 
 }
@@ -1364,7 +1865,9 @@ payload.traffic="closed";
 }
 
 
-const {error}=await sb
+const {
+error
+}=await sb
 
 .from("stations")
 
@@ -1395,8 +1898,11 @@ return;
 
 
 const updatedStation={
+
 ...stations[0],
+
 ...payload
+
 };
 
 
@@ -1445,7 +1951,10 @@ loadOwner,
 
 async function loadAdmin(){
 
-const {data:p,error:pe}=await sb
+const {
+data:p,
+error:pe
+}=await sb
 
 .from("pending_updates")
 
@@ -1453,11 +1962,16 @@ const {data:p,error:pe}=await sb
 
 .order(
 "submitted_at",
-{ascending:false}
+{
+ascending:false
+}
 );
 
 
-const {data:s,error:se}=await sb
+const {
+data:s,
+error:se
+}=await sb
 
 .from("stations")
 
@@ -1465,7 +1979,9 @@ const {data:s,error:se}=await sb
 
 .order(
 "name",
-{ascending:true}
+{
+ascending:true
+}
 );
 
 
@@ -1501,7 +2017,9 @@ $("app").innerHTML=`
 
 <div class="admin-box">
 
-<b>👑 حساب المشرف</b>
+<b>
+👑 حساب المشرف
+</b>
 
 <br>
 
@@ -1514,6 +2032,7 @@ ${esc(session.user.email)}
 
 </div>
 
+
 <button onclick="logout()">
 خروج
 </button>
@@ -1521,13 +2040,16 @@ ${esc(session.user.email)}
 </div>
 
 
-<!-- إحصائيات الزوار -->
+<!-- =================================================
+     إحصائيات الزوار
+================================================= -->
 
 <div class="panel">
 
 <h3>
 📊 إحصائيات الموقع
 </h3>
+
 
 <div class="stats">
 
@@ -1579,13 +2101,16 @@ ${esc(session.user.email)}
 </div>
 
 
-<!-- إحصائيات المحطات -->
+<!-- =================================================
+     إحصائيات المحطات
+================================================= -->
 
 <div class="panel">
 
 <h3>
 📊 إحصائيات المحطات
 </h3>
+
 
 <div class="stats">
 
@@ -1645,13 +2170,16 @@ s.gas==="yes"
 </div>
 
 
-<!-- التحديثات المعلقة -->
+<!-- =================================================
+     التحديثات المعلقة
+================================================= -->
 
 <div class="panel">
 
 <h3>
 التحديثات المعلقة (${p.length})
 </h3>
+
 
 ${
 p.length
@@ -1668,23 +2196,29 @@ ${esc(x.name)}
 
 <br>
 
+
 <span class="badge">
 ${esc(x.status)}
 </span>
+
 
 <span class="badge">
 بنزين ${esc(x.gas)}
 </span>
 
+
 <span class="badge">
 مازوت ${esc(x.diesel)}
 </span>
+
 
 <span class="badge">
 ${esc(x.traffic)}
 </span>
 
+
 <br>
+
 
 <div class="actions">
 
@@ -1695,6 +2229,7 @@ onclick="approve('${x.id}')">
 اعتماد ✅
 
 </button>
+
 
 <button
 class="danger"
@@ -1719,7 +2254,9 @@ onclick="reject('${x.id}')">
 </div>
 
 
-<!-- جميع المحطات -->
+<!-- =================================================
+     جميع المحطات
+================================================= -->
 
 <div class="panel">
 
@@ -1728,6 +2265,7 @@ onclick="reject('${x.id}')">
 <h3>
 جميع المحطات (${stations.length})
 </h3>
+
 
 <button
 class="primary"
@@ -1750,6 +2288,7 @@ ${stations.map(s=>`
 ${esc(s.name)}
 </div>
 
+
 <div class="muted">
 ${esc(s.area||"")}
 </div>
@@ -1757,7 +2296,9 @@ ${esc(s.area||"")}
 
 ${
 s.region_type
+
 ?
+
 `
 
 <span class="badge ${
@@ -1773,12 +2314,24 @@ ${esc(regionText(s.region_type))}
 </span>
 
 `
+
 :
-""
+
+`
+
+<span class="badge region-required">
+
+⚠️ تصنيف المنطقة غير محدد
+
+</span>
+
+`
+
 }
 
 
 <br>
+
 
 <span
 class="badge ${s.status==="open"?"ok":"no"}">
@@ -1812,6 +2365,7 @@ s.closure_reason
 
 </span>
 
+
 <span class="badge warn">
 
 ⏱️
@@ -1836,6 +2390,7 @@ ${s.gas==="yes"?"يوجد":"لا يوجد"}
 
 </span>
 
+
 <span
 class="badge ${s.diesel==="yes"?"ok":"no"}">
 
@@ -1851,9 +2406,12 @@ ${s.diesel==="yes"?"يوجد":"لا يوجد"}
 
 <br>
 
+
 <small>
+
 آخر تحديث:
 ${fmt(s.updated_at)}
+
 </small>
 
 
@@ -1911,9 +2469,13 @@ style="margin-top:8px;white-space:normal">
 
 <div class="actions">
 
-<button onclick="openEdit('${s.id}')">
+<button
+onclick="openEdit('${s.id}')">
+
 ✏️ تعديل
+
 </button>
+
 
 <button
 class="danger"
@@ -1939,14 +2501,15 @@ onclick="removeStation('${s.id}')">
 
 
 /* =================================================
-   تعديل
+   تعديل محطة
 ================================================= */
 
 function openEdit(id){
 
 const s=
 stations.find(
-x=>String(x.id)===String(id)
+x=>
+String(x.id)===String(id)
 );
 
 
@@ -1970,7 +2533,9 @@ $("area").value=
 s.area||"";
 
 
-/* التصنيف الجديد */
+/* =================================================
+   التصنيف
+================================================= */
 
 $("region_type").value=
 s.region_type||"";
@@ -1989,15 +2554,15 @@ s.traffic==="closed"
 ?
 "none"
 :
-s.traffic;
+s.traffic||"none";
 
 
 $("gas").value=
-s.gas;
+s.gas||"no";
 
 
 $("diesel").value=
-s.diesel;
+s.diesel||"no";
 
 
 $("note").value=
@@ -2022,13 +2587,14 @@ String(s.closure_hours);
 
 toggleAdminOpening();
 
+
 stationDlg.showModal();
 
 }
 
 
 /* =================================================
-   إضافة
+   إضافة محطة
 ================================================= */
 
 function openAdd(){
@@ -2050,6 +2616,12 @@ $("status").value=
 $("opening_time").value="";
 
 
+/*
+مهم:
+لا نضع مدينة ولا ريف تلقائياً.
+يجب على المشرف الاختيار.
+*/
+
 $("region_type").value="";
 
 
@@ -2062,7 +2634,17 @@ $("closure_reason").value="";
 $("closure_hours").value="";
 
 
+$("traffic").value="none";
+
+
+$("gas").value="yes";
+
+
+$("diesel").value="yes";
+
+
 toggleAdminOpening();
+
 
 stationDlg.showModal();
 
@@ -2104,8 +2686,10 @@ closed
 $("traffic").disabled=
 closed;
 
+
 $("gas").disabled=
 closed;
+
 
 $("diesel").disabled=
 closed;
@@ -2121,6 +2705,7 @@ $("traffic").value=
 if(
 $("traffic").value==="closed"
 )
+
 $("traffic").value="none";
 
 }
@@ -2139,6 +2724,33 @@ e.preventDefault();
 
 const id=
 $("sid").value;
+
+
+/* =================================================
+   التحقق من تصنيف المنطقة
+================================================= */
+
+const regionType=
+$("region_type").value;
+
+
+if(
+regionType!=="city" &&
+regionType!=="countryside"
+){
+
+alert(
+"⚠️ يجب اختيار تصنيف المحطة:\n\n"+
+"🏙️ مدينة حلب\n"+
+"أو\n"+
+"🌿 ريف حلب"
+);
+
+$("region_type").focus();
+
+return;
+
+}
 
 
 const closed=
@@ -2208,7 +2820,9 @@ return;
 }
 
 
-/* رابط الموقع */
+/* =================================================
+   رابط الموقع
+================================================= */
 
 const locationUrl=
 $("location_url")
@@ -2230,11 +2844,9 @@ return;
 }
 
 
-/*
-مهم:
-لا نرسل "" للحقول الرقمية.
-مدة الإغلاق ترسل رقماً أو null.
-*/
+/* =================================================
+   البيانات
+================================================= */
 
 const payload={
 
@@ -2244,10 +2856,13 @@ $("name").value.trim(),
 area:
 $("area").value.trim(),
 
-/* التصنيف الجديد */
+/*
+التصنيف يحفظ دائماً:
+city أو countryside
+*/
 
 region_type:
-$("region_type").value || null,
+regionType,
 
 location_url:
 locationUrl || null,
@@ -2292,7 +2907,9 @@ payload.traffic=
 }
 
 
-/* حفظ */
+/* =================================================
+   حفظ
+================================================= */
 
 let result;
 
@@ -2333,6 +2950,7 @@ return;
 
 stationDlg.close();
 
+
 loadAdmin();
 
 };
@@ -2349,12 +2967,13 @@ if(
 "هل أنت متأكد من حذف هذه المحطة؟"
 )
 )
+
 return;
 
 
-const {error}=
-
-await sb
+const {
+error
+}=await sb
 
 .from("stations")
 
@@ -2397,11 +3016,13 @@ error
 .single();
 
 
-if(error||!p){
+if(error || !p){
 
 alert(
-error?.message||
+
+error?.message ||
 "لم يتم العثور على التحديث."
+
 );
 
 return;
@@ -2409,13 +3030,18 @@ return;
 }
 
 
+/* =================================================
+   البحث عن المحطة الموجودة
+================================================= */
+
 const {
-data:old
+data:old,
+error:oldError
 }=await sb
 
 .from("stations")
 
-.select("id")
+.select("id,region_type")
 
 .eq("name",p.name)
 
@@ -2424,13 +3050,41 @@ data:old
 .maybeSingle();
 
 
+if(oldError){
+
+alert(
+oldError.message
+);
+
+return;
+
+}
+
+
 let result;
 
 
+/* =================================================
+   المحطة موجودة
+================================================= */
+
 if(old){
 
-result=
+/*
+مهم جداً:
 
+عند تحديث محطة موجودة
+لا نلمس region_type.
+
+إذا كانت محطة شويحنة ريف
+تبقى ريف.
+
+إذا كانت محطة داخل المدينة
+تبقى مدينة.
+
+*/
+
+result=
 await sb
 
 .from("stations")
@@ -2457,10 +3111,61 @@ new Date().toISOString()
 
 .eq("id",old.id);
 
-}else{
+}
+
+
+/* =================================================
+   محطة جديدة
+================================================= */
+
+else{
+
+/*
+إذا كانت محطة جديدة قادمة من pending_updates
+فلا يجوز إنشاؤها بدون تصنيف.
+
+إذا كان جدول pending_updates يحتوي region_type
+نستخدمه.
+
+*/
+
+const pendingRegion=
+p.region_type;
+
+
+/*
+إذا لم يوجد تصنيف
+نوقف الاعتماد حتى لا تظهر
+المحطة تلقائياً في مدينة حلب.
+*/
+
+if(
+pendingRegion!=="city" &&
+pendingRegion!=="countryside"
+){
+
+alert(
+
+"⚠️ هذه محطة جديدة ولا يوجد لها تصنيف.\n\n"+
+
+"يجب تحديد:\n"+
+
+"🏙️ مدينة حلب\n"+
+
+"أو\n"+
+
+"🌿 ريف حلب\n\n"+
+
+"أضف المحطة من زر «إضافة محطة» في لوحة التحكم."
+
+);
+
+return;
+
+}
+
 
 result=
-
 await sb
 
 .from("stations")
@@ -2471,9 +3176,16 @@ name:p.name,
 
 area:p.area,
 
+region_type:pendingRegion,
+
 status:p.status,
 
-traffic:p.traffic,
+traffic:
+p.status==="closed"
+?
+"closed"
+:
+p.traffic,
 
 gas:p.gas,
 
@@ -2498,6 +3210,10 @@ return;
 }
 
 
+/* =================================================
+   حذف التحديث المعلق
+================================================= */
+
 await sb
 
 .from("pending_updates")
@@ -2518,9 +3234,9 @@ loadAdmin();
 
 async function reject(id){
 
-const {error}=
-
-await sb
+const {
+error
+}=await sb
 
 .from("pending_updates")
 
@@ -2565,4 +3281,5 @@ init();
 </script>
 
 </body>
+
 </html>
