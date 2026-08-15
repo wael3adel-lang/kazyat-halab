@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
+
 <head>
 
 <meta charset="utf-8">
@@ -242,30 +243,75 @@ font-weight:800;
 color:#555
 }
 
+/* النجوم والأرقام من 1 إلى 5 */
+
 .stars{
-margin-top:6px;
+margin-top:8px;
 display:flex;
-gap:2px;
-direction:rtl
+gap:4px;
+direction:ltr;
+justify-content:flex-start;
+align-items:flex-start
+}
+
+.star-item{
+text-align:center;
+min-width:42px
 }
 
 .star{
 border:0;
 background:transparent;
-font-size:25px;
+font-size:27px;
 padding:1px 3px;
 cursor:pointer;
-line-height:1
+line-height:1;
+transition:.15s
 }
 
 .star:hover{
-transform:scale(1.1)
+transform:scale(1.12)
+}
+
+.star.selected{
+transform:scale(1.12)
+}
+
+.star-number{
+font-size:12px;
+font-weight:800;
+color:#555;
+margin-top:1px
+}
+
+.rating-selected{
+font-size:13px;
+font-weight:700;
+color:#0f766e;
+margin-top:8px;
+min-height:20px
+}
+
+.confirm-rating{
+margin-top:9px;
+border:0;
+background:#0f766e;
+color:#fff;
+border-radius:10px;
+padding:9px 16px;
+font:inherit;
+font-weight:800;
+cursor:pointer
+}
+
+.confirm-rating:hover{
+opacity:.9
 }
 
 .rating-message{
 font-size:12px;
 color:#0f766e;
-margin-top:5px;
+margin-top:6px;
 min-height:18px
 }
 
@@ -315,17 +361,21 @@ padding:6px 9px
 
 </head>
 
+
 <body>
+
 
 <header>
 
 <div class="wrap">
+
 
 <div class="header-top">
 
 <div class="brand">
 ⛽ كازيات حلب
 </div>
+
 
 <a
 class="admin-message"
@@ -339,13 +389,16 @@ rel="noopener">
 
 </div>
 
+
 <div class="sub">
 حالة المحطات وآخر تحديثات الوقود
 </div>
 
+
 <div class="credit">
 By Ammar Morgan
 </div>
+
 
 <div
 class="sub"
@@ -354,6 +407,7 @@ id="updatedLine">
 آخر تحديث: جاري التحميل…
 
 </div>
+
 
 <div class="search">
 
@@ -365,11 +419,18 @@ autocomplete="off">
 
 </div>
 
+
 </div>
 
 </header>
 
+
 <main class="wrap">
+
+
+<!-- =========================
+     إحصائيات
+========================= -->
 
 <div
 class="stats"
@@ -383,6 +444,7 @@ id="stats">
 
 <div class="filters">
 
+
 <button
 class="active"
 data-region="city">
@@ -391,6 +453,7 @@ data-region="city">
 
 </button>
 
+
 <button
 data-region="countryside">
 
@@ -398,14 +461,16 @@ data-region="countryside">
 
 </button>
 
+
 </div>
 
 
 <!-- =========================
-     فلاتر حالة المحطات
+     فلاتر المحطات
 ========================= -->
 
 <div class="filters">
+
 
 <button
 class="active"
@@ -415,33 +480,41 @@ data-f="all">
 
 </button>
 
+
 <button data-f="open">
 تعمل
 </button>
+
 
 <button data-f="both">
 بنزين + مازوت
 </button>
 
+
 <button data-f="gas">
 بنزين
 </button>
+
 
 <button data-f="diesel">
 مازوت
 </button>
 
+
 <button data-f="closed">
 مغلقة
 </button>
+
 
 <button data-f="long">
 طابور طويل
 </button>
 
+
 <button data-f="light">
 ازدحام خفيف
 </button>
+
 
 </div>
 
@@ -457,12 +530,19 @@ class="grid"
 id="stations">
 </section>
 
+
 </main>
 
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+
 <script>
+
+
+/* =========================
+   Supabase
+========================= */
 
 const sb=supabase.createClient(
 
@@ -472,11 +552,20 @@ const sb=supabase.createClient(
 
 );
 
+
+/* =========================
+   المتغيرات
+========================= */
+
 let all=[];
+
 let filter="all";
+
 let regionFilter="city";
 
 const ratings={};
+
+const selectedRatings={};
 
 const $=id=>document.getElementById(id);
 
@@ -507,7 +596,8 @@ return String(x??"")
 
 function fmt(t){
 
-if(!t)return "—";
+if(!t)
+return "—";
 
 return new Intl.DateTimeFormat(
 "ar-SY",
@@ -529,25 +619,35 @@ minute:"2-digit"
 
 function closureReasonText(v){
 
-const value=String(v??"").trim().toLowerCase();
+const value=
+String(v??"")
+.trim()
+.toLowerCase();
+
 
 if(value==="maintenance")
 return "🔧 صيانة";
 
+
 if(value==="technical")
 return "⚡ عطل فني";
+
 
 if(value==="delivery")
 return "🚚 بانتظار وصول الطلبية";
 
+
 if(value==="fuel")
 return "⛽ نفاد الوقود";
+
 
 if(value==="administrative")
 return "🏢 إغلاق إداري";
 
+
 if(value==="temporary")
 return "🕐 إغلاق مؤقت";
+
 
 return "";
 
@@ -560,30 +660,54 @@ return "";
 
 function tr(v){
 
-const value=String(v??"").trim().toLowerCase();
+const value=
+String(v??"")
+.trim()
+.toLowerCase();
+
 
 if(value==="none")
-return ["🟢","لا يوجد ازدحام","ok"];
+return [
+"🟢",
+"لا يوجد ازدحام",
+"ok"
+];
+
 
 if(value==="light")
-return ["🟡","ازدحام خفيف","warn"];
+return [
+"🟡",
+"ازدحام خفيف",
+"warn"
+];
+
 
 if(value==="long")
-return ["🔴","طابور طويل","no"];
+return [
+"🔴",
+"طابور طويل",
+"no"
+];
 
-return ["❌","مغلقة","gray"];
+
+return [
+"❌",
+"مغلقة",
+"gray"
+];
 
 }
 
 
 /* =========================
-   لوكيشن
+   زر الموقع
 ========================= */
 
 function locationButton(s){
 
 if(!s.location_url)
 return "";
+
 
 return `
 
@@ -603,12 +727,14 @@ rel="noopener">
 
 
 /* =========================
-   الشكوى
+   زر الشكوى
 ========================= */
 
 function complaintButton(s){
 
-const stationName=String(s.name??"محطة");
+const stationName=
+String(s.name??"محطة");
+
 
 const text=
 `شكوى بخصوص ${stationName}
@@ -616,9 +742,11 @@ const text=
 أرغب بتقديم شكوى:
 `;
 
+
 const url=
 "https://wa.me/905050978000?text="+
 encodeURIComponent(text);
+
 
 return `
 
@@ -638,55 +766,107 @@ rel="noopener">
 
 
 /* =========================
-   التقييم
+   صندوق التقييم
 ========================= */
 
 function ratingBox(s){
 
-const r=ratings[s.id] || {
+const r=
+ratings[s.id] ||
+{
 average:0,
 count:0
 };
 
+
 const average=
 Number(r.average||0).toFixed(1);
 
+
 const count=
 Number(r.count||0);
+
 
 return `
 
 <div class="rating-box">
 
+
 <div class="rating-average">
 
 ⭐ تقييم المحطة:
 ${average} / 5
-${count ? ` — ${count} تقييم` : ""}
+
+${
+count
+?
+` — ${count} تقييم`
+:
+""
+}
 
 </div>
+
 
 <div class="stars">
 
-${[5,4,3,2,1].map(n=>`
+
+${[1,2,3,4,5].map(n=>`
+
+<div class="star-item">
+
 
 <button
 class="star"
-onclick="rateStation(${Number(s.id)},${n})"
+onclick="selectRating(${Number(s.id)},${n})"
+id="star-${Number(s.id)}-${n}"
 title="تقييم ${n} من 5">
 
-${n <= Math.round(Number(r.average||0)) ? "⭐" : "☆"}
+☆
 
 </button>
 
-`).join("")}
+
+<div class="star-number">
+
+${n}
 
 </div>
+
+
+</div>
+
+`).join("")}
+
+
+</div>
+
+
+<div
+class="rating-selected"
+id="rating-selected-${Number(s.id)}">
+
+اختر تقييمك من 1 إلى 5
+
+</div>
+
+
+<button
+class="confirm-rating"
+id="confirm-rating-${Number(s.id)}"
+onclick="confirmRating(${Number(s.id)})"
+style="display:none">
+
+✅ تأكيد التقييم
+
+</button>
+
 
 <div
 class="rating-message"
 id="rating-message-${Number(s.id)}">
 </div>
+
 
 </div>
 
@@ -696,169 +876,104 @@ id="rating-message-${Number(s.id)}">
 
 
 /* =========================
-   فلتر المنطقة والحالة
+   اختيار التقييم
 ========================= */
 
-function stationMatchesFilter(s){
+function selectRating(stationId,rating){
 
-const status=
-String(s.status??"")
-.trim()
-.toLowerCase();
-
-const gas=
-String(s.gas??"")
-.trim()
-.toLowerCase();
-
-const diesel=
-String(s.diesel??"")
-.trim()
-.toLowerCase();
-
-const traffic=
-String(s.traffic??"")
-.trim()
-.toLowerCase();
-
-const region=
-String(s.region??"")
-.trim()
-.toLowerCase();
+selectedRatings[stationId]=rating;
 
 
-/* المنطقة */
+const selected=
+document.getElementById(
+"rating-selected-"+stationId
+);
 
-if(regionFilter==="countryside"){
 
-if(region!=="countryside")
-return false;
+if(selected){
+
+selected.textContent=
+"اخترت: ⭐ "+rating+
+" من 5 — يمكنك تغيير الاختيار قبل التأكيد";
+
+}
+
+
+/* تحديث النجوم */
+
+for(let n=1;n<=5;n++){
+
+const star=
+document.getElementById(
+"star-"+stationId+"-"+n
+);
+
+
+if(star){
+
+star.textContent=
+n<=rating
+?
+"⭐"
+:
+"☆";
+
+
+if(n<=rating){
+
+star.classList.add("selected");
 
 }else{
 
-/*
-  أي محطة ليست countryside
-  تعتبر من مدينة حلب.
-*/
+star.classList.remove("selected");
 
-if(region==="countryside")
-return false;
+}
+
+}
 
 }
 
 
-/* حالة المحطة */
+/* إظهار زر التأكيد */
 
-if(filter==="open"){
-return status==="open";
-}
-
-if(filter==="closed"){
-return status==="closed";
-}
-
-if(filter==="both"){
-return (
-status==="open" &&
-gas==="yes" &&
-diesel==="yes"
+const confirm=
+document.getElementById(
+"confirm-rating-"+stationId
 );
-}
 
-if(filter==="gas"){
-return (
-status==="open" &&
-gas==="yes"
-);
-}
 
-if(filter==="diesel"){
-return (
-status==="open" &&
-diesel==="yes"
-);
-}
+if(confirm){
 
-if(filter==="long"){
-return (
-status==="open" &&
-traffic==="long"
-);
-}
+confirm.style.display=
+"inline-block";
 
-if(filter==="light"){
-return (
-status==="open" &&
-traffic==="light"
-);
 }
-
-return true;
 
 }
 
 
 /* =========================
-   تحميل التقييمات
+   تأكيد التقييم
 ========================= */
 
-async function loadRatings(){
+async function confirmRating(stationId){
 
-const {data,error}=
+const rating=
+selectedRatings[stationId];
 
-await sb
-.from("station_ratings")
-.select("station_id,rating");
 
-if(error){
-
-console.log("Ratings error:",error.message);
+if(!rating){
 
 return;
 
 }
 
 
-Object.keys(ratings)
-.forEach(k=>delete ratings[k]);
-
-
-(data||[]).forEach(row=>{
-
-const id=String(row.station_id);
-
-if(!ratings[id]){
-
-ratings[id]={
-total:0,
-count:0,
-average:0
-};
-
-}
-
-ratings[id].total += Number(row.rating);
-ratings[id].count += 1;
-
-ratings[id].average =
-ratings[id].total /
-ratings[id].count;
-
-});
-
-}
-
-
-/* =========================
-   إرسال تقييم
-========================= */
-
-async function rateStation(stationId,rating){
-
 const message=
 document.getElementById(
 "rating-message-"+stationId
 );
+
 
 if(message){
 
@@ -870,6 +985,9 @@ message.textContent=
 
 const storageKey=
 "rated_station_"+stationId;
+
+
+/* منع التقييم الثاني */
 
 if(localStorage.getItem(storageKey)){
 
@@ -885,13 +1003,15 @@ return;
 }
 
 
-const {error}=
+/* إرسال التقييم */
 
+const {error}=
 await sb
 .from("station_ratings")
 .insert({
 
 station_id:Number(stationId),
+
 rating:Number(rating)
 
 });
@@ -900,6 +1020,7 @@ rating:Number(rating)
 if(error){
 
 console.error(error);
+
 
 if(message){
 
@@ -913,11 +1034,15 @@ return;
 }
 
 
+/* حفظ حالة التقييم */
+
 localStorage.setItem(
 storageKey,
 "1"
 );
 
+
+/* رسالة النجاح */
 
 if(message){
 
@@ -927,7 +1052,11 @@ message.textContent=
 }
 
 
+delete selectedRatings[stationId];
+
+
 await loadRatings();
+
 
 await render();
 
@@ -935,10 +1064,209 @@ await render();
 
 
 /* =========================
-   عرض البيانات
+   فلتر المحطة
+========================= */
+
+function stationMatchesFilter(s){
+
+
+const status=
+String(s.status??"")
+.trim()
+.toLowerCase();
+
+
+const gas=
+String(s.gas??"")
+.trim()
+.toLowerCase();
+
+
+const diesel=
+String(s.diesel??"")
+.trim()
+.toLowerCase();
+
+
+const traffic=
+String(s.traffic??"")
+.trim()
+.toLowerCase();
+
+
+const region=
+String(s.region??"")
+.trim()
+.toLowerCase();
+
+
+/* =========================
+   المنطقة
+========================= */
+
+if(regionFilter==="countryside"){
+
+if(region!=="countryside")
+return false;
+
+}else{
+
+/*
+أي محطة ليست ريف حلب
+تعتبر من مدينة حلب
+*/
+
+if(region==="countryside")
+return false;
+
+}
+
+
+/* =========================
+   الحالة
+========================= */
+
+if(filter==="open"){
+
+return status==="open";
+
+}
+
+
+if(filter==="closed"){
+
+return status==="closed";
+
+}
+
+
+if(filter==="both"){
+
+return (
+status==="open" &&
+gas==="yes" &&
+diesel==="yes"
+);
+
+}
+
+
+if(filter==="gas"){
+
+return (
+status==="open" &&
+gas==="yes"
+);
+
+}
+
+
+if(filter==="diesel"){
+
+return (
+status==="open" &&
+diesel==="yes"
+);
+
+}
+
+
+if(filter==="long"){
+
+return (
+status==="open" &&
+traffic==="long"
+);
+
+}
+
+
+if(filter==="light"){
+
+return (
+status==="open" &&
+traffic==="light"
+);
+
+}
+
+
+return true;
+
+}
+
+
+/* =========================
+   تحميل التقييمات
+========================= */
+
+async function loadRatings(){
+
+const {data,error}=
+await sb
+.from("station_ratings")
+.select("station_id,rating");
+
+
+if(error){
+
+console.log(
+"Ratings error:",
+error.message
+);
+
+return;
+
+}
+
+
+Object.keys(ratings)
+.forEach(
+k=>
+delete ratings[k]
+);
+
+
+(data||[]).forEach(row=>{
+
+const id=
+String(row.station_id);
+
+
+if(!ratings[id]){
+
+ratings[id]={
+total:0,
+count:0,
+average:0
+};
+
+}
+
+
+ratings[id].total +=
+Number(row.rating);
+
+
+ratings[id].count +=
+1;
+
+
+ratings[id].average=
+ratings[id].total /
+ratings[id].count;
+
+});
+
+}
+
+
+/* =========================
+   عرض المحطات
 ========================= */
 
 async function render(){
+
 
 const q=
 $("search")
@@ -950,9 +1278,11 @@ $("search")
 const a=
 all.filter(s=>{
 
+
 const name=
 String(s.name??"")
 .toLowerCase();
+
 
 const area=
 String(s.area??"")
@@ -975,10 +1305,12 @@ return stationMatchesFilter(s);
 
 
 /* =========================
-   إحصائيات
+   الإحصائيات
 ========================= */
 
-const total=a.length;
+const total=
+a.length;
+
 
 const open=
 a.filter(
@@ -988,6 +1320,7 @@ String(s.status??"")
 .toLowerCase()==="open"
 ).length;
 
+
 const closed=
 a.filter(
 s=>
@@ -996,12 +1329,14 @@ String(s.status??"")
 .toLowerCase()==="closed"
 ).length;
 
+
 const gas=
 a.filter(
 s=>
 String(s.status??"")
 .trim()
 .toLowerCase()==="open" &&
+
 String(s.gas??"")
 .trim()
 .toLowerCase()==="yes"
@@ -1050,6 +1385,10 @@ $("stats").innerHTML=
 `;
 
 
+/* =========================
+   العدد
+========================= */
+
 $("count").textContent=
 
 a.length===0
@@ -1065,10 +1404,13 @@ a.length+" محطة";
 
 $("stations").innerHTML=
 
+
 a.map(s=>{
+
 
 const t=
 tr(s.traffic);
+
 
 const status=
 String(s.status??"")
@@ -1077,7 +1419,7 @@ String(s.status??"")
 
 
 /* =========================
-   محطة مغلقة
+   المحطة المغلقة
 ========================= */
 
 if(status==="closed"){
@@ -1086,17 +1428,20 @@ return `
 
 <article class="card">
 
+
 <div class="name">
 
 ${esc(s.name)}
 
 </div>
 
+
 <div class="area">
 
 ${esc(s.area||"")}
 
 </div>
+
 
 <div class="badges">
 
@@ -1110,6 +1455,7 @@ ${esc(s.area||"")}
 
 
 <div class="closure-info">
+
 
 ${
 s.closure_reason
@@ -1134,7 +1480,6 @@ s.closure_reason
 :
 
 ""
-
 }
 
 
@@ -1159,8 +1504,8 @@ ${esc(s.closure_hours)}
 :
 
 ""
-
 }
+
 
 </div>
 
@@ -1182,13 +1527,14 @@ s.note
 :
 
 ""
-
 }
 
 
 ${locationButton(s)}
 
+
 ${ratingBox(s)}
+
 
 ${complaintButton(s)}
 
@@ -1210,18 +1556,20 @@ ${fmt(s.updated_at)}
 
 
 /* =========================
-   محطة تعمل
+   المحطة العاملة
 ========================= */
 
 return `
 
 <article class="card">
 
+
 <div class="name">
 
 ${esc(s.name)}
 
 </div>
+
 
 <div class="area">
 
@@ -1248,7 +1596,8 @@ ${t[1]}
 </span>
 
 
-<span class="badge ${
+<span
+class="badge ${
 String(s.gas??"")
 .trim()
 .toLowerCase()==="yes"
@@ -1273,7 +1622,8 @@ String(s.gas??"")
 </span>
 
 
-<span class="badge ${
+<span
+class="badge ${
 String(s.diesel??"")
 .trim()
 .toLowerCase()==="yes"
@@ -1318,13 +1668,14 @@ s.note
 :
 
 ""
-
 }
 
 
 ${locationButton(s)}
 
+
 ${ratingBox(s)}
+
 
 ${complaintButton(s)}
 
@@ -1344,7 +1695,9 @@ ${fmt(s.updated_at)}
 
 })
 
+
 .join("")
+
 
 ||
 
@@ -1370,7 +1723,6 @@ style="text-align:center;color:#777">
 async function load(){
 
 const {data,error}=
-
 await sb
 .from("stations")
 .select("*")
@@ -1411,7 +1763,6 @@ all=data||[];
 if(all.length){
 
 const latest=
-
 all.reduce(
 
 (a,b)=>
@@ -1428,7 +1779,6 @@ b
 
 $("updatedLine")
 .textContent=
-
 "آخر تحديث: "+
 fmt(latest.updated_at);
 
@@ -1441,6 +1791,7 @@ $("updatedLine").textContent=
 
 
 await loadRatings();
+
 
 await render();
 
@@ -1457,9 +1808,11 @@ document
 )
 .forEach(button=>{
 
+
 button.addEventListener(
 "click",
 ()=>{
+
 
 document
 .querySelectorAll(
@@ -1470,10 +1823,13 @@ b=>
 b.classList.remove("active")
 );
 
+
 button.classList.add("active");
+
 
 regionFilter=
 button.dataset.region;
+
 
 filter="all";
 
@@ -1515,9 +1871,11 @@ document
 )
 .forEach(button=>{
 
+
 button.addEventListener(
 "click",
 ()=>{
+
 
 document
 .querySelectorAll(
@@ -1528,10 +1886,13 @@ b=>
 b.classList.remove("active")
 );
 
+
 button.classList.add("active");
+
 
 filter=
 button.dataset.f;
+
 
 render();
 
@@ -1569,6 +1930,7 @@ load,
 
 load();
 
+
 </script>
 
 
@@ -1591,5 +1953,7 @@ navigator.serviceWorker
 
 </script>
 
+
 </body>
+
 </html>
