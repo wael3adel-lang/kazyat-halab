@@ -225,6 +225,71 @@ font-size:13px;
 font-weight:800
 }
 
+/* =========================
+   التقييم
+========================= */
+
+.rating-box{
+margin-top:13px;
+padding-top:11px;
+border-top:1px solid #eef2f2;
+text-align:right
+}
+
+.rating-average{
+font-size:13px;
+font-weight:800;
+color:#555
+}
+
+.stars{
+margin-top:6px;
+display:flex;
+gap:2px;
+direction:rtl
+}
+
+.star{
+border:0;
+background:transparent;
+font-size:25px;
+padding:1px 3px;
+cursor:pointer;
+line-height:1
+}
+
+.star:hover{
+transform:scale(1.1)
+}
+
+.rating-message{
+font-size:12px;
+color:#0f766e;
+margin-top:5px;
+min-height:18px
+}
+
+/* =========================
+   زر الشكوى
+========================= */
+
+.complaint-link{
+display:inline-block;
+margin-top:9px;
+background:#fff1f2;
+color:#be123c;
+text-decoration:none;
+border:1px solid #fecdd3;
+border-radius:10px;
+padding:8px 11px;
+font-size:13px;
+font-weight:800
+}
+
+.complaint-link:hover{
+background:#ffe4e6
+}
+
 @media(max-width:600px){
 
 .stats{
@@ -306,20 +371,41 @@ autocomplete="off">
 
 <main class="wrap">
 
-<!-- إحصائيات المحطات للمستخدمين -->
-
 <div
 class="stats"
 id="stats">
 </div>
 
+
+<!-- =========================
+     اختيار المنطقة
+========================= -->
+
 <div class="filters">
 
-<!-- زر ريف حلب الجديد -->
+<button
+class="active"
+data-region="city">
 
-<button data-f="countryside">
-🏡 ريف حلب
+🏙️ حلب المدينة
+
 </button>
+
+<button
+data-region="countryside">
+
+🏡 ريف حلب
+
+</button>
+
+</div>
+
+
+<!-- =========================
+     فلاتر حالة المحطات
+========================= -->
+
+<div class="filters">
 
 <button
 class="active"
@@ -359,10 +445,12 @@ data-f="all">
 
 </div>
 
+
 <div
 id="count"
 style="margin-bottom:10px;font-size:13px;color:#68757a">
 </div>
+
 
 <section
 class="grid"
@@ -370,6 +458,7 @@ id="stations">
 </section>
 
 </main>
+
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -385,6 +474,9 @@ const sb=supabase.createClient(
 
 let all=[];
 let filter="all";
+let regionFilter="city";
+
+const ratings={};
 
 const $=id=>document.getElementById(id);
 
@@ -471,31 +563,15 @@ function tr(v){
 const value=String(v??"").trim().toLowerCase();
 
 if(value==="none")
-return [
-"🟢",
-"لا يوجد ازدحام",
-"ok"
-];
+return ["🟢","لا يوجد ازدحام","ok"];
 
 if(value==="light")
-return [
-"🟡",
-"ازدحام خفيف",
-"warn"
-];
+return ["🟡","ازدحام خفيف","warn"];
 
 if(value==="long")
-return [
-"🔴",
-"طابور طويل",
-"no"
-];
+return ["🔴","طابور طويل","no"];
 
-return [
-"❌",
-"مغلقة",
-"gray"
-];
+return ["❌","مغلقة","gray"];
 
 }
 
@@ -527,95 +603,333 @@ rel="noopener">
 
 
 /* =========================
-   الفلاتر
+   الشكوى
+========================= */
+
+function complaintButton(s){
+
+const stationName=String(s.name??"محطة");
+
+const text=
+`شكوى بخصوص ${stationName}
+
+أرغب بتقديم شكوى:
+`;
+
+const url=
+"https://wa.me/905050978000?text="+
+encodeURIComponent(text);
+
+return `
+
+<a
+class="complaint-link"
+href="${url}"
+target="_blank"
+rel="noopener">
+
+📩 شكوى على المحطة
+
+</a>
+
+`;
+
+}
+
+
+/* =========================
+   التقييم
+========================= */
+
+function ratingBox(s){
+
+const r=ratings[s.id] || {
+average:0,
+count:0
+};
+
+const average=
+Number(r.average||0).toFixed(1);
+
+const count=
+Number(r.count||0);
+
+return `
+
+<div class="rating-box">
+
+<div class="rating-average">
+
+⭐ تقييم المحطة:
+${average} / 5
+${count ? ` — ${count} تقييم` : ""}
+
+</div>
+
+<div class="stars">
+
+${[5,4,3,2,1].map(n=>`
+
+<button
+class="star"
+onclick="rateStation(${Number(s.id)},${n})"
+title="تقييم ${n} من 5">
+
+${n <= Math.round(Number(r.average||0)) ? "⭐" : "☆"}
+
+</button>
+
+`).join("")}
+
+</div>
+
+<div
+class="rating-message"
+id="rating-message-${Number(s.id)}">
+</div>
+
+</div>
+
+`;
+
+}
+
+
+/* =========================
+   فلتر المنطقة والحالة
 ========================= */
 
 function stationMatchesFilter(s){
 
-const status=String(s.status??"").trim().toLowerCase();
-const gas=String(s.gas??"").trim().toLowerCase();
-const diesel=String(s.diesel??"").trim().toLowerCase();
-const traffic=String(s.traffic??"").trim().toLowerCase();
-const region=String(s.region??"").trim().toLowerCase();
+const status=
+String(s.status??"")
+.trim()
+.toLowerCase();
+
+const gas=
+String(s.gas??"")
+.trim()
+.toLowerCase();
+
+const diesel=
+String(s.diesel??"")
+.trim()
+.toLowerCase();
+
+const traffic=
+String(s.traffic??"")
+.trim()
+.toLowerCase();
+
+const region=
+String(s.region??"")
+.trim()
+.toLowerCase();
 
 
-/* =========================
-   ريف حلب
-========================= */
+/* المنطقة */
 
-if(filter==="countryside"){
+if(regionFilter==="countryside"){
 
-return region==="countryside";
+if(region!=="countryside")
+return false;
+
+}else{
+
+/*
+  أي محطة ليست countryside
+  تعتبر من مدينة حلب.
+*/
+
+if(region==="countryside")
+return false;
 
 }
 
+
+/* حالة المحطة */
 
 if(filter==="open"){
-
 return status==="open";
-
 }
-
 
 if(filter==="closed"){
-
 return status==="closed";
-
 }
 
-
 if(filter==="both"){
-
 return (
 status==="open" &&
 gas==="yes" &&
 diesel==="yes"
 );
-
 }
 
-
 if(filter==="gas"){
-
 return (
 status==="open" &&
 gas==="yes"
 );
-
 }
 
-
 if(filter==="diesel"){
-
 return (
 status==="open" &&
 diesel==="yes"
 );
-
 }
 
-
 if(filter==="long"){
-
 return (
 status==="open" &&
 traffic==="long"
 );
-
 }
 
-
 if(filter==="light"){
-
 return (
 status==="open" &&
 traffic==="light"
 );
+}
+
+return true;
 
 }
 
 
-return true;
+/* =========================
+   تحميل التقييمات
+========================= */
+
+async function loadRatings(){
+
+const {data,error}=
+
+await sb
+.from("station_ratings")
+.select("station_id,rating");
+
+if(error){
+
+console.log("Ratings error:",error.message);
+
+return;
+
+}
+
+
+Object.keys(ratings)
+.forEach(k=>delete ratings[k]);
+
+
+(data||[]).forEach(row=>{
+
+const id=String(row.station_id);
+
+if(!ratings[id]){
+
+ratings[id]={
+total:0,
+count:0,
+average:0
+};
+
+}
+
+ratings[id].total += Number(row.rating);
+ratings[id].count += 1;
+
+ratings[id].average =
+ratings[id].total /
+ratings[id].count;
+
+});
+
+}
+
+
+/* =========================
+   إرسال تقييم
+========================= */
+
+async function rateStation(stationId,rating){
+
+const message=
+document.getElementById(
+"rating-message-"+stationId
+);
+
+if(message){
+
+message.textContent=
+"جاري إرسال التقييم…";
+
+}
+
+
+const storageKey=
+"rated_station_"+stationId;
+
+if(localStorage.getItem(storageKey)){
+
+if(message){
+
+message.textContent=
+"⚠️ لقد قيّمت هذه المحطة مسبقًا من هذا الجهاز.";
+
+}
+
+return;
+
+}
+
+
+const {error}=
+
+await sb
+.from("station_ratings")
+.insert({
+
+station_id:Number(stationId),
+rating:Number(rating)
+
+});
+
+
+if(error){
+
+console.error(error);
+
+if(message){
+
+message.textContent=
+"تعذر إرسال التقييم، حاول مرة أخرى.";
+
+}
+
+return;
+
+}
+
+
+localStorage.setItem(
+storageKey,
+"1"
+);
+
+
+if(message){
+
+message.textContent=
+"✅ شكرًا، تم تسجيل تقييمك.";
+
+}
+
+
+await loadRatings();
+
+await render();
 
 }
 
@@ -636,8 +950,14 @@ $("search")
 const a=
 all.filter(s=>{
 
-const name=String(s.name??"").toLowerCase();
-const area=String(s.area??"").toLowerCase();
+const name=
+String(s.name??"")
+.toLowerCase();
+
+const area=
+String(s.area??"")
+.toLowerCase();
+
 
 if(
 q &&
@@ -648,44 +968,45 @@ return false;
 
 }
 
+
 return stationMatchesFilter(s);
 
 });
 
 
 /* =========================
-   إحصائيات المحطات
+   إحصائيات
 ========================= */
 
-const total=
-all.length;
-
+const total=a.length;
 
 const open=
-all.filter(
-s=>String(s.status??"").trim().toLowerCase()==="open"
+a.filter(
+s=>
+String(s.status??"")
+.trim()
+.toLowerCase()==="open"
 ).length;
-
 
 const closed=
-all.filter(
-s=>String(s.status??"").trim().toLowerCase()==="closed"
+a.filter(
+s=>
+String(s.status??"")
+.trim()
+.toLowerCase()==="closed"
 ).length;
-
 
 const gas=
-all.filter(
-
+a.filter(
 s=>
-String(s.status??"").trim().toLowerCase()==="open" &&
-String(s.gas??"").trim().toLowerCase()==="yes"
-
+String(s.status??"")
+.trim()
+.toLowerCase()==="open" &&
+String(s.gas??"")
+.trim()
+.toLowerCase()==="yes"
 ).length;
 
-
-/* =========================
-   عرض الإحصائيات
-========================= */
 
 $("stats").innerHTML=
 
@@ -693,9 +1014,7 @@ $("stats").innerHTML=
 
 <div class="stat">
 
-<b>
-${total}
-</b>
+<b>${total}</b>
 
 إجمالي المحطات
 
@@ -704,9 +1023,7 @@ ${total}
 
 <div class="stat">
 
-<b>
-${open}
-</b>
+<b>${open}</b>
 
 تعمل
 
@@ -715,9 +1032,7 @@ ${open}
 
 <div class="stat">
 
-<b>
-${closed}
-</b>
+<b>${closed}</b>
 
 مغلقة
 
@@ -726,9 +1041,7 @@ ${closed}
 
 <div class="stat">
 
-<b>
-${gas}
-</b>
+<b>${gas}</b>
 
 بنزين
 
@@ -736,10 +1049,6 @@ ${gas}
 
 `;
 
-
-/* =========================
-   عدد النتائج
-========================= */
 
 $("count").textContent=
 
@@ -762,7 +1071,9 @@ const t=
 tr(s.traffic);
 
 const status=
-String(s.status??"").trim().toLowerCase();
+String(s.status??"")
+.trim()
+.toLowerCase();
 
 
 /* =========================
@@ -799,7 +1110,6 @@ ${esc(s.area||"")}
 
 
 <div class="closure-info">
-
 
 ${
 s.closure_reason
@@ -838,9 +1148,7 @@ s.closure_hours
 
 ⏱️ مدة الإغلاق المتوقعة:
 
-${esc(
-s.closure_hours
-)}
+${esc(s.closure_hours)}
 
 ساعة
 
@@ -853,7 +1161,6 @@ s.closure_hours
 ""
 
 }
-
 
 </div>
 
@@ -880,6 +1187,10 @@ s.note
 
 
 ${locationButton(s)}
+
+${ratingBox(s)}
+
+${complaintButton(s)}
 
 
 <div class="time">
@@ -938,7 +1249,9 @@ ${t[1]}
 
 
 <span class="badge ${
-String(s.gas??"").trim().toLowerCase()==="yes"
+String(s.gas??"")
+.trim()
+.toLowerCase()==="yes"
 ?
 "ok"
 :
@@ -948,7 +1261,9 @@ String(s.gas??"").trim().toLowerCase()==="yes"
 بنزين:
 
 ${
-String(s.gas??"").trim().toLowerCase()==="yes"
+String(s.gas??"")
+.trim()
+.toLowerCase()==="yes"
 ?
 "يوجد"
 :
@@ -959,7 +1274,9 @@ String(s.gas??"").trim().toLowerCase()==="yes"
 
 
 <span class="badge ${
-String(s.diesel??"").trim().toLowerCase()==="yes"
+String(s.diesel??"")
+.trim()
+.toLowerCase()==="yes"
 ?
 "ok"
 :
@@ -969,7 +1286,9 @@ String(s.diesel??"").trim().toLowerCase()==="yes"
 مازوت:
 
 ${
-String(s.diesel??"").trim().toLowerCase()==="yes"
+String(s.diesel??"")
+.trim()
+.toLowerCase()==="yes"
 ?
 "يوجد"
 :
@@ -1005,6 +1324,10 @@ s.note
 
 ${locationButton(s)}
 
+${ratingBox(s)}
+
+${complaintButton(s)}
+
 
 <div class="time">
 
@@ -1021,9 +1344,7 @@ ${fmt(s.updated_at)}
 
 })
 
-
 .join("")
-
 
 ||
 
@@ -1097,7 +1418,6 @@ all.reduce(
 
 new Date(a.updated_at) >
 new Date(b.updated_at)
-
 ?
 a
 :
@@ -1112,9 +1432,7 @@ $("updatedLine")
 "آخر تحديث: "+
 fmt(latest.updated_at);
 
-}
-
-else{
+}else{
 
 $("updatedLine").textContent=
 "آخر تحديث: —";
@@ -1122,18 +1440,20 @@ $("updatedLine").textContent=
 }
 
 
+await loadRatings();
+
 await render();
 
 }
 
 
 /* =========================
-   الفلاتر
+   اختيار المنطقة
 ========================= */
 
 document
 .querySelectorAll(
-".filters button"
+"[data-region]"
 )
 .forEach(button=>{
 
@@ -1143,13 +1463,69 @@ button.addEventListener(
 
 document
 .querySelectorAll(
-".filters button"
+"[data-region]"
 )
 .forEach(
 b=>
-b.classList.remove(
-"active"
+b.classList.remove("active")
+);
+
+button.classList.add("active");
+
+regionFilter=
+button.dataset.region;
+
+filter="all";
+
+
+document
+.querySelectorAll(
+"[data-f]"
 )
+.forEach(b=>{
+
+b.classList.remove("active");
+
+});
+
+
+document
+.querySelector(
+'[data-f="all"]'
+)
+.classList.add("active");
+
+
+render();
+
+}
+
+);
+
+});
+
+
+/* =========================
+   فلاتر الحالة
+========================= */
+
+document
+.querySelectorAll(
+"[data-f]"
+)
+.forEach(button=>{
+
+button.addEventListener(
+"click",
+()=>{
+
+document
+.querySelectorAll(
+"[data-f]"
+)
+.forEach(
+b=>
+b.classList.remove("active")
 );
 
 button.classList.add("active");
