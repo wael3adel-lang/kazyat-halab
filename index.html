@@ -2,425 +2,587 @@
 <html lang="ar" dir="rtl">
 
 <head>
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0f766e">
+
+<link rel="manifest" href="manifest.webmanifest">
 
 <title>كازيات حلب</title>
 
 <style>
 
+/* =========================
+   الأساس
+========================= */
+
 *{
-box-sizing:border-box;
+    box-sizing:border-box;
 }
 
 body{
-margin:0;
-font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;
-background:#f4f7f7;
-color:#17202a;
+    margin:0;
+    font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;
+    background:#f3f6f6;
+    color:#17202a;
 }
 
 .wrap{
-max-width:900px;
-margin:auto;
-padding-left:12px;
-padding-right:12px;
+    width:min(900px,calc(100% - 24px));
+    margin:auto;
 }
 
-/* الهيدر */
+/* =========================
+   الهيدر
+========================= */
 
 header{
-background:#0f766e;
-color:#fff;
-padding:20px 0 18px;
+    background:#0f766e;
+    color:#fff;
+    padding:18px 0 16px;
 }
 
 .header-top{
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:10px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
 }
 
 .brand{
-font-size:28px;
-font-weight:900;
+    font-size:25px;
+    font-weight:900;
 }
 
 .admin-message{
-display:inline-block;
-background:transparent;
-color:#fff;
-border:1px solid rgba(255,255,255,.65);
-border-radius:999px;
-padding:6px 10px;
-font-size:11px;
-font-weight:700;
-text-decoration:none;
-white-space:nowrap;
+    display:inline-block;
+    color:#fff;
+    border:1px solid rgba(255,255,255,.65);
+    border-radius:999px;
+    padding:6px 10px;
+    font-size:11px;
+    font-weight:700;
+    text-decoration:none;
+    white-space:nowrap;
 }
 
 .sub{
-margin-top:5px;
-opacity:.92;
-font-size:14px;
-font-weight:600;
+    margin-top:4px;
+    opacity:.9;
+    font-size:13px;
 }
 
 .credit{
-margin-top:6px;
-font-size:11px;
-opacity:.75;
-font-weight:600;
+    margin-top:5px;
+    font-size:10px;
+    opacity:.7;
 }
 
 .updated-line{
-margin-top:6px;
-font-size:12px;
-opacity:.95;
+    margin-top:7px;
+    font-size:11px;
+    opacity:.9;
 }
 
-/* البحث */
-
 .search{
-margin-top:14px;
+    margin-top:12px;
 }
 
 .search input{
-width:100%;
-padding:13px 15px;
-border:0;
-border-radius:13px;
-font-size:15px;
-outline:none;
-font-family:inherit;
+    width:100%;
+    padding:12px 14px;
+    border:0;
+    border-radius:12px;
+    font-size:14px;
+    outline:none;
 }
 
-/* الفلاتر */
+/* =========================
+   الفلاتر
+========================= */
 
 .filters{
-display:flex;
-gap:7px;
-overflow-x:auto;
-padding:12px 0;
-scrollbar-width:none;
+    display:flex;
+    gap:6px;
+    overflow-x:auto;
+    padding:10px 0;
+    scrollbar-width:none;
 }
 
 .filters::-webkit-scrollbar{
-display:none;
+    display:none;
 }
 
 .filters button{
-white-space:nowrap;
-border:1px solid #d7dddd;
-background:#fff;
-border-radius:999px;
-padding:8px 13px;
-cursor:pointer;
-font:inherit;
-font-size:14px;
-color:#17202a;
+    white-space:nowrap;
+    border:1px solid #d6dddd;
+    background:#fff;
+    border-radius:999px;
+    padding:7px 12px;
+    cursor:pointer;
+    font:inherit;
+    font-size:12px;
+    color:#17202a;
 }
 
 .filters button.active{
-background:#0f766e;
-color:#fff;
-border-color:#0f766e;
+    background:#0f766e;
+    color:#fff;
+    border-color:#0f766e;
 }
 
-/* الإحصائيات */
+/* =========================
+   الإحصائيات
+========================= */
 
 .stats{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:7px;
-margin:10px 0 5px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:6px;
+    margin:8px 0;
 }
 
 .stat{
-background:#fff;
-border-radius:12px;
-padding:8px 5px;
-text-align:center;
-border:1px solid #e5eaea;
+    background:#fff;
+    border:1px solid #e1e7e7;
+    border-radius:11px;
+    padding:7px 4px;
+    text-align:center;
 }
 
 .stat b{
-display:block;
-font-size:19px;
-line-height:1.2;
+    display:block;
+    font-size:18px;
+    line-height:1.2;
 }
 
 .stat span{
-display:block;
-margin-top:2px;
-font-size:11px;
-color:#5f6b70;
+    display:block;
+    margin-top:2px;
+    font-size:10px;
+    color:#69757a;
 }
-
-/* العدد */
 
 .count-row{
-margin:2px 2px 9px;
-font-size:12px;
-color:#68757a;
+    margin:3px 2px 8px;
+    font-size:11px;
+    color:#68757a;
 }
 
-/* البطاقات */
+/* =========================
+   شبكة المحطات
+========================= */
 
 .grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:10px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+    gap:8px;
 }
 
-.card{
-background:#fff;
-border:1px solid #e2e8e8;
-border-radius:16px;
-padding:13px;
-box-shadow:0 2px 8px rgba(0,0,0,.045);
+/* =========================
+   بطاقة المحطة
+========================= */
+
+.station-card{
+    background:#fff;
+    border-radius:15px;
+    border:2px solid #dce5e4;
+    overflow:hidden;
+    cursor:pointer;
+    transition:.15s;
+    box-shadow:0 2px 7px rgba(0,0,0,.04);
 }
 
-/* اسم المحطة */
-
-.card-head{
-display:flex;
-align-items:flex-start;
-justify-content:space-between;
-gap:10px;
+.station-card:hover{
+    transform:translateY(-1px);
 }
 
-.name{
-font-size:19px;
-font-weight:900;
-line-height:1.35;
+.station-card.open{
+    border-color:#86efac;
 }
 
-.area{
-font-size:12px;
-color:#69767c;
-margin-top:2px;
+.station-card.closed{
+    border-color:#fca5a5;
 }
 
-/* المنطقة داخل البطاقة */
+/* =========================
+   الرأس
+========================= */
 
-.region{
-display:inline-block;
-margin-top:5px;
-padding:4px 7px;
-border-radius:7px;
-font-size:10px;
-font-weight:800;
+.station-main{
+    padding:12px 13px;
 }
 
-.region-city{
-background:#dbeafe;
-color:#1d4ed8;
+.station-head{
+    display:flex;
+    align-items:center;
+    gap:8px;
 }
 
-.region-country{
-background:#dcfce7;
-color:#166534;
+.status-circle{
+    width:11px;
+    height:11px;
+    min-width:11px;
+    border-radius:50%;
 }
 
-/* المعلومات */
-
-.main-info{
-display:flex;
-flex-wrap:wrap;
-gap:6px;
-margin-top:11px;
+.status-circle.green{
+    background:#22c55e;
 }
 
-.info-badge{
-display:inline-flex;
-align-items:center;
-gap:4px;
-padding:7px 9px;
-border-radius:9px;
-font-size:12px;
-font-weight:800;
-line-height:1.1;
+.status-circle.red{
+    background:#ef4444;
 }
 
-.ok{
-background:#dcfce7;
-color:#166534;
+.station-name{
+    font-size:18px;
+    font-weight:900;
+    line-height:1.3;
 }
 
-.no{
-background:#fee2e2;
-color:#991b1b;
+.station-area{
+    color:#68757a;
+    font-size:11px;
+    margin-top:2px;
+    padding-right:19px;
 }
 
-.warn{
-background:#fef3c7;
-color:#92400e;
+/* =========================
+   البنزين والمازوت
+========================= */
+
+.fuel-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:7px;
+    margin-top:11px;
 }
 
-.gray{
-background:#e5e7eb;
-color:#374151;
+.fuel-item{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    background:#f8fafb;
+    border-radius:9px;
+    padding:8px 5px;
+    font-size:12px;
+    font-weight:800;
 }
 
-.traffic-badge{
-font-weight:900;
+.fuel-dot{
+    width:10px;
+    height:10px;
+    border-radius:50%;
 }
 
-/* الأزرار */
-
-.actions{
-display:flex;
-gap:7px;
-flex-wrap:wrap;
-margin-top:10px;
+.fuel-dot.yes{
+    background:#22c55e;
 }
 
-.location-link,
-.complaint-link{
-display:inline-flex;
-align-items:center;
-justify-content:center;
-text-decoration:none;
-border-radius:9px;
-padding:7px 10px;
-font-size:12px;
-font-weight:800;
+.fuel-dot.no{
+    background:#ef4444;
 }
 
-.location-link{
-background:#ecfdf5;
-color:#047857;
-border:1px solid #a7f3d0;
+/* =========================
+   تفاصيل البطاقة
+========================= */
+
+.station-details{
+    display:none;
+    border-top:1px solid #e5eaea;
+    background:#fafcfc;
+    padding:11px 13px;
 }
 
-.complaint-link{
-background:#fff1f2;
-color:#be123c;
-border:1px solid #fecdd3;
+.station-card.expanded .station-details{
+    display:block;
 }
 
-/* الملاحظة */
+/* =========================
+   أزرار التفاصيل
+========================= */
 
-.note{
-font-size:12px;
-margin-top:9px;
-line-height:1.6;
-color:#4b5563;
-background:#f8fafc;
-padding:7px 9px;
-border-radius:8px;
+.detail-actions{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:6px;
 }
 
-/* الإغلاق */
-
-.closure-info{
-margin-top:9px;
-background:#fff7ed;
-color:#9a3412;
-border-radius:9px;
-padding:8px 9px;
-font-size:12px;
-font-weight:750;
-line-height:1.7;
+.detail-button{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    border:0;
+    border-radius:8px;
+    padding:8px 4px;
+    font:inherit;
+    font-size:11px;
+    font-weight:800;
+    cursor:pointer;
 }
 
-/* الوقت */
-
-.time{
-font-size:10px;
-color:#777;
-margin-top:8px;
-text-align:left;
+.location-button{
+    background:#ecfdf5;
+    color:#047857;
+    border:1px solid #a7f3d0;
 }
 
-/* رسالة الخطأ */
-
-.error-box{
-background:#fff;
-border:1px solid #fecaca;
-color:#991b1b;
-border-radius:16px;
-padding:20px;
-text-align:center;
-line-height:1.8;
+.message-button{
+    background:#eff6ff;
+    color:#1d4ed8;
+    border:1px solid #bfdbfe;
 }
 
-.retry{
-margin-top:12px;
-border:0;
-background:#0f766e;
-color:#fff;
-border-radius:9px;
-padding:9px 16px;
-font-family:inherit;
-font-weight:700;
-cursor:pointer;
+.rating-button{
+    background:#fff7ed;
+    color:#c2410c;
+    border:1px solid #fed7aa;
 }
 
-/* الهاتف */
+/* =========================
+   الازدحام
+========================= */
+
+.traffic-box{
+    margin-top:8px;
+    padding:7px 9px;
+    border-radius:8px;
+    font-size:11px;
+    font-weight:800;
+    text-align:center;
+}
+
+.traffic-none{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.traffic-light{
+    background:#fef3c7;
+    color:#92400e;
+}
+
+.traffic-long{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+/* =========================
+   الإغلاق
+========================= */
+
+.closure-box{
+    margin-top:8px;
+    background:#fff7ed;
+    color:#9a3412;
+    border-radius:8px;
+    padding:8px 9px;
+    font-size:11px;
+    line-height:1.6;
+    font-weight:700;
+}
+
+/* =========================
+   الملاحظة
+========================= */
+
+.note-box{
+    margin-top:8px;
+    background:#f1f5f9;
+    color:#475569;
+    border-radius:8px;
+    padding:8px 9px;
+    font-size:11px;
+    line-height:1.6;
+}
+
+/* =========================
+   التقييم
+========================= */
+
+.rating-section{
+    margin-top:9px;
+    padding-top:9px;
+    border-top:1px solid #e5eaea;
+}
+
+.rating-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:5px;
+}
+
+.rating-average{
+    font-size:11px;
+    color:#555;
+    font-weight:800;
+}
+
+.rating-toggle{
+    border:0;
+    background:#fff;
+    color:#0f766e;
+    font-size:11px;
+    font-weight:800;
+    cursor:pointer;
+    padding:4px 7px;
+    border-radius:7px;
+}
+
+.rating-content{
+    display:none;
+    margin-top:7px;
+}
+
+.rating-content.show{
+    display:block;
+}
+
+.stars{
+    display:flex;
+    direction:ltr;
+    justify-content:center;
+    gap:2px;
+}
+
+.star{
+    border:0;
+    background:transparent;
+    font-size:22px;
+    line-height:1;
+    padding:2px;
+    cursor:pointer;
+}
+
+.rating-selected{
+    text-align:center;
+    font-size:10px;
+    color:#0f766e;
+    font-weight:700;
+    min-height:15px;
+    margin-top:4px;
+}
+
+.confirm-rating{
+    display:none;
+    border:0;
+    background:#0f766e;
+    color:#fff;
+    border-radius:7px;
+    padding:6px 10px;
+    font-size:10px;
+    font-weight:800;
+    cursor:pointer;
+    margin:5px auto 0;
+}
+
+.rating-message{
+    text-align:center;
+    color:#0f766e;
+    font-size:10px;
+    min-height:14px;
+    margin-top:4px;
+}
+
+/* =========================
+   آخر تحديث
+========================= */
+
+.station-time{
+    margin-top:8px;
+    text-align:left;
+    color:#888;
+    font-size:9px;
+}
+
+/* =========================
+   لا توجد نتائج
+========================= */
+
+.empty{
+    background:#fff;
+    border:1px solid #e1e7e7;
+    border-radius:14px;
+    padding:30px 15px;
+    text-align:center;
+    color:#777;
+}
+
+/* =========================
+   الهاتف
+========================= */
 
 @media(max-width:600px){
 
-.brand{
-font-size:25px;
+    .wrap{
+        width:calc(100% - 18px);
+    }
+
+    header{
+        padding:15px 0 13px;
+    }
+
+    .brand{
+        font-size:22px;
+    }
+
+    .admin-message{
+        font-size:9px;
+        padding:5px 8px;
+    }
+
+    .sub{
+        font-size:12px;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+        gap:7px;
+    }
+
+    .station-main{
+        padding:11px 12px;
+    }
+
+    .station-name{
+        font-size:17px;
+    }
+
+    .station-area{
+        font-size:10px;
+    }
+
+    .fuel-item{
+        padding:7px 4px;
+        font-size:11px;
+    }
+
+    .detail-actions{
+        grid-template-columns:repeat(3,1fr);
+    }
+
 }
 
-.admin-message{
-font-size:10px;
-padding:5px 8px;
-}
+@media(max-width:380px){
 
-.sub{
-font-size:13px;
-}
+    .brand{
+        font-size:20px;
+    }
 
-.grid{
-grid-template-columns:1fr;
-gap:8px;
-}
+    .station-name{
+        font-size:16px;
+    }
 
-.card{
-padding:12px;
-border-radius:14px;
-}
-
-.name{
-font-size:18px;
-}
-
-.main-info{
-gap:5px;
-}
-
-.info-badge{
-padding:7px 8px;
-font-size:11px;
-}
-
-.stats{
-gap:5px;
-}
-
-.stat{
-padding:7px 3px;
-}
-
-.stat b{
-font-size:18px;
-}
-
-.stat span{
-font-size:10px;
-}
+    .fuel-item{
+        font-size:10px;
+    }
 
 }
 
 </style>
-
 </head>
 
 <body>
@@ -480,7 +642,15 @@ autocomplete="off">
 
 <main class="wrap">
 
-<!-- المنطقة -->
+<!-- الإحصائيات -->
+
+<div
+class="stats"
+id="stats">
+</div>
+
+
+<!-- المناطق -->
 
 <div class="filters">
 
@@ -495,18 +665,10 @@ data-region="city">
 <button
 data-region="countryside">
 
-🌿 ريف حلب
+🏡 ريف حلب
 
 </button>
 
-</div>
-
-
-<!-- الإحصائيات -->
-
-<div
-class="stats"
-id="stats">
 </div>
 
 
@@ -567,6 +729,10 @@ id="count">
 class="grid"
 id="stations">
 
+<div class="empty">
+جاري تحميل المحطات…
+</div>
+
 </section>
 
 </main>
@@ -574,14 +740,13 @@ id="stations">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-
 <script>
 
-/* =================================================
-   SUPABASE
-================================================= */
+/* =========================
+   Supabase
+========================= */
 
-const sb = supabase.createClient(
+const sb=supabase.createClient(
 
 "https://hjggfolotblsurfwfcvn.supabase.co",
 
@@ -590,27 +755,30 @@ const sb = supabase.createClient(
 );
 
 
-/* =================================================
+/* =========================
    المتغيرات
-================================================= */
+========================= */
 
-let all = [];
+let all=[];
 
-let filter = "all";
+let filter="all";
 
-let regionFilter = "city";
+let regionFilter="city";
 
-const $ = id =>
-document.getElementById(id);
+const ratings={};
+
+const selectedRatings={};
+
+const $=id=>document.getElementById(id);
 
 
-/* =================================================
+/* =========================
    حماية النصوص
-================================================= */
+========================= */
 
 function esc(x){
 
-return String(x ?? "")
+return String(x??"")
 .replace(/[&<>"']/g,m=>({
 
 "&":"&amp;",
@@ -624,24 +792,22 @@ return String(x ?? "")
 }
 
 
-/* =================================================
+/* =========================
    التاريخ
-================================================= */
+========================= */
 
 function fmt(t){
 
 if(!t)
 return "—";
 
-const d = new Date(t);
+const d=new Date(t);
 
 if(isNaN(d.getTime()))
 return "—";
 
 return new Intl.DateTimeFormat(
-
 "ar-SY",
-
 {
 day:"numeric",
 month:"numeric",
@@ -649,61 +815,38 @@ year:"numeric",
 hour:"2-digit",
 minute:"2-digit"
 }
-
 ).format(d);
 
 }
 
 
-/* =================================================
-   المنطقة
-================================================= */
-
-function regionText(v){
-
-const value =
-String(v ?? "")
-.trim()
-.toLowerCase();
-
-if(value === "city")
-return "🏙️ مدينة حلب";
-
-if(value === "countryside")
-return "🌿 ريف حلب";
-
-return "";
-
-}
-
-
-/* =================================================
+/* =========================
    سبب الإغلاق
-================================================= */
+========================= */
 
 function closureReasonText(v){
 
-const value =
-String(v ?? "")
+const value=
+String(v??"")
 .trim()
 .toLowerCase();
 
-if(value === "maintenance")
+if(value==="maintenance")
 return "🔧 صيانة";
 
-if(value === "technical")
+if(value==="technical")
 return "⚡ عطل فني";
 
-if(value === "delivery")
+if(value==="delivery")
 return "🚚 بانتظار وصول الطلبية";
 
-if(value === "fuel")
+if(value==="fuel")
 return "⛽ نفاد الوقود";
 
-if(value === "administrative")
+if(value==="administrative")
 return "🏢 إغلاق إداري";
 
-if(value === "temporary")
+if(value==="temporary")
 return "🕐 إغلاق مؤقت";
 
 return "";
@@ -711,50 +854,95 @@ return "";
 }
 
 
-/* =================================================
+/* =========================
    الازدحام
-================================================= */
+========================= */
 
-function tr(v){
+function trafficInfo(v){
 
-const value =
-String(v ?? "")
+const value=
+String(v??"")
 .trim()
 .toLowerCase();
 
-if(value === "none")
-return [
-"🟢",
-"لا يوجد ازدحام",
-"ok"
-];
+if(value==="none"){
 
-if(value === "light")
-return [
-"🟡",
-"ازدحام خفيف",
-"warn"
-];
+return {
+text:"🟢 لا يوجد ازدحام",
+className:"traffic-none"
+};
 
-if(value === "long")
-return [
-"🔴",
-"طابور طويل",
-"no"
-];
+}
 
-return [
-"❌",
-"مغلقة",
-"gray"
-];
+if(value==="light"){
+
+return {
+text:"🟡 ازدحام خفيف",
+className:"traffic-light"
+};
+
+}
+
+if(value==="long"){
+
+return {
+text:"🔴 طابور طويل",
+className:"traffic-long"
+};
+
+}
+
+return null;
 
 }
 
 
-/* =================================================
+/* =========================
+   المنطقة
+   ندعم region و region_type
+========================= */
+
+function getRegion(s){
+
+const value=
+String(
+s.region_type ??
+s.region ??
+""
+)
+.trim()
+.toLowerCase();
+
+if(value==="countryside")
+return "countryside";
+
+return "city";
+
+}
+
+
+/* =========================
+   فتح وإغلاق البطاقة
+========================= */
+
+function toggleStation(stationId){
+
+const card=
+document.getElementById(
+"station-"+CSS.escape(String(stationId))
+);
+
+if(!card)
+return;
+
+card.classList.toggle("expanded");
+
+}
+
+
+/* =========================
    الموقع
-================================================= */
+========================= */
 
 function locationButton(s){
 
@@ -764,10 +952,11 @@ return "";
 return `
 
 <a
-class="location-link"
+class="detail-button location-button"
 href="${esc(s.location_url)}"
 target="_blank"
-rel="noopener">
+rel="noopener"
+onclick="event.stopPropagation()">
 
 📍 الموقع
 
@@ -778,33 +967,34 @@ rel="noopener">
 }
 
 
-/* =================================================
-   الشكوى
-================================================= */
+/* =========================
+   الرسالة / الشكوى
+========================= */
 
-function complaintButton(s){
+function messageButton(s){
 
-const stationName =
-String(s.name ?? "محطة");
+const stationName=
+String(s.name??"محطة");
 
-const text =
-`شكوى بخصوص ${stationName}
+const text=
+`مرحباً، لدي رسالة بخصوص ${stationName}
 
-أرغب بتقديم شكوى:`;
+الرسالة:`;
 
-const url =
+const url=
 "https://wa.me/905050978000?text="+
 encodeURIComponent(text);
 
 return `
 
 <a
-class="complaint-link"
+class="detail-button message-button"
 href="${url}"
 target="_blank"
-rel="noopener">
+rel="noopener"
+onclick="event.stopPropagation()">
 
-📩 شكوى
+📩 رسالة
 
 </a>
 
@@ -813,185 +1003,472 @@ rel="noopener">
 }
 
 
-/* =================================================
-   مطابقة المنطقة
-================================================= */
+/* =========================
+   صندوق التقييم
+========================= */
 
-function stationMatchesRegion(s){
+function ratingBox(s){
 
-const region =
-String(s.region_type ?? "")
-.trim()
-.toLowerCase();
+const id=String(s.id);
 
-/*
+const r=
+ratings[id] ||
+{
+average:0,
+count:0
+};
 
-مهم جداً:
+const average=
+Number(r.average||0).toFixed(1);
 
-الآن نعتمد فقط على region_type.
+const count=
+Number(r.count||0);
 
-city
-= مدينة حلب
+return `
 
-countryside
-= ريف حلب
+<div
+class="rating-section"
+onclick="event.stopPropagation()">
 
-*/
+<div class="rating-top">
 
-if(regionFilter === "countryside"){
+<div class="rating-average">
 
-return region === "countryside";
+⭐ ${average} / 5
+${count ? ` • ${count} تقييم` : " • لا يوجد تقييم"}
+
+</div>
+
+<button
+class="rating-toggle"
+type="button"
+onclick="toggleRating('${esc(id)}')">
+
+⭐ تقييم المحطة
+
+</button>
+
+</div>
+
+
+<div
+class="rating-content"
+id="rating-content-${esc(id)}">
+
+<div class="stars">
+
+${[1,2,3,4,5].map(n=>`
+
+<button
+class="star"
+onclick="selectRating('${esc(id)}',${n})"
+id="star-${esc(id)}-${n}"
+title="تقييم ${n} من 5">
+
+☆
+
+</button>
+
+`).join("")}
+
+</div>
+
+
+<div
+class="rating-selected"
+id="rating-selected-${esc(id)}">
+
+اختر تقييمك من 1 إلى 5
+
+</div>
+
+
+<button
+class="confirm-rating"
+id="confirm-rating-${esc(id)}"
+onclick="confirmRating('${esc(id)}')">
+
+✅ تأكيد التقييم
+
+</button>
+
+
+<div
+class="rating-message"
+id="rating-message-${esc(id)}">
+</div>
+
+</div>
+
+</div>
+
+`;
 
 }
 
-if(regionFilter === "city"){
 
-return region === "city";
+/* =========================
+   فتح التقييم
+========================= */
+
+function toggleRating(stationId){
+
+const box=
+document.getElementById(
+"rating-content-"+stationId
+);
+
+if(!box)
+return;
+
+box.classList.toggle("show");
 
 }
 
-return true;
+
+/* =========================
+   اختيار التقييم
+========================= */
+
+function selectRating(stationId,rating){
+
+selectedRatings[stationId]=rating;
+
+const selected=
+document.getElementById(
+"rating-selected-"+stationId
+);
+
+if(selected){
+
+selected.textContent=
+"اخترت ⭐ "+rating+" من 5";
+
+}
+
+for(let n=1;n<=5;n++){
+
+const star=
+document.getElementById(
+"star-"+stationId+"-"+n
+);
+
+if(star){
+
+star.textContent=
+n<=rating
+?
+"⭐"
+:
+"☆";
+
+}
+
+}
+
+const confirm=
+document.getElementById(
+"confirm-rating-"+stationId
+);
+
+if(confirm){
+
+confirm.style.display="block";
+
+}
 
 }
 
 
-/* =================================================
-   مطابقة الفلتر
-================================================= */
+/* =========================
+   تأكيد التقييم
+========================= */
+
+async function confirmRating(stationId){
+
+const rating=
+selectedRatings[stationId];
+
+if(!rating)
+return;
+
+const message=
+document.getElementById(
+"rating-message-"+stationId
+);
+
+if(message){
+
+message.textContent=
+"جاري إرسال التقييم…";
+
+}
+
+const storageKey=
+"rated_station_"+stationId;
+
+if(localStorage.getItem(storageKey)){
+
+if(message){
+
+message.textContent=
+"⚠️ لقد قيّمت هذه المحطة مسبقاً من هذا الجهاز.";
+
+}
+
+return;
+
+}
+
+const {error}=
+await sb
+.from("station_ratings")
+.insert({
+
+station_id:stationId,
+
+rating:Number(rating)
+
+});
+
+if(error){
+
+console.error(error);
+
+if(message){
+
+message.textContent=
+"تعذر إرسال التقييم، حاول مرة أخرى.";
+
+}
+
+return;
+
+}
+
+localStorage.setItem(
+storageKey,
+"1"
+);
+
+if(message){
+
+message.textContent=
+"✅ تم تسجيل تقييمك.";
+
+}
+
+delete selectedRatings[stationId];
+
+await loadRatings();
+
+await render();
+
+}
+
+
+/* =========================
+   مطابقة الفلاتر
+========================= */
 
 function stationMatchesFilter(s){
 
-const status =
-String(s.status ?? "")
+const status=
+String(s.status??"")
 .trim()
 .toLowerCase();
 
-const gas =
-String(s.gas ?? "")
+const gas=
+String(s.gas??"")
 .trim()
 .toLowerCase();
 
-const diesel =
-String(s.diesel ?? "")
+const diesel=
+String(s.diesel??"")
 .trim()
 .toLowerCase();
 
-const traffic =
-String(s.traffic ?? "")
+const traffic=
+String(s.traffic??"")
 .trim()
 .toLowerCase();
 
+const region=
+getRegion(s);
 
-if(filter === "open"){
 
-return status === "open";
+/* المنطقة */
+
+if(regionFilter==="countryside"){
+
+if(region!=="countryside")
+return false;
+
+}else{
+
+if(region==="countryside")
+return false;
 
 }
 
 
-if(filter === "closed"){
+/* الحالة */
 
-return status === "closed";
+if(filter==="open")
+return status==="open";
 
-}
+if(filter==="closed")
+return status==="closed";
 
-
-if(filter === "both"){
+if(filter==="both"){
 
 return (
-status === "open" &&
-gas === "yes" &&
-diesel === "yes"
+status==="open" &&
+gas==="yes" &&
+diesel==="yes"
 );
 
 }
 
-
-if(filter === "gas"){
+if(filter==="gas"){
 
 return (
-status === "open" &&
-gas === "yes"
+status==="open" &&
+gas==="yes"
 );
 
 }
 
-
-if(filter === "diesel"){
+if(filter==="diesel"){
 
 return (
-status === "open" &&
-diesel === "yes"
+status==="open" &&
+diesel==="yes"
 );
 
 }
 
-
-if(filter === "none"){
+if(filter==="none"){
 
 return (
-status === "open" &&
-traffic === "none"
+status==="open" &&
+traffic==="none"
 );
 
 }
 
-
-if(filter === "long"){
+if(filter==="long"){
 
 return (
-status === "open" &&
-traffic === "long"
+status==="open" &&
+traffic==="long"
 );
 
 }
 
-
-if(filter === "light"){
+if(filter==="light"){
 
 return (
-status === "open" &&
-traffic === "light"
+status==="open" &&
+traffic==="light"
 );
 
 }
-
 
 return true;
 
 }
 
 
-/* =================================================
-   عرض المحطات
-================================================= */
+/* =========================
+   تحميل التقييمات
+========================= */
 
-function render(){
+async function loadRatings(){
 
-const searchInput =
-$("search");
+try{
 
-const q =
-searchInput
+const {data,error}=
+await sb
+.from("station_ratings")
+.select("station_id,rating");
+
+if(error){
+
+console.log(
+"Ratings error:",
+error.message
+);
+
+return;
+
+}
+
+Object.keys(ratings)
+.forEach(
+k=>delete ratings[k]
+);
+
+(data||[]).forEach(row=>{
+
+const id=String(row.station_id);
+
+if(!ratings[id]){
+
+ratings[id]={
+total:0,
+count:0,
+average:0
+};
+
+}
+
+ratings[id].total +=
+Number(row.rating)||0;
+
+ratings[id].count +=1;
+
+ratings[id].average=
+ratings[id].count
 ?
-searchInput.value
-.trim()
-.toLowerCase()
+ratings[id].total /
+ratings[id].count
 :
-"";
+0;
+
+});
+
+}catch(e){
+
+console.error(e);
+
+}
+
+}
 
 
-const filtered =
+/* =========================
+   رسم المحطات
+========================= */
+
+async function render(){
+
+const q=
+$("search")
+.value
+.trim()
+.toLowerCase();
+
+const a=
 all.filter(s=>{
 
-const name =
-String(s.name ?? "")
+const name=
+String(s.name??"")
 .toLowerCase();
 
-const area =
-String(s.area ?? "")
+const area=
+String(s.area??"")
 .toLowerCase();
-
 
 if(
 q &&
@@ -1002,66 +1479,47 @@ return false;
 
 }
 
-
-if(!stationMatchesRegion(s)){
-
-return false;
-
-}
-
-
-if(!stationMatchesFilter(s)){
-
-return false;
-
-}
-
-
-return true;
+return stationMatchesFilter(s);
 
 });
 
 
 /* الإحصائيات */
 
-const total =
-filtered.length;
+const total=a.length;
 
-const open =
-filtered.filter(
-s=>
-String(s.status ?? "")
+const open=
+a.filter(s=>
+String(s.status??"")
 .trim()
-.toLowerCase() === "open"
+.toLowerCase()==="open"
 ).length;
 
-const closed =
-filtered.filter(
-s=>
-String(s.status ?? "")
+const closed=
+a.filter(s=>
+String(s.status??"")
 .trim()
-.toLowerCase() === "closed"
+.toLowerCase()==="closed"
 ).length;
 
-const gas =
-filtered.filter(
-s=>
-String(s.status ?? "")
+const gas=
+a.filter(s=>
+String(s.status??"")
 .trim()
-.toLowerCase() === "open" &&
-String(s.gas ?? "")
+.toLowerCase()==="open" &&
+String(s.gas??"")
 .trim()
-.toLowerCase() === "yes"
+.toLowerCase()==="yes"
 ).length;
 
 
-$("stats").innerHTML = `
+$("stats").innerHTML=`
 
 <div class="stat">
 
 <b>${total}</b>
 
-<span>إجمالي المحطات</span>
+<span>المحطات</span>
 
 </div>
 
@@ -1092,265 +1550,205 @@ $("stats").innerHTML = `
 `;
 
 
-/* العدد */
-
-$("count").textContent =
-total === 0
-?
-"لا توجد محطات"
-:
-total === 1
-?
-"1 محطة"
-:
-total+" محطات";
+$("count").textContent=
+a.length+
+(a.length===1 ? " محطة" : " محطات");
 
 
-/* لا نتائج */
+/* =========================
+   البطاقات
+========================= */
 
-if(!filtered.length){
+$("stations").innerHTML=
 
-$("stations").innerHTML = `
+a.map(s=>{
 
-<div
-class="card"
-style="text-align:center;color:#777">
+const id=String(s.id);
 
-لا توجد محطات ضمن هذا التصنيف.
-
-</div>
-
-`;
-
-return;
-
-}
-
-
-/* البطاقات */
-
-$("stations").innerHTML =
-
-filtered.map(s=>{
-
-const status =
-String(s.status ?? "")
+const status=
+String(s.status??"")
 .trim()
 .toLowerCase();
 
-const gas =
-String(s.gas ?? "")
+const isClosed=
+status==="closed";
+
+const gas=
+String(s.gas??"")
 .trim()
-.toLowerCase();
+.toLowerCase()==="yes";
 
-const diesel =
-String(s.diesel ?? "")
+const diesel=
+String(s.diesel??"")
 .trim()
-.toLowerCase();
+.toLowerCase()==="yes";
 
-const t =
-tr(s.traffic);
+const traffic=
+trafficInfo(s.traffic);
 
-const region =
-String(s.region_type ?? "")
-.trim()
-.toLowerCase();
+const region=
+getRegion(s);
 
-
-const regionBadge =
-
-region === "countryside"
-
+const regionName=
+region==="countryside"
 ?
-
-`
-
-<span class="region region-country">
-
-🌿 ريف حلب
-
-</span>
-
-`
-
+"ريف حلب"
 :
+"حلب المدينة";
 
-region === "city"
-
-?
-
-`
-
-<span class="region region-city">
-
-🏙️ مدينة حلب
-
-</span>
-
-`
-
-:
-
-"";
-
-
-/* المحطة المغلقة */
-
-if(status === "closed"){
 
 return `
 
-<article class="card">
+<article
+class="station-card ${isClosed?"closed":"open"}"
+id="station-${esc(id)}"
+onclick="toggleStation('${esc(id)}')">
 
-<div class="card-head">
 
-<div>
+<!-- =========================
+     الجزء الظاهر دائماً
+========================= -->
 
-<div class="name">
+<div class="station-main">
 
+<div class="station-head">
+
+<span
+class="status-circle ${isClosed?"red":"green"}">
+</span>
+
+<div class="station-name">
 ${esc(s.name)}
-
-</div>
-
-<div class="area">
-
-${esc(s.area || "")}
-
-</div>
-
-${regionBadge}
-
 </div>
 
 </div>
 
 
-<div class="main-info">
+<div class="station-area">
 
-<span class="info-badge gray">
+${esc(s.area||regionName)}
 
-❌ مغلقة
+</div>
 
+
+<div class="fuel-row">
+
+<div class="fuel-item">
+
+<span
+class="fuel-dot ${gas?"yes":"no"}">
 </span>
 
+بنزين
+
+</div>
+
+
+<div class="fuel-item">
+
+<span
+class="fuel-dot ${diesel?"yes":"no"}">
+</span>
+
+مازوت
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     التفاصيل
+========================= -->
+
+<div class="station-details">
+
+
+<div class="detail-actions">
+
+${locationButton(s)}
+
+${messageButton(s)}
+
+<button
+class="detail-button rating-button"
+onclick="event.stopPropagation();toggleRating('${esc(id)}')">
+
+⭐ التقييم
+
+</button>
+
+</div>
+
+
+${
+isClosed
+?
+`
+
+<div class="closure-box">
+
+❌ المحطة مغلقة
 
 ${
 s.closure_reason
 ?
-
-`
-
-<span class="info-badge no">
-
-${esc(
-closureReasonText(
-s.closure_reason
-)
-)}
-
-</span>
-
-`
-
+`<br>${esc(closureReasonText(s.closure_reason))}`
 :
-
 ""
-
 }
-
-</div>
-
-
-${
-s.opening_time
-?
-
-`
-
-<div class="closure-info">
-
-🕘 الافتتاح:
-${esc(
-s.opening_time === "8"
-?
-"الثامنة صباحاً"
-:
-s.opening_time === "9"
-?
-"التاسعة صباحاً"
-:
-s.opening_time === "order"
-?
-"مع وصول الطلبية"
-:
-s.opening_time
-)}
-
-</div>
-
-`
-
-:
-
-""
-
-}
-
 
 ${
 s.closure_hours
 ?
-
-`
-
-<div class="closure-info">
-
-⏱️ مدة الإغلاق المتوقعة:
-${esc(s.closure_hours)}
-ساعة
+`<br>⏱️ مدة الإغلاق المتوقعة: ${esc(s.closure_hours)} ساعة`
+:
+""
+}
 
 </div>
 
 `
-
 :
+traffic
+?
+`
 
+<div class="traffic-box ${traffic.className}">
+
+${traffic.text}
+
+</div>
+
+`
+:
 ""
-
 }
 
 
 ${
 s.note
 ?
-
 `
 
-<div class="note">
+<div class="note-box">
 
 📝 ${esc(s.note)}
 
 </div>
 
 `
-
 :
-
 ""
-
 }
 
 
-<div class="actions">
-
-${locationButton(s)}
-
-${complaintButton(s)}
-
-</div>
+${ratingBox(s)}
 
 
-<div class="time">
+<div class="station-time">
 
 آخر تحديث:
 ${fmt(s.updated_at)}
@@ -1358,179 +1756,43 @@ ${fmt(s.updated_at)}
 </div>
 
 
+</div>
+
 </article>
+
+`;
+
+}).join("")
+
+
+||
+
+`
+
+<div class="empty">
+
+لا توجد محطات مطابقة للبحث أو الفلتر.
+
+</div>
 
 `;
 
 }
 
 
-/* المحطة العاملة */
-
-return `
-
-<article class="card">
-
-<div class="card-head">
-
-<div>
-
-<div class="name">
-
-${esc(s.name)}
-
-</div>
-
-<div class="area">
-
-${esc(s.area || "")}
-
-</div>
-
-${regionBadge}
-
-</div>
-
-</div>
-
-
-<div class="main-info">
-
-<span class="info-badge ok">
-
-🟢 تعمل
-
-</span>
-
-
-<span class="info-badge ${t[2]} traffic-badge">
-
-${t[0]} ${t[1]}
-
-</span>
-
-
-<span class="info-badge ${
-gas === "yes"
-?
-"ok"
-:
-"no"
-}">
-
-⛽ بنزين:
-${gas === "yes"
-?
-"يوجد"
-:
-"لا يوجد"}
-
-</span>
-
-
-<span class="info-badge ${
-diesel === "yes"
-?
-"ok"
-:
-"no"
-}">
-
-🛢️ مازوت:
-${diesel === "yes"
-?
-"يوجد"
-:
-"لا يوجد"}
-
-</span>
-
-</div>
-
-
-${
-s.note
-?
-
-`
-
-<div class="note">
-
-📝 ${esc(s.note)}
-
-</div>
-
-`
-
-:
-
-""
-
-}
-
-
-<div class="actions">
-
-${locationButton(s)}
-
-${complaintButton(s)}
-
-</div>
-
-
-<div class="time">
-
-آخر تحديث:
-${fmt(s.updated_at)}
-
-</div>
-
-
-</article>
-
-`;
-
-}).join("");
-
-}
-
-
-/* =================================================
+/* =========================
    تحميل البيانات
-================================================= */
+========================= */
 
 async function load(){
 
-$("updatedLine").textContent =
-"آخر تحديث: جاري الاتصال…";
-
-
-$("stations").innerHTML = `
-
-<div
-class="card"
-style="text-align:center;color:#777">
-
-جاري تحميل المحطات…
-
-</div>
-
-`;
-
-
 try{
 
-/*
+$("updatedLine").textContent=
+"آخر تحديث: جاري التحميل…";
 
-مهلة 10 ثوانٍ فقط.
-
-إذا لم تستجب Supabase
-لا تبقى الصفحة معلقة.
-
-*/
-
-const queryPromise =
-sb
+const {data,error}=
+await sb
 .from("stations")
 .select("*")
 .order(
@@ -1540,196 +1802,108 @@ ascending:false
 }
 );
 
+if(error){
 
-const timeoutPromise =
-new Promise(resolve=>{
+console.error(error);
 
-setTimeout(
+$("stations").innerHTML=`
 
-()=>{
+<div class="empty">
 
-resolve({
-
-data:null,
-
-error:{
-message:
-"انتهت مهلة الاتصال بقاعدة البيانات."
-}
-
-});
-
-},
-
-10000
-
-);
-
-});
-
-
-const result =
-await Promise.race([
-queryPromise,
-timeoutPromise
-]);
-
-
-if(!result){
-
-throw new Error(
-"لم تصل استجابة."
-);
-
-}
-
-
-if(result.error){
-
-console.error(
-"Supabase error:",
-result.error
-);
-
-$("updatedLine").textContent =
-"تعذر تحميل البيانات";
-
-
-$("stations").innerHTML = `
-
-<div class="error-box">
-
-<b>
-❌ تعذر تحميل المحطات
-</b>
+تعذر تحميل المحطات.
 
 <br><br>
 
-${esc(
-result.error.message ||
-"خطأ غير معروف"
-)}
-
-<br><br>
-
-<button
-class="retry"
-onclick="load()">
-
-🔄 إعادة المحاولة
-
-</button>
+${esc(error.message)}
 
 </div>
 
 `;
+
+$("updatedLine").textContent=
+"تعذر تحميل البيانات";
 
 return;
 
 }
 
+all=data||[];
 
-all =
-Array.isArray(result.data)
-?
-result.data
-:
-[];
 
+/* آخر تحديث */
 
 if(all.length){
 
-/*
+const valid=
+all.filter(
+s=>s.updated_at
+);
 
-آخر تحديث من جميع المحطات.
+if(valid.length){
 
-*/
+const latest=
+valid.reduce(
+(a,b)=>
+new Date(a.updated_at)>
+new Date(b.updated_at)
+?
+a
+:
+b
+);
 
-let latest =
-all[0];
-
-for(
-let i=1;
-i<all.length;
-i++
-){
-
-if(
-new Date(all[i].updated_at) >
-new Date(latest.updated_at)
-){
-
-latest =
-all[i];
-
-}
-
-}
-
-
-$("updatedLine").textContent =
+$("updatedLine").textContent=
 "آخر تحديث: "+
 fmt(latest.updated_at);
 
 }else{
 
-$("updatedLine").textContent =
+$("updatedLine").textContent=
+"آخر تحديث: —";
+
+}
+
+}else{
+
+$("updatedLine").textContent=
 "آخر تحديث: —";
 
 }
 
 
-render();
+await loadRatings();
+
+await render();
 
 }catch(error){
 
-console.error(
-"Load error:",
-error
-);
+console.error(error);
 
+$("stations").innerHTML=`
 
-$("updatedLine").textContent =
-"حدث خطأ في الاتصال";
+<div class="empty">
 
-
-$("stations").innerHTML = `
-
-<div class="error-box">
-
-<b>
-❌ تعذر تحميل بيانات المحطات
-</b>
+حدث خطأ أثناء تحميل البيانات.
 
 <br><br>
 
-${esc(
-error.message ||
-"حدث خطأ غير معروف"
-)}
-
-<br><br>
-
-<button
-class="retry"
-onclick="load()">
-
-🔄 إعادة المحاولة
-
-</button>
+حاول تحديث الصفحة.
 
 </div>
 
 `;
 
-}
+$("updatedLine").textContent=
+"تعذر تحميل البيانات";
 
 }
 
+}
 
-/* =================================================
+
+/* =========================
    اختيار المنطقة
-================================================= */
+========================= */
 
 document
 .querySelectorAll("[data-region]")
@@ -1742,46 +1916,29 @@ button.addEventListener(
 document
 .querySelectorAll("[data-region]")
 .forEach(
-b=>
-b.classList.remove("active")
+b=>b.classList.remove("active")
 );
 
 button.classList.add("active");
 
-regionFilter =
+regionFilter=
 button.dataset.region;
 
-
-/*
-
-عند تغيير المنطقة
-نرجع فلتر المحطات إلى الكل.
-
-*/
-
-filter =
-"all";
-
+filter="all";
 
 document
 .querySelectorAll("[data-f]")
 .forEach(
-b=>
-b.classList.remove("active")
+b=>b.classList.remove("active")
 );
 
-
-const allButton =
+const allButton=
 document.querySelector(
 '[data-f="all"]'
 );
 
-if(allButton){
-
+if(allButton)
 allButton.classList.add("active");
-
-}
-
 
 render();
 
@@ -1792,9 +1949,9 @@ render();
 });
 
 
-/* =================================================
+/* =========================
    فلاتر المحطات
-================================================= */
+========================= */
 
 document
 .querySelectorAll("[data-f]")
@@ -1807,13 +1964,12 @@ button.addEventListener(
 document
 .querySelectorAll("[data-f]")
 .forEach(
-b=>
-b.classList.remove("active")
+b=>b.classList.remove("active")
 );
 
 button.classList.add("active");
 
-filter =
+filter=
 button.dataset.f;
 
 render();
@@ -1825,9 +1981,9 @@ render();
 });
 
 
-/* =================================================
+/* =========================
    البحث
-================================================= */
+========================= */
 
 $("search")
 .addEventListener(
@@ -1836,9 +1992,10 @@ render
 );
 
 
-/* =================================================
+/* =========================
    تحديث تلقائي
-================================================= */
+   كل دقيقة
+========================= */
 
 setInterval(
 load,
@@ -1846,14 +2003,20 @@ load,
 );
 
 
-/* =================================================
-   التشغيل
-================================================= */
+/* =========================
+   تشغيل
+========================= */
 
 load();
 
 </script>
 
-</body>
 
-</html>
+<script>
+
+if(
+"serviceWorker" in navigator &&
+location.protocol!=="file:"
+){
+
+navigator
