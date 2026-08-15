@@ -12,10 +12,6 @@
 
 <style>
 
-/* =========================
-   الأساس
-========================= */
-
 *{
     box-sizing:border-box;
 }
@@ -28,7 +24,7 @@ body{
 }
 
 .wrap{
-    width:min(900px,calc(100% - 24px));
+    width:min(900px,calc(100% - 18px));
     margin:auto;
 }
 
@@ -39,18 +35,18 @@ body{
 header{
     background:#0f766e;
     color:#fff;
-    padding:18px 0 16px;
+    padding:16px 0 14px;
 }
 
 .header-top{
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:10px;
+    gap:8px;
 }
 
 .brand{
-    font-size:25px;
+    font-size:24px;
     font-weight:900;
 }
 
@@ -59,8 +55,8 @@ header{
     color:#fff;
     border:1px solid rgba(255,255,255,.65);
     border-radius:999px;
-    padding:6px 10px;
-    font-size:11px;
+    padding:5px 9px;
+    font-size:10px;
     font-weight:700;
     text-decoration:none;
     white-space:nowrap;
@@ -69,30 +65,30 @@ header{
 .sub{
     margin-top:4px;
     opacity:.9;
-    font-size:13px;
+    font-size:12px;
 }
 
 .credit{
-    margin-top:5px;
+    margin-top:4px;
     font-size:10px;
     opacity:.7;
 }
 
 .updated-line{
-    margin-top:7px;
+    margin-top:6px;
     font-size:11px;
-    opacity:.9;
+    opacity:.95;
 }
 
 .search{
-    margin-top:12px;
+    margin-top:10px;
 }
 
 .search input{
     width:100%;
-    padding:12px 14px;
+    padding:11px 13px;
     border:0;
-    border-radius:12px;
+    border-radius:11px;
     font-size:14px;
     outline:none;
 }
@@ -105,7 +101,7 @@ header{
     display:flex;
     gap:6px;
     overflow-x:auto;
-    padding:10px 0;
+    padding:9px 0;
     scrollbar-width:none;
 }
 
@@ -118,7 +114,7 @@ header{
     border:1px solid #d6dddd;
     background:#fff;
     border-radius:999px;
-    padding:7px 12px;
+    padding:7px 11px;
     cursor:pointer;
     font:inherit;
     font-size:12px;
@@ -138,34 +134,34 @@ header{
 .stats{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:6px;
-    margin:8px 0;
+    gap:5px;
+    margin:7px 0;
 }
 
 .stat{
     background:#fff;
     border:1px solid #e1e7e7;
-    border-radius:11px;
-    padding:7px 4px;
+    border-radius:10px;
+    padding:6px 3px;
     text-align:center;
 }
 
 .stat b{
     display:block;
-    font-size:18px;
+    font-size:17px;
     line-height:1.2;
 }
 
 .stat span{
     display:block;
     margin-top:2px;
-    font-size:10px;
+    font-size:9px;
     color:#69757a;
 }
 
 .count-row{
-    margin:3px 2px 8px;
-    font-size:11px;
+    margin:3px 2px 7px;
+    font-size:10px;
     color:#68757a;
 }
 
@@ -175,8 +171,8 @@ header{
 
 .grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
-    gap:8px;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:7px;
 }
 
 /* =========================
@@ -185,16 +181,13 @@ header{
 
 .station-card{
     background:#fff;
-    border-radius:15px;
+    border-radius:13px;
     border:2px solid #dce5e4;
     overflow:hidden;
     cursor:pointer;
     transition:.15s;
-    box-shadow:0 2px 7px rgba(0,0,0,.04);
-}
-
-.station-card:hover{
-    transform:translateY(-1px);
+    box-shadow:0 2px 6px rgba(0,0,0,.04);
+    min-width:0;
 }
 
 .station-card.open{
@@ -205,25 +198,30 @@ header{
     border-color:#fca5a5;
 }
 
+.station-card:active{
+    transform:scale(.985);
+}
+
 /* =========================
-   الرأس
+   الجزء الرئيسي
 ========================= */
 
 .station-main{
-    padding:12px 13px;
+    padding:10px;
 }
 
 .station-head{
     display:flex;
-    align-items:center;
-    gap:8px;
+    align-items:flex-start;
+    gap:6px;
 }
 
 .status-circle{
-    width:11px;
-    height:11px;
-    min-width:11px;
+    width:9px;
+    height:9px;
+    min-width:9px;
     border-radius:50%;
+    margin-top:5px;
 }
 
 .status-circle.green{
@@ -235,16 +233,19 @@ header{
 }
 
 .station-name{
-    font-size:18px;
+    font-size:15px;
     font-weight:900;
-    line-height:1.3;
+    line-height:1.25;
 }
 
 .station-area{
     color:#68757a;
-    font-size:11px;
+    font-size:9px;
     margin-top:2px;
-    padding-right:19px;
+    padding-right:15px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
 /* =========================
@@ -254,25 +255,26 @@ header{
 .fuel-row{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:7px;
-    margin-top:11px;
+    gap:5px;
+    margin-top:9px;
 }
 
 .fuel-item{
     display:flex;
     align-items:center;
     justify-content:center;
-    gap:6px;
+    gap:5px;
     background:#f8fafb;
-    border-radius:9px;
-    padding:8px 5px;
-    font-size:12px;
+    border-radius:8px;
+    padding:7px 3px;
+    font-size:10px;
     font-weight:800;
 }
 
 .fuel-dot{
-    width:10px;
-    height:10px;
+    width:9px;
+    height:9px;
+    min-width:9px;
     border-radius:50%;
 }
 
@@ -285,14 +287,14 @@ header{
 }
 
 /* =========================
-   تفاصيل البطاقة
+   التفاصيل
 ========================= */
 
 .station-details{
     display:none;
     border-top:1px solid #e5eaea;
     background:#fafcfc;
-    padding:11px 13px;
+    padding:9px 10px;
 }
 
 .station-card.expanded .station-details{
@@ -306,7 +308,7 @@ header{
 .detail-actions{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:6px;
+    gap:5px;
 }
 
 .detail-button{
@@ -315,10 +317,10 @@ header{
     justify-content:center;
     text-decoration:none;
     border:0;
-    border-radius:8px;
-    padding:8px 4px;
+    border-radius:7px;
+    padding:7px 3px;
     font:inherit;
-    font-size:11px;
+    font-size:9px;
     font-weight:800;
     cursor:pointer;
 }
@@ -346,10 +348,10 @@ header{
 ========================= */
 
 .traffic-box{
-    margin-top:8px;
-    padding:7px 9px;
-    border-radius:8px;
-    font-size:11px;
+    margin-top:7px;
+    padding:6px 7px;
+    border-radius:7px;
+    font-size:10px;
     font-weight:800;
     text-align:center;
 }
@@ -374,14 +376,14 @@ header{
 ========================= */
 
 .closure-box{
-    margin-top:8px;
-    background:#fff7ed;
-    color:#9a3412;
-    border-radius:8px;
-    padding:8px 9px;
-    font-size:11px;
+    margin-top:7px;
+    background:#fff1f2;
+    color:#991b1b;
+    border-radius:7px;
+    padding:7px 8px;
+    font-size:10px;
     line-height:1.6;
-    font-weight:700;
+    font-weight:800;
 }
 
 /* =========================
@@ -389,12 +391,12 @@ header{
 ========================= */
 
 .note-box{
-    margin-top:8px;
+    margin-top:7px;
     background:#f1f5f9;
     color:#475569;
-    border-radius:8px;
-    padding:8px 9px;
-    font-size:11px;
+    border-radius:7px;
+    padding:7px 8px;
+    font-size:10px;
     line-height:1.6;
 }
 
@@ -403,8 +405,8 @@ header{
 ========================= */
 
 .rating-section{
-    margin-top:9px;
-    padding-top:9px;
+    margin-top:8px;
+    padding-top:8px;
     border-top:1px solid #e5eaea;
 }
 
@@ -416,7 +418,7 @@ header{
 }
 
 .rating-average{
-    font-size:11px;
+    font-size:10px;
     color:#555;
     font-weight:800;
 }
@@ -425,16 +427,16 @@ header{
     border:0;
     background:#fff;
     color:#0f766e;
-    font-size:11px;
+    font-size:10px;
     font-weight:800;
     cursor:pointer;
-    padding:4px 7px;
-    border-radius:7px;
+    padding:4px 6px;
+    border-radius:6px;
 }
 
 .rating-content{
     display:none;
-    margin-top:7px;
+    margin-top:6px;
 }
 
 .rating-content.show{
@@ -445,13 +447,13 @@ header{
     display:flex;
     direction:ltr;
     justify-content:center;
-    gap:2px;
+    gap:1px;
 }
 
 .star{
     border:0;
     background:transparent;
-    font-size:22px;
+    font-size:21px;
     line-height:1;
     padding:2px;
     cursor:pointer;
@@ -459,11 +461,11 @@ header{
 
 .rating-selected{
     text-align:center;
-    font-size:10px;
+    font-size:9px;
     color:#0f766e;
     font-weight:700;
-    min-height:15px;
-    margin-top:4px;
+    min-height:14px;
+    margin-top:3px;
 }
 
 .confirm-rating{
@@ -471,41 +473,42 @@ header{
     border:0;
     background:#0f766e;
     color:#fff;
-    border-radius:7px;
-    padding:6px 10px;
-    font-size:10px;
+    border-radius:6px;
+    padding:6px 9px;
+    font-size:9px;
     font-weight:800;
     cursor:pointer;
-    margin:5px auto 0;
+    margin:4px auto 0;
 }
 
 .rating-message{
     text-align:center;
     color:#0f766e;
-    font-size:10px;
-    min-height:14px;
-    margin-top:4px;
+    font-size:9px;
+    min-height:13px;
+    margin-top:3px;
 }
 
 /* =========================
-   آخر تحديث
+   الوقت
 ========================= */
 
 .station-time{
-    margin-top:8px;
+    margin-top:7px;
     text-align:left;
     color:#888;
-    font-size:9px;
+    font-size:8px;
 }
 
 /* =========================
-   لا توجد نتائج
+   لا نتائج
 ========================= */
 
 .empty{
+    grid-column:1 / -1;
     background:#fff;
     border:1px solid #e1e7e7;
-    border-radius:14px;
+    border-radius:13px;
     padding:30px 15px;
     text-align:center;
     color:#777;
@@ -518,72 +521,110 @@ header{
 @media(max-width:600px){
 
     .wrap{
-        width:calc(100% - 18px);
+        width:calc(100% - 12px);
     }
 
     header{
-        padding:15px 0 13px;
+        padding:14px 0 12px;
     }
 
     .brand{
-        font-size:22px;
+        font-size:21px;
     }
 
     .admin-message{
         font-size:9px;
-        padding:5px 8px;
+        padding:5px 7px;
     }
 
     .sub{
-        font-size:12px;
+        font-size:11px;
     }
 
     .grid{
-        grid-template-columns:1fr;
-        gap:7px;
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:6px;
     }
 
     .station-main{
-        padding:11px 12px;
+        padding:9px;
     }
 
     .station-name{
-        font-size:17px;
+        font-size:14px;
     }
 
     .station-area{
-        font-size:10px;
+        font-size:8px;
+        padding-right:14px;
+    }
+
+    .fuel-row{
+        gap:4px;
+        margin-top:8px;
     }
 
     .fuel-item{
-        padding:7px 4px;
-        font-size:11px;
+        padding:6px 2px;
+        font-size:9px;
+    }
+
+    .fuel-dot{
+        width:8px;
+        height:8px;
+        min-width:8px;
     }
 
     .detail-actions{
         grid-template-columns:repeat(3,1fr);
     }
 
+    .detail-button{
+        font-size:8px;
+        padding:6px 2px;
+    }
+
 }
 
-@media(max-width:380px){
+@media(max-width:360px){
 
     .brand{
-        font-size:20px;
+        font-size:19px;
+    }
+
+    .station-name{
+        font-size:13px;
+    }
+
+    .station-main{
+        padding:8px;
+    }
+
+    .fuel-item{
+        font-size:8px;
+    }
+
+}
+
+/* =========================
+   شاشة أكبر
+========================= */
+
+@media(min-width:601px){
+
+    .grid{
+        grid-template-columns:repeat(3,minmax(0,1fr));
     }
 
     .station-name{
         font-size:16px;
     }
 
-    .fuel-item{
-        font-size:10px;
-    }
-
 }
 
 </style>
 </head>
+
 
 <body>
 
@@ -609,13 +650,16 @@ rel="noopener">
 
 </div>
 
+
 <div class="sub">
 حالة المحطات وآخر تحديثات الوقود
 </div>
 
+
 <div class="credit">
 By Ammar Morgan
 </div>
+
 
 <div
 class="updated-line"
@@ -624,6 +668,7 @@ id="updatedLine">
 آخر تحديث: جاري التحميل…
 
 </div>
+
 
 <div class="search">
 
@@ -642,7 +687,6 @@ autocomplete="off">
 
 <main class="wrap">
 
-<!-- الإحصائيات -->
 
 <div
 class="stats"
@@ -661,6 +705,7 @@ data-region="city">
 🏙️ حلب المدينة
 
 </button>
+
 
 <button
 data-region="countryside">
@@ -722,6 +767,9 @@ data-f="all">
 <div
 class="count-row"
 id="count">
+
+جاري تحميل المحطات…
+
 </div>
 
 
@@ -735,10 +783,12 @@ id="stations">
 
 </section>
 
+
 </main>
 
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 
 <script>
 
@@ -746,11 +796,11 @@ id="stations">
    Supabase
 ========================= */
 
-const sb=supabase.createClient(
+const sb = supabase.createClient(
 
-"https://hjggfolotblsurfwfcvn.supabase.co",
+    "https://hjggfolotblsurfwfcvn.supabase.co",
 
-"sb_publishable_UTpiWf5wrq8VfxAXxl9zfw_CtRRizyl"
+    "sb_publishable_UTpiWf5wrq8VfxAXxl9zfw_CtRRizyl"
 
 );
 
@@ -759,17 +809,17 @@ const sb=supabase.createClient(
    المتغيرات
 ========================= */
 
-let all=[];
+let all = [];
 
-let filter="all";
+let filter = "all";
 
-let regionFilter="city";
+let regionFilter = "city";
 
-const ratings={};
+const ratings = {};
 
-const selectedRatings={};
+const selectedRatings = {};
 
-const $=id=>document.getElementById(id);
+const $ = id => document.getElementById(id);
 
 
 /* =========================
@@ -778,16 +828,14 @@ const $=id=>document.getElementById(id);
 
 function esc(x){
 
-return String(x??"")
-.replace(/[&<>"']/g,m=>({
-
-"&":"&amp;",
-"<":"&lt;",
-">":"&gt;",
-'"':"&quot;",
-"'":"&#039;"
-
-}[m]));
+    return String(x ?? "")
+        .replace(/[&<>"']/g, m => ({
+            "&":"&amp;",
+            "<":"&lt;",
+            ">":"&gt;",
+            '"':"&quot;",
+            "'":"&#039;"
+        }[m]));
 
 }
 
@@ -798,24 +846,26 @@ return String(x??"")
 
 function fmt(t){
 
-if(!t)
-return "—";
+    if(!t){
+        return "—";
+    }
 
-const d=new Date(t);
+    const d = new Date(t);
 
-if(isNaN(d.getTime()))
-return "—";
+    if(isNaN(d.getTime())){
+        return "—";
+    }
 
-return new Intl.DateTimeFormat(
-"ar-SY",
-{
-day:"numeric",
-month:"numeric",
-year:"numeric",
-hour:"2-digit",
-minute:"2-digit"
-}
-).format(d);
+    return new Intl.DateTimeFormat(
+        "ar-SY",
+        {
+            day:"numeric",
+            month:"numeric",
+            year:"numeric",
+            hour:"2-digit",
+            minute:"2-digit"
+        }
+    ).format(d);
 
 }
 
@@ -826,30 +876,30 @@ minute:"2-digit"
 
 function closureReasonText(v){
 
-const value=
-String(v??"")
-.trim()
-.toLowerCase();
+    const value =
+        String(v ?? "")
+        .trim()
+        .toLowerCase();
 
-if(value==="maintenance")
-return "🔧 صيانة";
+    if(value === "maintenance")
+        return "🔧 صيانة";
 
-if(value==="technical")
-return "⚡ عطل فني";
+    if(value === "technical")
+        return "⚡ عطل فني";
 
-if(value==="delivery")
-return "🚚 بانتظار وصول الطلبية";
+    if(value === "delivery")
+        return "🚚 بانتظار وصول الطلبية";
 
-if(value==="fuel")
-return "⛽ نفاد الوقود";
+    if(value === "fuel")
+        return "⛽ نفاد الوقود";
 
-if(value==="administrative")
-return "🏢 إغلاق إداري";
+    if(value === "administrative")
+        return "🏢 إغلاق إداري";
 
-if(value==="temporary")
-return "🕐 إغلاق مؤقت";
+    if(value === "temporary")
+        return "🕐 إغلاق مؤقت";
 
-return "";
+    return String(v ?? "");
 
 }
 
@@ -860,145 +910,145 @@ return "";
 
 function trafficInfo(v){
 
-const value=
-String(v??"")
-.trim()
-.toLowerCase();
+    const value =
+        String(v ?? "")
+        .trim()
+        .toLowerCase();
 
-if(value==="none"){
+    if(value === "none"){
 
-return {
-text:"🟢 لا يوجد ازدحام",
-className:"traffic-none"
-};
+        return {
+            text:"🟢 لا يوجد ازدحام",
+            className:"traffic-none"
+        };
 
-}
+    }
 
-if(value==="light"){
+    if(value === "light"){
 
-return {
-text:"🟡 ازدحام خفيف",
-className:"traffic-light"
-};
+        return {
+            text:"🟡 ازدحام خفيف",
+            className:"traffic-light"
+        };
 
-}
+    }
 
-if(value==="long"){
+    if(value === "long"){
 
-return {
-text:"🔴 طابور طويل",
-className:"traffic-long"
-};
+        return {
+            text:"🔴 طابور طويل",
+            className:"traffic-long"
+        };
 
-}
+    }
 
-return null;
+    return null;
 
 }
 
 
 /* =========================
    المنطقة
-   ندعم region و region_type
 ========================= */
 
 function getRegion(s){
 
-const value=
-String(
-s.region_type ??
-s.region ??
-""
-)
-.trim()
-.toLowerCase();
+    const value =
+        String(
+            s.region_type ??
+            s.region ??
+            ""
+        )
+        .trim()
+        .toLowerCase();
 
-if(value==="countryside")
-return "countryside";
+    if(value === "countryside"){
+        return "countryside";
+    }
 
-return "city";
+    return "city";
 
 }
 
 
 /* =========================
-   فتح وإغلاق البطاقة
+   فتح / إغلاق المحطة
 ========================= */
 
 function toggleStation(stationId){
 
-const card=
-document.getElementById(
-"station-"+CSS.escape(String(stationId))
-);
+    const safeId = String(stationId);
 
-if(!card)
-return;
+    const card =
+        document.getElementById(
+            "station-" + safeId
+        );
 
-card.classList.toggle("expanded");
+    if(!card){
+        return;
+    }
+
+    card.classList.toggle("expanded");
 
 }
 
 
 /* =========================
-   الموقع
+   زر الموقع
 ========================= */
 
 function locationButton(s){
 
-if(!s.location_url)
-return "";
+    if(!s.location_url){
+        return "";
+    }
 
-return `
+    return `
+        <a
+            class="detail-button location-button"
+            href="${esc(s.location_url)}"
+            target="_blank"
+            rel="noopener"
+            onclick="event.stopPropagation()">
 
-<a
-class="detail-button location-button"
-href="${esc(s.location_url)}"
-target="_blank"
-rel="noopener"
-onclick="event.stopPropagation()">
+            📍 الموقع
 
-📍 الموقع
-
-</a>
-
-`;
+        </a>
+    `;
 
 }
 
 
 /* =========================
-   الرسالة / الشكوى
+   زر الرسالة
 ========================= */
 
 function messageButton(s){
 
-const stationName=
-String(s.name??"محطة");
+    const stationName =
+        String(s.name ?? "محطة");
 
-const text=
-`مرحباً، لدي رسالة بخصوص ${stationName}
+    const text =
+        `مرحباً، لدي رسالة بخصوص ${stationName}
 
 الرسالة:`;
 
-const url=
-"https://wa.me/905050978000?text="+
-encodeURIComponent(text);
+    const url =
+        "https://wa.me/905050978000?text=" +
+        encodeURIComponent(text);
 
-return `
+    return `
+        <a
+            class="detail-button message-button"
+            href="${url}"
+            target="_blank"
+            rel="noopener"
+            onclick="event.stopPropagation()">
 
-<a
-class="detail-button message-button"
-href="${url}"
-target="_blank"
-rel="noopener"
-onclick="event.stopPropagation()">
+            📩 رسالة
 
-📩 رسالة
-
-</a>
-
-`;
+        </a>
+    `;
 
 }
 
@@ -1009,100 +1059,105 @@ onclick="event.stopPropagation()">
 
 function ratingBox(s){
 
-const id=String(s.id);
+    const id = String(s.id);
 
-const r=
-ratings[id] ||
-{
-average:0,
-count:0
-};
+    const r =
+        ratings[id] ||
+        {
+            average:0,
+            count:0
+        };
 
-const average=
-Number(r.average||0).toFixed(1);
+    const average =
+        Number(r.average || 0).toFixed(1);
 
-const count=
-Number(r.count||0);
+    const count =
+        Number(r.count || 0);
 
-return `
+    return `
 
-<div
-class="rating-section"
-onclick="event.stopPropagation()">
+        <div
+            class="rating-section"
+            onclick="event.stopPropagation()">
 
-<div class="rating-top">
+            <div class="rating-top">
 
-<div class="rating-average">
+                <div class="rating-average">
 
-⭐ ${average} / 5
-${count ? ` • ${count} تقييم` : " • لا يوجد تقييم"}
+                    ⭐ ${average} / 5
+                    ${count
+                        ? ` • ${count} تقييم`
+                        : " • لا يوجد تقييم"
+                    }
 
-</div>
-
-<button
-class="rating-toggle"
-type="button"
-onclick="toggleRating('${esc(id)}')">
-
-⭐ تقييم المحطة
-
-</button>
-
-</div>
+                </div>
 
 
-<div
-class="rating-content"
-id="rating-content-${esc(id)}">
+                <button
+                    class="rating-toggle"
+                    type="button"
+                    onclick="toggleRating('${esc(id)}')">
 
-<div class="stars">
+                    ⭐ تقييم المحطة
 
-${[1,2,3,4,5].map(n=>`
+                </button>
 
-<button
-class="star"
-onclick="selectRating('${esc(id)}',${n})"
-id="star-${esc(id)}-${n}"
-title="تقييم ${n} من 5">
-
-☆
-
-</button>
-
-`).join("")}
-
-</div>
+            </div>
 
 
-<div
-class="rating-selected"
-id="rating-selected-${esc(id)}">
+            <div
+                class="rating-content"
+                id="rating-content-${esc(id)}">
 
-اختر تقييمك من 1 إلى 5
+                <div class="stars">
 
-</div>
+                    ${[1,2,3,4,5].map(n => `
+
+                        <button
+                            class="star"
+                            onclick="selectRating('${esc(id)}',${n})"
+                            id="star-${esc(id)}-${n}"
+                            title="تقييم ${n} من 5">
+
+                            ☆
+
+                        </button>
+
+                    `).join("")}
+
+                </div>
 
 
-<button
-class="confirm-rating"
-id="confirm-rating-${esc(id)}"
-onclick="confirmRating('${esc(id)}')">
+                <div
+                    class="rating-selected"
+                    id="rating-selected-${esc(id)}">
 
-✅ تأكيد التقييم
+                    اختر تقييمك من 1 إلى 5
 
-</button>
+                </div>
 
 
-<div
-class="rating-message"
-id="rating-message-${esc(id)}">
-</div>
+                <button
+                    class="confirm-rating"
+                    id="confirm-rating-${esc(id)}"
+                    onclick="confirmRating('${esc(id)}')">
 
-</div>
+                    ✅ تأكيد التقييم
 
-</div>
+                </button>
 
-`;
+
+                <div
+                    class="rating-message"
+                    id="rating-message-${esc(id)}">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    `;
 
 }
 
@@ -1113,15 +1168,16 @@ id="rating-message-${esc(id)}">
 
 function toggleRating(stationId){
 
-const box=
-document.getElementById(
-"rating-content-"+stationId
-);
+    const box =
+        document.getElementById(
+            "rating-content-" + stationId
+        );
 
-if(!box)
-return;
+    if(!box){
+        return;
+    }
 
-box.classList.toggle("show");
+    box.classList.toggle("show");
 
 }
 
@@ -1132,50 +1188,56 @@ box.classList.toggle("show");
 
 function selectRating(stationId,rating){
 
-selectedRatings[stationId]=rating;
+    selectedRatings[stationId] = rating;
 
-const selected=
-document.getElementById(
-"rating-selected-"+stationId
-);
+    const selected =
+        document.getElementById(
+            "rating-selected-" + stationId
+        );
 
-if(selected){
+    if(selected){
 
-selected.textContent=
-"اخترت ⭐ "+rating+" من 5";
+        selected.textContent =
+            "اخترت ⭐ " +
+            rating +
+            " من 5";
 
-}
+    }
 
-for(let n=1;n<=5;n++){
 
-const star=
-document.getElementById(
-"star-"+stationId+"-"+n
-);
+    for(let n = 1; n <= 5; n++){
 
-if(star){
+        const star =
+            document.getElementById(
+                "star-" +
+                stationId +
+                "-" +
+                n
+            );
 
-star.textContent=
-n<=rating
-?
-"⭐"
-:
-"☆";
+        if(star){
 
-}
+            star.textContent =
+                n <= rating
+                    ? "⭐"
+                    : "☆";
 
-}
+        }
 
-const confirm=
-document.getElementById(
-"confirm-rating-"+stationId
-);
+    }
 
-if(confirm){
 
-confirm.style.display="block";
+    const confirm =
+        document.getElementById(
+            "confirm-rating-" + stationId
+        );
 
-}
+    if(confirm){
+
+        confirm.style.display =
+            "block";
+
+    }
 
 }
 
@@ -1186,837 +1248,64 @@ confirm.style.display="block";
 
 async function confirmRating(stationId){
 
-const rating=
-selectedRatings[stationId];
+    const rating =
+        selectedRatings[stationId];
 
-if(!rating)
-return;
+    if(!rating){
+        return;
+    }
 
-const message=
-document.getElementById(
-"rating-message-"+stationId
-);
 
-if(message){
+    const message =
+        document.getElementById(
+            "rating-message-" + stationId
+        );
 
-message.textContent=
-"جاري إرسال التقييم…";
+    if(message){
 
-}
+        message.textContent =
+            "جاري إرسال التقييم…";
 
-const storageKey=
-"rated_station_"+stationId;
+    }
 
-if(localStorage.getItem(storageKey)){
 
-if(message){
+    const storageKey =
+        "rated_station_" + stationId;
 
-message.textContent=
-"⚠️ لقد قيّمت هذه المحطة مسبقاً من هذا الجهاز.";
 
-}
+    if(localStorage.getItem(storageKey)){
 
-return;
+        if(message){
 
-}
+            message.textContent =
+                "⚠️ لقد قيّمت هذه المحطة مسبقاً من هذا الجهاز.";
 
-const {error}=
-await sb
-.from("station_ratings")
-.insert({
+        }
 
-station_id:stationId,
+        return;
 
-rating:Number(rating)
+    }
 
-});
 
-if(error){
+    try{
 
-console.error(error);
+        const { error } =
+            await sb
+            .from("station_ratings")
+            .insert({
 
-if(message){
+                station_id:Number(stationId),
 
-message.textContent=
-"تعذر إرسال التقييم، حاول مرة أخرى.";
+                rating:Number(rating)
 
-}
+            });
 
-return;
 
-}
+        if(error){
 
-localStorage.setItem(
-storageKey,
-"1"
-);
+            console.error(error);
 
-if(message){
+            if(message){
 
-message.textContent=
-"✅ تم تسجيل تقييمك.";
-
-}
-
-delete selectedRatings[stationId];
-
-await loadRatings();
-
-await render();
-
-}
-
-
-/* =========================
-   مطابقة الفلاتر
-========================= */
-
-function stationMatchesFilter(s){
-
-const status=
-String(s.status??"")
-.trim()
-.toLowerCase();
-
-const gas=
-String(s.gas??"")
-.trim()
-.toLowerCase();
-
-const diesel=
-String(s.diesel??"")
-.trim()
-.toLowerCase();
-
-const traffic=
-String(s.traffic??"")
-.trim()
-.toLowerCase();
-
-const region=
-getRegion(s);
-
-
-/* المنطقة */
-
-if(regionFilter==="countryside"){
-
-if(region!=="countryside")
-return false;
-
-}else{
-
-if(region==="countryside")
-return false;
-
-}
-
-
-/* الحالة */
-
-if(filter==="open")
-return status==="open";
-
-if(filter==="closed")
-return status==="closed";
-
-if(filter==="both"){
-
-return (
-status==="open" &&
-gas==="yes" &&
-diesel==="yes"
-);
-
-}
-
-if(filter==="gas"){
-
-return (
-status==="open" &&
-gas==="yes"
-);
-
-}
-
-if(filter==="diesel"){
-
-return (
-status==="open" &&
-diesel==="yes"
-);
-
-}
-
-if(filter==="none"){
-
-return (
-status==="open" &&
-traffic==="none"
-);
-
-}
-
-if(filter==="long"){
-
-return (
-status==="open" &&
-traffic==="long"
-);
-
-}
-
-if(filter==="light"){
-
-return (
-status==="open" &&
-traffic==="light"
-);
-
-}
-
-return true;
-
-}
-
-
-/* =========================
-   تحميل التقييمات
-========================= */
-
-async function loadRatings(){
-
-try{
-
-const {data,error}=
-await sb
-.from("station_ratings")
-.select("station_id,rating");
-
-if(error){
-
-console.log(
-"Ratings error:",
-error.message
-);
-
-return;
-
-}
-
-Object.keys(ratings)
-.forEach(
-k=>delete ratings[k]
-);
-
-(data||[]).forEach(row=>{
-
-const id=String(row.station_id);
-
-if(!ratings[id]){
-
-ratings[id]={
-total:0,
-count:0,
-average:0
-};
-
-}
-
-ratings[id].total +=
-Number(row.rating)||0;
-
-ratings[id].count +=1;
-
-ratings[id].average=
-ratings[id].count
-?
-ratings[id].total /
-ratings[id].count
-:
-0;
-
-});
-
-}catch(e){
-
-console.error(e);
-
-}
-
-}
-
-
-/* =========================
-   رسم المحطات
-========================= */
-
-async function render(){
-
-const q=
-$("search")
-.value
-.trim()
-.toLowerCase();
-
-const a=
-all.filter(s=>{
-
-const name=
-String(s.name??"")
-.toLowerCase();
-
-const area=
-String(s.area??"")
-.toLowerCase();
-
-if(
-q &&
-!((name+" "+area).includes(q))
-){
-
-return false;
-
-}
-
-return stationMatchesFilter(s);
-
-});
-
-
-/* الإحصائيات */
-
-const total=a.length;
-
-const open=
-a.filter(s=>
-String(s.status??"")
-.trim()
-.toLowerCase()==="open"
-).length;
-
-const closed=
-a.filter(s=>
-String(s.status??"")
-.trim()
-.toLowerCase()==="closed"
-).length;
-
-const gas=
-a.filter(s=>
-String(s.status??"")
-.trim()
-.toLowerCase()==="open" &&
-String(s.gas??"")
-.trim()
-.toLowerCase()==="yes"
-).length;
-
-
-$("stats").innerHTML=`
-
-<div class="stat">
-
-<b>${total}</b>
-
-<span>المحطات</span>
-
-</div>
-
-<div class="stat">
-
-<b>${open}</b>
-
-<span>تعمل</span>
-
-</div>
-
-<div class="stat">
-
-<b>${closed}</b>
-
-<span>مغلقة</span>
-
-</div>
-
-<div class="stat">
-
-<b>${gas}</b>
-
-<span>بنزين</span>
-
-</div>
-
-`;
-
-
-$("count").textContent=
-a.length+
-(a.length===1 ? " محطة" : " محطات");
-
-
-/* =========================
-   البطاقات
-========================= */
-
-$("stations").innerHTML=
-
-a.map(s=>{
-
-const id=String(s.id);
-
-const status=
-String(s.status??"")
-.trim()
-.toLowerCase();
-
-const isClosed=
-status==="closed";
-
-const gas=
-String(s.gas??"")
-.trim()
-.toLowerCase()==="yes";
-
-const diesel=
-String(s.diesel??"")
-.trim()
-.toLowerCase()==="yes";
-
-const traffic=
-trafficInfo(s.traffic);
-
-const region=
-getRegion(s);
-
-const regionName=
-region==="countryside"
-?
-"ريف حلب"
-:
-"حلب المدينة";
-
-
-return `
-
-<article
-class="station-card ${isClosed?"closed":"open"}"
-id="station-${esc(id)}"
-onclick="toggleStation('${esc(id)}')">
-
-
-<!-- =========================
-     الجزء الظاهر دائماً
-========================= -->
-
-<div class="station-main">
-
-<div class="station-head">
-
-<span
-class="status-circle ${isClosed?"red":"green"}">
-</span>
-
-<div class="station-name">
-${esc(s.name)}
-</div>
-
-</div>
-
-
-<div class="station-area">
-
-${esc(s.area||regionName)}
-
-</div>
-
-
-<div class="fuel-row">
-
-<div class="fuel-item">
-
-<span
-class="fuel-dot ${gas?"yes":"no"}">
-</span>
-
-بنزين
-
-</div>
-
-
-<div class="fuel-item">
-
-<span
-class="fuel-dot ${diesel?"yes":"no"}">
-</span>
-
-مازوت
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =========================
-     التفاصيل
-========================= -->
-
-<div class="station-details">
-
-
-<div class="detail-actions">
-
-${locationButton(s)}
-
-${messageButton(s)}
-
-<button
-class="detail-button rating-button"
-onclick="event.stopPropagation();toggleRating('${esc(id)}')">
-
-⭐ التقييم
-
-</button>
-
-</div>
-
-
-${
-isClosed
-?
-`
-
-<div class="closure-box">
-
-❌ المحطة مغلقة
-
-${
-s.closure_reason
-?
-`<br>${esc(closureReasonText(s.closure_reason))}`
-:
-""
-}
-
-${
-s.closure_hours
-?
-`<br>⏱️ مدة الإغلاق المتوقعة: ${esc(s.closure_hours)} ساعة`
-:
-""
-}
-
-</div>
-
-`
-:
-traffic
-?
-`
-
-<div class="traffic-box ${traffic.className}">
-
-${traffic.text}
-
-</div>
-
-`
-:
-""
-}
-
-
-${
-s.note
-?
-`
-
-<div class="note-box">
-
-📝 ${esc(s.note)}
-
-</div>
-
-`
-:
-""
-}
-
-
-${ratingBox(s)}
-
-
-<div class="station-time">
-
-آخر تحديث:
-${fmt(s.updated_at)}
-
-</div>
-
-
-</div>
-
-</article>
-
-`;
-
-}).join("")
-
-
-||
-
-`
-
-<div class="empty">
-
-لا توجد محطات مطابقة للبحث أو الفلتر.
-
-</div>
-
-`;
-
-}
-
-
-/* =========================
-   تحميل البيانات
-========================= */
-
-async function load(){
-
-try{
-
-$("updatedLine").textContent=
-"آخر تحديث: جاري التحميل…";
-
-const {data,error}=
-await sb
-.from("stations")
-.select("*")
-.order(
-"updated_at",
-{
-ascending:false
-}
-);
-
-if(error){
-
-console.error(error);
-
-$("stations").innerHTML=`
-
-<div class="empty">
-
-تعذر تحميل المحطات.
-
-<br><br>
-
-${esc(error.message)}
-
-</div>
-
-`;
-
-$("updatedLine").textContent=
-"تعذر تحميل البيانات";
-
-return;
-
-}
-
-all=data||[];
-
-
-/* آخر تحديث */
-
-if(all.length){
-
-const valid=
-all.filter(
-s=>s.updated_at
-);
-
-if(valid.length){
-
-const latest=
-valid.reduce(
-(a,b)=>
-new Date(a.updated_at)>
-new Date(b.updated_at)
-?
-a
-:
-b
-);
-
-$("updatedLine").textContent=
-"آخر تحديث: "+
-fmt(latest.updated_at);
-
-}else{
-
-$("updatedLine").textContent=
-"آخر تحديث: —";
-
-}
-
-}else{
-
-$("updatedLine").textContent=
-"آخر تحديث: —";
-
-}
-
-
-await loadRatings();
-
-await render();
-
-}catch(error){
-
-console.error(error);
-
-$("stations").innerHTML=`
-
-<div class="empty">
-
-حدث خطأ أثناء تحميل البيانات.
-
-<br><br>
-
-حاول تحديث الصفحة.
-
-</div>
-
-`;
-
-$("updatedLine").textContent=
-"تعذر تحميل البيانات";
-
-}
-
-}
-
-
-/* =========================
-   اختيار المنطقة
-========================= */
-
-document
-.querySelectorAll("[data-region]")
-.forEach(button=>{
-
-button.addEventListener(
-"click",
-()=>{
-
-document
-.querySelectorAll("[data-region]")
-.forEach(
-b=>b.classList.remove("active")
-);
-
-button.classList.add("active");
-
-regionFilter=
-button.dataset.region;
-
-filter="all";
-
-document
-.querySelectorAll("[data-f]")
-.forEach(
-b=>b.classList.remove("active")
-);
-
-const allButton=
-document.querySelector(
-'[data-f="all"]'
-);
-
-if(allButton)
-allButton.classList.add("active");
-
-render();
-
-}
-
-);
-
-});
-
-
-/* =========================
-   فلاتر المحطات
-========================= */
-
-document
-.querySelectorAll("[data-f]")
-.forEach(button=>{
-
-button.addEventListener(
-"click",
-()=>{
-
-document
-.querySelectorAll("[data-f]")
-.forEach(
-b=>b.classList.remove("active")
-);
-
-button.classList.add("active");
-
-filter=
-button.dataset.f;
-
-render();
-
-}
-
-);
-
-});
-
-
-/* =========================
-   البحث
-========================= */
-
-$("search")
-.addEventListener(
-"input",
-render
-);
-
-
-/* =========================
-   تحديث تلقائي
-   كل دقيقة
-========================= */
-
-setInterval(
-load,
-60000
-);
-
-
-/* =========================
-   تشغيل
-========================= */
-
-load();
-
-</script>
-
-
-<script>
-
-if(
-"serviceWorker" in navigator &&
-location.protocol!=="file:"
-){
-
-navigator
+                message.textContent =
+                    "تعذر إرسال
