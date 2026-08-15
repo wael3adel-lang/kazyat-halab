@@ -110,7 +110,7 @@ header{
 }
 
 /* =========================
-   المنطقة
+   الفلاتر
 ========================= */
 
 .filters{
@@ -286,7 +286,7 @@ header{
 }
 
 /* =========================
-   الازدحام - بارز
+   الازدحام
 ========================= */
 
 .traffic-badge{
@@ -294,7 +294,7 @@ header{
 }
 
 /* =========================
-   الموقع
+   الأزرار
 ========================= */
 
 .actions{
@@ -366,7 +366,7 @@ header{
 }
 
 /* =========================
-   التقييم - مختصر
+   التقييم
 ========================= */
 
 .rating-box{
@@ -402,15 +402,6 @@ header{
 .rating-content{
     margin-top:8px;
 }
-
-.rating-help{
-    font-size:11px;
-    color:#0f766e;
-    font-weight:700;
-    margin-top:4px;
-}
-
-/* النجوم صغيرة */
 
 .stars{
     margin-top:6px;
@@ -554,10 +545,6 @@ header{
 
 }
 
-/* =========================
-   شاشات صغيرة جداً
-========================= */
-
 @media(max-width:380px){
 
     .brand{
@@ -583,9 +570,7 @@ header{
 
 </head>
 
-
 <body>
-
 
 <header>
 
@@ -609,16 +594,13 @@ rel="noopener">
 
 </div>
 
-
 <div class="sub">
 حالة المحطات وآخر تحديثات الوقود
 </div>
 
-
 <div class="credit">
 By Ammar Morgan
 </div>
-
 
 <div
 class="updated-line"
@@ -627,7 +609,6 @@ id="updatedLine">
 آخر تحديث: جاري التحميل…
 
 </div>
-
 
 <div class="search">
 
@@ -639,14 +620,11 @@ autocomplete="off">
 
 </div>
 
-
 </div>
 
 </header>
 
-
 <main class="wrap">
-
 
 <!-- =========================
      الإحصائيات
@@ -657,13 +635,11 @@ class="stats"
 id="stats">
 </div>
 
-
 <!-- =========================
      اختيار المنطقة
 ========================= -->
 
 <div class="filters">
-
 
 <button
 class="active"
@@ -673,7 +649,6 @@ data-region="city">
 
 </button>
 
-
 <button
 data-region="countryside">
 
@@ -681,16 +656,13 @@ data-region="countryside">
 
 </button>
 
-
 </div>
-
 
 <!-- =========================
      فلاتر المحطات
 ========================= -->
 
 <div class="filters">
-
 
 <button
 class="active"
@@ -700,67 +672,53 @@ data-f="all">
 
 </button>
 
-
 <button data-f="open">
 تعمل
 </button>
-
 
 <button data-f="both">
 بنزين + مازوت
 </button>
 
-
 <button data-f="gas">
 بنزين
 </button>
-
 
 <button data-f="diesel">
 مازوت
 </button>
 
-
 <button data-f="closed">
 مغلقة
 </button>
-
 
 <button data-f="none">
 لا يوجد ازدحام
 </button>
 
-
 <button data-f="long">
 طابور طويل
 </button>
-
 
 <button data-f="light">
 ازدحام خفيف
 </button>
 
-
 </div>
-
 
 <div
 class="count-row"
 id="count">
 </div>
 
-
 <section
 class="grid"
 id="stations">
 </section>
 
-
 </main>
 
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 
 <script>
 
@@ -776,7 +734,6 @@ const sb=supabase.createClient(
 
 );
 
-
 /* =========================
    المتغيرات
 ========================= */
@@ -785,6 +742,10 @@ let all=[];
 
 let filter="all";
 
+/*
+   مهم جداً:
+   القيمة الافتراضية مدينة حلب
+*/
 let regionFilter="city";
 
 const ratings={};
@@ -792,7 +753,6 @@ const ratings={};
 const selectedRatings={};
 
 const $=id=>document.getElementById(id);
-
 
 /* =========================
    حماية النصوص
@@ -812,7 +772,6 @@ return String(x??"")
 }[m]));
 
 }
-
 
 /* =========================
    التاريخ
@@ -836,7 +795,6 @@ minute:"2-digit"
 
 }
 
-
 /* =========================
    سبب الإغلاق
 ========================= */
@@ -848,35 +806,27 @@ String(v??"")
 .trim()
 .toLowerCase();
 
-
 if(value==="maintenance")
 return "🔧 صيانة";
-
 
 if(value==="technical")
 return "⚡ عطل فني";
 
-
 if(value==="delivery")
 return "🚚 بانتظار وصول الطلبية";
-
 
 if(value==="fuel")
 return "⛽ نفاد الوقود";
 
-
 if(value==="administrative")
 return "🏢 إغلاق إداري";
-
 
 if(value==="temporary")
 return "🕐 إغلاق مؤقت";
 
-
 return "";
 
 }
-
 
 /* =========================
    الازدحام
@@ -889,14 +839,12 @@ String(v??"")
 .trim()
 .toLowerCase();
 
-
 if(value==="none")
 return [
 "🟢",
 "لا يوجد ازدحام",
 "ok"
 ];
-
 
 if(value==="light")
 return [
@@ -905,14 +853,12 @@ return [
 "warn"
 ];
 
-
 if(value==="long")
 return [
 "🔴",
 "طابور طويل",
 "no"
 ];
-
 
 return [
 "❌",
@@ -922,7 +868,6 @@ return [
 
 }
 
-
 /* =========================
    زر الموقع
 ========================= */
@@ -931,7 +876,6 @@ function locationButton(s){
 
 if(!s.location_url)
 return "";
-
 
 return `
 
@@ -949,7 +893,6 @@ rel="noopener">
 
 }
 
-
 /* =========================
    زر الشكوى
 ========================= */
@@ -959,17 +902,14 @@ function complaintButton(s){
 const stationName=
 String(s.name??"محطة");
 
-
 const text=
 `شكوى بخصوص ${stationName}
 
 أرغب بتقديم شكوى:`;
 
-
 const url=
 "https://wa.me/905050978000?text="+
 encodeURIComponent(text);
-
 
 return `
 
@@ -987,7 +927,6 @@ rel="noopener">
 
 }
 
-
 /* =========================
    صندوق التقييم
 ========================= */
@@ -1001,14 +940,11 @@ average:0,
 count:0
 };
 
-
 const average=
 Number(r.average||0).toFixed(1);
 
-
 const count=
 Number(r.count||0);
-
 
 return `
 
@@ -1023,7 +959,6 @@ ${count ? ` • ${count} تقييم` : " • لا يوجد تقييم"}
 
 </div>
 
-
 <button
 class="rating-toggle"
 type="button"
@@ -1035,12 +970,10 @@ onclick="toggleRating(${Number(s.id)})">
 
 </div>
 
-
 <div
 class="rating-content"
 id="rating-content-${Number(s.id)}"
 style="display:none">
-
 
 <div class="stars">
 
@@ -1058,7 +991,6 @@ title="تقييم ${n} من 5">
 
 </button>
 
-
 <div class="star-number">
 ${n}
 </div>
@@ -1069,7 +1001,6 @@ ${n}
 
 </div>
 
-
 <div
 class="rating-selected"
 id="rating-selected-${Number(s.id)}">
@@ -1077,7 +1008,6 @@ id="rating-selected-${Number(s.id)}">
 اختر تقييمك من 1 إلى 5
 
 </div>
-
 
 <button
 class="confirm-rating"
@@ -1089,12 +1019,10 @@ style="display:none">
 
 </button>
 
-
 <div
 class="rating-message"
 id="rating-message-${Number(s.id)}">
 </div>
-
 
 </div>
 
@@ -1103,7 +1031,6 @@ id="rating-message-${Number(s.id)}">
 `;
 
 }
-
 
 /* =========================
    فتح التقييم
@@ -1119,7 +1046,6 @@ document.getElementById(
 if(!box)
 return;
 
-
 if(box.style.display==="none"){
 
 box.style.display="block";
@@ -1132,1056 +1058,4 @@ box.style.display="none";
 
 }
 
-
-/* =========================
-   اختيار التقييم
-========================= */
-
-function selectRating(stationId,rating){
-
-selectedRatings[stationId]=rating;
-
-
-const selected=
-document.getElementById(
-"rating-selected-"+stationId
-);
-
-
-if(selected){
-
-selected.textContent=
-"اخترت ⭐ "+rating+
-" من 5";
-
-}
-
-
-/* تحديث النجوم */
-
-for(let n=1;n<=5;n++){
-
-const star=
-document.getElementById(
-"star-"+stationId+"-"+n
-);
-
-
-if(star){
-
-star.textContent=
-n<=rating
-?
-"⭐"
-:
-"☆";
-
-
-if(n<=rating){
-
-star.classList.add("selected");
-
-}else{
-
-star.classList.remove("selected");
-
-}
-
-}
-
-}
-
-
-/* إظهار زر التأكيد */
-
-const confirm=
-document.getElementById(
-"confirm-rating-"+stationId
-);
-
-
-if(confirm){
-
-confirm.style.display=
-"inline-block";
-
-}
-
-}
-
-
-/* =========================
-   تأكيد التقييم
-========================= */
-
-async function confirmRating(stationId){
-
-const rating=
-selectedRatings[stationId];
-
-
-if(!rating){
-
-return;
-
-}
-
-
-const message=
-document.getElementById(
-"rating-message-"+stationId
-);
-
-
-if(message){
-
-message.textContent=
-"جاري إرسال التقييم…";
-
-}
-
-
-const storageKey=
-"rated_station_"+stationId;
-
-
-/* منع التقييم الثاني */
-
-if(localStorage.getItem(storageKey)){
-
-if(message){
-
-message.textContent=
-"⚠️ لقد قيّمت هذه المحطة مسبقًا من هذا الجهاز.";
-
-}
-
-return;
-
-}
-
-
-/* إرسال التقييم */
-
-const {error}=
-await sb
-.from("station_ratings")
-.insert({
-
-station_id:Number(stationId),
-
-rating:Number(rating)
-
-});
-
-
-if(error){
-
-console.error(error);
-
-
-if(message){
-
-message.textContent=
-"تعذر إرسال التقييم، حاول مرة أخرى.";
-
-}
-
-return;
-
-}
-
-
-/* حفظ حالة التقييم */
-
-localStorage.setItem(
-storageKey,
-"1"
-);
-
-
-/* رسالة النجاح */
-
-if(message){
-
-message.textContent=
-"✅ تم تسجيل تقييمك.";
-
-}
-
-
-delete selectedRatings[stationId];
-
-
-await loadRatings();
-
-
-await render();
-
-}
-
-
-/* =========================
-   فلتر المحطة
-========================= */
-
-function stationMatchesFilter(s){
-
-const status=
-String(s.status??"")
-.trim()
-.toLowerCase();
-
-
-const gas=
-String(s.gas??"")
-.trim()
-.toLowerCase();
-
-
-const diesel=
-String(s.diesel??"")
-.trim()
-.toLowerCase();
-
-
-const traffic=
-String(s.traffic??"")
-.trim()
-.toLowerCase();
-
-
-const region=
-String(s.region??"")
-.trim()
-.toLowerCase();
-
-
-/* =========================
-   المنطقة
-========================= */
-
-if(regionFilter==="countryside"){
-
-if(region!=="countryside")
-return false;
-
-}else{
-
-/*
-أي محطة ليست ريف حلب
-تعتبر من مدينة حلب
-*/
-
-if(region==="countryside")
-return false;
-
-}
-
-
-/* =========================
-   الحالة
-========================= */
-
-if(filter==="open"){
-
-return status==="open";
-
-}
-
-
-if(filter==="closed"){
-
-return status==="closed";
-
-}
-
-
-if(filter==="both"){
-
-return (
-status==="open" &&
-gas==="yes" &&
-diesel==="yes"
-);
-
-}
-
-
-if(filter==="gas"){
-
-return (
-status==="open" &&
-gas==="yes"
-);
-
-}
-
-
-if(filter==="diesel"){
-
-return (
-status==="open" &&
-diesel==="yes"
-);
-
-}
-
-
-/* لا يوجد ازدحام */
-
-if(filter==="none"){
-
-return (
-status==="open" &&
-traffic==="none"
-);
-
-}
-
-
-if(filter==="long"){
-
-return (
-status==="open" &&
-traffic==="long"
-);
-
-}
-
-
-if(filter==="light"){
-
-return (
-status==="open" &&
-traffic==="light"
-);
-
-}
-
-
-return true;
-
-}
-
-
-/* =========================
-   تحميل التقييمات
-========================= */
-
-async function loadRatings(){
-
-const {data,error}=
-await sb
-.from("station_ratings")
-.select("station_id,rating");
-
-
-if(error){
-
-console.log(
-"Ratings error:",
-error.message
-);
-
-return;
-
-}
-
-
-Object.keys(ratings)
-.forEach(
-k=>
-delete ratings[k]
-);
-
-
-(data||[]).forEach(row=>{
-
-const id=
-String(row.station_id);
-
-
-if(!ratings[id]){
-
-ratings[id]={
-total:0,
-count:0,
-average:0
-};
-
-}
-
-
-ratings[id].total +=
-Number(row.rating);
-
-
-ratings[id].count +=
-1;
-
-
-ratings[id].average=
-ratings[id].total /
-ratings[id].count;
-
-});
-
-}
-
-
-/* =========================
-   عرض المحطات
-========================= */
-
-async function render(){
-
-const q=
-$("search")
-.value
-.trim()
-.toLowerCase();
-
-
-const a=
-all.filter(s=>{
-
-const name=
-String(s.name??"")
-.toLowerCase();
-
-
-const area=
-String(s.area??"")
-.toLowerCase();
-
-
-if(
-q &&
-!((name+" "+area).includes(q))
-){
-
-return false;
-
-}
-
-
-return stationMatchesFilter(s);
-
-});
-
-
-/* =========================
-   الإحصائيات
-========================= */
-
-const total=
-a.length;
-
-
-const open=
-a.filter(
-s=>
-String(s.status??"")
-.trim()
-.toLowerCase()==="open"
-).length;
-
-
-const closed=
-a.filter(
-s=>
-String(s.status??"")
-.trim()
-.toLowerCase()==="closed"
-).length;
-
-
-const gas=
-a.filter(
-s=>
-String(s.status??"")
-.trim()
-.toLowerCase()==="open" &&
-
-String(s.gas??"")
-.trim()
-.toLowerCase()==="yes"
-).length;
-
-
-$("stats").innerHTML=
-
-`
-
-<div class="stat">
-
-<b>${total}</b>
-
-<span>إجمالي المحطات</span>
-
-</div>
-
-
-<div class="stat">
-
-<b>${open}</b>
-
-<span>تعمل</span>
-
-</div>
-
-
-<div class="stat">
-
-<b>${closed}</b>
-
-<span>مغلقة</span>
-
-</div>
-
-
-<div class="stat">
-
-<b>${gas}</b>
-
-<span>بنزين</span>
-
-</div>
-
-`;
-
-
-/* =========================
-   العدد
-========================= */
-
-$("count").textContent=
-
-a.length===0
-?
-"0 محطة"
-:
-a.length+" محطة";
-
-
-/* =========================
-   عرض المحطات
-========================= */
-
-$("stations").innerHTML=
-
-a.map(s=>{
-
-const t=
-tr(s.traffic);
-
-
-const status=
-String(s.status??"")
-.trim()
-.toLowerCase();
-
-
-/* =========================
-   المحطة المغلقة
-========================= */
-
-if(status==="closed"){
-
-return `
-
-<article class="card">
-
-<div class="card-head">
-
-<div>
-
-<div class="name">
-
-<span class="status-dot red"></span>
-
-${esc(s.name)}
-
-</div>
-
-<div class="area">
-
-${esc(s.area||"")}
-
-</div>
-
-</div>
-
-</div>
-
-
-<div class="main-info">
-
-<span class="info-badge gray">
-
-❌ مغلقة
-
-</span>
-
-${s.closure_reason ? `
-
-<span class="info-badge no">
-
-${esc(
-closureReasonText(
-s.closure_reason
-)
-)}
-
-</span>
-
-` : ""}
-
-</div>
-
-
-${s.closure_hours ? `
-
-<div class="closure-info">
-
-⏱️ مدة الإغلاق المتوقعة:
-${esc(s.closure_hours)} ساعة
-
-</div>
-
-` : ""}
-
-
-${s.note ? `
-
-<div class="note">
-
-📝 ${esc(s.note)}
-
-</div>
-
-` : ""}
-
-
-<div class="actions">
-
-${locationButton(s)}
-
-${complaintButton(s)}
-
-</div>
-
-
-${ratingBox(s)}
-
-
-<div class="time">
-
-آخر تحديث:
-${fmt(s.updated_at)}
-
-</div>
-
-
-</article>
-
-`;
-
-}
-
-
-/* =========================
-   المحطة العاملة
-========================= */
-
-return `
-
-<article class="card">
-
-<div class="card-head">
-
-<div>
-
-<div class="name">
-
-<span class="status-dot green"></span>
-
-${esc(s.name)}
-
-</div>
-
-<div class="area">
-
-${esc(s.area||"")}
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- المعلومات الأهم -->
-
-<div class="main-info">
-
-
-<span class="info-badge ok">
-
-🟢 تعمل
-
-</span>
-
-
-<span class="info-badge ${t[2]} traffic-badge">
-
-${t[0]} ${t[1]}
-
-</span>
-
-
-<span class="info-badge ${
-String(s.gas??"")
-.trim()
-.toLowerCase()==="yes"
-?
-"ok"
-:
-"no"
-}">
-
-⛽ بنزين:
-${
-String(s.gas??"")
-.trim()
-.toLowerCase()==="yes"
-?
-"يوجد"
-:
-"لا يوجد"
-}
-
-</span>
-
-
-<span class="info-badge ${
-String(s.diesel??"")
-.trim()
-.toLowerCase()==="yes"
-?
-"ok"
-:
-"no"
-}">
-
-مازوت:
-${
-String(s.diesel??"")
-.trim()
-.toLowerCase()==="yes"
-?
-"يوجد"
-:
-"لا يوجد"
-}
-
-</span>
-
-
-</div>
-
-
-${s.note ? `
-
-<div class="note">
-
-📝 ${esc(s.note)}
-
-</div>
-
-` : ""}
-
-
-<div class="actions">
-
-${locationButton(s)}
-
-${complaintButton(s)}
-
-</div>
-
-
-${ratingBox(s)}
-
-
-<div class="time">
-
-آخر تحديث:
-${fmt(s.updated_at)}
-
-</div>
-
-
-</article>
-
-`;
-
-})
-
-
-.join("")
-
-||
-
-`
-
-<div
-class="card"
-style="text-align:center;color:#777">
-
-لا توجد نتائج.
-
-</div>
-
-`;
-
-}
-
-
-/* =========================
-   تحميل المحطات
-========================= */
-
-async function load(){
-
-const {data,error}=
-await sb
-.from("stations")
-.select("*")
-.order(
-"updated_at",
-{
-ascending:false
-}
-);
-
-
-if(error){
-
-$("stations").innerHTML=
-
-`
-
-<div class="card">
-
-تعذر تحميل البيانات:
-
-<br><br>
-
-${esc(error.message)}
-
-</div>
-
-`;
-
-return;
-
-}
-
-
-all=data||[];
-
-
-if(all.length){
-
-const latest=
-all.reduce(
-
-(a,b)=>
-
-new Date(a.updated_at) >
-new Date(b.updated_at)
-?
-a
-:
-b
-
-);
-
-
-$("updatedLine")
-.textContent=
-"آخر تحديث: "+
-fmt(latest.updated_at);
-
-}else{
-
-$("updatedLine").textContent=
-"آخر تحديث: —";
-
-}
-
-
-await loadRatings();
-
-
-await render();
-
-}
-
-
-/* =========================
-   اختيار المنطقة
-========================= */
-
-document
-.querySelectorAll(
-"[data-region]"
-)
-.forEach(button=>{
-
-button.addEventListener(
-"click",
-()=>{
-
-document
-.querySelectorAll(
-"[data-region]"
-)
-.forEach(
-b=>
-b.classList.remove("active")
-);
-
-
-button.classList.add("active");
-
-
-regionFilter=
-button.dataset.region;
-
-
-filter="all";
-
-
-document
-.querySelectorAll(
-"[data-f]"
-)
-.forEach(b=>{
-
-b.classList.remove("active");
-
-});
-
-
-document
-.querySelector(
-'[data-f="all"]'
-)
-.classList.add("active");
-
-
-render();
-
-}
-
-);
-
-});
-
-
-/* =========================
-   فلاتر الحالة
-========================= */
-
-document
-.querySelectorAll(
-"[data-f]"
-)
-.forEach(button=>{
-
-button.addEventListener(
-"click",
-()=>{
-
-document
-.querySelectorAll(
-"[data-f]"
-)
-.forEach(
-b=>
-b.classList.remove("active")
-);
-
-
-button.classList.add("active");
-
-
-filter=
-button.dataset.f;
-
-
-render();
-
-}
-
-);
-
-});
-
-
-/* =========================
-   البحث
-========================= */
-
-$("search")
-.addEventListener(
-"input",
-render
-);
-
-
-/* =========================
-   تحديث تلقائي
-========================= */
-
-setInterval(
-load,
-60000
-);
-
-
-/* =========================
-   تشغيل
-========================= */
-
-load();
-
-</script>
-
-
-<script>
-
-if(
-
-"serviceWorker"
-in navigator &&
-
-location.protocol!=="file:"
-
-){
-
-navigator.serviceWorker
-.register("./sw.js")
-.catch(()=>{});
-
-}
-
-</script>
-
-
-</body>
-
-</html>
+/
