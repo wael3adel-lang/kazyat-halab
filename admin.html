@@ -1,14 +1,3 @@
-إي، نضيفها ضمن نموذج «إنشاء محطة جديدة» في لوحة التحكم كخانة اختيار:
-
-مدينة حلب
-ريف حلب
-
-وبعد اختيارها تُحفظ مع بيانات المحطة، بحيث نقدر لاحقاً نستخدمها لفرز المحطات حسب المنطقة.
-
-لكن حتى أعدّل لك الملف الصحيح بدون ما نخرب التحديثات الموجودة، ابعتلي ملف لوحة التحكم الحالي admin.html هنا، أو ارفع ملفات المشروع إذا عندكها.
-
-بعدها أعطيك التعديل جاهز للنسخ واللصق وأحدد لك بالضبط وين تحطه.
-
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
@@ -18,43 +7,213 @@
 
 <style>
 *{box-sizing:border-box}
-body{font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;margin:0;background:#f4f7f7;color:#17202a}
-header{background:#0f766e;color:#fff;padding:22px}
-main{max-width:1050px;margin:auto;padding:15px}
-.panel{background:#fff;padding:16px;border-radius:16px;margin:12px 0;box-shadow:0 2px 10px #0000000b}
-input,select,textarea{padding:11px;border:1px solid #ccd5d5;border-radius:10px;width:100%;margin:5px 0 10px;font:inherit}
-button{padding:10px 14px;border:0;border-radius:10px;cursor:pointer;margin:3px;font:inherit}
-.primary{background:#0f766e;color:#fff}
-.danger{background:#fee2e2;color:#991b1b}
-.muted{color:#68757a}
-.row{border-bottom:1px solid #eee;padding:13px 0}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:10px}
-.badge{background:#eef2f2;padding:5px 8px;border-radius:8px;margin:2px;display:inline-block;font-size:12px}
-.ok{background:#dcfce7;color:#166534}
-.no{background:#fee2e2;color:#991b1b}
-.warn{background:#fef3c7;color:#92400e}
-.gray{background:#e5e7eb;color:#374151}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.stat{background:#f8fafb;border-radius:12px;padding:12px;text-align:center}
-.stat b{display:block;font-size:24px}
-.visitor-stat{background:#ecfdf5;color:#065f46}
-.actions{display:flex;flex-wrap:wrap;gap:4px}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.owner-box{background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46;border-radius:12px;padding:12px;margin-bottom:12px}
-.admin-box{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af;border-radius:12px;padding:12px;margin-bottom:12px}
-.station-title{font-size:20px;font-weight:800}
-.hidden{display:none}
-.closure-box{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:12px;padding:10px;margin-top:10px}
-dialog{border:0;border-radius:18px;width:min(650px,94vw);padding:0;box-shadow:0 20px 60px #0004}
-dialog::backdrop{background:#0006}
-.form{padding:20px}
+
+body{
+font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;
+margin:0;
+background:#f4f7f7;
+color:#17202a
+}
+
+header{
+background:#0f766e;
+color:#fff;
+padding:22px
+}
+
+main{
+max-width:1050px;
+margin:auto;
+padding:15px
+}
+
+.panel{
+background:#fff;
+padding:16px;
+border-radius:16px;
+margin:12px 0;
+box-shadow:0 2px 10px #0000000b
+}
+
+input,select,textarea{
+padding:11px;
+border:1px solid #ccd5d5;
+border-radius:10px;
+width:100%;
+margin:5px 0 10px;
+font:inherit
+}
+
+button{
+padding:10px 14px;
+border:0;
+border-radius:10px;
+cursor:pointer;
+margin:3px;
+font:inherit
+}
+
+.primary{
+background:#0f766e;
+color:#fff
+}
+
+.danger{
+background:#fee2e2;
+color:#991b1b
+}
+
+.muted{
+color:#68757a
+}
+
+.row{
+border-bottom:1px solid #eee;
+padding:13px 0
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:10px
+}
+
+.badge{
+background:#eef2f2;
+padding:5px 8px;
+border-radius:8px;
+margin:2px;
+display:inline-block;
+font-size:12px
+}
+
+.ok{
+background:#dcfce7;
+color:#166534
+}
+
+.no{
+background:#fee2e2;
+color:#991b1b
+}
+
+.warn{
+background:#fef3c7;
+color:#92400e
+}
+
+.gray{
+background:#e5e7eb;
+color:#374151
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:8px
+}
+
+.stat{
+background:#f8fafb;
+border-radius:12px;
+padding:12px;
+text-align:center
+}
+
+.stat b{
+display:block;
+font-size:24px
+}
+
+.visitor-stat{
+background:#ecfdf5;
+color:#065f46
+}
+
+.actions{
+display:flex;
+flex-wrap:wrap;
+gap:4px
+}
+
+.two{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px
+}
+
+.owner-box{
+background:#ecfdf5;
+border:1px solid #a7f3d0;
+color:#065f46;
+border-radius:12px;
+padding:12px;
+margin-bottom:12px
+}
+
+.admin-box{
+background:#eff6ff;
+border:1px solid #bfdbfe;
+color:#1e40af;
+border-radius:12px;
+padding:12px;
+margin-bottom:12px
+}
+
+.station-title{
+font-size:20px;
+font-weight:800
+}
+
+.hidden{
+display:none
+}
+
+.closure-box{
+background:#fff7ed;
+border:1px solid #fed7aa;
+color:#9a3412;
+border-radius:12px;
+padding:10px;
+margin-top:10px
+}
+
+.region-city{
+background:#dbeafe;
+color:#1d4ed8
+}
+
+.region-country{
+background:#dcfce7;
+color:#166534
+}
+
+dialog{
+border:0;
+border-radius:18px;
+width:min(650px,94vw);
+padding:0;
+box-shadow:0 20px 60px #0004
+}
+
+dialog::backdrop{
+background:#0006
+}
+
+.form{
+padding:20px
+}
 
 @media(max-width:700px){
-.stats{grid-template-columns:repeat(2,1fr)}
+.stats{
+grid-template-columns:repeat(2,1fr)
+}
 }
 
 @media(max-width:600px){
-.two{grid-template-columns:1fr}
+.two{
+grid-template-columns:1fr
+}
 }
 </style>
 </head>
@@ -70,6 +229,7 @@ dialog::backdrop{background:#0006}
 <main>
 <div id="app">جاري التحميل…</div>
 </main>
+
 
 <!-- نافذة إضافة / تعديل محطة -->
 
@@ -87,11 +247,24 @@ dialog::backdrop{background:#0006}
 <label>المنطقة</label>
 <input id="area">
 
+<!-- التصنيف الجديد -->
+
+<label>تصنيف المحطة</label>
+
+<select id="region_type">
+<option value="">اختر التصنيف</option>
+<option value="city">🏙️ مدينة حلب</option>
+<option value="countryside">🌿 ريف حلب</option>
+</select>
+
+
 <label>📍 رابط موقع المحطة على Google Maps</label>
+
 <input
 id="location_url"
 type="url"
 placeholder="https://maps.google.com/...">
+
 
 <div class="two">
 
@@ -107,6 +280,7 @@ placeholder="https://maps.google.com/...">
 </select>
 
 </div>
+
 
 <div id="adminOpeningBox" class="hidden">
 
@@ -124,6 +298,7 @@ placeholder="https://maps.google.com/...">
 </div>
 
 </div>
+
 
 <!-- سبب ومدة الإغلاق -->
 
@@ -146,6 +321,7 @@ placeholder="https://maps.google.com/...">
 
 </select>
 
+
 <label>مدة الإغلاق المتوقعة</label>
 
 <select id="closure_hours">
@@ -163,6 +339,7 @@ placeholder="https://maps.google.com/...">
 </select>
 
 </div>
+
 
 <div id="adminFuelBox">
 
@@ -182,6 +359,7 @@ placeholder="https://maps.google.com/...">
 
 </div>
 
+
 <div>
 
 <label>البنزين</label>
@@ -196,6 +374,7 @@ placeholder="https://maps.google.com/...">
 </div>
 
 </div>
+
 
 <div>
 
@@ -212,9 +391,11 @@ placeholder="https://maps.google.com/...">
 
 </div>
 
+
 <label>ملاحظة / إعلان</label>
 
 <textarea id="note" rows="4"></textarea>
+
 
 <div>
 
@@ -232,6 +413,7 @@ placeholder="https://maps.google.com/...">
 
 </dialog>
 
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
@@ -248,18 +430,20 @@ let currentStationId=null;
 
 const $=id=>document.getElementById(id);
 
+
 function esc(x){
 
 return String(x??"")
 .replace(/[&<>"']/g,m=>({
-"&":"&",
-"<":"<",
-">":">",
-'"':""",
-"'":"'"
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
 }[m]));
 
 }
+
 
 function fmt(t){
 
@@ -278,6 +462,7 @@ minute:"2-digit"
 
 }
 
+
 function openingText(v){
 
 if(v==="8")return "الثامنة صباحاً";
@@ -287,6 +472,7 @@ if(v==="order")return "مع وصول الطلبية";
 return "";
 
 }
+
 
 function closureReasonText(v){
 
@@ -301,8 +487,20 @@ return "";
 
 }
 
+
+function regionText(v){
+
+if(v==="city")return "🏙️ مدينة حلب";
+
+if(v==="countryside")return "🌿 ريف حلب";
+
+return "";
+
+}
+
+
 /* =========================
-تسجيل الدخول
+   تسجيل الدخول
 ========================= */
 
 function login(){
@@ -329,6 +527,7 @@ $("app").innerHTML=`
 
 }
 
+
 async function doLogin(){
 
 const {error}=await sb.auth.signInWithPassword({
@@ -350,8 +549,9 @@ location.reload();
 
 }
 
+
 /* =========================
-البداية
+   البداية
 ========================= */
 
 async function init(){
@@ -367,6 +567,7 @@ return;
 
 }
 
+
 const {data:me,error}=await sb
 
 .from("admin_users")
@@ -376,6 +577,7 @@ const {data:me,error}=await sb
 .eq("user_id",session.user.id)
 
 .maybeSingle();
+
 
 if(error){
 
@@ -397,6 +599,7 @@ return;
 
 }
 
+
 if(!me){
 
 $("app").innerHTML=`
@@ -413,8 +616,10 @@ return;
 
 }
 
+
 currentRole=me.role||"admin";
 currentStationId=me.station_id;
+
 
 if(currentRole==="station_owner")
 loadOwner();
@@ -423,8 +628,9 @@ loadAdmin();
 
 }
 
+
 /* =================================================
-إحصائيات الزوار
+   إحصائيات الزوار
 ================================================= */
 
 async function getVisitorStats(){
@@ -436,6 +642,7 @@ const {data,error}=await sb
 .from("visitor_events")
 
 .select("*");
+
 
 if(error){
 
@@ -453,6 +660,7 @@ ips:0
 
 }
 
+
 if(!data || !data.length){
 
 return {
@@ -464,11 +672,14 @@ ips:0
 
 }
 
+
 const now=new Date();
+
 
 const todayStart=new Date();
 
 todayStart.setHours(0,0,0,0);
+
 
 const weekStart=new Date();
 
@@ -477,6 +688,7 @@ now.getDate()-6
 );
 
 weekStart.setHours(0,0,0,0);
+
 
 const uniqueVisitors=
 
@@ -487,6 +699,7 @@ data
 .filter(Boolean)
 
 ).size;
+
 
 const todayEvents=
 
@@ -502,6 +715,7 @@ return !isNaN(d) && d>=todayStart;
 
 });
 
+
 const weekEvents=
 
 data.filter(x=>{
@@ -516,6 +730,7 @@ return !isNaN(d) && d>=weekStart;
 
 });
 
+
 const ipValues=
 
 data
@@ -527,8 +742,10 @@ null
 )
 .filter(Boolean);
 
+
 const uniqueIps=
 new Set(ipValues).size;
+
 
 return {
 
@@ -541,6 +758,7 @@ week:weekEvents.length,
 ips:uniqueIps
 
 };
+
 
 }catch(e){
 
@@ -557,8 +775,9 @@ ips:0
 
 }
 
+
 /* =================================================
-إشعار Telegram
+   إشعار Telegram
 ================================================= */
 
 async function notifyTelegram(station){
@@ -567,11 +786,13 @@ try{
 
 const changes=[];
 
+
 if(station.status==="closed"){
 
 changes.push(
 "❌ <b>الحالة:</b> مغلقة"
 );
+
 
 if(station.closure_reason){
 
@@ -585,6 +806,7 @@ station.closure_reason
 );
 
 }
+
 
 if(
 station.closure_hours !== null &&
@@ -606,6 +828,7 @@ changes.push(
 "🟢 <b>الحالة:</b> تعمل"
 );
 
+
 changes.push(
 "⛽ <b>البنزين:</b> "+
 (
@@ -617,6 +840,7 @@ station.gas==="yes"
 )
 );
 
+
 changes.push(
 "🛢️ <b>المازوت:</b> "+
 (
@@ -627,6 +851,7 @@ station.diesel==="yes"
 "لا يوجد"
 )
 );
+
 
 if(station.traffic==="none"){
 
@@ -654,6 +879,7 @@ changes.push(
 
 }
 
+
 if(station.note){
 
 changes.push(
@@ -662,6 +888,7 @@ esc(station.note)
 );
 
 }
+
 
 const {data,error}=await sb.functions.invoke(
 
@@ -677,6 +904,7 @@ changes
 
 );
 
+
 if(error){
 
 console.error(
@@ -688,12 +916,14 @@ return false;
 
 }
 
+
 console.log(
 "Telegram sent:",
 data
 );
 
 return true;
+
 
 }catch(err){
 
@@ -705,8 +935,9 @@ return false;
 
 }
 
+
 /* =================================================
-صاحب الكازية
+   صاحب الكازية
 ================================================= */
 
 async function loadOwner(){
@@ -725,6 +956,7 @@ return;
 
 }
 
+
 const {data:s,error}=await sb
 
 .from("stations")
@@ -734,6 +966,7 @@ const {data:s,error}=await sb
 .eq("id",currentStationId)
 
 .maybeSingle();
+
 
 if(error){
 
@@ -749,6 +982,7 @@ return;
 
 }
 
+
 if(!s){
 
 $("app").innerHTML=`
@@ -763,7 +997,9 @@ return;
 
 }
 
+
 stations=[s];
+
 
 $("app").innerHTML=`
 
@@ -789,6 +1025,7 @@ ${esc(session.user.email)}
 
 </div>
 
+
 <div class="panel">
 
 <h2>
@@ -798,6 +1035,18 @@ ${esc(session.user.email)}
 <div class="muted">
 ${esc(s.area||"")}
 </div>
+
+${
+s.region_type
+?
+`
+<span class="badge ${s.region_type==="city"?"region-city":"region-country"}">
+${esc(regionText(s.region_type))}
+</span>
+`
+:
+""
+}
 
 <div class="badge">
 آخر تحديث:
@@ -819,6 +1068,7 @@ ${fmt(s.updated_at)}
 </option>
 
 </select>
+
 
 <div id="ownerOpenFields">
 
@@ -842,6 +1092,7 @@ ${fmt(s.updated_at)}
 
 </div>
 
+
 <div>
 
 <label>المازوت</label>
@@ -862,6 +1113,7 @@ ${fmt(s.updated_at)}
 
 </div>
 
+
 <label>الازدحام</label>
 
 <select id="ownerTraffic">
@@ -881,6 +1133,7 @@ ${fmt(s.updated_at)}
 </select>
 
 </div>
+
 
 <div id="ownerClosedFields" class="closure-box">
 
@@ -917,6 +1170,7 @@ ${fmt(s.updated_at)}
 </option>
 
 </select>
+
 
 <label>مدة الإغلاق المتوقعة</label>
 
@@ -962,6 +1216,7 @@ ${fmt(s.updated_at)}
 
 </div>
 
+
 <br>
 
 <button
@@ -972,6 +1227,7 @@ onclick="saveOwner()">
 💾 حفظ تحديث الكازية
 
 </button>
+
 
 <div
 id="ownerMessage"
@@ -987,16 +1243,20 @@ toggleOwnerFields();
 
 }
 
+
 function toggleOwnerFields(){
 
 const closed=
 $("ownerStatus").value==="closed";
 
+
 $("ownerOpenFields").style.display=
 closed?"none":"block";
 
+
 $("ownerClosedFields").style.display=
 closed?"block":"none";
+
 
 if($("ownerGas"))
 $("ownerGas").disabled=closed;
@@ -1009,8 +1269,9 @@ $("ownerTraffic").disabled=closed;
 
 }
 
+
 /* =================================================
-حفظ صاحب الكازية
+   حفظ صاحب الكازية
 ================================================= */
 
 async function saveOwner(){
@@ -1022,16 +1283,20 @@ return;
 
 }
 
+
 const closed=
 $("ownerStatus").value==="closed";
 
+
 let closureReason=null;
 let closureHours=null;
+
 
 if(closed){
 
 closureReason=
 $("ownerClosureReason").value || null;
+
 
 closureHours=
 $("ownerClosureHours").value
@@ -1043,12 +1308,14 @@ $("ownerClosureHours").value,
 :
 null;
 
+
 if(!closureReason){
 
 alert("اختر سبب الإغلاق.");
 return;
 
 }
+
 
 if(closureHours===null){
 
@@ -1058,6 +1325,7 @@ return;
 }
 
 }
+
 
 const payload={
 
@@ -1077,6 +1345,7 @@ new Date().toISOString()
 
 };
 
+
 if(!closed){
 
 payload.gas=
@@ -1094,6 +1363,7 @@ payload.traffic="closed";
 
 }
 
+
 const {error}=await sb
 
 .from("stations")
@@ -1101,6 +1371,7 @@ const {error}=await sb
 .update(payload)
 
 .eq("id",currentStationId);
+
 
 if(error){
 
@@ -1122,17 +1393,21 @@ return;
 
 }
 
+
 const updatedStation={
 ...stations[0],
 ...payload
 };
 
+
 stations=[updatedStation];
+
 
 const telegramOk=
 await notifyTelegram(
 updatedStation
 );
+
 
 $("ownerMessage").innerHTML=`
 
@@ -1155,6 +1430,7 @@ telegramOk
 
 `;
 
+
 setTimeout(
 loadOwner,
 1500
@@ -1162,8 +1438,9 @@ loadOwner,
 
 }
 
+
 /* =================================================
-لوحة المشرف
+   لوحة المشرف
 ================================================= */
 
 async function loadAdmin(){
@@ -1179,6 +1456,7 @@ const {data:p,error:pe}=await sb
 {ascending:false}
 );
 
+
 const {data:s,error:se}=await sb
 
 .from("stations")
@@ -1189,6 +1467,7 @@ const {data:s,error:se}=await sb
 "name",
 {ascending:true}
 );
+
 
 if(pe||se){
 
@@ -1208,10 +1487,13 @@ return;
 
 }
 
+
 stations=s||[];
+
 
 const visitorStats=
 await getVisitorStats();
+
 
 $("app").innerHTML=`
 
@@ -1238,6 +1520,7 @@ ${esc(session.user.email)}
 
 </div>
 
+
 <!-- إحصائيات الزوار -->
 
 <div class="panel">
@@ -1258,6 +1541,7 @@ ${esc(session.user.email)}
 
 </div>
 
+
 <div class="stat">
 
 <b>
@@ -1268,6 +1552,7 @@ ${esc(session.user.email)}
 
 </div>
 
+
 <div class="stat">
 
 <b>
@@ -1277,6 +1562,7 @@ ${esc(session.user.email)}
 زيارات آخر 7 أيام
 
 </div>
+
 
 <div class="stat">
 
@@ -1291,6 +1577,7 @@ ${esc(session.user.email)}
 </div>
 
 </div>
+
 
 <!-- إحصائيات المحطات -->
 
@@ -1312,6 +1599,7 @@ ${stations.length}
 
 </div>
 
+
 <div class="stat">
 
 <b>
@@ -1324,6 +1612,7 @@ s=>s.status==="open"
 
 </div>
 
+
 <div class="stat">
 
 <b>
@@ -1335,6 +1624,7 @@ s=>s.status==="closed"
 مغلقة
 
 </div>
+
 
 <div class="stat">
 
@@ -1353,6 +1643,7 @@ s.gas==="yes"
 </div>
 
 </div>
+
 
 <!-- التحديثات المعلقة -->
 
@@ -1427,6 +1718,7 @@ onclick="reject('${x.id}')">
 
 </div>
 
+
 <!-- جميع المحطات -->
 
 <div class="panel">
@@ -1447,6 +1739,7 @@ onclick="openAdd()">
 
 </div>
 
+
 <div class="grid">
 
 ${stations.map(s=>`
@@ -1460,6 +1753,30 @@ ${esc(s.name)}
 <div class="muted">
 ${esc(s.area||"")}
 </div>
+
+
+${
+s.region_type
+?
+`
+
+<span class="badge ${
+s.region_type==="city"
+?
+"region-city"
+:
+"region-country"
+}">
+
+${esc(regionText(s.region_type))}
+
+</span>
+
+`
+:
+""
+}
+
 
 <br>
 
@@ -1475,6 +1792,7 @@ s.status==="open"
 }
 
 </span>
+
 
 ${
 s.status==="closed"
@@ -1530,12 +1848,14 @@ ${s.diesel==="yes"?"يوجد":"لا يوجد"}
 
 }
 
+
 <br>
 
 <small>
 آخر تحديث:
 ${fmt(s.updated_at)}
 </small>
+
 
 ${
 s.location_url
@@ -1564,6 +1884,7 @@ class="badge ok">
 
 }
 
+
 ${
 s.note
 
@@ -1586,6 +1907,7 @@ style="margin-top:8px;white-space:normal">
 ""
 
 }
+
 
 <div class="actions">
 
@@ -1615,8 +1937,9 @@ onclick="removeStation('${s.id}')">
 
 }
 
+
 /* =================================================
-تعديل
+   تعديل
 ================================================= */
 
 function openEdit(id){
@@ -1626,26 +1949,40 @@ stations.find(
 x=>String(x.id)===String(id)
 );
 
+
 if(!s)
 return;
+
 
 $("dlgTitle").textContent=
 "تعديل محطة";
 
+
 $("sid").value=
 s.id;
+
 
 $("name").value=
 s.name;
 
+
 $("area").value=
 s.area||"";
+
+
+/* التصنيف الجديد */
+
+$("region_type").value=
+s.region_type||"";
+
 
 $("location_url").value=
 s.location_url||"";
 
+
 $("status").value=
 s.status;
+
 
 $("traffic").value=
 s.traffic==="closed"
@@ -1654,20 +1991,26 @@ s.traffic==="closed"
 :
 s.traffic;
 
+
 $("gas").value=
 s.gas;
+
 
 $("diesel").value=
 s.diesel;
 
+
 $("note").value=
 s.note||"";
+
 
 $("opening_time").value=
 s.opening_time||"";
 
+
 $("closure_reason").value=
 s.closure_reason||"";
+
 
 $("closure_hours").value=
 s.closure_hours==null
@@ -1676,14 +2019,16 @@ s.closure_hours==null
 :
 String(s.closure_hours);
 
+
 toggleAdminOpening();
 
 stationDlg.showModal();
 
 }
 
+
 /* =================================================
-إضافة
+   إضافة
 ================================================= */
 
 function openAdd(){
@@ -1691,20 +2036,31 @@ function openAdd(){
 $("dlgTitle").textContent=
 "إضافة محطة";
 
+
 $("stationForm").reset();
 
+
 $("sid").value="";
+
 
 $("status").value=
 "open";
 
+
 $("opening_time").value="";
+
+
+$("region_type").value="";
+
 
 $("location_url").value="";
 
+
 $("closure_reason").value="";
 
+
 $("closure_hours").value="";
+
 
 toggleAdminOpening();
 
@@ -1712,8 +2068,9 @@ stationDlg.showModal();
 
 }
 
+
 /* =================================================
-حالة نافذة المشرف
+   حالة نافذة المشرف
 ================================================= */
 
 function toggleAdminOpening(){
@@ -1721,11 +2078,13 @@ function toggleAdminOpening(){
 const closed=
 $("status").value==="closed";
 
+
 $("adminOpeningBox")
 .classList.toggle(
 "hidden",
 !closed
 );
+
 
 $("closureAdminBox")
 .classList.toggle(
@@ -1733,12 +2092,14 @@ $("closureAdminBox")
 !closed
 );
 
+
 $("adminFuelBox").style.opacity=
 closed
 ?
 ".5"
 :
 "1";
+
 
 $("traffic").disabled=
 closed;
@@ -1748,6 +2109,7 @@ closed;
 
 $("diesel").disabled=
 closed;
+
 
 if(closed){
 
@@ -1765,19 +2127,23 @@ $("traffic").value="none";
 
 }
 
+
 /* =================================================
-حفظ محطة المشرف
+   حفظ محطة المشرف
 ================================================= */
 
 $("stationForm").onsubmit=async e=>{
 
 e.preventDefault();
 
+
 const id=
 $("sid").value;
 
+
 const closed=
 $("status").value==="closed";
+
 
 let opening=null;
 
@@ -1785,13 +2151,16 @@ let closureReason=null;
 
 let closureHours=null;
 
+
 if(closed){
 
 opening=
 $("opening_time").value || null;
 
+
 closureReason=
 $("closure_reason").value || null;
+
 
 closureHours=
 $("closure_hours").value
@@ -1803,6 +2172,7 @@ $("closure_hours").value,
 :
 null;
 
+
 if(!opening){
 
 alert(
@@ -1813,6 +2183,7 @@ return;
 
 }
 
+
 if(!closureReason){
 
 alert(
@@ -1822,6 +2193,7 @@ alert(
 return;
 
 }
+
 
 if(closureHours===null){
 
@@ -1835,12 +2207,14 @@ return;
 
 }
 
+
 /* رابط الموقع */
 
 const locationUrl=
 $("location_url")
 .value
 .trim();
+
 
 if(
 locationUrl &&
@@ -1855,6 +2229,7 @@ return;
 
 }
 
+
 /*
 مهم:
 لا نرسل "" للحقول الرقمية.
@@ -1868,6 +2243,11 @@ $("name").value.trim(),
 
 area:
 $("area").value.trim(),
+
+/* التصنيف الجديد */
+
+region_type:
+$("region_type").value || null,
 
 location_url:
 locationUrl || null,
@@ -1892,6 +2272,7 @@ new Date().toISOString()
 
 };
 
+
 if(!closed){
 
 payload.traffic=
@@ -1910,9 +2291,11 @@ payload.traffic=
 
 }
 
+
 /* حفظ */
 
 let result;
+
 
 if(id){
 
@@ -1936,6 +2319,7 @@ await sb
 
 }
 
+
 if(result.error){
 
 alert(
@@ -1946,14 +2330,16 @@ return;
 
 }
 
+
 stationDlg.close();
 
 loadAdmin();
 
 };
 
+
 /* =================================================
-حذف
+   حذف
 ================================================= */
 
 async function removeStation(id){
@@ -1965,6 +2351,7 @@ if(
 )
 return;
 
+
 const {error}=
 
 await sb
@@ -1975,6 +2362,7 @@ await sb
 
 .eq("id",id);
 
+
 if(error){
 
 alert(error.message);
@@ -1983,12 +2371,14 @@ return;
 
 }
 
+
 loadAdmin();
 
 }
 
+
 /* =================================================
-اعتماد تحديث
+   اعتماد تحديث
 ================================================= */
 
 async function approve(id){
@@ -2006,6 +2396,7 @@ error
 
 .single();
 
+
 if(error||!p){
 
 alert(
@@ -2016,6 +2407,7 @@ error?.message||
 return;
 
 }
+
 
 const {
 data:old
@@ -2031,7 +2423,9 @@ data:old
 
 .maybeSingle();
 
+
 let result;
+
 
 if(old){
 
@@ -2092,6 +2486,7 @@ new Date().toISOString()
 
 }
 
+
 if(result.error){
 
 alert(
@@ -2102,6 +2497,7 @@ return;
 
 }
 
+
 await sb
 
 .from("pending_updates")
@@ -2110,12 +2506,14 @@ await sb
 
 .eq("id",id);
 
+
 loadAdmin();
 
 }
 
+
 /* =================================================
-رفض
+   رفض
 ================================================= */
 
 async function reject(id){
@@ -2130,6 +2528,7 @@ await sb
 
 .eq("id",id);
 
+
 if(error){
 
 alert(error.message);
@@ -2138,12 +2537,14 @@ return;
 
 }
 
+
 loadAdmin();
 
 }
 
+
 /* =================================================
-خروج
+   خروج
 ================================================= */
 
 async function logout(){
@@ -2154,8 +2555,9 @@ location.reload();
 
 }
 
+
 /* =================================================
-تشغيل
+   تشغيل
 ================================================= */
 
 init();
@@ -2164,212 +2566,3 @@ init();
 
 </body>
 </html>
-
-تمام. بما أن الكود عندك واضح، نضيف الخيارين مدينة حلب / ريف حلب داخل نافذة إضافة محطة، ويُحفظ الاختيار مع المحطة ويظهر أيضاً عند التعديل.
-
-لكن في نقطة مهمة: لازم نضيف عمود جديد في جدول stations في Supabase أولاً.
-
-1. أضف هذا العمود في Supabase
-
-من SQL Editor شغّل:
-
-ALTER TABLE stations
-ADD COLUMN IF NOT EXISTS region_type text
-CHECK (region_type IN ('city', 'countryside'));
-2. داخل stationForm
-
-ابحث عن هذا الجزء:
-
-<label>المنطقة</label>
-<input id="area">
-
-وخليه:
-
-<label>المنطقة</label>
-<input id="area">
-
-
-<label>التصنيف</label>
-<select id="region_type" required>
-  <option value="">اختر التصنيف</option>
-  <option value="city">مدينة حلب</option>
-  <option value="countryside">ريف حلب</option>
-</select>
-3. في openEdit
-
-بعد:
-
-$("area").value=
-s.area||"";
-
-أضف:
-
-$("region_type").value=
-s.region_type||"";
-4. في openAdd
-
-بعد:
-
-$("location_url").value="";
-
-أضف:
-
-$("region_type").value="";
-5. في payload
-
-ابحث عن:
-
-const payload={
-    
-name:
-$("name").value.trim(),
-
-
-area:
-$("area").value.trim(),
-
-
-location_url:
-
-وخليه:
-
-const payload={
-
-
-name:
-$("name").value.trim(),
-
-
-area:
-$("area").value.trim(),
-
-
-region_type:
-$("region_type").value,
-
-
-location_url:
-6. الأفضل يظهر التصنيف أيضاً في قائمة المحطات
-
-داخل:
-
-${esc(s.area||"")}
-
-نضيف بعدها:
-
-<br>
-<span class="badge">
-${
-s.region_type==="city"
-?
-"🏙️ مدينة حلب"
-:
-s.region_type==="countryside"
-?
-"🌿 ريف حلب"
-:
-""
-}
-</span>
-
-النتيجة عند إضافة محطة ستكون:
-
-اسم المحطة: محطة القداح
-المنطقة: طريق دمشق
-التصنيف: ▼ مدينة حلب / ريف حلب
-
-وبعد الحفظ يبقى التصنيف مرتبطاً بالمحطة، وعند الضغط على تعديل سيظهر الاختيار المحفوظ تلقائياً.
-
-⚠️ مهم: لا تحتاج تغيير أي شيء في كود صاحب الكازية أو التحديثات؛ هذا التعديل خاص بتصنيف المحطة.
-
-إذا بدك، أقدر أعطيك ملف admin.html كامل بعد التعديل جاهز تنسخه وتلصقه مرة واحدة بدل ما تعدّل الأسطر يدوياً.
-
-عطيني كامل
-
-أكيد. بما أن ملفك الحالي طويل جداً، والأهم ألا نغيّر أي جزء من الوظائف الموجودة عندك، جهزت لك ملف التعديل بشكل مرتب.
-
-تحميل ملف التعديل الجاهز
-
-لكن قبل تعديل admin.html نفّذ هذا السطر في Supabase → SQL Editor:
-
-ALTER TABLE stations
-ADD COLUMN IF NOT EXISTS region_type text
-CHECK (region_type IN ('city', 'countryside'));
-
-بعدها يصبح عند إضافة محطة جديدة:
-
-التصنيف:
-
-🏙️ مدينة حلب
-🌿 ريف حلب
-
-ويُحفظ التصنيف مع المحطة، ويظهر أيضاً عند تعديل المحطة وفي قائمة المحطات.
-
-إذا أردت الملف admin.html كاملاً حرفياً، بكل الكود الذي أرسلته أنت + التعديلات مدمجة داخله، أقدر أرتبه لك كملف واحد جاهز للرفع إلى GitHub. 
-
-admin_region_update.txt
-Document
-
-Library
-/
-admin_region_update.txt
-تعديل admin.html — إضافة تصنيف المحطة (مدينة حلب / ريف حلب)
-
-1) نفّذ أولاً في Supabase SQL Editor:
-
-ALTER TABLE stations
-ADD COLUMN IF NOT EXISTS region_type text
-CHECK (region_type IN ('city', 'countryside'));
-
-2) داخل نموذج stationForm، بعد:
-<label>المنطقة</label>
-<input id="area">
-
-أضف:
-<label>التصنيف</label>
-<select id="region_type" required>
-  <option value="">اختر التصنيف</option>
-  <option value="city">مدينة حلب</option>
-  <option value="countryside">ريف حلب</option>
-</select>
-
-3) داخل openEdit() بعد:
-$("area").value=
-s.area||"";
-
-أضف:
-$("region_type").value=
-s.region_type||"";
-
-4) داخل openAdd() بعد:
-$("location_url").value="";
-
-أضف:
-$("region_type").value="";
-
-5) داخل payload بعد:
-area:
-$("area").value.trim(),
-
-أضف:
-region_type:
-$("region_type").value,
-
-6) لإظهار التصنيف في قائمة المحطات، بعد:
-${esc(s.area||"")}
-
-أضف:
-<br>
-<span class="badge">
-${
-s.region_type==="city"
-?
-"🏙️ مدينة حلب"
-:
-s.region_type==="countryside"
-?
-"🌿 ريف حلب"
-:
-""
-}
-</span>
