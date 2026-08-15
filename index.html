@@ -35,18 +35,18 @@ body{
 header{
     background:#0f766e;
     color:#fff;
-    padding:16px 0 14px;
+    padding:16px 0 15px;
 }
 
 .header-top{
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:8px;
+    gap:10px;
 }
 
 .brand{
-    font-size:24px;
+    font-size:25px;
     font-weight:900;
 }
 
@@ -55,8 +55,8 @@ header{
     color:#fff;
     border:1px solid rgba(255,255,255,.65);
     border-radius:999px;
-    padding:5px 9px;
-    font-size:10px;
+    padding:6px 10px;
+    font-size:11px;
     font-weight:700;
     text-decoration:none;
     white-space:nowrap;
@@ -64,31 +64,31 @@ header{
 
 .sub{
     margin-top:4px;
-    opacity:.9;
-    font-size:12px;
+    opacity:.92;
+    font-size:13px;
 }
 
 .credit{
-    margin-top:4px;
+    margin-top:5px;
     font-size:10px;
     opacity:.7;
 }
 
 .updated-line{
-    margin-top:6px;
+    margin-top:7px;
     font-size:11px;
-    opacity:.95;
+    opacity:.9;
 }
 
 .search{
-    margin-top:10px;
+    margin-top:12px;
 }
 
 .search input{
     width:100%;
-    padding:11px 13px;
+    padding:12px 14px;
     border:0;
-    border-radius:11px;
+    border-radius:12px;
     font-size:14px;
     outline:none;
 }
@@ -101,7 +101,7 @@ header{
     display:flex;
     gap:6px;
     overflow-x:auto;
-    padding:9px 0;
+    padding:10px 0;
     scrollbar-width:none;
 }
 
@@ -114,7 +114,7 @@ header{
     border:1px solid #d6dddd;
     background:#fff;
     border-radius:999px;
-    padding:7px 11px;
+    padding:7px 12px;
     cursor:pointer;
     font:inherit;
     font-size:12px;
@@ -134,34 +134,34 @@ header{
 .stats{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:5px;
-    margin:7px 0;
+    gap:6px;
+    margin:8px 0;
 }
 
 .stat{
     background:#fff;
     border:1px solid #e1e7e7;
-    border-radius:10px;
-    padding:6px 3px;
+    border-radius:11px;
+    padding:7px 4px;
     text-align:center;
 }
 
 .stat b{
     display:block;
-    font-size:17px;
+    font-size:18px;
     line-height:1.2;
 }
 
 .stat span{
     display:block;
     margin-top:2px;
-    font-size:9px;
+    font-size:10px;
     color:#69757a;
 }
 
 .count-row{
-    margin:3px 2px 7px;
-    font-size:10px;
+    margin:3px 2px 8px;
+    font-size:11px;
     color:#68757a;
 }
 
@@ -172,7 +172,7 @@ header{
 .grid{
     display:grid;
     grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:7px;
+    gap:8px;
 }
 
 /* =========================
@@ -181,12 +181,12 @@ header{
 
 .station-card{
     background:#fff;
-    border-radius:13px;
+    border-radius:14px;
     border:2px solid #dce5e4;
     overflow:hidden;
     cursor:pointer;
     transition:.15s;
-    box-shadow:0 2px 6px rgba(0,0,0,.04);
+    box-shadow:0 2px 7px rgba(0,0,0,.04);
     min-width:0;
 }
 
@@ -198,12 +198,8 @@ header{
     border-color:#fca5a5;
 }
 
-.station-card:active{
-    transform:scale(.985);
-}
-
 /* =========================
-   الجزء الرئيسي
+   الجزء الظاهر
 ========================= */
 
 .station-main{
@@ -213,7 +209,7 @@ header{
 .station-head{
     display:flex;
     align-items:flex-start;
-    gap:6px;
+    gap:7px;
 }
 
 .status-circle{
@@ -221,7 +217,7 @@ header{
     height:9px;
     min-width:9px;
     border-radius:50%;
-    margin-top:5px;
+    margin-top:6px;
 }
 
 .status-circle.green{
@@ -233,16 +229,16 @@ header{
 }
 
 .station-name{
-    font-size:15px;
+    font-size:16px;
     font-weight:900;
-    line-height:1.25;
+    line-height:1.3;
 }
 
 .station-area{
     color:#68757a;
-    font-size:9px;
+    font-size:10px;
     margin-top:2px;
-    padding-right:15px;
+    padding-right:16px;
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
@@ -267,7 +263,7 @@ header{
     background:#f8fafb;
     border-radius:8px;
     padding:7px 3px;
-    font-size:10px;
+    font-size:11px;
     font-weight:800;
 }
 
@@ -287,6 +283,21 @@ header{
 }
 
 /* =========================
+   المحطة المغلقة
+========================= */
+
+.closed-status{
+    margin-top:9px;
+    background:#f1f5f9;
+    color:#64748b;
+    border-radius:8px;
+    padding:7px 5px;
+    text-align:center;
+    font-size:11px;
+    font-weight:900;
+}
+
+/* =========================
    التفاصيل
 ========================= */
 
@@ -294,7 +305,7 @@ header{
     display:none;
     border-top:1px solid #e5eaea;
     background:#fafcfc;
-    padding:9px 10px;
+    padding:10px;
 }
 
 .station-card.expanded .station-details{
@@ -317,10 +328,10 @@ header{
     justify-content:center;
     text-decoration:none;
     border:0;
-    border-radius:7px;
+    border-radius:8px;
     padding:7px 3px;
     font:inherit;
-    font-size:9px;
+    font-size:10px;
     font-weight:800;
     cursor:pointer;
 }
@@ -349,8 +360,8 @@ header{
 
 .traffic-box{
     margin-top:7px;
-    padding:6px 7px;
-    border-radius:7px;
+    padding:7px 8px;
+    border-radius:8px;
     font-size:10px;
     font-weight:800;
     text-align:center;
@@ -377,24 +388,28 @@ header{
 
 .closure-box{
     margin-top:7px;
-    background:#fff1f2;
-    color:#991b1b;
-    border-radius:7px;
+    background:#f1f5f9;
+    color:#475569;
+    border-radius:8px;
     padding:7px 8px;
     font-size:10px;
     line-height:1.6;
     font-weight:800;
 }
 
+.closure-reason{
+    color:#991b1b;
+}
+
 /* =========================
-   الملاحظة
+   الملاحظات
 ========================= */
 
 .note-box{
     margin-top:7px;
     background:#f1f5f9;
     color:#475569;
-    border-radius:7px;
+    border-radius:8px;
     padding:7px 8px;
     font-size:10px;
     line-height:1.6;
@@ -431,12 +446,12 @@ header{
     font-weight:800;
     cursor:pointer;
     padding:4px 6px;
-    border-radius:6px;
+    border-radius:7px;
 }
 
 .rating-content{
     display:none;
-    margin-top:6px;
+    margin-top:7px;
 }
 
 .rating-content.show{
@@ -461,11 +476,11 @@ header{
 
 .rating-selected{
     text-align:center;
-    font-size:9px;
+    font-size:10px;
     color:#0f766e;
     font-weight:700;
-    min-height:14px;
-    margin-top:3px;
+    min-height:15px;
+    margin-top:4px;
 }
 
 .confirm-rating{
@@ -473,45 +488,51 @@ header{
     border:0;
     background:#0f766e;
     color:#fff;
-    border-radius:6px;
-    padding:6px 9px;
-    font-size:9px;
+    border-radius:7px;
+    padding:6px 10px;
+    font-size:10px;
     font-weight:800;
     cursor:pointer;
-    margin:4px auto 0;
+    margin:5px auto 0;
 }
 
 .rating-message{
     text-align:center;
     color:#0f766e;
-    font-size:9px;
-    min-height:13px;
-    margin-top:3px;
+    font-size:10px;
+    min-height:14px;
+    margin-top:4px;
 }
 
 /* =========================
-   الوقت
+   آخر تحديث
 ========================= */
 
 .station-time{
     margin-top:7px;
     text-align:left;
     color:#888;
-    font-size:8px;
+    font-size:9px;
 }
 
 /* =========================
-   لا نتائج
+   التحميل والخطأ
 ========================= */
 
+.loading-box,
 .empty{
     grid-column:1 / -1;
     background:#fff;
     border:1px solid #e1e7e7;
-    border-radius:13px;
+    border-radius:14px;
     padding:30px 15px;
     text-align:center;
     color:#777;
+    font-size:15px;
+}
+
+.error-box{
+    color:#991b1b;
 }
 
 /* =========================
@@ -521,24 +542,24 @@ header{
 @media(max-width:600px){
 
     .wrap{
-        width:calc(100% - 12px);
+        width:calc(100% - 18px);
     }
 
     header{
-        padding:14px 0 12px;
+        padding:15px 0 13px;
     }
 
     .brand{
-        font-size:21px;
+        font-size:22px;
     }
 
     .admin-message{
         font-size:9px;
-        padding:5px 7px;
+        padding:5px 8px;
     }
 
     .sub{
-        font-size:11px;
+        font-size:12px;
     }
 
     .grid{
@@ -551,22 +572,16 @@ header{
     }
 
     .station-name{
-        font-size:14px;
+        font-size:15px;
     }
 
     .station-area{
-        font-size:8px;
-        padding-right:14px;
-    }
-
-    .fuel-row{
-        gap:4px;
-        margin-top:8px;
+        font-size:9px;
     }
 
     .fuel-item{
         padding:6px 2px;
-        font-size:9px;
+        font-size:10px;
     }
 
     .fuel-dot{
@@ -579,52 +594,34 @@ header{
         grid-template-columns:repeat(3,1fr);
     }
 
-    .detail-button{
-        font-size:8px;
-        padding:6px 2px;
-    }
-
 }
 
-@media(max-width:360px){
+@media(max-width:380px){
 
     .brand{
-        font-size:19px;
+        font-size:20px;
     }
 
     .station-name{
-        font-size:13px;
+        font-size:14px;
     }
 
-    .station-main{
-        padding:8px;
+    .station-area{
+        font-size:8px;
     }
 
     .fuel-item{
-        font-size:8px;
+        font-size:9px;
     }
 
-}
-
-/* =========================
-   شاشة أكبر
-========================= */
-
-@media(min-width:601px){
-
-    .grid{
-        grid-template-columns:repeat(3,minmax(0,1fr));
-    }
-
-    .station-name{
-        font-size:16px;
+    .detail-button{
+        font-size:9px;
     }
 
 }
 
 </style>
 </head>
-
 
 <body>
 
@@ -650,16 +647,13 @@ rel="noopener">
 
 </div>
 
-
 <div class="sub">
 حالة المحطات وآخر تحديثات الوقود
 </div>
 
-
 <div class="credit">
 By Ammar Morgan
 </div>
-
 
 <div
 class="updated-line"
@@ -668,7 +662,6 @@ id="updatedLine">
 آخر تحديث: جاري التحميل…
 
 </div>
-
 
 <div class="search">
 
@@ -687,14 +680,11 @@ autocomplete="off">
 
 <main class="wrap">
 
-
 <div
 class="stats"
 id="stats">
 </div>
 
-
-<!-- المناطق -->
 
 <div class="filters">
 
@@ -706,7 +696,6 @@ data-region="city">
 
 </button>
 
-
 <button
 data-region="countryside">
 
@@ -716,8 +705,6 @@ data-region="countryside">
 
 </div>
 
-
-<!-- الفلاتر -->
 
 <div class="filters">
 
@@ -767,9 +754,6 @@ data-f="all">
 <div
 class="count-row"
 id="count">
-
-جاري تحميل المحطات…
-
 </div>
 
 
@@ -777,18 +761,16 @@ id="count">
 class="grid"
 id="stations">
 
-<div class="empty">
-جاري تحميل المحطات…
+<div class="loading-box">
+جاري تحميل المحطات… ⏳
 </div>
 
 </section>
-
 
 </main>
 
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 
 <script>
 
@@ -796,516 +778,13 @@ id="stations">
    Supabase
 ========================= */
 
-const sb = supabase.createClient(
-
-    "https://hjggfolotblsurfwfcvn.supabase.co",
-
-    "sb_publishable_UTpiWf5wrq8VfxAXxl9zfw_CtRRizyl"
-
-);
-
-
-/* =========================
-   المتغيرات
-========================= */
-
-let all = [];
-
-let filter = "all";
-
-let regionFilter = "city";
-
-const ratings = {};
-
-const selectedRatings = {};
-
-const $ = id => document.getElementById(id);
-
-
-/* =========================
-   حماية النصوص
-========================= */
-
-function esc(x){
-
-    return String(x ?? "")
-        .replace(/[&<>"']/g, m => ({
-            "&":"&amp;",
-            "<":"&lt;",
-            ">":"&gt;",
-            '"':"&quot;",
-            "'":"&#039;"
-        }[m]));
-
-}
-
-
-/* =========================
-   التاريخ
-========================= */
-
-function fmt(t){
-
-    if(!t){
-        return "—";
-    }
-
-    const d = new Date(t);
-
-    if(isNaN(d.getTime())){
-        return "—";
-    }
-
-    return new Intl.DateTimeFormat(
-        "ar-SY",
-        {
-            day:"numeric",
-            month:"numeric",
-            year:"numeric",
-            hour:"2-digit",
-            minute:"2-digit"
-        }
-    ).format(d);
-
-}
-
-
-/* =========================
-   سبب الإغلاق
-========================= */
-
-function closureReasonText(v){
-
-    const value =
-        String(v ?? "")
-        .trim()
-        .toLowerCase();
-
-    if(value === "maintenance")
-        return "🔧 صيانة";
-
-    if(value === "technical")
-        return "⚡ عطل فني";
-
-    if(value === "delivery")
-        return "🚚 بانتظار وصول الطلبية";
-
-    if(value === "fuel")
-        return "⛽ نفاد الوقود";
-
-    if(value === "administrative")
-        return "🏢 إغلاق إداري";
-
-    if(value === "temporary")
-        return "🕐 إغلاق مؤقت";
-
-    return String(v ?? "");
-
-}
-
-
-/* =========================
-   الازدحام
-========================= */
-
-function trafficInfo(v){
-
-    const value =
-        String(v ?? "")
-        .trim()
-        .toLowerCase();
-
-    if(value === "none"){
-
-        return {
-            text:"🟢 لا يوجد ازدحام",
-            className:"traffic-none"
-        };
-
-    }
-
-    if(value === "light"){
-
-        return {
-            text:"🟡 ازدحام خفيف",
-            className:"traffic-light"
-        };
-
-    }
-
-    if(value === "long"){
-
-        return {
-            text:"🔴 طابور طويل",
-            className:"traffic-long"
-        };
-
-    }
-
-    return null;
-
-}
-
-
-/* =========================
-   المنطقة
-========================= */
-
-function getRegion(s){
-
-    const value =
-        String(
-            s.region_type ??
-            s.region ??
-            ""
-        )
-        .trim()
-        .toLowerCase();
-
-    if(value === "countryside"){
-        return "countryside";
-    }
-
-    return "city";
-
-}
-
-
-/* =========================
-   فتح / إغلاق المحطة
-========================= */
-
-function toggleStation(stationId){
-
-    const safeId = String(stationId);
-
-    const card =
-        document.getElementById(
-            "station-" + safeId
-        );
-
-    if(!card){
-        return;
-    }
-
-    card.classList.toggle("expanded");
-
-}
-
-
-/* =========================
-   زر الموقع
-========================= */
-
-function locationButton(s){
-
-    if(!s.location_url){
-        return "";
-    }
-
-    return `
-        <a
-            class="detail-button location-button"
-            href="${esc(s.location_url)}"
-            target="_blank"
-            rel="noopener"
-            onclick="event.stopPropagation()">
-
-            📍 الموقع
-
-        </a>
-    `;
-
-}
-
-
-/* =========================
-   زر الرسالة
-========================= */
-
-function messageButton(s){
-
-    const stationName =
-        String(s.name ?? "محطة");
-
-    const text =
-        `مرحباً، لدي رسالة بخصوص ${stationName}
-
-الرسالة:`;
-
-    const url =
-        "https://wa.me/905050978000?text=" +
-        encodeURIComponent(text);
-
-    return `
-        <a
-            class="detail-button message-button"
-            href="${url}"
-            target="_blank"
-            rel="noopener"
-            onclick="event.stopPropagation()">
-
-            📩 رسالة
-
-        </a>
-    `;
-
-}
-
-
-/* =========================
-   صندوق التقييم
-========================= */
-
-function ratingBox(s){
-
-    const id = String(s.id);
-
-    const r =
-        ratings[id] ||
-        {
-            average:0,
-            count:0
-        };
-
-    const average =
-        Number(r.average || 0).toFixed(1);
-
-    const count =
-        Number(r.count || 0);
-
-    return `
-
-        <div
-            class="rating-section"
-            onclick="event.stopPropagation()">
-
-            <div class="rating-top">
-
-                <div class="rating-average">
-
-                    ⭐ ${average} / 5
-                    ${count
-                        ? ` • ${count} تقييم`
-                        : " • لا يوجد تقييم"
-                    }
-
-                </div>
-
-
-                <button
-                    class="rating-toggle"
-                    type="button"
-                    onclick="toggleRating('${esc(id)}')">
-
-                    ⭐ تقييم المحطة
-
-                </button>
-
-            </div>
-
-
-            <div
-                class="rating-content"
-                id="rating-content-${esc(id)}">
-
-                <div class="stars">
-
-                    ${[1,2,3,4,5].map(n => `
-
-                        <button
-                            class="star"
-                            onclick="selectRating('${esc(id)}',${n})"
-                            id="star-${esc(id)}-${n}"
-                            title="تقييم ${n} من 5">
-
-                            ☆
-
-                        </button>
-
-                    `).join("")}
-
-                </div>
-
-
-                <div
-                    class="rating-selected"
-                    id="rating-selected-${esc(id)}">
-
-                    اختر تقييمك من 1 إلى 5
-
-                </div>
-
-
-                <button
-                    class="confirm-rating"
-                    id="confirm-rating-${esc(id)}"
-                    onclick="confirmRating('${esc(id)}')">
-
-                    ✅ تأكيد التقييم
-
-                </button>
-
-
-                <div
-                    class="rating-message"
-                    id="rating-message-${esc(id)}">
-
-                </div>
-
-            </div>
-
-        </div>
-
-    `;
-
-}
-
-
-/* =========================
-   فتح التقييم
-========================= */
-
-function toggleRating(stationId){
-
-    const box =
-        document.getElementById(
-            "rating-content-" + stationId
-        );
-
-    if(!box){
-        return;
-    }
-
-    box.classList.toggle("show");
-
-}
-
-
-/* =========================
-   اختيار التقييم
-========================= */
-
-function selectRating(stationId,rating){
-
-    selectedRatings[stationId] = rating;
-
-    const selected =
-        document.getElementById(
-            "rating-selected-" + stationId
-        );
-
-    if(selected){
-
-        selected.textContent =
-            "اخترت ⭐ " +
-            rating +
-            " من 5";
-
-    }
-
-
-    for(let n = 1; n <= 5; n++){
-
-        const star =
-            document.getElementById(
-                "star-" +
-                stationId +
-                "-" +
-                n
-            );
-
-        if(star){
-
-            star.textContent =
-                n <= rating
-                    ? "⭐"
-                    : "☆";
-
-        }
-
-    }
-
-
-    const confirm =
-        document.getElementById(
-            "confirm-rating-" + stationId
-        );
-
-    if(confirm){
-
-        confirm.style.display =
-            "block";
-
-    }
-
-}
-
-
-/* =========================
-   تأكيد التقييم
-========================= */
-
-async function confirmRating(stationId){
-
-    const rating =
-        selectedRatings[stationId];
-
-    if(!rating){
-        return;
-    }
-
-
-    const message =
-        document.getElementById(
-            "rating-message-" + stationId
-        );
-
-    if(message){
-
-        message.textContent =
-            "جاري إرسال التقييم…";
-
-    }
-
-
-    const storageKey =
-        "rated_station_" + stationId;
-
-
-    if(localStorage.getItem(storageKey)){
-
-        if(message){
-
-            message.textContent =
-                "⚠️ لقد قيّمت هذه المحطة مسبقاً من هذا الجهاز.";
-
-        }
-
-        return;
-
-    }
-
-
-    try{
-
-        const { error } =
-            await sb
-            .from("station_ratings")
-            .insert({
-
-                station_id:Number(stationId),
-
-                rating:Number(rating)
-
-            });
-
-
-        if(error){
-
-            console.error(error);
-
-            if(message){
-
-                message.textContent =
-                    "تعذر إرسال
+const SUPABASE_URL =
+"https://hjggfolotblsurfwfcvn.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_UTpiWf5wrq8VfxAXxl9zfw_CtRRizyl";
+
+const sb =
+supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
