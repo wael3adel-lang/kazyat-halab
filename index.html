@@ -25,12 +25,16 @@ color:#17202a;
 .wrap{
 max-width:900px;
 margin:auto;
+padding-left:12px;
+padding-right:12px;
 }
+
+/* الهيدر */
 
 header{
 background:#0f766e;
 color:#fff;
-padding:20px 14px 18px;
+padding:20px 0 18px;
 }
 
 .header-top{
@@ -58,12 +62,8 @@ text-decoration:none;
 white-space:nowrap;
 }
 
-.admin-message:hover{
-background:rgba(255,255,255,.12);
-}
-
 .sub{
-margin-top:4px;
+margin-top:5px;
 opacity:.92;
 font-size:14px;
 font-weight:600;
@@ -82,6 +82,8 @@ font-size:12px;
 opacity:.95;
 }
 
+/* البحث */
+
 .search{
 margin-top:14px;
 }
@@ -93,7 +95,10 @@ border:0;
 border-radius:13px;
 font-size:15px;
 outline:none;
+font-family:inherit;
 }
+
+/* الفلاتر */
 
 .filters{
 display:flex;
@@ -125,6 +130,8 @@ color:#fff;
 border-color:#0f766e;
 }
 
+/* الإحصائيات */
+
 .stats{
 display:grid;
 grid-template-columns:repeat(4,1fr);
@@ -153,11 +160,15 @@ font-size:11px;
 color:#5f6b70;
 }
 
+/* العدد */
+
 .count-row{
 margin:2px 2px 9px;
 font-size:12px;
 color:#68757a;
 }
+
+/* البطاقات */
 
 .grid{
 display:grid;
@@ -172,6 +183,8 @@ border-radius:16px;
 padding:13px;
 box-shadow:0 2px 8px rgba(0,0,0,.045);
 }
+
+/* اسم المحطة */
 
 .card-head{
 display:flex;
@@ -192,22 +205,28 @@ color:#69767c;
 margin-top:2px;
 }
 
-.status-dot{
-width:10px;
-height:10px;
-border-radius:50%;
+/* المنطقة داخل البطاقة */
+
+.region{
 display:inline-block;
-margin-left:4px;
-vertical-align:middle;
+margin-top:5px;
+padding:4px 7px;
+border-radius:7px;
+font-size:10px;
+font-weight:800;
 }
 
-.status-dot.green{
-background:#22c55e;
+.region-city{
+background:#dbeafe;
+color:#1d4ed8;
 }
 
-.status-dot.red{
-background:#ef4444;
+.region-country{
+background:#dcfce7;
+color:#166534;
 }
+
+/* المعلومات */
 
 .main-info{
 display:flex;
@@ -251,6 +270,8 @@ color:#374151;
 font-weight:900;
 }
 
+/* الأزرار */
+
 .actions{
 display:flex;
 gap:7px;
@@ -282,6 +303,8 @@ color:#be123c;
 border:1px solid #fecdd3;
 }
 
+/* الملاحظة */
+
 .note{
 font-size:12px;
 margin-top:9px;
@@ -291,6 +314,8 @@ background:#f8fafc;
 padding:7px 9px;
 border-radius:8px;
 }
+
+/* الإغلاق */
 
 .closure-info{
 margin-top:9px;
@@ -303,97 +328,7 @@ font-weight:750;
 line-height:1.7;
 }
 
-.rating-box{
-margin-top:10px;
-padding-top:9px;
-border-top:1px solid #eef2f2;
-}
-
-.rating-summary{
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:8px;
-}
-
-.rating-average{
-font-size:12px;
-font-weight:800;
-color:#555;
-}
-
-.rating-toggle{
-border:0;
-background:#f8fafc;
-color:#0f766e;
-border-radius:8px;
-padding:6px 8px;
-font-size:11px;
-font-weight:800;
-cursor:pointer;
-}
-
-.rating-content{
-margin-top:8px;
-}
-
-.stars{
-margin-top:6px;
-display:flex;
-gap:2px;
-direction:ltr;
-justify-content:flex-start;
-align-items:flex-start;
-}
-
-.star-item{
-text-align:center;
-min-width:31px;
-}
-
-.star{
-border:0;
-background:transparent;
-font-size:21px;
-padding:1px;
-cursor:pointer;
-line-height:1;
-}
-
-.star-number{
-font-size:10px;
-font-weight:800;
-color:#555;
-margin-top:1px;
-}
-
-.rating-selected{
-font-size:11px;
-font-weight:700;
-color:#0f766e;
-margin-top:5px;
-min-height:17px;
-}
-
-.confirm-rating{
-margin-top:6px;
-border:0;
-background:#0f766e;
-color:#fff;
-border-radius:8px;
-padding:7px 11px;
-font:inherit;
-font-size:11px;
-font-weight:800;
-cursor:pointer;
-}
-
-.rating-message{
-font-size:11px;
-color:#0f766e;
-margin-top:5px;
-min-height:15px;
-}
+/* الوقت */
 
 .time{
 font-size:10px;
@@ -402,28 +337,33 @@ margin-top:8px;
 text-align:left;
 }
 
-.loading{
-background:#fff;
-border-radius:16px;
-padding:25px;
-text-align:center;
-color:#68757a;
-}
+/* رسالة الخطأ */
 
-.error{
-background:#fff1f2;
+.error-box{
+background:#fff;
+border:1px solid #fecaca;
 color:#991b1b;
-border:1px solid #fecdd3;
 border-radius:16px;
 padding:20px;
+text-align:center;
 line-height:1.8;
 }
 
-@media(max-width:600px){
-
-header{
-padding:17px 12px 15px;
+.retry{
+margin-top:12px;
+border:0;
+background:#0f766e;
+color:#fff;
+border-radius:9px;
+padding:9px 16px;
+font-family:inherit;
+font-weight:700;
+cursor:pointer;
 }
+
+/* الهاتف */
+
+@media(max-width:600px){
 
 .brand{
 font-size:25px;
@@ -475,27 +415,6 @@ font-size:18px;
 
 .stat span{
 font-size:10px;
-}
-
-}
-
-@media(max-width:380px){
-
-.brand{
-font-size:22px;
-}
-
-.admin-message{
-font-size:9px;
-}
-
-.info-badge{
-font-size:10px;
-padding:6px 7px;
-}
-
-.name{
-font-size:17px;
 }
 
 }
@@ -558,12 +477,10 @@ autocomplete="off">
 
 </header>
 
+
 <main class="wrap">
 
-<div
-class="stats"
-id="stats">
-</div>
+<!-- المنطقة -->
 
 <div class="filters">
 
@@ -578,11 +495,22 @@ data-region="city">
 <button
 data-region="countryside">
 
-🏡 ريف حلب
+🌿 ريف حلب
 
 </button>
 
 </div>
+
+
+<!-- الإحصائيات -->
+
+<div
+class="stats"
+id="stats">
+</div>
+
+
+<!-- الفلاتر -->
 
 <div class="filters">
 
@@ -628,47 +556,43 @@ data-f="all">
 
 </div>
 
+
 <div
 class="count-row"
 id="count">
 </div>
 
+
 <section
 class="grid"
 id="stations">
-
-<div class="loading">
-⏳ جاري تحميل المحطات…
-</div>
 
 </section>
 
 </main>
 
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 
 <script>
 
-/* =========================================
-   الاتصال بقاعدة البيانات
-========================================= */
+/* =================================================
+   SUPABASE
+================================================= */
 
-const SUPABASE_URL =
-"https://hjggfolotblsurfwfcvn.supabase.co";
+const sb = supabase.createClient(
 
-const SUPABASE_KEY =
-"sb_publishable_UTpiWf5wrq8VfxAXxl9zfw_CtRRizyl";
+"https://hjggfolotblsurfwfcvn.supabase.co",
 
-const sb =
-supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
+"sb_publishable_UTpiWf5wrq8VfxAXxl9zfw_CtRRizyl"
+
 );
 
 
-/* =========================================
+/* =================================================
    المتغيرات
-========================================= */
+================================================= */
 
 let all = [];
 
@@ -676,17 +600,13 @@ let filter = "all";
 
 let regionFilter = "city";
 
-const ratings = {};
-
-const selectedRatings = {};
-
 const $ = id =>
 document.getElementById(id);
 
 
-/* =========================================
+/* =================================================
    حماية النصوص
-========================================= */
+================================================= */
 
 function esc(x){
 
@@ -704,461 +624,8 @@ return String(x ?? "")
 }
 
 
-/* =========================================
+/* =================================================
    التاريخ
-========================================= */
+================================================= */
 
 function fmt(t){
-
-if(!t)
-return "—";
-
-const d =
-new Date(t);
-
-if(
-Number.isNaN(d.getTime())
-)
-return "—";
-
-return new Intl.DateTimeFormat(
-"ar-SY",
-{
-day:"numeric",
-month:"numeric",
-year:"numeric",
-hour:"2-digit",
-minute:"2-digit"
-}
-).format(d);
-
-}
-
-
-/* =========================================
-   سبب الإغلاق
-========================================= */
-
-function closureReasonText(v){
-
-const value =
-String(v ?? "")
-.trim()
-.toLowerCase();
-
-if(value==="maintenance")
-return "🔧 صيانة";
-
-if(value==="technical")
-return "⚡ عطل فني";
-
-if(value==="delivery")
-return "🚚 بانتظار وصول الطلبية";
-
-if(value==="fuel")
-return "⛽ نفاد الوقود";
-
-if(value==="administrative")
-return "🏢 إغلاق إداري";
-
-if(value==="temporary")
-return "🕐 إغلاق مؤقت";
-
-return "";
-
-}
-
-
-/* =========================================
-   الازدحام
-========================================= */
-
-function tr(v){
-
-const value =
-String(v ?? "")
-.trim()
-.toLowerCase();
-
-if(value==="none")
-return [
-"🟢",
-"لا يوجد ازدحام",
-"ok"
-];
-
-if(value==="light")
-return [
-"🟡",
-"ازدحام خفيف",
-"warn"
-];
-
-if(value==="long")
-return [
-"🔴",
-"طابور طويل",
-"no"
-];
-
-return [
-"❌",
-"مغلقة",
-"gray"
-];
-
-}
-
-
-/* =========================================
-   الموقع
-========================================= */
-
-function locationButton(s){
-
-if(!s.location_url)
-return "";
-
-return `
-
-<a
-class="location-link"
-href="${esc(s.location_url)}"
-target="_blank"
-rel="noopener">
-
-📍 الموقع
-
-</a>
-
-`;
-
-}
-
-
-/* =========================================
-   الشكوى
-========================================= */
-
-function complaintButton(s){
-
-const stationName =
-String(s.name ?? "محطة");
-
-const text =
-`شكوى بخصوص ${stationName}
-
-أرغب بتقديم شكوى:`;
-
-const url =
-"https://wa.me/905050978000?text="+
-encodeURIComponent(text);
-
-return `
-
-<a
-class="complaint-link"
-href="${url}"
-target="_blank"
-rel="noopener">
-
-📩 شكوى
-
-</a>
-
-`;
-
-}
-
-
-/* =========================================
-   التقييم
-========================================= */
-
-function ratingBox(s){
-
-const r =
-ratings[s.id] ||
-{
-average:0,
-count:0
-};
-
-const average =
-Number(r.average || 0)
-.toFixed(1);
-
-const count =
-Number(r.count || 0);
-
-return `
-
-<div class="rating-box">
-
-<div class="rating-summary">
-
-<div class="rating-average">
-
-⭐ ${average} / 5
-${count ? ` • ${count} تقييم` : " • لا يوجد تقييم"}
-
-</div>
-
-<button
-class="rating-toggle"
-type="button"
-onclick="toggleRating(${Number(s.id)})">
-
-⭐ تقييم المحطة
-
-</button>
-
-</div>
-
-<div
-class="rating-content"
-id="rating-content-${Number(s.id)}"
-style="display:none">
-
-<div class="stars">
-
-${[1,2,3,4,5].map(n=>`
-
-<div class="star-item">
-
-<button
-class="star"
-onclick="selectRating(${Number(s.id)},${n})"
-id="star-${Number(s.id)}-${n}"
-title="تقييم ${n} من 5">
-
-☆
-
-</button>
-
-<div class="star-number">
-${n}
-</div>
-
-</div>
-
-`).join("")}
-
-</div>
-
-<div
-class="rating-selected"
-id="rating-selected-${Number(s.id)}">
-
-اختر تقييمك من 1 إلى 5
-
-</div>
-
-<button
-class="confirm-rating"
-id="confirm-rating-${Number(s.id)}"
-onclick="confirmRating(${Number(s.id)})"
-style="display:none">
-
-✅ تأكيد
-
-</button>
-
-<div
-class="rating-message"
-id="rating-message-${Number(s.id)}">
-</div>
-
-</div>
-
-</div>
-
-`;
-
-}
-
-
-/* =========================================
-   فتح التقييم
-========================================= */
-
-function toggleRating(stationId){
-
-const box =
-document.getElementById(
-"rating-content-"+stationId
-);
-
-if(!box)
-return;
-
-if(box.style.display==="none"){
-
-box.style.display="block";
-
-}else{
-
-box.style.display="none";
-
-}
-
-}
-
-
-/* =========================================
-   اختيار التقييم
-========================================= */
-
-function selectRating(stationId,rating){
-
-selectedRatings[stationId] =
-rating;
-
-const selected =
-document.getElementById(
-"rating-selected-"+stationId
-);
-
-if(selected){
-
-selected.textContent =
-"اخترت ⭐ "+rating+" من 5";
-
-}
-
-for(let n=1;n<=5;n++){
-
-const star =
-document.getElementById(
-"star-"+stationId+"-"+n
-);
-
-if(star){
-
-star.textContent =
-n<=rating
-?
-"⭐"
-:
-"☆";
-
-}
-
-}
-
-const confirm =
-document.getElementById(
-"confirm-rating-"+stationId
-);
-
-if(confirm){
-
-confirm.style.display =
-"inline-block";
-
-}
-
-}
-
-
-/* =========================================
-   إرسال التقييم
-========================================= */
-
-async function confirmRating(stationId){
-
-const rating =
-selectedRatings[stationId];
-
-if(!rating)
-return;
-
-const message =
-document.getElementById(
-"rating-message-"+stationId
-);
-
-if(message)
-message.textContent =
-"جاري إرسال التقييم…";
-
-const storageKey =
-"rated_station_"+stationId;
-
-if(localStorage.getItem(storageKey)){
-
-if(message)
-message.textContent =
-"⚠️ لقد قيّمت هذه المحطة مسبقًا من هذا الجهاز.";
-
-return;
-
-}
-
-try{
-
-const result =
-await sb
-.from("station_ratings")
-.insert({
-
-station_id:Number(stationId),
-
-rating:Number(rating)
-
-});
-
-if(result.error)
-throw result.error;
-
-localStorage.setItem(
-storageKey,
-"1"
-);
-
-if(message)
-message.textContent =
-"✅ تم تسجيل تقييمك.";
-
-delete selectedRatings[stationId];
-
-await loadRatings();
-
-render();
-
-}catch(error){
-
-console.error(error);
-
-if(message)
-message.textContent =
-"تعذر إرسال التقييم، حاول مرة أخرى.";
-
-}
-
-}
-
-
-/* =========================================
-   فلترة المحطات
-========================================= */
-
-function stationMatchesFilter(s){
-
-const status =
-String(s.status ?? "")
-.trim()
-.toLowerCase();
-
-const gas =
-String(s.gas ?? "")
-.trim()
-.toLowerCase();
-
-const diesel =
-String(s.diesel ?? "")
-.trim()
-.toLowerCase();
-
-const traffic =
-String(s.traffic ?? "")
