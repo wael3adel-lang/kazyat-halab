@@ -315,6 +315,12 @@ id="stats">
 
 <div class="filters">
 
+<!-- زر ريف حلب الجديد -->
+
+<button data-f="countryside">
+🏡 ريف حلب
+</button>
+
 <button
 class="active"
 data-f="all">
@@ -530,50 +536,84 @@ const status=String(s.status??"").trim().toLowerCase();
 const gas=String(s.gas??"").trim().toLowerCase();
 const diesel=String(s.diesel??"").trim().toLowerCase();
 const traffic=String(s.traffic??"").trim().toLowerCase();
+const region=String(s.region??"").trim().toLowerCase();
+
+
+/* =========================
+   ريف حلب
+========================= */
+
+if(filter==="countryside"){
+
+return region==="countryside";
+
+}
+
 
 if(filter==="open"){
+
 return status==="open";
+
 }
+
 
 if(filter==="closed"){
+
 return status==="closed";
+
 }
 
+
 if(filter==="both"){
+
 return (
 status==="open" &&
 gas==="yes" &&
 diesel==="yes"
 );
+
 }
 
+
 if(filter==="gas"){
+
 return (
 status==="open" &&
 gas==="yes"
 );
+
 }
 
+
 if(filter==="diesel"){
+
 return (
 status==="open" &&
 diesel==="yes"
 );
+
 }
 
+
 if(filter==="long"){
+
 return (
 status==="open" &&
 traffic==="long"
 );
+
 }
 
+
 if(filter==="light"){
+
 return (
 status==="open" &&
 traffic==="light"
 );
+
 }
+
 
 return true;
 
