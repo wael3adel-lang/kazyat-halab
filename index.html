@@ -336,6 +336,10 @@ header{
     gap:7px;
 }
 
+/* =========================
+   دائرة حالة المحطة
+========================= */
+
 .status-circle{
     width:9px;
     height:9px;
@@ -356,6 +360,35 @@ header{
     font-size:15px;
     font-weight:900;
     line-height:1.3;
+    flex:1;
+}
+
+/* =========================
+   دائرة التوثيق / انتظام التحديث
+========================= */
+
+.trust-badge{
+    width:11px;
+    height:11px;
+    min-width:11px;
+    border-radius:50%;
+    margin-top:5px;
+    box-shadow:0 0 0 1px rgba(0,0,0,.08);
+}
+
+/* أزرق = تحديث منتظم */
+.trust-badge.blue{
+    background:#1877f2;
+}
+
+/* فضي = تحديث غير منتظم */
+.trust-badge.silver{
+    background:#cbd5e1;
+}
+
+/* لا يوجد تصنيف */
+.trust-badge.none{
+    display:none;
 }
 
 .station-area{
@@ -426,54 +459,6 @@ header{
 }
 
 /* =========================
-   حالة تحديث البيانات
-========================= */
-
-.update-frequency{
-    margin-top:7px;
-}
-
-.update-frequency-button{
-    width:100%;
-    border:0;
-    border-radius:999px;
-    padding:6px 9px;
-    font-size:9px;
-    font-weight:900;
-    cursor:pointer;
-    font-family:inherit;
-}
-
-.update-frequency-button.regular{
-    background:#dbeafe;
-    color:#1d4ed8;
-    border:1px solid #93c5fd;
-}
-
-.update-frequency-button.irregular{
-    background:#f1f5f9;
-    color:#64748b;
-    border:1px solid #cbd5e1;
-}
-
-.update-frequency-info{
-    display:none;
-    margin-top:5px;
-    background:#fff;
-    border:1px solid #dce5e4;
-    border-radius:8px;
-    padding:8px;
-    font-size:9px;
-    line-height:1.7;
-    color:#475569;
-    text-align:center;
-}
-
-.update-frequency-info.show{
-    display:block;
-}
-
-/* =========================
    التفاصيل
 ========================= */
 
@@ -486,6 +471,35 @@ header{
 
 .station-card.expanded .station-details{
     display:block;
+}
+
+/* =========================
+   شرح انتظام التحديث
+========================= */
+
+.trust-info{
+    margin-top:8px;
+    background:#f8fafc;
+    border:1px solid #dbe3ea;
+    border-radius:9px;
+    padding:9px 10px;
+    font-size:10px;
+    line-height:1.7;
+    color:#475569;
+}
+
+.trust-info.blue{
+    border-right:3px solid #1877f2;
+}
+
+.trust-info.silver{
+    border-right:3px solid #cbd5e1;
+}
+
+.trust-info-title{
+    font-weight:900;
+    color:#334155;
+    margin-bottom:2px;
 }
 
 /* =========================
@@ -1003,8 +1017,6 @@ id="stations">
 </main>
 
 
-<!-- Supabase -->
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
@@ -1208,85 +1220,69 @@ return "city";
 
 
 /* =========================
-   حالة تحديث البيانات
+   مستوى التحديث
 ========================= */
 
-function updateFrequencyBox(s){
-
-const id =
-String(s.id);
+function getTrustLevel(s){
 
 const value =
-String(s.update_frequency ?? "")
+String(s.trust_level ?? "")
 .trim()
 .toLowerCase();
 
-/*
-   إذا لم تكن الحالة محددة في قاعدة البيانات،
-   نعتبرها غير منتظمة بشكل افتراضي.
-   الهدف هو عدم إعطاء المستخدم انطباعاً
-   بأن بيانات الوقود مضمونة ومحدثة دائماً.
-*/
+if(value === "blue")
+return "blue";
 
-const regular =
-value === "regular";
+if(value === "silver")
+return "silver";
 
-const text =
-regular
-? "🔵 تحديث دائم ⓘ"
-: "⚪ تحديث غير منتظم ⓘ";
-
-const explanation =
-regular
-? "يتم تحديث معلومات هذه المحطة بشكل منتظم، لكن توفر الوقود قد يتغير بعد آخر تحديث."
-: "قد لا تكون معلومات هذه المحطة محدثة حالياً. يرجى الانتباه إلى أن توفر الوقود غير مضمون.";
-
-return `
-
-<div
-class="update-frequency"
-onclick="event.stopPropagation()">
-
-<button
-type="button"
-class="update-frequency-button ${regular ? "regular" : "irregular"}"
-onclick="event.stopPropagation();toggleUpdateFrequency('${esc(id)}')">
-
-${text}
-
-</button>
-
-</div>
-
-<div
-class="update-frequency-info"
-id="update-info-${esc(id)}"
-onclick="event.stopPropagation()">
-
-${explanation}
-
-</div>
-
-`;
+return "none";
 
 }
 
 
 /* =========================
-   فتح شرح حالة التحديث
+   شرح مستوى التحديث
 ========================= */
 
-function toggleUpdateFrequency(id){
+function trustInfo(s){
 
-const box =
-document.getElementById(
-    "update-info-" + id
-);
+const trust =
+getTrustLevel(s);
 
-if(!box)
-return;
+if(trust === "blue"){
 
-box.classList.toggle("show");
+return `
+<div class="trust-info blue">
+
+<div class="trust-info-title">
+🔵 تحديث منتظم
+</div>
+
+تقوم هذه المحطة بتحديث معلوماتها بشكل منتظم، لكن تبقى المعلومات مرتبطة بآخر تحديث ظاهر في الصفحة.
+
+</div>
+`;
+
+}
+
+if(trust === "silver"){
+
+return `
+<div class="trust-info silver">
+
+<div class="trust-info-title">
+⚪ تحديث غير منتظم
+</div>
+
+قد لا تكون معلومات هذه المحطة محدثة بشكل مستمر، لذلك يُنصح بالانتباه إلى وقت آخر تحديث قبل الاعتماد عليها.
+
+</div>
+`;
+
+}
+
+return "";
 
 }
 
@@ -1320,7 +1316,6 @@ if(!s.location_url)
 return "";
 
 return `
-
 <a
 class="detail-button location-button"
 href="${esc(s.location_url)}"
@@ -1331,7 +1326,6 @@ onclick="event.stopPropagation()">
 📍 الموقع
 
 </a>
-
 `;
 
 }
@@ -1356,7 +1350,6 @@ const url =
 encodeURIComponent(text);
 
 return `
-
 <a
 class="detail-button message-button"
 href="${url}"
@@ -1367,7 +1360,6 @@ onclick="event.stopPropagation()">
 📩 رسالة
 
 </a>
-
 `;
 
 }
@@ -1788,14 +1780,11 @@ try{
 const value =
 decodeURIComponent(String(url));
 
-/*
-   الشكل:
-   @36.202123,37.134567,17z
-*/
+/* الشكل @36.202123,37.134567,17z */
 
 let match =
 value.match(
-/@(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/
+/@(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/ 
 );
 
 if(match){
@@ -1808,14 +1797,11 @@ return {
 }
 
 
-/*
-   الشكل:
-   !3d36.202123!4d37.134567
-*/
+/* الشكل !3d36.202123!4d37.134567 */
 
 match =
 value.match(
-/!3d(-?\d+(?:\.\d+)?)!4d(-?\d+(?:\.\d+)?)/
+/!3d(-?\d+(?:\.\d+)?)!4d(-?\d+(?:\.\d+)?)/ 
 );
 
 if(match){
@@ -1828,14 +1814,11 @@ return {
 }
 
 
-/*
-   الشكل:
-   ?q=36.202123,37.134567
-*/
+/* الشكل ?q=36.202123,37.134567 */
 
 match =
 value.match(
-/[?&]q=(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/
+/[?&]q=(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/ 
 );
 
 if(match){
@@ -1848,10 +1831,7 @@ return {
 }
 
 
-/*
-   الشكل:
-   query=36.202123,37.134567
-*/
+/* الشكل query=36.202123,37.134567 */
 
 match =
 value.match(
@@ -1991,9 +1971,7 @@ const userLng =
 position.coords.longitude;
 
 
-/*
-   نضيف إحداثيات كل محطة
-*/
+/* نضيف إحداثيات كل محطة */
 
 const stationsWithDistance =
 all
@@ -2215,12 +2193,6 @@ return String(s.id) === String(id);
 if(!station)
 return;
 
-
-/*
-   إذا كان لها رابط Google Maps
-   نفتح الموقع مباشرة.
-*/
-
 if(station.location_url){
 
 window.open(
@@ -2230,14 +2202,7 @@ station.location_url,
 );
 
 return;
-
 }
-
-
-/*
-   إذا لم يوجد الرابط،
-   نفتح البطاقة داخل الصفحة.
-*/
 
 const card =
 document.getElementById(
@@ -2502,6 +2467,36 @@ region === "countryside"
 ? "ريف حلب"
 : "حلب المدينة";
 
+const trust =
+getTrustLevel(s);
+
+
+/* دائرة التوثيق */
+
+let trustBadge = "";
+
+if(trust === "blue"){
+
+trustBadge = `
+<span
+class="trust-badge blue"
+title="تحديث منتظم">
+</span>
+`;
+
+}
+
+if(trust === "silver"){
+
+trustBadge = `
+<span
+class="trust-badge silver"
+title="تحديث غير منتظم">
+</span>
+`;
+
+}
+
 
 let mainFuel = "";
 
@@ -2595,6 +2590,8 @@ ${esc(s.name)}
 
 </div>
 
+${trustBadge}
+
 </div>
 
 
@@ -2606,9 +2603,6 @@ ${esc(s.area || regionName)}
 
 
 ${mainFuel}
-
-
-${updateFrequencyBox(s)}
 
 
 </div>
@@ -2634,6 +2628,9 @@ onclick="event.stopPropagation();toggleRating('${esc(id)}')">
 </button>
 
 </div>
+
+
+${trustInfo(s)}
 
 
 ${
