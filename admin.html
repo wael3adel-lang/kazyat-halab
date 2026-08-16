@@ -5,6 +5,7 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+
 <title>لوحة تحكم — كازيات حلب</title>
 
 <style>
@@ -221,6 +222,54 @@ font-weight:800;
 display:block
 }
 
+/* =========================
+   حالة تحديث المحطة
+========================= */
+
+.trust-select-box{
+background:#f8fafc;
+border:1px solid #e2e8f0;
+border-radius:12px;
+padding:12px;
+margin-bottom:10px
+}
+
+.trust-select-box label{
+font-weight:800;
+display:block
+}
+
+.trust-help{
+font-size:12px;
+color:#64748b;
+line-height:1.7;
+margin-top:3px
+}
+
+.trust-badge{
+display:inline-flex;
+align-items:center;
+gap:5px;
+padding:4px 9px;
+border-radius:999px;
+font-size:12px;
+font-weight:800;
+margin:4px 2px;
+white-space:nowrap
+}
+
+.trust-blue{
+background:#eff6ff;
+color:#2563eb;
+border:1px solid #bfdbfe
+}
+
+.trust-silver{
+background:#f1f5f9;
+color:#64748b;
+border:1px solid #cbd5e1
+}
+
 dialog{
 border:0;
 border-radius:18px;
@@ -235,6 +284,49 @@ background:#0006
 
 .form{
 padding:20px
+}
+
+/* =========================
+   نافذة شرح التحديث
+========================= */
+
+.trust-info-dialog{
+border:0;
+border-radius:18px;
+width:min(520px,94vw);
+padding:0;
+box-shadow:0 20px 60px #0005
+}
+
+.trust-info-dialog::backdrop{
+background:#0007
+}
+
+.trust-info-content{
+padding:22px
+}
+
+.trust-info-title{
+font-size:20px;
+font-weight:800;
+margin-bottom:12px
+}
+
+.trust-info-text{
+font-size:15px;
+line-height:1.9;
+color:#374151
+}
+
+.trust-info-warning{
+margin-top:15px;
+padding:12px;
+background:#fff7ed;
+border:1px solid #fed7aa;
+color:#9a3412;
+border-radius:12px;
+font-size:13px;
+line-height:1.7
 }
 
 @media(max-width:700px){
@@ -291,7 +383,6 @@ grid-template-columns:1fr
 تعديل محطة
 </h2>
 
-
 <input
 type="hidden"
 id="sid">
@@ -342,10 +433,44 @@ required>
 
 </select>
 
-<div
-class="region-required">
+<div class="region-required">
 
 يجب اختيار مدينة حلب أو ريف حلب قبل حفظ المحطة.
+
+</div>
+
+</div>
+
+
+<!-- =================================================
+     حالة تحديث المحطة
+================================================= -->
+
+<div class="trust-select-box">
+
+<label>
+📌 حالة تحديث معلومات المحطة
+</label>
+
+<select id="trust_level">
+
+<option value="">
+بدون شارة
+</option>
+
+<option value="blue">
+🔵 تحديث منتظم
+</option>
+
+<option value="silver">
+⚪ تحديث غير منتظم
+</option>
+
+</select>
+
+<div class="trust-help">
+
+هذه الشارة توضح للمستخدم مدى انتظام تحديث معلومات المحطة، ولا تعني ضمان توفر المحروقات.
 
 </div>
 
@@ -637,6 +762,46 @@ onclick="stationDlg.close()">
 </dialog>
 
 
+<!-- =================================================
+     نافذة شرح شارة التحديث
+================================================= -->
+
+<dialog id="trustInfoDlg" class="trust-info-dialog">
+
+<div class="trust-info-content">
+
+<div
+id="trustInfoTitle"
+class="trust-info-title">
+</div>
+
+<div
+id="trustInfoText"
+class="trust-info-text">
+</div>
+
+<div class="trust-info-warning">
+
+⚠️ شارة التحديث لا تعني ضمان توفر البنزين أو المازوت.
+قد تتغير حالة المحطة بعد آخر تحديث.
+
+</div>
+
+<br>
+
+<button
+type="button"
+onclick="trustInfoDlg.close()">
+
+فهمت
+
+</button>
+
+</div>
+
+</dialog>
+
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
@@ -777,6 +942,87 @@ if(v==="countryside")
 return "🌿 ريف حلب";
 
 return "⚠️ غير محدد";
+
+}
+
+
+/* =================================================
+   شارة تحديث المحطة
+================================================= */
+
+function trustBadge(level){
+
+if(level==="blue"){
+
+return `
+<button
+type="button"
+class="trust-badge trust-blue"
+onclick="showTrustInfo('blue')"
+title="اضغط لمعرفة معنى الشارة">
+
+🔵 تحديث منتظم
+
+</button>
+`;
+
+}
+
+if(level==="silver"){
+
+return `
+<button
+type="button"
+class="trust-badge trust-silver"
+onclick="showTrustInfo('silver')"
+title="اضغط لمعرفة معنى الشارة">
+
+⚪ تحديث غير منتظم
+
+</button>
+`;
+
+}
+
+return "";
+
+}
+
+
+/* =================================================
+   شرح شارة التحديث
+================================================= */
+
+function showTrustInfo(type){
+
+if(type==="blue"){
+
+$("trustInfoTitle").innerHTML=
+"🔵 تحديث منتظم";
+
+$("trustInfoText").innerHTML=
+
+"يتم تحديث معلومات هذه المحطة بشكل منتظم من خلال صاحب المحطة أو عبر التواصل المباشر معها.<br><br>"+
+
+"<b>لكن هذا لا يعني أن توفر المحروقات مضمون أو مستمر.</b> "+
+"فقد تتغير حالة المحطة بعد آخر تحديث.";
+
+}
+
+else{
+
+$("trustInfoTitle").innerHTML=
+"⚪ تحديث غير منتظم";
+
+$("trustInfoText").innerHTML=
+
+"صاحب هذه المحطة لديه تواصل مع إدارة التطبيق، لكن تحديث المعلومات لا يتم بشكل منتظم.<br><br>"+
+
+"<b>لذلك قد تختلف المعلومات الظاهرة في التطبيق عن الحالة الحالية للمحطة.</b>";
+
+}
+
+$("trustInfoDlg").showModal();
 
 }
 
@@ -2285,7 +2531,11 @@ ${stations.map(s=>`
 <div class="row">
 
 <div class="station-title">
+
 ${esc(s.name)}
+
+${trustBadge(s.trust_level)}
+
 </div>
 
 
@@ -2541,6 +2791,14 @@ $("region_type").value=
 s.region_type||"";
 
 
+/* =================================================
+   حالة تحديث المحطة
+================================================= */
+
+$("trust_level").value=
+s.trust_level||"";
+
+
 $("location_url").value=
 s.location_url||"";
 
@@ -2623,6 +2881,14 @@ $("opening_time").value="";
 */
 
 $("region_type").value="";
+
+
+/*
+المحطة الجديدة بدون شارة
+حتى يحددها المشرف بنفسه.
+*/
+
+$("trust_level").value="";
 
 
 $("location_url").value="";
@@ -2864,6 +3130,13 @@ city أو countryside
 region_type:
 regionType,
 
+/*
+حالة تحديث المحطة
+*/
+
+trust_level:
+$("trust_level").value || null,
+
 location_url:
 locationUrl || null,
 
@@ -3076,12 +3349,9 @@ if(old){
 عند تحديث محطة موجودة
 لا نلمس region_type.
 
-إذا كانت محطة شويحنة ريف
-تبقى ريف.
+ولا نلمس trust_level.
 
-إذا كانت محطة داخل المدينة
-تبقى مدينة.
-
+حالة التحديث يحددها المشرف فقط.
 */
 
 result=
@@ -3126,7 +3396,6 @@ else{
 
 إذا كان جدول pending_updates يحتوي region_type
 نستخدمه.
-
 */
 
 const pendingRegion=
@@ -3135,8 +3404,7 @@ p.region_type;
 
 /*
 إذا لم يوجد تصنيف
-نوقف الاعتماد حتى لا تظهر
-المحطة تلقائياً في مدينة حلب.
+نوقف الاعتماد.
 */
 
 if(
@@ -3177,6 +3445,13 @@ name:p.name,
 area:p.area,
 
 region_type:pendingRegion,
+
+/*
+المحطات الجديدة بدون شارة
+والمشرف يحددها لاحقاً.
+*/
+
+trust_level:null,
 
 status:p.status,
 
