@@ -426,6 +426,54 @@ header{
 }
 
 /* =========================
+   حالة تحديث البيانات
+========================= */
+
+.update-frequency{
+    margin-top:7px;
+}
+
+.update-frequency-button{
+    width:100%;
+    border:0;
+    border-radius:999px;
+    padding:6px 9px;
+    font-size:9px;
+    font-weight:900;
+    cursor:pointer;
+    font-family:inherit;
+}
+
+.update-frequency-button.regular{
+    background:#dbeafe;
+    color:#1d4ed8;
+    border:1px solid #93c5fd;
+}
+
+.update-frequency-button.irregular{
+    background:#f1f5f9;
+    color:#64748b;
+    border:1px solid #cbd5e1;
+}
+
+.update-frequency-info{
+    display:none;
+    margin-top:5px;
+    background:#fff;
+    border:1px solid #dce5e4;
+    border-radius:8px;
+    padding:8px;
+    font-size:9px;
+    line-height:1.7;
+    color:#475569;
+    text-align:center;
+}
+
+.update-frequency-info.show{
+    display:block;
+}
+
+/* =========================
    التفاصيل
 ========================= */
 
@@ -823,7 +871,6 @@ autocomplete="off">
 
 <main class="wrap">
 
-
 <!-- =========================
      الأقرب إليك
 ========================= -->
@@ -1161,6 +1208,90 @@ return "city";
 
 
 /* =========================
+   حالة تحديث البيانات
+========================= */
+
+function updateFrequencyBox(s){
+
+const id =
+String(s.id);
+
+const value =
+String(s.update_frequency ?? "")
+.trim()
+.toLowerCase();
+
+/*
+   إذا لم تكن الحالة محددة في قاعدة البيانات،
+   نعتبرها غير منتظمة بشكل افتراضي.
+   الهدف هو عدم إعطاء المستخدم انطباعاً
+   بأن بيانات الوقود مضمونة ومحدثة دائماً.
+*/
+
+const regular =
+value === "regular";
+
+const text =
+regular
+? "🔵 تحديث دائم ⓘ"
+: "⚪ تحديث غير منتظم ⓘ";
+
+const explanation =
+regular
+? "يتم تحديث معلومات هذه المحطة بشكل منتظم، لكن توفر الوقود قد يتغير بعد آخر تحديث."
+: "قد لا تكون معلومات هذه المحطة محدثة حالياً. يرجى الانتباه إلى أن توفر الوقود غير مضمون.";
+
+return `
+
+<div
+class="update-frequency"
+onclick="event.stopPropagation()">
+
+<button
+type="button"
+class="update-frequency-button ${regular ? "regular" : "irregular"}"
+onclick="event.stopPropagation();toggleUpdateFrequency('${esc(id)}')">
+
+${text}
+
+</button>
+
+</div>
+
+<div
+class="update-frequency-info"
+id="update-info-${esc(id)}"
+onclick="event.stopPropagation()">
+
+${explanation}
+
+</div>
+
+`;
+
+}
+
+
+/* =========================
+   فتح شرح حالة التحديث
+========================= */
+
+function toggleUpdateFrequency(id){
+
+const box =
+document.getElementById(
+    "update-info-" + id
+);
+
+if(!box)
+return;
+
+box.classList.toggle("show");
+
+}
+
+
+/* =========================
    فتح البطاقة
 ========================= */
 
@@ -1189,6 +1320,7 @@ if(!s.location_url)
 return "";
 
 return `
+
 <a
 class="detail-button location-button"
 href="${esc(s.location_url)}"
@@ -1199,6 +1331,7 @@ onclick="event.stopPropagation()">
 📍 الموقع
 
 </a>
+
 `;
 
 }
@@ -1223,6 +1356,7 @@ const url =
 encodeURIComponent(text);
 
 return `
+
 <a
 class="detail-button message-button"
 href="${url}"
@@ -1233,6 +1367,7 @@ onclick="event.stopPropagation()">
 📩 رسالة
 
 </a>
+
 `;
 
 }
@@ -1660,7 +1795,7 @@ decodeURIComponent(String(url));
 
 let match =
 value.match(
-/@(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/ 
+/@(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/
 );
 
 if(match){
@@ -1680,7 +1815,7 @@ return {
 
 match =
 value.match(
-/!3d(-?\d+(?:\.\d+)?)!4d(-?\d+(?:\.\d+)?)/ 
+/!3d(-?\d+(?:\.\d+)?)!4d(-?\d+(?:\.\d+)?)/
 );
 
 if(match){
@@ -1700,7 +1835,7 @@ return {
 
 match =
 value.match(
-/[?&]q=(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/ 
+/[?&]q=(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/
 );
 
 if(match){
@@ -2471,6 +2606,9 @@ ${esc(s.area || regionName)}
 
 
 ${mainFuel}
+
+
+${updateFrequencyBox(s)}
 
 
 </div>
