@@ -132,7 +132,35 @@ header{
 .nearest-message.show{
     display:block;
 }
+.nearest-filters{
+    display:none;
+    grid-template-columns:repeat(3,1fr);
+    gap:6px;
+    margin-top:7px;
+}
 
+.nearest-filters.show{
+    display:grid;
+}
+
+.nearest-fuel-button{
+    border:1px solid #dce5e4;
+    background:#fff;
+    color:#17202a;
+    border-radius:10px;
+    padding:9px 4px;
+    font:inherit;
+    font-size:11px;
+    font-weight:900;
+    cursor:pointer;
+}
+
+.nearest-fuel-button.active{
+    background:#0f766e;
+    color:#fff;
+    border-color:#0f766e;
+}
+    
 /* =========================
    نتائج الأقرب
 ========================= */
@@ -899,7 +927,39 @@ type="button">
 📍 الكازيات الأقرب إليك
 
 </button>
+<div
+class="nearest-filters"
+id="nearestFilters">
 
+<button
+class="nearest-fuel-button"
+type="button"
+data-nearest-fuel="gas">
+
+⛽ بنزين
+
+</button>
+
+<button
+class="nearest-fuel-button"
+type="button"
+data-nearest-fuel="diesel">
+
+🛢️ مازوت
+
+</button>
+
+<button
+class="nearest-fuel-button"
+type="button"
+data-nearest-fuel="both">
+
+⛽ + 🛢️
+
+</button>
+
+</div>
+    
 <div
 class="nearest-message"
 id="nearestMessage">
@@ -1928,10 +1988,10 @@ return Math.round(km) + " كم";
 
 
 /* =========================================================
-   تشغيل ميزة أقرب الكازيات
+   تشغيل ميزة أقرب المحطات
 ========================================================= */
 
-function findNearestStations(){
+function findNearestStations(fuelType){
 
 const message =
 $("nearestMessage");
@@ -1971,23 +2031,89 @@ const userLng =
 position.coords.longitude;
 
 
-/* نضيف إحداثيات كل محطة */
+/*
+   نبحث فقط عن المحطات المفيدة:
+   1- المحطة تعمل
+   2- المادة المطلوبة متوفرة
+*/
 
 const stationsWithDistance =
 all
+.filter(function(s){
+
+const status =
+String(s.status ?? "")
+.trim()
+.toLowerCase();
+
+const gas =
+String(s.gas ?? "")
+.trim()
+.toLowerCase();
+
+const diesel =
+String(s.diesel ?? "")
+.trim()
+.toLowerCase();
+
+
+/* المحطات المغلقة لا تدخل */
+
+if(status !== "open")
+return false;
+
+
+/* بنزين */
+
+if(fuelType === "gas"){
+
+return gas === "yes";
+
+}
+
+
+/* مازوت */
+
+if(fuelType === "diesel"){
+
+return diesel === "yes";
+
+}
+
+
+/* بنزين + مازوت */
+
+if(fuelType === "both"){
+
+return (
+gas === "yes" &&
+diesel === "yes"
+);
+
+}
+
+return false;
+
+})
 .map(function(s){
 
 const coordinates = {
-    lat: Number(s.latitude),
-    lng: Number(s.longitude)
+
+lat:Number(s.latitude),
+
+lng:Number(s.longitude)
+
 };
 
 if(
-    !Number.isFinite(coordinates.lat) ||
-    !Number.isFinite(coordinates.lng)
+!Number.isFinite(coordinates.lat) ||
+!Number.isFinite(coordinates.lng)
 ){
-    return null;
+
+return null;
+
 }
+
 const distance =
 distanceKm(
 userLat,
@@ -1997,8 +2123,11 @@ coordinates.lng
 );
 
 return {
-    station:s,
-    distance:distance
+
+station:s,
+
+distance:distance
+
 };
 
 })
@@ -2015,10 +2144,26 @@ return a.distance-b.distance;
 .slice(0,3);
 
 
+/* لا توجد محطات مناسبة */
+
 if(!stationsWithDistance.length){
 
+let fuelText =
+"المادة المطلوبة";
+
+if(fuelType === "gas")
+fuelText = "البنزين";
+
+if(fuelType === "diesel")
+fuelText = "المازوت";
+
+if(fuelType === "both")
+fuelText = "البنزين والمازوت";
+
 message.textContent =
-"⚠️ لم نتمكن من استخراج مواقع المحطات من روابط Google Maps.";
+"⚠️ لا توجد محطات تعمل ويتوفر فيها " +
+fuelText +
+" بالقرب منك حالياً.";
 
 message.classList.add("show");
 
@@ -2027,8 +2172,10 @@ return;
 }
 
 
+/* تم تحديد الموقع */
+
 message.textContent =
-"📍 تم تحديد موقعك بنجاح";
+"📍 تم تحديد أقرب المحطات التي يتوفر فيها الوقود المطلوب.";
 
 list.innerHTML =
 stationsWithDistance
@@ -2036,54 +2183,6 @@ stationsWithDistance
 
 const s =
 item.station;
-
-const status =
-String(s.status ?? "")
-.trim()
-.toLowerCase();
-
-const gas =
-String(s.gas ?? "")
-.trim()
-.toLowerCase() === "yes";
-
-const diesel =
-String(s.diesel ?? "")
-.trim()
-.toLowerCase() === "yes";
-
-let fuelText = "";
-
-if(status === "closed"){
-
-fuelText =
-"❌ مغلقة";
-
-}else{
-
-if(gas && diesel){
-
-fuelText =
-"🟢 بنزين + مازوت";
-
-}else if(gas){
-
-fuelText =
-"🟢 بنزين";
-
-}else if(diesel){
-
-fuelText =
-"🟢 مازوت";
-
-}else{
-
-fuelText =
-"🔴 لا يوجد وقود";
-
-}
-
-}
 
 const rank =
 index === 0
@@ -2093,6 +2192,30 @@ index === 0
 : "🥉 الثالثة";
 
 
+let fuelText = "";
+
+if(fuelType === "gas"){
+
+fuelText =
+"🟢 بنزين";
+
+}
+
+if(fuelType === "diesel"){
+
+fuelText =
+"🟢 مازوت";
+
+}
+
+if(fuelType === "both"){
+
+fuelText =
+"🟢 بنزين + مازوت";
+
+}
+
+
 return `
 
 <div
@@ -2100,23 +2223,33 @@ class="nearest-card ${index === 0 ? "first" : ""}"
 onclick="openNearestStation('${esc(String(s.id))}')">
 
 <div class="nearest-rank">
+
 ${rank}
+
 </div>
 
 <div class="nearest-name">
+
 ${esc(s.name || "محطة")}
+
 </div>
 
 <div class="nearest-area">
+
 ${esc(s.area || "")}
+
 </div>
 
 <div class="nearest-distance">
+
 📍 ${formatDistance(item.distance)}
+
 </div>
 
 <div class="nearest-fuel">
+
 ${fuelText}
+
 </div>
 
 </div>
@@ -2144,7 +2277,7 @@ let text =
 if(error.code === 1){
 
 text =
-"⚠️ يجب السماح للموقع من المتصفح حتى نحدد الكازيات الأقرب إليك.";
+"⚠️ يجب السماح للموقع من المتصفح حتى نحدد المحطات الأقرب إليك.";
 
 }
 
@@ -2170,19 +2303,18 @@ message.classList.add("show");
 },
 
 {
-    enableHighAccuracy:true,
-    timeout:15000,
-    maximumAge:30000
+
+enableHighAccuracy:true,
+
+timeout:15000,
+
+maximumAge:30000
+
 }
 
 );
 
 }
-
-
-/* =========================================================
-   فتح المحطة من نتائج الأقرب
-========================================================= */
 
 function openNearestStation(id){
 
@@ -2927,12 +3059,42 @@ $("nearestButton")
 "click",
 function(){
 
-findNearestStations();
+const filters =
+$("nearestFilters");
+
+if(filters){
+
+filters.classList.toggle("show");
 
 }
-);
 
+});
+document
+.querySelectorAll("[data-nearest-fuel]")
+.forEach(function(button){
 
+button.addEventListener(
+"click",
+function(){
+
+document
+.querySelectorAll("[data-nearest-fuel]")
+.forEach(function(b){
+
+b.classList.remove("active");
+
+});
+
+button.classList.add("active");
+
+const fuelType =
+button.dataset.nearestFuel;
+
+findNearestStations(fuelType);
+
+});
+});
+    
 /* =========================
    اختيار المنطقة
 ========================= */
