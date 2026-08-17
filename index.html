@@ -1977,14 +1977,17 @@ const stationsWithDistance =
 all
 .map(function(s){
 
-const coordinates =
-getCoordinatesFromUrl(
-s.location_url
-);
+const coordinates = {
+    lat: Number(s.latitude),
+    lng: Number(s.longitude)
+};
 
-if(!coordinates)
-return null;
-
+if(
+    !Number.isFinite(coordinates.lat) ||
+    !Number.isFinite(coordinates.lng)
+){
+    return null;
+}
 const distance =
 distanceKm(
 userLat,
