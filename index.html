@@ -48,62 +48,31 @@ header{
     font-weight:900;
 }
 
-/* =========================
-   شكاوى خدمات الطاقة
-========================= */
-
 .energy-complaints{
-    position:relative;
     display:inline-flex;
     align-items:center;
-}
-
-.energy-button{
-    display:inline-flex;
-    align-items:center;
+    justify-content:center;
     gap:5px;
     color:#fff;
     border:1px solid rgba(255,255,255,.65);
     border-radius:999px;
-    padding:6px 10px;
+    padding:5px 9px;
     font-size:11px;
     font-weight:700;
     text-decoration:none;
     white-space:nowrap;
     cursor:pointer;
-    background:transparent;
 }
 
-.energy-menu{
-    display:none;
-    position:absolute;
-    top:calc(100% + 6px);
-    left:0;
-    min-width:190px;
-    background:#fff;
-    border-radius:10px;
-    padding:6px;
-    box-shadow:0 4px 14px rgba(0,0,0,.18);
-    z-index:100;
-}
-
-.energy-menu.show{
-    display:block;
-}
-
-.energy-number{
-    display:block;
-    color:#0f766e;
-    text-decoration:none;
-    font-size:11px;
-    font-weight:800;
-    padding:8px 9px;
-    border-radius:7px;
-    text-align:center;
-}
-
-.energy-number:hover{
-    background:#f0fdfa;
+.energy-whatsapp{
+    width:22px;
+    height:22px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    font-size:17px;
+    line-height:1;
 }
 
 .sub{
@@ -118,33 +87,37 @@ header{
     opacity:.7;
 }
 
-.updated-line{
+.header-meta{
     margin-top:6px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.updated-line{
     font-size:11px;
     opacity:.9;
 }
 
-/* =========================
-   رسالة فريق التطبيق
-========================= */
-
 .team-message{
-    display:block;
-    margin-top:7px;
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
     color:#fff;
-    text-decoration:none;
     font-size:11px;
-    font-weight:700;
-    opacity:.95;
-    text-align:right;
+    font-weight:800;
+    text-decoration:none;
+    white-space:nowrap;
 }
 
-.team-message:hover{
-    opacity:1;
+.team-message-icon{
+    font-size:17px;
+    line-height:1;
 }
 
 .search{
-    margin-top:10px;
+    margin-top:12px;
 }
 
 .search input{
@@ -154,6 +127,77 @@ header{
     border-radius:14px;
     font-size:15px;
     outline:none;
+}
+
+/* =========================
+   نافذة أرقام الشكاوى
+========================= */
+
+.complaint-overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    z-index:9999;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+}
+
+.complaint-overlay.show{
+    display:flex;
+}
+
+.complaint-box{
+    width:min(360px,100%);
+    background:#fff;
+    border-radius:16px;
+    padding:18px;
+    text-align:center;
+    box-shadow:0 10px 35px rgba(0,0,0,.2);
+}
+
+.complaint-title{
+    font-size:16px;
+    font-weight:900;
+    color:#0f766e;
+}
+
+.complaint-subtitle{
+    margin-top:5px;
+    font-size:11px;
+    color:#64748b;
+}
+
+.complaint-numbers{
+    display:grid;
+    gap:7px;
+    margin-top:13px;
+}
+
+.complaint-number{
+    display:block;
+    text-decoration:none;
+    background:#ecfdf5;
+    color:#047857;
+    border:1px solid #a7f3d0;
+    border-radius:9px;
+    padding:9px;
+    font-size:12px;
+    font-weight:800;
+}
+
+.complaint-close{
+    margin-top:10px;
+    border:0;
+    background:#f1f5f9;
+    color:#475569;
+    border-radius:9px;
+    padding:8px 18px;
+    font:inherit;
+    font-size:11px;
+    font-weight:800;
+    cursor:pointer;
 }
 
 /* =========================
@@ -840,17 +884,32 @@ header{
         font-size:22px;
     }
 
-    .energy-button{
+    .energy-complaints{
         font-size:9px;
         padding:5px 8px;
+    }
+
+    .energy-whatsapp{
+        width:21px;
+        height:21px;
+        font-size:16px;
     }
 
     .sub{
         font-size:12px;
     }
 
+    .header-meta{
+        margin-top:5px;
+    }
+
+    .updated-line,
     .team-message{
         font-size:10px;
+    }
+
+    .team-message-icon{
+        font-size:16px;
     }
 
     .grid{
@@ -900,6 +959,10 @@ header{
         font-size:20px;
     }
 
+    .energy-complaints{
+        font-size:8px;
+    }
+
     .station-name{
         font-size:13px;
     }
@@ -925,48 +988,21 @@ header{
 
 <div class="header-top">
 
+<a
+class="energy-complaints"
+href="#"
+onclick="openEnergyComplaints(event)">
+
+<span>شكاوى خدمات الطاقة</span>
+
+<span class="energy-whatsapp">
+💬
+</span>
+
+</a>
+
 <div class="brand">
 ⛽ كازيات حلب
-</div>
-
-<!-- شكاوى خدمات الطاقة -->
-<div class="energy-complaints">
-
-<button
-class="energy-button"
-id="energyButton"
-type="button">
-
-📞 شكاوى خدمات الطاقة
-
-</button>
-
-<div
-class="energy-menu"
-id="energyMenu">
-
-<a
-class="energy-number"
-href="https://wa.me/963958856626"
-target="_blank"
-rel="noopener">
-
-واتساب 1 — 0958856626
-
-</a>
-
-<a
-class="energy-number"
-href="https://wa.me/963930340823"
-target="_blank"
-rel="noopener">
-
-واتساب 2 — 0930340823
-
-</a>
-
-</div>
-
 </div>
 
 </div>
@@ -979,6 +1015,25 @@ rel="noopener">
 By Ammar Morgan
 </div>
 
+<div class="header-meta">
+
+<div
+class="team-message">
+
+<a
+href="https://wa.me/905050978000?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20لدي%20رسالة%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5%20%D8%AA%D8%B7%D8%A8%D9%8A%D9%82%20%D9%83%D8%A7%D8%B2%D9%8A%D8%A7%D8%AA%20%D8%AD%D9%84%D8%A8"
+target="_blank"
+rel="noopener"
+class="team-message">
+
+<span class="team-message-icon">🎧</span>
+
+رسالة إلى فريق التطبيق
+
+</a>
+
+</div>
+
 <div
 class="updated-line"
 id="updatedLine">
@@ -987,16 +1042,7 @@ id="updatedLine">
 
 </div>
 
-<!-- رسالة إلى فريق التطبيق -->
-<a
-class="team-message"
-href="https://wa.me/905050978000?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D9%84%D8%AF%D9%8A%20رس%D8%A7%D9%84%D8%A9%20%D8%A5%D9%84%D9%89%20%D9%81%D8%B1%D9%8A%D9%82%20%D8%AA%D8%B7%D8%A8%D9%8A%D9%82%20%D9%83%D8%A7%D8%B2%D9%8A%D8%A7%D8%AA%20%D8%AD%D9%84%D8%A8"
-target="_blank"
-rel="noopener">
-
-🎧 رسالة إلى فريق التطبيق
-
-</a>
+</div>
 
 <div class="search">
 
@@ -1011,6 +1057,65 @@ autocomplete="off">
 </div>
 
 </header>
+
+
+<!-- =========================
+     نافذة شكاوى خدمات الطاقة
+========================= -->
+
+<div
+class="complaint-overlay"
+id="complaintOverlay"
+onclick="closeEnergyComplaints(event)">
+
+<div
+class="complaint-box"
+onclick="event.stopPropagation()">
+
+<div class="complaint-title">
+شكاوى خدمات الطاقة
+</div>
+
+<div class="complaint-subtitle">
+اختر الرقم الذي تريد التواصل معه عبر واتساب
+</div>
+
+<div class="complaint-numbers">
+
+<a
+class="complaint-number"
+href="https://wa.me/963958856626?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D9%84%D8%AF%D9%8A%20%D8%B4%D9%83%D9%88%D9%89%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5%20%D8%AE%D8%AF%D9%85%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B7%D8%A7%D9%82%D8%A9"
+target="_blank"
+rel="noopener">
+
+📱 +963 958 856 626
+
+</a>
+
+<a
+class="complaint-number"
+href="https://wa.me/963930340823?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D9%84%D8%AF%D9%8A%20%D8%B4%D9%83%D9%88%D9%89%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5%20%D8%AE%D8%AF%D9%85%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B7%D8%A7%D9%82%D8%A9"
+target="_blank"
+rel="noopener">
+
+📱 +963 930 340 823
+
+</a>
+
+</div>
+
+<button
+class="complaint-close"
+type="button"
+onclick="closeEnergyComplaints()">
+
+إغلاق
+
+</button>
+
+</div>
+
+</div>
 
 
 <main class="wrap">
@@ -1182,6 +1287,7 @@ id="stations">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+
 <script>
 
 /* =========================
@@ -1272,6 +1378,42 @@ return new Intl.DateTimeFormat(
     minute:"2-digit"
 }
 ).format(d);
+
+}
+
+
+/* =========================
+   شكاوى خدمات الطاقة
+========================= */
+
+function openEnergyComplaints(event){
+
+if(event)
+event.preventDefault();
+
+const overlay =
+$("complaintOverlay");
+
+if(overlay)
+overlay.classList.add("show");
+
+}
+
+function closeEnergyComplaints(event){
+
+if(
+event &&
+event.target &&
+event.target.id !== "complaintOverlay"
+){
+return;
+}
+
+const overlay =
+$("complaintOverlay");
+
+if(overlay)
+overlay.classList.remove("show");
 
 }
 
@@ -1912,7 +2054,7 @@ decodeURIComponent(String(url));
 
 let match =
 value.match(
-/@(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/
+/@(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/ 
 );
 
 if(match){
@@ -1946,7 +2088,7 @@ return {
 
 match =
 value.match(
-/[?&]q=(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/
+/[?&]q=(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/ 
 );
 
 if(match){
@@ -3120,49 +3262,6 @@ loadingNow = false;
 
 
 /* =========================
-   زر شكاوى خدمات الطاقة
-========================= */
-
-$("energyButton")
-.addEventListener(
-"click",
-function(event){
-
-event.stopPropagation();
-
-$("energyMenu")
-.classList.toggle("show");
-
-});
-
-
-document.addEventListener(
-"click",
-function(){
-
-const menu =
-$("energyMenu");
-
-if(menu){
-
-menu.classList.remove("show");
-
-}
-
-});
-
-
-$("energyMenu")
-.addEventListener(
-"click",
-function(event){
-
-event.stopPropagation();
-
-});
-
-
-/* =========================
    زر الأقرب إليك
 ========================= */
 
@@ -3207,7 +3306,6 @@ button.dataset.nearestFuel;
 findNearestStations(fuelType);
 
 });
-
 });
 
 
@@ -3321,6 +3419,24 @@ $("search")
 function(){
 
 render();
+
+}
+);
+
+
+/* =========================
+   إغلاق نافذة الشكاوى بزر ESC
+========================= */
+
+document.addEventListener(
+"keydown",
+function(event){
+
+if(event.key === "Escape"){
+
+closeEnergyComplaints();
+
+}
 
 }
 );
