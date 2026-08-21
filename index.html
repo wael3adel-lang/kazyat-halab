@@ -48,8 +48,20 @@ header{
     font-weight:900;
 }
 
-.admin-message{
-    display:inline-block;
+/* =========================
+   شكاوى خدمات الطاقة
+========================= */
+
+.energy-complaints{
+    position:relative;
+    display:inline-flex;
+    align-items:center;
+}
+
+.energy-button{
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
     color:#fff;
     border:1px solid rgba(255,255,255,.65);
     border-radius:999px;
@@ -58,6 +70,40 @@ header{
     font-weight:700;
     text-decoration:none;
     white-space:nowrap;
+    cursor:pointer;
+    background:transparent;
+}
+
+.energy-menu{
+    display:none;
+    position:absolute;
+    top:calc(100% + 6px);
+    left:0;
+    min-width:190px;
+    background:#fff;
+    border-radius:10px;
+    padding:6px;
+    box-shadow:0 4px 14px rgba(0,0,0,.18);
+    z-index:100;
+}
+
+.energy-menu.show{
+    display:block;
+}
+
+.energy-number{
+    display:block;
+    color:#0f766e;
+    text-decoration:none;
+    font-size:11px;
+    font-weight:800;
+    padding:8px 9px;
+    border-radius:7px;
+    text-align:center;
+}
+
+.energy-number:hover{
+    background:#f0fdfa;
 }
 
 .sub{
@@ -78,8 +124,27 @@ header{
     opacity:.9;
 }
 
+/* =========================
+   رسالة فريق التطبيق
+========================= */
+
+.team-message{
+    display:block;
+    margin-top:7px;
+    color:#fff;
+    text-decoration:none;
+    font-size:11px;
+    font-weight:700;
+    opacity:.95;
+    text-align:right;
+}
+
+.team-message:hover{
+    opacity:1;
+}
+
 .search{
-    margin-top:12px;
+    margin-top:10px;
 }
 
 .search input{
@@ -132,6 +197,7 @@ header{
 .nearest-message.show{
     display:block;
 }
+
 .nearest-filters{
     display:none;
     grid-template-columns:repeat(3,1fr);
@@ -160,7 +226,7 @@ header{
     color:#fff;
     border-color:#0f766e;
 }
-    
+
 /* =========================
    نتائج الأقرب
 ========================= */
@@ -404,17 +470,14 @@ header{
     box-shadow:0 0 0 1px rgba(0,0,0,.08);
 }
 
-/* أزرق = تحديث منتظم */
 .trust-badge.blue{
     background:#1877f2;
 }
 
-/* فضي = تحديث غير منتظم */
 .trust-badge.silver{
     background:#cbd5e1;
 }
 
-/* لا يوجد تصنيف */
 .trust-badge.none{
     display:none;
 }
@@ -536,7 +599,7 @@ header{
 
 .detail-actions{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:repeat(2,1fr);
     gap:5px;
 }
 
@@ -558,12 +621,6 @@ header{
     background:#ecfdf5;
     color:#047857;
     border:1px solid #a7f3d0;
-}
-
-.message-button{
-    background:#eff6ff;
-    color:#1d4ed8;
-    border:1px solid #bfdbfe;
 }
 
 .rating-button{
@@ -783,13 +840,17 @@ header{
         font-size:22px;
     }
 
-    .admin-message{
+    .energy-button{
         font-size:9px;
         padding:5px 8px;
     }
 
     .sub{
         font-size:12px;
+    }
+
+    .team-message{
+        font-size:10px;
     }
 
     .grid{
@@ -868,15 +929,45 @@ header{
 ⛽ كازيات حلب
 </div>
 
+<!-- شكاوى خدمات الطاقة -->
+<div class="energy-complaints">
+
+<button
+class="energy-button"
+id="energyButton"
+type="button">
+
+📞 شكاوى خدمات الطاقة
+
+</button>
+
+<div
+class="energy-menu"
+id="energyMenu">
+
 <a
-class="admin-message"
-href="https://wa.me/905050978000?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D9%84%D8%AF%D9%8A%20%D9%85%D8%B9%D9%84%D9%88%D9%85%D8%A7%D8%AA%20%D8%A3%D9%88%20%D8%AA%D8%AD%D8%AF%D9%8A%D8%AB%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5%20%D9%83%D8%A7%D8%B2%D9%8A%D8%A7%D8%AA%20%D8%AD%D9%84%D8%A8"
+class="energy-number"
+href="https://wa.me/963958856626"
 target="_blank"
 rel="noopener">
 
-📩 المشرف
+واتساب 1 — 0958856626
 
 </a>
+
+<a
+class="energy-number"
+href="https://wa.me/963930340823"
+target="_blank"
+rel="noopener">
+
+واتساب 2 — 0930340823
+
+</a>
+
+</div>
+
+</div>
 
 </div>
 
@@ -895,6 +986,17 @@ id="updatedLine">
 آخر تحديث: جاري التحميل…
 
 </div>
+
+<!-- رسالة إلى فريق التطبيق -->
+<a
+class="team-message"
+href="https://wa.me/905050978000?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D9%84%D8%AF%D9%8A%20رس%D8%A7%D9%84%D8%A9%20%D8%A5%D9%84%D9%89%20%D9%81%D8%B1%D9%8A%D9%82%20%D8%AA%D8%B7%D8%A8%D9%8A%D9%82%20%D9%83%D8%A7%D8%B2%D9%8A%D8%A7%D8%AA%20%D8%AD%D9%84%D8%A8"
+target="_blank"
+rel="noopener">
+
+🎧 رسالة إلى فريق التطبيق
+
+</a>
 
 <div class="search">
 
@@ -927,6 +1029,7 @@ type="button">
 📍 المحطات الأقرب إليك
 
 </button>
+
 <div
 class="nearest-filters"
 id="nearestFilters">
@@ -959,7 +1062,7 @@ data-nearest-fuel="both">
 </button>
 
 </div>
-    
+
 <div
 class="nearest-message"
 id="nearestMessage">
@@ -1078,7 +1181,6 @@ id="stations">
 
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 
 <script>
 
@@ -1384,40 +1486,6 @@ rel="noopener"
 onclick="event.stopPropagation()">
 
 📍 الموقع
-
-</a>
-`;
-
-}
-
-
-/* =========================
-   الرسالة
-========================= */
-
-function messageButton(s){
-
-const stationName =
-String(s.name || "محطة");
-
-const text =
-"مرحباً، لدي رسالة بخصوص " +
-stationName +
-"\n\nالرسالة:";
-
-const url =
-"https://wa.me/905050978000?text=" +
-encodeURIComponent(text);
-
-return `
-<a
-class="detail-button message-button"
-href="${url}"
-target="_blank"
-rel="noopener"
-onclick="event.stopPropagation()">
-
-📩 رسالة
 
 </a>
 `;
@@ -1844,7 +1912,7 @@ decodeURIComponent(String(url));
 
 let match =
 value.match(
-/@(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/ 
+/@(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/
 );
 
 if(match){
@@ -1861,7 +1929,7 @@ return {
 
 match =
 value.match(
-/!3d(-?\d+(?:\.\d+)?)!4d(-?\d+(?:\.\d+)?)/ 
+/!3d(-?\d+(?:\.\d+)?)!4d(-?\d+(?:\.\d+)?)/
 );
 
 if(match){
@@ -1878,7 +1946,7 @@ return {
 
 match =
 value.match(
-/[?&]q=(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/ 
+/[?&]q=(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/
 );
 
 if(match){
@@ -2315,6 +2383,7 @@ maximumAge:30000
 );
 
 }
+
 
 function openNearestStation(id){
 
@@ -3051,6 +3120,49 @@ loadingNow = false;
 
 
 /* =========================
+   زر شكاوى خدمات الطاقة
+========================= */
+
+$("energyButton")
+.addEventListener(
+"click",
+function(event){
+
+event.stopPropagation();
+
+$("energyMenu")
+.classList.toggle("show");
+
+});
+
+
+document.addEventListener(
+"click",
+function(){
+
+const menu =
+$("energyMenu");
+
+if(menu){
+
+menu.classList.remove("show");
+
+}
+
+});
+
+
+$("energyMenu")
+.addEventListener(
+"click",
+function(event){
+
+event.stopPropagation();
+
+});
+
+
+/* =========================
    زر الأقرب إليك
 ========================= */
 
@@ -3069,6 +3181,8 @@ filters.classList.toggle("show");
 }
 
 });
+
+
 document
 .querySelectorAll("[data-nearest-fuel]")
 .forEach(function(button){
@@ -3093,8 +3207,10 @@ button.dataset.nearestFuel;
 findNearestStations(fuelType);
 
 });
+
 });
-    
+
+
 /* =========================
    اختيار المنطقة
 ========================= */
